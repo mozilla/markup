@@ -1,0 +1,87 @@
+{% load i18n %}
+<!-- VISUALIZATION -->
+<!-- This template will load the linear view of all visualizations flowing one after the next. -->
+<div id="linear" class="autoResize">
+	<!-- These are per mark information, shown on hover of a single mark -->
+	<div id="mark-information">
+		<a id="mark-playback" href="#" title="Replay this mark">{{ _('Replay this mark') }}</a>
+		<a id="mark-flag" href="#" title="Flag as inappropriate">{{ _('Flag as inappropriate') }}</a>
+		<h3 id="mark-number">{{ _('Mark') }} <span id="mark-id"></span> <span id="mark-contributor-name"></span></h3>
+		<h4><span id="mark-timestamp"></span><span id="mark-country"></span></h4>
+		
+		<a href="#" id="facebook-share">{{ _('Share on Facebook') }}</a>
+		<a href="#" id="twitter-share">{{ _('Share on Twitter') }}</a>
+		<div id="url-share">
+			<label>{{ _('URL') }}</label>
+			<input value="http://ffdemomarkup.com/#/marks/:id" />
+		</div>
+	</div>
+	<div id="contributor-quote-box" style="display:none;">
+		<div class="infobox-inner">
+			<p id="contributor-quote"></p>
+			<p id="contributor-name"></p>
+		</div>
+		<div class="infobox-arrow"></div>
+	</div>
+	<!-- This stuff is show errywhere -->
+	<div id="mark-browsing" class="collapsible">
+		<h3>{{ _('Mark Browsing') }}</h3>
+		<div id="mark-browsing-contents" >
+			<ul id="mark-browsing-controls"> 
+				<li id="mark-browsing-zoom-in"><a href="#">{{ _('zoom in') }}</a></li>
+				<li id="mark-browsing-zoom-out"><a href="#">{{ _('zoom out') }}</a></li>
+				<li id="mark-browsing-next"><a href="#">{{ _('right') }}</a></li>
+				<li id="mark-browsing-prev"><a href="#">{{ _('left') }}</a></li>
+			</ul>
+			<div id="mark-browsing-options">
+				<div class="select-wrapper">
+					<label id="country-select-label">{{ _('location:') }}</label>
+					<select id="country-select">
+						<option>{{ _('All countries') }}</option>
+					</select>
+				</div>
+				<div class="select-wrapper">
+					<label id="contributor-select-label">{{ _('contributor:') }}</label>
+					<select id="contributor-select">
+						<option value="label">{{ _('View a contributor') }}</option>
+					</select>
+				</div>
+			</div>
+			<ul id="mark-browsing-shortcuts"> 
+				<li><a id="your-mark-link" href="#">{{ _('view yours') }}</a></li>
+				<li><a id="first-mark-link" href="/#/linear/first-mark">{{ _('view first') }}</a></li>
+				<li><a id="last-mark-link" href="/#/linear/last-mark">{{ _('view last') }}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="stats" class="collapsible">
+		<h3>{{ _('Mark Stats') }}</h3>
+		<ul>
+			<li>{% blocktrans %}<span id="stats-number-of-marks"></span> Marks for an open Web{% endblocktrans %}</li>
+			<li>{% blocktrans %}On <span id="stats-number-of-countries"></span> different countries{% endblocktrans %}</li>
+			<li>{% blocktrans %}Over <span id="stats-number-of-days"></span> days{% endblocktrans %}</li>
+		</ul>
+	</div>
+	
+	<a id="view-source" href="https://github.com/mozilla/markup">{{ _('view source') }}</a>
+</div>
+<div class="translated-strings" style="display:none;">
+	<ol id="month-abbreviations">
+		<li>{{ _('jan') }}</li>
+		<li>{{ _('feb') }}</li>
+		<li>{{ _('mar') }}</li>
+		<li>{{ _('apr') }}</li>
+		<li>{{ _('may') }}</li>
+		<li>{{ _('jun') }}</li>
+		<li>{{ _('jul') }}</li>
+		<li>{{ _('aug') }}</li>
+		<li>{{ _('sep') }}</li>
+		<li>{{ _('oct') }}</li>
+		<li>{{ _('nov') }}</li>
+		<li>{{ _('dec') }}</li>
+	</ol>
+	<span id="twitter-msg">{% blocktrans %}Mozilla Firefox Mark Up. The internet is your creation. Show your support to keep it open and free. Make your mark.{% endblocktrans %}</span>
+	<span id="facebook-msg">{% blocktrans %}The Web is your creation. Make your mark with Mozilla Firefox Mark Up from @firefox (moz.ly){% endblocktrans %}</span>
+	<span id="loading-marks-msg">{{ _('Loading Marks') }}</span>
+	<span id="error-msg">{% blocktrans %}Oops! Something went wrong on our end.<br />Please start at <a href="#/linear/">the beginning of the marks</a> and try again.{% endblocktrans %}</span>
+</div>

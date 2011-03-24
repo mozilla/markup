@@ -1,0 +1,24 @@
+{% load gml_extras %}
+
+<gml spec='1.0'>
+<tag>
+<header>
+</header>
+<drawing>
+  <stroke>
+    {% for points in obj_decoded.strokes %}
+      {% for point in points %}
+        <pt>
+          <pres></pres>
+          <rot></rot>
+          <x>{{ point.x|normalize_point:obj_decoded.bWidth }}</x>
+          <y>{{ point.y|normalize_point:obj_decoded.bHeight }}</y>
+          <t></t>
+        </pt>
+      {% endfor %}
+    {% endfor %}
+  </stroke>
+</drawing>
+</tag>
+</gml>
+

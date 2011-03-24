@@ -1,0 +1,8 @@
+settings_local.py
+*.py[co]
+*.sw[po]
+*.pot
+*.mo
+pip-log.txt
+build.py
+.DS_Store

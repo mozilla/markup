@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block bodytag %}
+  <body class="manifesto">
+{% endblock %}
+
+{% block content %}
+	<section id="static-content">
+		<h1>{{ _('Manifesto') }}</h1>
+		{% blocktrans %}
+		<blockquote>"An open net embraces free culture. That doesn't mean disrespecting the copyright of others. It means instead enabling others to share and build upon the work you want the Net to love. Practice the freedom you expect from others, by licensing your work as freely as you can."</blockquote>
+		<cite>- Lawrence Lessig for Mark Up</cite>
+		<p>The Web is an integral part of modern life.<br />
+		It is an educator, a communicator, an entertainer, an inspirer, a collaboration of all our creative efforts.<br />
+		It gives us hope. It enriches our lives. It grants us freedom of speech.<br />
+		It sparks movements and enables us to share our ideas, our thoughts, our dreams.</p>
+
+		<p>The Web is our creation.<br />
+		It is a reflection of us, of our desire to create.<br />
+		We are all contributors, the ones who use the Web every day.<br />
+		We are the writers, the coders, the artists.<br />
+		And all the comments and uploads we make add up to something bigger.<br />
+		This is why we believe that the Web must remain open and accessible to all.</p>
+
+		<p>Mark Up is a celebration of that freedom.<br />
+		Each person’s mark is an individual expression on a continuous line symbolizing solidarity.<br />
+		It is a declaration and a chance to show your support for a people's Web.<br />
+		So make your mark and show your support for the world’s greatest public resource.</p>
+
+		{% endblocktrans %}
+	</section>
+{% endblock %}
+
+

@@ -1,0 +1,103 @@
+{% load i18n %}
+
+{% load localeurl_tags %}
+<!DOCTYPE html> 
+<html> 
+	<head> 
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="title" content="Mozilla Firefox Mark Up">
+		<meta name="description" content="The Web is your creation. Show your support to keep it open and accessible to all. Make your mark." />
+		<link rel="image_src" href="/media/assets/images/site_thumb.jpg" />
+		
+		<meta property="og:title" content="Mozilla Firefox Mark Up"/>
+		<meta property="og:type" content="website"/>
+		<meta property="og:url" content="http://markup.mozilla.com"/>
+		<meta property="og:image" content="http://markup.mozilla.com/media/assets/images/site_thumb.jpg"/>
+		<meta property="og:site_name" content="Mozilla Firefox Mark Up"/>
+		<meta property="og:description" content="The Web is your creation. And, Mark Up is an open invitation to show your support for keeping the Web public and accessible to all. Make your mark."/>
+
+		<title>{{ _('Mozilla Firefox Mark Up') }}</title>
+		<link rel="shortcut icon" href="/media/assets/images/favicon.png" />
+		<link href="/media/assets/css/style.css" type="text/css" rel="stylesheet" />
+		<script src="/media/assets/js/jquery-1.5.1.min.js" type="text/javascript"></script>
+		<script src="/media/assets/js/common.js" type="text/javascript"></script>
+		{% block js %}{% endblock %}
+  </head>
+
+  {% block bodytag %}
+  <body> 
+  {% endblock %}
+		<header>
+			<section id="main-links">
+				<h2><a href="http://www.mozilla.org/" target="_blank" id="mozilla-logo">{{ _('Mozilla') }}</a></h2>
+				<h1><a href="/">{{ _('Mozilla Mark Up') }}</a></h1>
+			</section>
+		</header>
+		<section id="main-navigation">
+			<nav>
+				<div id="coming-soon-tip">{{ _('Coming soon') }}</div>
+				<ul>
+					<li id="manifesto"><a href="/manifesto">{{ _('Manifesto') }}</a></li>
+					<li id="make-your-mark"><a href="/#/mark/new">{{ _('Make Your Mark') }}</a></li>
+					<li id="behind-the-code"><a href="/about/">{{ _('Behind The Code') }}</a></li>
+					<li id="community" class="disabled">{{ _('Community') }}</li>
+					<li class="download-link"><a href="http://www.mozilla.com/firefox" target="_blank">{{ _('Download Firefox 4') }}</a></li>
+				</ul>
+			</nav>
+		</section>
+		<section id="content">
+			{% block content %}{% endblock %}
+		</section>
+		<footer>
+			<section id="callout-boxes">
+				<div id="callout-boxes-wrapper">
+					<div class="callout-box">
+						<a href="/about"><img src="/media/assets/images/evan_roth.jpg" width="57px" height="57px" alt="{{ _('Evan Roth') }}" /></a>
+						<h3><a href="/about">{{ _('Collaborating with Mark Up') }}</a></h3>
+						<p>{% blocktrans %}Learn more about our collaboration with artist Evan Roth and Lawrence Lessig's contribution.{% endblocktrans %}</p>
+					</div>
+					<div class="callout-box">
+						<a href="/newsletter"><img src="/media/assets/images/world_eater.jpg" width="57px" height="57px" alt="{{ _('Mozilla Newsletter') }}" /></a>
+						<h3><a href="/newsletter">{{ _('Read all about it') }}</a></h3>
+						<p>{% blocktrans %}Subscribe to Mozilla's monthly email newsletter and receive the latest tips and tricks for getting the most out of Firefox.{% endblocktrans %}</p>
+					</div>
+					<div class="callout-box">
+						<a href="https://demos.mozilla.org/" target="_blank"><img src="/media/assets/images/web_of_wonders.jpg" width="57px" height="57px" alt="{{ _('Web Of Wonders') }}" /></a>
+						<h3><a href="https://demos.mozilla.org/" target="_blank">{{ _('Web O\'(pen) Wonder') }}</a></h3>
+						<p>{% blocktrans %}Want to see what the Web is really capable of? Explore the Web O' Wonder demo gallery and prepare to be amazed!{% endblocktrans %}</p>
+					</div>
+					<div class="callout-box last">
+						<a href="http://www.mozilla.com/firefox" target="_blank"><img src="/media/assets/images/firefox_logo.jpg" width="57px" height="57px" alt="{{ _('Download Firefox 4') }}" /></a>
+						<h3><a href="http://www.mozilla.com/firefox" target="_blank">{{ _('Download Firefox 4') }}</a></h3>
+						<p>{% blocktrans %}Enjoy the latest version featuring a new look, more tools and other goodness.{% endblocktrans %}</p>
+					</div>
+				</div>
+			</section>
+			<section id="language">
+				<a id="current-locale" href="#">{{ locale_code }}</a>
+				<ul id="language-selector">
+					{% for lang in LANGUAGES %}
+						{% ifequal lang.0 LANGUAGE_CODE %}
+							<li class="selected">{{ lang.1 }}</li>
+						{% else %}
+							<li><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.1 }}</a></li>
+						{% endifequal %}
+					{% endfor %}
+				</ul>
+			</section>
+			<section id='legal'>
+				<p class="legal-blurb">{% blocktrans %}The Mozilla Firefox Mark Up campaign is a publicly accessible campaign site. If you choose to use your formal signature, then please recognize that it will be viewable to those with whom you share it online as well as to anyone who comes to this site.{% endblocktrans %}</p>
+				<p class="legal-blurb last">{% blocktrans %}Mozilla appeals to your sense of propriety and we ask that you avoid offensive or unlawful marks. Mozilla reserves the right to remove marks that are offensive and/or violate the law. See Mozilla’s Legal Notices for more information.{% endblocktrans %}</p>
+				<nav id="legal-links">
+					<ul>
+						<li><a href="http://www.mozilla.com/privacy-policy.html" target="_blank">{{ _('Privacy Policy') }}</a></li>
+						<li><a href="http://www.mozilla.com/about/legal.html" target="_blank">{{ _('Legal Notices') }}</a></li>
+						<li class="last"><a href="http://www.mozilla.com/legal/fraud-report/index.html" target="_blank">{{ _('Report Trademark Abuse') }}</a></li>
+					</ul>
+				</nav>
+				<p>{% blocktrans %}Except where otherwise noted, content on this site is licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/us/" target="_blank">Creative Commons Attribution Share-Alike License v3.0</a> or any later version.{% endblocktrans %}</p>
+			</section>
+		</footer>
+  </body>
+
+</html>

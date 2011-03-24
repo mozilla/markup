@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block bodytag %}
+  <body class="make-your-mark">
+{% endblock %}
+
+{% block js %}
+<script src="/media/assets/js/markApp.min.js" type="text/javascript"></script>
+<script src="/media/assets/js/app.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+	<div id="fallback" class="overlay-wrapper">
+		<div id="fallback-content">
+			<p>{% blocktrans %}Oops! Your browser doesn’t support the features used on this site.
+			Please download a more modern browser like <a href="http://www.mozilla.com/products/download.html">Firefox 4</a>.{% endblocktrans %}</p>
+		</div>
+	</div>
+	<div id="sammy"></div>
+	<div id="markapp"></div>
+	<div class="translated-strings" style="display:none;">
+		<span id="default-error-msg">{% blocktrans %}An error occured. Please try your request again.{% endblocktrans %}</span>
+		<span id="default-loading-msg">{% blocktrans %}Loading{% endblocktrans %}</span>
+	</div>
+{% endblock %}
