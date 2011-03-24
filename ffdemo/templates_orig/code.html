@@ -1,0 +1,12 @@
+{% extends "about.html" %}
+{% load i18n %}
+{% block bodytag %}
+  <body class="behind-the-code about-code">
+{% endblock %}
+
+{% block about-content %}
+	<h1>{{ _('Code Repository') }}</h1>
+	{% blocktrans %}<p>We believe creativity should be shared. We believe everything on the Web should be accessible to the people who contribute to it. And that's why we chose to make the code behind Mark Up public.</p>
+	<p>We encourage you to use the code below to keep creating, collaborating and contributing.</p>{% endblocktrans %}
+{% endblock %}
+

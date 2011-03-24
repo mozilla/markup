@@ -1,0 +1,379 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-03-21 23:04-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: settings.py:69
+msgid "German"
+msgstr ""
+
+#: settings.py:70
+msgid "English"
+msgstr ""
+
+#: settings.py:71
+msgid "French"
+msgstr ""
+
+#: settings.py:72
+msgid "Russian"
+msgstr ""
+
+#: templates_orig/about.html:8
+msgid "About Mozilla"
+msgstr ""
+
+#: templates_orig/about.html:9
+msgid "GML"
+msgstr ""
+
+#: templates_orig/about.html:10 templates_orig/evan-roth.html:8
+msgid "Evan Roth"
+msgstr ""
+
+#: templates_orig/about.html:11
+msgid "Code Repository"
+msgstr ""
+
+#: templates_orig/code.html:8
+msgid "Behind the Code"
+msgstr ""
+
+#: templates_orig/community.html:9
+msgid "Community"
+msgstr ""
+
+#: templates_orig/evan-roth.html:9
+msgid ""
+"Evan Roth is an artist and researcher based in Paris whose work explores the "
+"intersection of free culture and popular culture. His notable projects "
+"include <a href=\"http://graffitiresearchlab.com/projects/laser-tag/\">L.A.S."
+"E.R. Tag</a> and <a href=\"http://graffitiresearchlab.com/projects/led-"
+"throwies/\">LED Throwies</a> (Graffiti Research Lab), <a href=\"http://"
+"whiteglovetracking.com/\">White Glove Tracking</a>, <a href=\"http://www."
+"eyewriter.org/\">EyeWriter</a>, <a href=\"http://graffitianalysis.com/"
+"\">Graffiti Analysis</a> and a collaboration with <a href=\"http://www."
+"youtube.com/watch?v=QftcJtvLr8g\">Jay-Z</a> on the first open source rap "
+"video. Roth's work is in the permanent collection of the MoMA (NYC) and has "
+"been exhibited widely in the Americas, Europe and Asia, including the "
+"Pompidou (Paris), the Kunsthalle (Vienna), the Tate (London), the Fondation "
+"Cartier (Paris) and the front page of Youtube. Roth has received numerous "
+"awards for his work, including the <a href=\"http://new.aec.at/repair/en/"
+"program/prix-ars-electronica/\">Golden Nica</a> from Prix Ars Electronica, "
+"Rhizome/The New Museum commissions (<a href=\"http://rhizome.org/"
+"commissions/2007/\">2007</a>, <a href=\"http://rhizome.org/commissions/2009/"
+"\">2009</a>), the <a href=\"http://2010.futureeverything.org/abouttheawards/"
+"eyewriter2\">Future Everything Award</a> and Brit Insurance Designs of the "
+"Year (<a href=\"http://www.designsoftheyear.com/2010/02/05/evan-roth-"
+"graffiti-taxonomy-paris-france/\">1</a>, <a href=\"http://www."
+"designsoftheyear.com/2010/02/10/members-of-free-art-and-technology-graffiti-"
+"research-lab-openframeworks-the-ebeling-group-and-tony-quan-the-eyewriter-"
+"usa/\">2</a>)."
+msgstr ""
+
+#: templates_orig/evan-roth.html:10
+msgid ""
+"Roth is co-founder of the <a href=\"http://www.graffitiresearchlab.com/"
+"\">Graffiti Research Lab</a> and the <a href=\"http://fffff.at/\">Free Art "
+"&amp; Technology Lab (F.A.T. Lab)</a>, a web based, open source research and "
+"development lab. In addition, at the Parsons School of Design, he has "
+"developed and continues to teach courses on viral media for artists, where "
+"grades depend on Internet attention metrics, and urban hacking, a course a "
+"New York City councilman has declared \"an invitation to break the law.\" "
+"Roth and his work have been featured in multiple outlets, including <a href="
+"\"http://www.npr.org/templates/story/story.php?storyId=124980282\">NPR</a>, "
+"the New York Times (<a href=\"http://www.nytimes.com/2006/06/25/arts/"
+"design/25daya.html?_r=1\">1</a>, <a href=\"http://www.nytimes.com/2007/08/12/"
+"nyregion/thecity/12graf.html\">2</a>, <a href=\"http://www.nytimes.com/ref/"
+"weekinreview/buzzwords2008.html\">3</a>), <a href=\"http://www.liberation.fr/"
+"recherche/?q=%22evan+roth%22\">Liberation</a>, Time magazine (<a href="
+"\"http://www.time.com/time/magazine/article/0,9171,1691618,00.html\">1</a>, "
+"<a href=\"http://www.time.com/time/arts/article/0,8599,1730645,00.html\">2</"
+"a>, <a href=\"http://www.time.com/time/"
+"photogallery/0,29307,1911799_1912685,00.html\">3</a>), <a href=\"http://"
+"edition.cnn.com/2010/TECH/web/09/10/gif.images/index.html\">CNN</a>, <a href="
+"\"http://browse.guardian.co.uk/search?search=%22evan+roth%22&sitesearch-"
+"radio=guardian&go-guardian=Search\">the Guardian</a>, <a href=\"http://"
+"abcnews.go.com/Technology/popup?id=2425229\">ABC News</a>, and <a href="
+"\"http://www.esquire.com/features/best-brightest-2007/"
+"graffiti1207\">Esquire</a>."
+msgstr ""
+
+#: templates_orig/gml.html:8
+msgid "Graffiti Markup Language"
+msgstr ""
+
+#: templates_orig/gml.html:9
+msgid ""
+"Graffiti Markup Language (.gml) is a universal, XML-based, open file format "
+"designed to store graffiti motion data (x coordinates, y coordinates and "
+"time). GML is intended to be a simple bridge between ink and code, promoting "
+"collaborations between graffiti writers and hackers. GML is today’s new "
+"digital standard for tomorrow’s vandals."
+msgstr ""
+
+#: templates_orig/home.html:20
+msgid ""
+"Oops! Your browser doesn’t support the features used on this site.\n"
+"\t\t\tPlease download a more modern browser like <a href=\"http://www."
+"mozilla.com/products/download.html\">Firefox 4</a>."
+msgstr ""
+
+#: templates_orig/sammy/home.html:1
+msgid "The Internet is your creation"
+msgstr ""
+
+#: templates_orig/sammy/home.html:2
+msgid ""
+"<em>Leave your mark to keep it open and free.</em> Nulla a purus sem, sit "
+"amet gravida massa. In eget risus ut urna auctor mattis vel eget metus. "
+"Morbi blandit lobortis imperdiet. Nam vulputate felis vel lectus congue "
+"fringilla. Nam tristique erat a massa convallis luctus. Sed fermentum "
+"vestibulum sollicitudin."
+msgstr ""
+
+#: templates_orig/sammy/home.html:3 templates_orig/sammy/makemark.html:7
+msgid "Click anywhere in the whitespace to begin your Mark"
+msgstr ""
+
+#: templates_orig/sammy/home.html:4 templates_orig/sammy/makemark.html:9
+msgid "browse Marks"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:6 templates_orig/sammy/moderate.html:6
+msgid "Replay this mark"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:7
+msgid "Flag as inappropriate"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:8 templates_orig/sammy/moderate.html:7
+msgid "Mark"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:11
+msgid "Share on Facebook"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:12
+msgid "Share on Twitter"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:14
+msgid "URL"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:20
+msgid "Mark Browsing"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:22
+msgid "zoom in"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:23
+msgid "zoom out"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:24
+msgid "right"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:25
+msgid "left"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:28
+msgid "location:"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:30
+msgid "All countries"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:34
+msgid "view yours"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:35
+msgid "view first"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:36
+msgid "view last"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:40
+msgid "Mark Stats"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:42
+msgid "<span id=\"stats-number-of-marks\"></span> Marks for an open Web"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:43
+msgid "On <span id=\"stats-number-of-countries\"></span> different countries"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:44
+msgid "Over <span id=\"stats-number-of-days\"></span> days"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:48 templates_orig/sammy/moderate.html:13
+msgid "view source"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:52 templates_orig/sammy/moderate.html:17
+msgid "jan"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:53 templates_orig/sammy/moderate.html:18
+msgid "feb"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:54 templates_orig/sammy/moderate.html:19
+msgid "mar"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:55 templates_orig/sammy/moderate.html:20
+msgid "apr"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:56 templates_orig/sammy/moderate.html:21
+msgid "may"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:57 templates_orig/sammy/moderate.html:22
+msgid "jun"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:58 templates_orig/sammy/moderate.html:23
+msgid "jul"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:59 templates_orig/sammy/moderate.html:24
+msgid "aug"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:60 templates_orig/sammy/moderate.html:25
+msgid "sep"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:61 templates_orig/sammy/moderate.html:26
+msgid "oct"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:62 templates_orig/sammy/moderate.html:27
+msgid "nov"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:63 templates_orig/sammy/moderate.html:28
+msgid "dec"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:65
+msgid ""
+"Mozilla Firefox Mark Up. The internet is your creation. Show your support to "
+"keep it open and free. Make your mark."
+msgstr ""
+
+#: templates_orig/sammy/linear.html:66
+msgid ""
+"The internet is your creation. Show your support to keep it open and free. "
+"Make your mark."
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:3
+msgid "The Web is your creation"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:4
+msgid "You are the ones using the Web every day."
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:4
+msgid ""
+"You are the writers, the coders, the artists. Each comment, upload, and "
+"contribution you make adds up to something bigger. The Web is created by "
+"everyone, and we believe it should remain free and accessible to everyone, "
+"with all people controlling their own online journeys."
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:5
+msgid ""
+"This is an open invitation to join the celebration of a Web that belongs to "
+"all of us. Make your mark and show your support for the world’s greatest "
+"public resource."
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:8
+msgid "Make Your Mark"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:11
+msgid "Submit"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:12
+msgid "Reset"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:13
+msgid "Cancel"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:14
+msgid "Location"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:16
+msgid "Information"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:20
+msgid "Select your country"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:22
+msgid ""
+"Location is only used to associate marks with geographic regions.<br />See "
+"<a href=\"http://www.mozilla.com/en-US/firefox/geolocation/\">http://www."
+"mozilla.com/en-US/firefox/geolocation/</a> for more information."
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:28
+msgid "Click anywhere to begin your mark"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:34
+msgid "Submitting Mark"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:35
+msgid ""
+"Oops! Something went wrong on our end.<br />Please submit your mark again."
+msgstr ""
+
+#: templates_orig/sammy/moderate.html:9
+msgid "Delete Mark"
+msgstr ""
+
+#: templates_orig/sammy/moderate.html:10
+msgid "Approve Mark"
+msgstr ""
