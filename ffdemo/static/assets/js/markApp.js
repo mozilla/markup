@@ -448,7 +448,8 @@
 							.css( { left: context.mouseX - 15, top: context.mouseY - $( '#contributor-quote-box' ).height() - 15 } );
 					} else {
 						$( '#contributor-quote-box:visible' ).fadeOut( 'fast' );
-						lC.hoverMark.color = lC.hoverMark.contributor_name ? '255,111,40' : '0,139,211';
+						// set mark to the orange highlight color
+						lC.hoverMark.color = '255,111,40';
 					}
 				} else if ( lC.hoverMark ) {
 					lC.hoverMark.color = lC.hoverMark.contributor_name ? '0,139,211' : '0,0,0';
