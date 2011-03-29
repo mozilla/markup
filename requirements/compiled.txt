@@ -1,0 +1,13 @@
+# Imaging
+PIL==1.1.7
+
+# Templating
+Jinja2==2.5.5
+
+# Database
+MySQL-python==1.2.3
+
+# Deployments
+Fabric==1.0.1
+paramiko==1.7.6
+pycrypto==2.3

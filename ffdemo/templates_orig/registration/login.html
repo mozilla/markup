@@ -7,7 +7,7 @@
 <!-- shouldn't really get here... -->
 {% else %}
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>{% _("Your username and password didn't match. Please try again.") }}</p>
 {% endif %}
 
 
@@ -17,11 +17,11 @@
 {% csrf_token %}
 <ul>
   <li>
-    <label for="username">Username</label>
+    <label for="username">{{ _('Username') }}</label>
     <input type="text" name="username" value="" id="username" />
   </li>
   <li>
-    <label for="password">Password</label>
+    <label for="password">{{ _('Password') }}</label>
     <input type="password" name="password" value="" id="password" />
   </li>
 

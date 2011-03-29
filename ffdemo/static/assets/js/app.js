@@ -139,8 +139,9 @@
 	
 	$( document ).ready( function () {
 		function browserSupportsRequiredFeatures() {
-			// detect canvas support
-			return !!document.createElement('canvas').getContext;
+			// detect canvas and native JSON support
+			return !!document.createElement('canvas').getContext && 
+				!!('JSON' in window);
 		}
 		if ( browserSupportsRequiredFeatures ) {
 			// remove the placeholder content
@@ -152,8 +153,8 @@
 		//	Try binding click event to locale here
 		$("#current-locale").click(function ()
 		{
-			$(this).parent().find("ul").toggle();
-			$(this).toggleClass("selected");
+			$( this ).parent().find("ul").toggle();
+			$( this ).toggleClass("selected");
 			return false;
 		});
 		

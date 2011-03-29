@@ -4,6 +4,7 @@ import hashlib
 import uuid
 from datetime import datetime
 from django.conf import settings
+import os
 
 class Mark(models.Model):
 	date_drawn = models.DateTimeField(auto_now_add=True)
@@ -27,7 +28,7 @@ class Invitation(models.Model):
         
         def save(self):
                 myuuid = uuid.uuid1().hex
-                self.invite_code = slugify( hashlib.md5(myuuid + datetime.now().strftime("%Y%m%d%H%m%s") ).hexdigest()[:12] )
+                self.invite_code = os.urandom(6).encode('hex')
                 super( Invitation, self ).save()
         
         def __unicode__(self):

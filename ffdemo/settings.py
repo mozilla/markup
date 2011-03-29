@@ -98,9 +98,6 @@ LOCALE_INDEPENDENT_PATHS = (
 # Fallbacks for locales that are not recognized by Babel. Bug 596981.
 BABEL_FALLBACK = {'fy-nl': 'nl'}
 
-
-
-
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = PROJECT_PATH+'/static/'
@@ -204,4 +201,3 @@ EMAIL_PORT = settings_local.EMAIL_PORT
 EMAIL_HOST_USER = settings_local.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = settings_local.EMAIL_HOST_PASSWORD
 EMAIL_USE_TLS = settings_local.EMAIL_USE_TLS
-

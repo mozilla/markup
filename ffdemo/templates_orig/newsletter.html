@@ -8,26 +8,19 @@
 		<p>Subscribe to our monthly updates and keep current with Mozilla news, including the latest tips and tricks for getting the most out of your Firefox browser. It’s the perfect way for us to keep in touch!</p>
 		
 		<form id="newsletter-form" action="http://awesomeness.mozilla.org/pub/rf" method="POST">
-			
-			<p><label for="email">Your email address:</label><input type="text" id="email" /></p>
+			<p><label for="email">Your email address:</label><input type="text" id="email" name="EMAIL_ADDRESS_" /></p>
 			<p>
 				<label for="newsletter-countries">Country:</label>
-				<select id="newsletter-countries">
+				<select id="newsletter-countries" name="COUNTRY_">
 					<option val="label">Select your country</option>
 				</select>
 			</p>
-			<p>
-				<label>Format:</label>
-				<label for="html-format">HTML</label><input type="radio" id="html-format" name="format" checked="checked" />
-				<label for="text-format">Text</label><input type="radio" id="text-format" name="format" />
-			</p>
-			<p><input type="checkbox" name="privacy" id="privacy-check" />I agree to the <a href="http://www.mozilla.com/en-US/privacy-policy" target="_blank">Mozilla Privacy Policy</a></p>
-			<p><input type="submit" value="Sign me up!" /></p>
-			
+			<p><input type="submit" value="Sign me up!" /></p>		
 			<cite>We will only send you Mozilla-related information</cite>
-			
+			<input type="hidden" name="_ri_" value="{{ datetime }}" />
+			<input type="hidden" name="MOZILLA_AND_YOU_FLG" value="Y" />
+			<input type="hidden" name="MOZILLA_AND_YOU_DATE" value="{{ datetime }}" />
 		</form>
-		
 		
 		{% endblocktrans %}
 	</section>

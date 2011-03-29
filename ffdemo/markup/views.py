@@ -14,10 +14,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.cache import cache_page
 from django.core.context_processors import csrf
 from ffdemo.utils.render import render_response
-from ffdemo.markup.models import Mark
+from ffdemo.markup.models import Mark, Invitation
 from ffdemo.markup.forms import MarkForm
 from django.shortcuts import get_object_or_404
 from ffdemo.markup import common
+import datetime
 
 @cache_page(15) # cache for 15 seconds
 def home(request):
@@ -48,8 +49,8 @@ def mozilla(request):
 def evan(request):
     return render_response(request, 'evan-roth.html')
 
-def gml(request):
-    mark = Mark.objects.all()[10]
+def gml(request, mark_reference):
+    mark = get_object_or_404(Mark, reference=mark_reference)
     obj_decoded = simplejson.loads(common.decode_points_obj(mark.points_obj_simplified))
     context = { 'mark': mark, 'obj_decoded': obj_decoded }
     return render_response(request, 'gml.xml', context, mimetype='application/xml')
@@ -85,7 +86,7 @@ def community(request):
 
 @cache_page(60 * 30)
 def newsletter(request):
-	return render_response(request, 'newsletter.html', {})
+	return render_response(request, 'newsletter.html', {'datetime':datetime.datetime.now()})
 
 @cache_page(60 * 30)
 def home_sammy(request):
@@ -102,14 +103,20 @@ def mark_sammy(request):
 
 def makemark_sammy(request):
 	mark_form = MarkForm()
-        return render_response(request, 'sammy/makemark.html', {'form': mark_form})
+	return render_response(request, 'sammy/makemark.html', {'form': mark_form})
 
 
 ### MODERATION VIEWS
 def account_locked(request):
         return render_response(request, 'registration/locked.html')
 
-
+def list_invites(request):
+        if not request.user.is_authenticated():
+                return HttpResponseRedirect('/accounts/login/')
+        else:
+                invites = Invitation.objects.order_by('id')
+                context = {'invites': invites}
+                return render_response(request, 'list_invites.html', context)
 
 
 def moderate_sammy(request):

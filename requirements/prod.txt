@@ -1,0 +1,10 @@
+# Django
+-e git://github.com/django/django.git@a85fe4dddc4b133de289#egg=django
+-e git://github.com/codekoala/django-axes.git#egg=django-axes
+-e git://github.com/kron4eg/django-localeurl.git#egg=django-localeurl
+
+# Migrations
+-e git://github.com/simplegeo/django-south.git#egg=south
+
+# YAML
+PyYAML==3.09

@@ -7,7 +7,7 @@ body {
 	font-size: 67.5%;
 	color: #222222;
 	background-color: #2f2f30;
-	background-image: url("/media/assets/images/footer_bg.gif");
+	background-image: url('/media/assets/images/footer_bg.gif');
 	background-position: 50% 0;
 	background-repeat: repeat;
 }
@@ -33,19 +33,13 @@ a img
 /* SelectBox styles */
 .ui-selectBox {
 	position: relative;
-	width: 188px; /* 188px + 35px (padding-right) + 2px (for borders) == 225px wide */
+	width: 188px;
 	border: solid 1px #BBB;
 	text-decoration: none;
 	color: #000;
 	outline: none;
 	vertical-align: middle;
 	background: #F2F2F2;
-	background: -moz-linear-gradient(top, #F8F8F8 1%, #E1E1E1 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #F8F8F8), color-stop(100%, #E1E1E1));
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F8F8F8', endColorstr='#E1E1E1', GradientType=0);
-	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .75);
-	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .75);
-	box-shadow: 0 1px 0 rgba(255, 255, 255, .75);
 	padding-right: 35px;
 	display: inline-block;
 	cursor: default;
@@ -79,30 +73,25 @@ a img
 	right: 0;
 	width: 23px;
 	height: 100%;
-	background: url(jquery.ui-selectBox-arrow.gif) 50% center no-repeat;
 	border-left: solid 1px #BBB;
 }
 
-/* Dropdown styles */
 #ui-selectBox-dropdown {
 	max-height: 200px;
 	border: solid 1px #BBB;
 	background: #FFF;
 	margin-top: -1px;
 	overflow: auto;
-	-moz-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
-	-webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
-	box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
 }
 
-#ui-selectBox-dropdown UL,
-#ui-selectBox-dropdown UL LI {
+#ui-selectBox-dropdown ul,
+#ui-selectBox-dropdown ul li {
 	list-style: none;
 	padding: 0;
 	margin: 0;
 }
 
-#ui-selectBox-dropdown UL LI {
+#ui-selectBox-dropdown ul li {
 	white-space: nowrap;
 	overflow: hidden;
 	padding: .2em .6em .2em 20px;
@@ -122,7 +111,6 @@ a img
 }
 
 #ui-selectBox-dropdown .ui-selectBox-option.ui-selectBox-initial {
-	background-image: url(jquery.ui-selectBox-tick.gif);
 	background-position: 4px center;
 	background-repeat: no-repeat;
 }
@@ -136,17 +124,6 @@ a img
 	font-style: italic;
 }
 
-
-/* The following can be removed if you already have a jQuery UI theme loaded */
-.ui-corner-tl { -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; border-top-left-radius: 4px; }
-.ui-corner-tr { -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; border-top-right-radius: 4px; }
-.ui-corner-bl { -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; border-bottom-left-radius: 4px; }
-.ui-corner-br { -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; border-bottom-right-radius: 4px; }
-.ui-corner-top { -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; border-top-left-radius: 4px; -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; border-top-right-radius: 4px; }
-.ui-corner-bottom { -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; border-bottom-left-radius: 4px; -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; border-bottom-right-radius: 4px; }
-.ui-corner-right {  -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; border-top-right-radius: 4px; -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; border-bottom-right-radius: 4px; }
-.ui-corner-left { -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; border-top-left-radius: 4px; -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; border-bottom-left-radius: 4px; }
-.ui-corner-all { -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
 .ui-selectBox
 {
 	width: 200px;
@@ -251,7 +228,7 @@ header h1 {
 }
 header h1 a {
 	color: #F66C1E;
-	background-image: url(/media/assets/images/mark_up_logo.jpg);
+	background-image: url('/media/assets/images/mark_up_logo.jpg');
 	background-position: 0 0;
 	background-repeat: no-repeat;
 	text-transform: uppercase;
@@ -381,7 +358,7 @@ body.community ul #community a {
 #markmaker {
 	height: 100%;
 	margin: -20px;
-	background-image: url(/media/assets/images/large_dash.gif);
+	background-image: url('/media/assets/images/large_dash.gif');
 	background-repeat: repeat-x;
 	background-position: 0 70%;
 }
@@ -406,7 +383,7 @@ body.community ul #community a {
 #browse-marks a {
 	float: right;
 	display: block;
-	background-image: url("/media/assets/images/magnifying.png");
+	background-image: url('/media/assets/images/magnifying.png');
 	background-position: 0 0;
 	font-size: 0.7em;
 	text-shadow: 0 0 1px rgba(0,0,0,.25);
@@ -430,7 +407,7 @@ body.community ul #community a {
 }
 
 #markmaker #drawing {
-	background: url(/media/assets/images/large_dash.gif ) 0 80% repeat-x;
+	background: url('/media/assets/images/large_dash.gif') 0 80% repeat-x;
 	height: 100%;
 	margin: -20px;
 }
@@ -467,18 +444,18 @@ display: inline-block;
 	cursor: not-allowed;
 }
 #markmaker-controls li#markmaker-submit a {
-	background-image: url(/media/assets/images/submit.png);
+	background-image: url('/media/assets/images/submit.png');
 	background-position: 50% 3px ;
 }
 #markmaker-controls li#markmaker-reset a {
-	background-image: url(/media/assets/images/reset.png);
+	background-image: url('/media/assets/images/reset.png');
 }
 #markmaker-controls li#markmaker-cancel a {
-	background-image: url(/media/assets/images/cancel.png);
+	background-image: url('/media/assets/images/cancel.png');
 	background-position: 50% 5px;
 }
 #markmaker-controls li#markmaker-location a {
-	background-image: url(/media/assets/images/location.png);
+	background-image: url('/media/assets/images/location.png');
 }
 #markmaker-information {
 	position: absolute;
@@ -489,7 +466,7 @@ display: inline-block;
 	width: 30px;
 	height: 30px;
 	text-indent: -9999px;
-	background: url(/media/assets/images/i.png) 50% 50% no-repeat;
+	background: url('/media/assets/images/i.png') 50% 50% no-repeat;
 	cursor: pointer;
 }
 
@@ -542,7 +519,7 @@ display: inline-block;
 .collapsible h3 {
 	cursor: pointer;
 	background-color: #F2F2F2;
-	background-image: url("/media/assets/images/collapsible.png");
+	background-image: url('/media/assets/images/collapsible.png');
 	background-position: 97% 50%;
 	background-repeat: no-repeat;
 	color: #6E6E6E;
@@ -551,7 +528,7 @@ display: inline-block;
 	padding: 5px;
 }
 .collapsibleMod-expanded h3 {
-	background-image: url("/media/assets/images/collapsed.png");
+	background-image: url('/media/assets/images/collapsed.png');
 }
 #stats {
 	position: absolute;
@@ -590,7 +567,7 @@ display: inline-block;
 
 #mark-browsing-controls {
 	list-style: none;
-	background-image: url(/media/assets/images/controls.png);
+	background-image: url('/media/assets/images/controls.png');
 	background-repeat: no-repeat;
 	background-position: 50% 36px;
 	width: 166px;
@@ -632,21 +609,21 @@ display: inline-block;
 	top: 30px;
 }
 #mark-browsing-zoom-in a {
-	background-image: url(/media/assets/images/zoomIn.png);
+	background-image: url('/media/assets/images/zoomIn.png');
 	background-position: 50% 100%;
 	padding: 0 0 20px 0;
 	text-align: center;
 	width: 70px;
 }
 #mark-browsing-zoom-out a {
-	background-image: url(/media/assets/images/zoomOut.png);
+	background-image: url('/media/assets/images/zoomOut.png');
 	background-position: 50% 0%;
 	padding: 40px 0 0 0;
 	text-align: center;
 	width: 70px;
 }
 #mark-browsing-next a {
-	background-image: url(/media/assets/images/nextMark.png);
+	background-image: url('/media/assets/images/nextMark.png');
 	background-position: 0% 50%;
 	padding: 10px 0 10px 36px;
 	text-align: right;
@@ -665,7 +642,7 @@ display: inline-block;
 #country-select-label,
 #contributor-select-label {
 	display: inline-block;
-	background-image: url(/media/assets/images/location_small.png);
+	background-image: url('/media/assets/images/location_small.png');
 	background-position: 0 0;
 	background-repeat: no-repeat;
 	text-indent:-9999px;
@@ -673,7 +650,7 @@ display: inline-block;
 	height: 14px;
 }
 #contributor-select-label {
-	background-image: url(/media/assets/images/contributor_label.png);
+	background-image: url('/media/assets/images/contributor_label.png');
 }
 #country-select {
 	margin-bottom: 8px;
@@ -723,7 +700,7 @@ display: inline-block;
 	height: 25px;
 	text-indent: -9999px;
 	display: block;
-	background-image: url(/media/assets/images/playback.png);
+	background-image: url('/media/assets/images/playback.png');
 	background-repeat: no-repeat;
 	background-position: 0 0;
 }
@@ -735,7 +712,7 @@ display: inline-block;
 	height: 10px;
 	text-indent: -9999px;
 	display: block;
-	background-image: url(/media/assets/images/flag.png);
+	background-image: url('/media/assets/images/flag.png');
 	background-repeat: no-repeat;
 	background-position: 0 0;
 }
@@ -755,10 +732,10 @@ display: inline-block;
 	margin-right: 2px;
 }
 #facebook-share {
-	background-image: url(/media/assets/images/facebook.png);
+	background-image: url('/media/assets/images/facebook.png');
 }
 #twitter-share {
-	background-image: url(/media/assets/images/twitter.png);
+	background-image: url('/media/assets/images/twitter.png');
 }
 
 #delete-mark
@@ -967,7 +944,7 @@ footer #legal a:hover {
 	background-color: #e4e4e4;
 }
 .infobox-arrow {
-	background-image: url("/media/assets/images/tri.png");
+	background-image: url('/media/assets/images/tri.png');
 	background-position: 100% 100%;
 	background-repeat: no-repeat;
 	height: 14px;
@@ -1027,7 +1004,7 @@ footer #legal a:hover {
 	padding: 6px 10px;
 }
 #information-dialog .infobox-arrow {
-	background-image: url("/media/assets/images/tri_rtl.png");
+	background-image: url('/media/assets/images/tri_rtl.png');
 	height: 14px;
 	width: 30px;
 	float: right;
@@ -1045,10 +1022,10 @@ footer #legal a:hover {
 	bottom: 102px;
 }
 .overlay-wrapper {
-	background: url(/media/assets/images/overlay.png) 0 0 repeat;
+	background: url('/media/assets/images/overlay.png') 0 0 repeat;
 }
 .overlay-light {
-	background: url(/media/assets/images/light_overlay.png) 0 0 repeat;
+	background: url('/media/assets/images/light_overlay.png') 0 0 repeat;
 	opacity: 0.9;
 }
 #markapp-loader {
@@ -1057,7 +1034,7 @@ footer #legal a:hover {
 	position: relative;
 }
 #markapp-loader div {
-	background: url("/media/assets/images/loading.gif") no-repeat 50% 31px;
+	background: url('/media/assets/images/loading.gif') no-repeat 50% 31px;
 	color: #FFFFFF;
 	font-size: 0.9em;
 	font-weight: bold;
@@ -1069,7 +1046,7 @@ footer #legal a:hover {
 }
 #markapp-loader.overlay-light div {
 	color: #ff5400;
-	background: url("/media/assets/images/loader_light.gif") no-repeat 50% 31px;
+	background: url('/media/assets/images/loader_light.gif') no-repeat 50% 31px;
 }
 #fallback,
 #markapp-error {
@@ -1089,7 +1066,7 @@ footer #legal a:hover {
 }
 #fallback-content p,
 #markapp-error-content p {
-	background-image: url(/media/assets/images/arrow_orange.png);
+	background-image: url('/media/assets/images/arrow_orange.png');
 	background-position: 10px 100%;
 	background-repeat: no-repeat;
 	margin: 0 0 -18px;
