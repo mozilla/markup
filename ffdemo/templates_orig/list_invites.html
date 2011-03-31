@@ -8,6 +8,7 @@
   <th>invite code</th>
   <th>type</th>
   <th>used at</th>
+  <th>url</th>
 </tr>
 {% for invite in invites %}
 <tr>
@@ -15,6 +16,7 @@
   <td>{{ invite.invite_code }}</td>
   <td>{{ invite.get_contributor_type_display }}</td>
   <td>{{ invite.used_at }}</td>
+  <td>/#/mark/new?invite={{ invite.invite_code }}&contributor_type={{ invite.contributor_type }}</td>
 </tr>
 
 {% endfor %}

@@ -4,28 +4,37 @@
 <div id="linear" class="autoResize">
 	<!-- These are per mark information, shown on hover of a single mark -->
 	<div id="mark-information">
-		<a id="mark-playback" href="#" title="Replay this mark">{{ _('Replay this mark') }}</a>
-		<h3 id="mark-number">{{ _('Mark') }} <span id="mark-id"></span></h3>
-		<h4><span id="mark-timestamp"></span><span id="mark-country"></span></h4>
-		<a href="#" id="delete-mark">{{ _('Delete Mark') }}</a>
-		<h3 id="approve-mark-copy">{{ _('Approve Mark') }}</h3><input type="checkbox" id="approve-mark-checkbox" />
+		<div id="mark-controls">
+			<a id="mark-playback" href="#" title="Replay this mark">{{ _('play') }}</a>
+		</div>
+		<div id="main-mark-information">
+				<h3 id="mark-number">{{ _('Mark') }} <span id="mark-id"></span></h3>
+				<h4><span id="mark-timestamp"></span><span id="mark-country"></span></h4>
+				<a href="#" id="delete-mark">{{ _('Delete Mark') }}</a>
+				<h3 id="approve-mark-copy">{{ _('Approve Mark') }}</h3><input type="checkbox" id="approve-mark-checkbox" />
+		</div>
 	</div>
 	
 	<a id="view-source" href="https://github.com/mozilla/markup">{{ _('view source') }}</a>
 </div>
 <div class="translated-strings" style="display:none;">
 	<ol id="month-abbreviations">
-		<li>{{ _('jan') }}</li>
-		<li>{{ _('feb') }}</li>
-		<li>{{ _('mar') }}</li>
-		<li>{{ _('apr') }}</li>
-		<li>{{ _('may') }}</li>
-		<li>{{ _('jun') }}</li>
-		<li>{{ _('jul') }}</li>
-		<li>{{ _('aug') }}</li>
-		<li>{{ _('sep') }}</li>
-		<li>{{ _('oct') }}</li>
-		<li>{{ _('nov') }}</li>
-		<li>{{ _('dec') }}</li>
+		<li>{{ _('Jan') }}</li>
+		<li>{{ _('Feb') }}</li>
+		<li>{{ _('Mar') }}</li>
+		<li>{{ _('Apr') }}</li>
+		<li>{{ _('May') }}</li>
+		<li>{{ _('Jun') }}</li>
+		<li>{{ _('Jul') }}</li>
+		<li>{{ _('Aug') }}</li>
+		<li>{{ _('Sep') }}</li>
+		<li>{{ _('Oct') }}</li>
+		<li>{{ _('Nov') }}</li>
+		<li>{{ _('Dec') }}</li>
 	</ol>
+	<span id="twitter-msg">{% blocktrans %}Mozilla Firefox Mark Up. The internet is your creation. Show your support to keep it open and free. Make your mark.{% endblocktrans %}</span>
+	<span id="facebook-msg">{% blocktrans %}The Web is your creation. Show your support to keep it open and accessible to all. Make your mark. (moz.ly){% endblocktrans %}</span>
+	<span id="loading-marks-msg">{{ _('Loading Marks') }}</span>
+	<span id="error-msg">{% blocktrans %}Oops! Something went wrong on our end.<br />Please start at <a href="#/linear/">the beginning of the marks</a> and try again.{% endblocktrans %}</span>
+	<span id="no-marks-error-msg">{% blocktrans %}We couldn't find any marks for your current selection.<br />Please start at <a href="#/moderate">the beginning of the marks</a> and try again.{% endblocktrans %}</span>
 </div>

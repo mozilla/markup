@@ -3,8 +3,8 @@
 <div id="markmaker" class="autoResize">
 	<div id="intro-main-copy">
 		<h1>{{ _('The Web is your creation') }}</h1>
-		<p><strong>{{ _('You are the ones using the Web every day.') }}</strong> {{ _('You are the ones using it every day. Every comment, upload and contribution you make adds up to something bigger. And we believe it should remain public and accessible to everyone.') }}</p>
-		<p>{{ _('This is an open invitation to join the celebration of a Web that belongs to us all. Make your mark and show your support for the world\'s greatest public resource.') }}</p>
+		<p>{% blocktrans %}<strong>You are the ones using the Web every day.</strong> Every comment, upload and contribution you make adds up to something bigger. And we believe it should remain public and accessible to everyone.{% endblocktrans %}</p>
+		<p>{% blocktrans %}This is an open invitation to join the celebration of a Web that belongs to us all. Make your mark and show your support for the world\'s greatest public resource.{% endblocktrans %}</p>
 	</div>
 	<h2 id="click-anywhere"><a href="#/mark/new">{{ _('Click anywhere in the whitespace to begin your Mark') }}</a></h2>
 	<h3 id="make-your-mark">{{ _('Make Your Mark') }}</h3>
@@ -26,7 +26,7 @@
 		<div class="infobox-arrow"></div>
 	</div>
 	<div id="markmaker-legal-line">
-		<p>{% blocktrans %}Please keep in mind that your mark will be publicly viewed.{% endblocktrans %}</p>
+		<p><a href="#legal">{% blocktrans %}Please keep in mind that your mark will be publicly viewed.{% endblocktrans %}</a></p>
 	</div>
 	<div id="information-dialog" style="display:none;">
 		<div class="infobox-inner">

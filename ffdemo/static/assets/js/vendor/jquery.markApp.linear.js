@@ -317,6 +317,7 @@
 							}
 							// return focus to the viz
 							$( this ).blur();
+							$( '.ui-selectBox-focus' ).removeClass( 'ui-selectBox-focus' );
 							context.$container.focus();
 						} );
 						// select the current mark if we have it
@@ -395,7 +396,7 @@
 									modules.linear.fn.jumpToMark( context, lC.reference_mark, lC.playback );
 								} else {
 									// show the error message, with a link back to the main visualization link
-									context.fn.showError( lC.errorMsg );
+									context.fn.showError( context.fn.getString( 'no-marks-error-msg' ) );
 								}
 								lC.requestingMarks = false;
 							}
@@ -430,7 +431,7 @@
 								}
 							} else {
 								// show the error message, with a link back to the main visualization link
-								context.fn.showError( lC.errorMsg );
+								context.fn.showError( context.fn.getString( 'no-marks-error-msg' ) );
 							}
 							lC.requestingMarks = false;
 						}
@@ -461,7 +462,7 @@
 					$( '#contributor-select-label' ).show();
 				}
 				// if the country has changed, grab updated data
-				if( ! $( '#mark-browsing-options' ).is( '.country-' + ( lC.country_code ? lC.country_code : 'all' ) ) ) {
+				if( lC.linear_root != "moderate" && ! $( '#mark-browsing-options' ).is( '.country-' + ( lC.country_code ? lC.country_code : 'all' ) ) ) {
 					$.ajax( {
 						'url': '/requests/init_viz_data',
 						'data': options,
@@ -471,9 +472,6 @@
 							$( '#mark-browsing-options' )
 								.removeAttr( 'class' )
 								.addClass( 'country-' + ( lC.country_code ? lC.country_code : 'all' ) );
-							// setup and show the stats
-							$( '#total-mark-count' )
-								.text( data.total_marks );
 							if( lC.country_code ) {
 								$( '#first-mark-link' )
 									.attr( 'href', '#/' + lC.linear_root + '/country/' + lC.country_code + '/' + data.country_first_mark );
@@ -487,7 +485,8 @@
 							}
 							// setup collapsibles
 							$( '#mark-browsing' ).collapsibleMod( );
-							
+							// set our total marks
+							$( '#total-mark-count' ).text( data.max_id );
 							// if the contributor box is empty, fill it
 							if( $( '#contributor-select option' ).size() == 1 ) {
 								var $select = $( '#contributor-select' );
@@ -501,7 +500,7 @@
 								}
 								$select.change( function ( ) {
 									var val = $( this ).val();
-									if( val.length != "label" ) {
+									if( val != "label" ) {
 										// jump to this contributors mark
 										context.app.setLocation( '#/' + lC.linear_root + '/' + val );
 									}
@@ -641,7 +640,7 @@
 							// push the marks into the leftBuffer
 							modules.linear.fn.setupMarks( context, data.marks );
 							// if we got back less than we asked for, assume we're at the end
-							if ( data.marks.length == 0 ) {
+							if ( data.marks.length < 18 ) {
 								lC[ isLeft ? 'moreLeft' : 'moreRight'] = false;
 							}
 						} else {
@@ -907,7 +906,7 @@
 						context.fn.storeData( 'markFlaggings', lC.flaggings );
 					},
 					error: function ( data ) {
-						context.fn.showError( lC.errorMsg );
+						context.fn.showError( context.fn.getString( 'error-msg' ) );
 					}
 				} );
 				
@@ -955,7 +954,7 @@
 					},
 					error: function ( data ) {
 						// TODO translate this msg
-						context.fn.showError( lC.errorMs );
+						context.fn.showError( context.fn.getString( 'error-msg' ) );
 					}
 				} );
 			},
@@ -974,7 +973,7 @@
 						lC.currentMark.is_approved = shouldApprove;
 					},
 					error: function ( data ) {
-						context.fn.showError( lC.errorMsg );
+						context.fn.showError( context.fn.getString( 'error-msg' ) );
 					}
 				} );
 			},

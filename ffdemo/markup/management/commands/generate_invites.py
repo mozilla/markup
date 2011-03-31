@@ -1,11 +1,14 @@
-import os, sys
+import os
+import sys
 from django.db import models
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from ffdemo.markup.models import Invitation
 
+
 class Command(BaseCommand):
     args = '<num_invites invite_type>'
+
     def handle(self, *args, **options):
         if len(args) < 2:
             raise CommandError('Requires number of invites to generate and type of invite')
@@ -22,4 +25,3 @@ class Command(BaseCommand):
                 invite = Invitation(contributor_type=invite_type)
                 invite.save()
             print "finished generating invites"
-            

@@ -14,20 +14,20 @@ from localeurl import utils
 
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, get_host
 
+
 class SQLLogMiddleware:
-    def process_response(self, request, response): 
+    def process_response(self, request, response):
         if settings.DEV and connection.queries:
             time = sum([float(q['time']) for q in connection.queries])
         return response
-        
+
+
 class DetectReferrer:
     def process_request(self, request):
         if not request.session.get('HTTP_REFERER', False):
             if(request.META.get('HTTP_REFERER')):
                 ref = urlparse(request.META.get('HTTP_REFERER'))
                 request.session['HTTP_REFERER'] = ref.hostname
-
-
 
 # SSL Middleware
 # via: http://djangosnippets.org/snippets/85/
@@ -39,9 +39,10 @@ class DetectReferrer:
 
 SSL = 'SSL'
 
+
 class SSLRedirect:
-    
-    def process_view(self, request, view_func, view_args, view_kwargs):
+
+    process_view(self, request, view_func, view_args, view_kwargs):
         if SSL in view_kwargs:
             secure = view_kwargs[SSL]
             del view_kwargs[SSL]
@@ -53,7 +54,7 @@ class SSLRedirect:
 
     def _is_secure(self, request):
         if request.is_secure():
-	    return True
+            return True
 
         #Handle the Webfaction case until this gets resolved in the request.is_secure()
         if 'HTTP_X_FORWARDED_SSL' in request.META:
@@ -63,10 +64,10 @@ class SSLRedirect:
 
     def _redirect(self, request, secure):
         protocol = secure and "https" or "http"
-        newurl = "%s://%s%s" % (protocol,get_host(request),request.get_full_path())
+        newurl = "%s://%s%s" % (protocol, get_host(request), request.get_full_path())
         if settings.DEBUG and request.method == 'POST':
-            raise RuntimeError, \
+            raise RuntimeError(
         """Django can't perform a SSL redirect while maintaining POST data.
-           Please structure your views so that redirects only occur during GETs."""
+           Please structure your views so that redirects only occur during GETs.""")
 
         return HttpResponsePermanentRedirect(newurl)

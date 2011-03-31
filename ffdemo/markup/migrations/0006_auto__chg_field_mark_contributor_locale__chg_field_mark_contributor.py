@@ -1,28 +1,26 @@
-# encoding: utf-8
 import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Changing field 'Mark.contributor_locale'
         db.alter_column('markup_mark', 'contributor_locale', self.gf('django.db.models.fields.CharField')(max_length=5, null=True))
 
         # Changing field 'Mark.contributor'
         db.alter_column('markup_mark', 'contributor', self.gf('django.db.models.fields.CharField')(max_length=75, null=True))
 
-
     def backwards(self, orm):
-        
+
         # Changing field 'Mark.contributor_locale'
         db.alter_column('markup_mark', 'contributor_locale', self.gf('django.db.models.fields.CharField')(max_length=4, null=True))
 
         # Changing field 'Mark.contributor'
         db.alter_column('markup_mark', 'contributor', self.gf('django.db.models.fields.CharField')(max_length=10, null=True))
-
 
     models = {
         'markup.invitation': {

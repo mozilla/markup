@@ -46,6 +46,9 @@
 			mousedown: function( context, e ) {
 				switch ( context.modules.capture.state ) {
 					case "drawing":
+						// drop the UI elements temporarily below the canvas
+						$( '#markmaker-controls, #contributor-fields, #translator-fields, #markmaker-legal-line' )
+							.css( 'zIndex', 0 );
 						// close the country select if it's open 
 						if( $( '#location-dialog' ).is( ':visible' ) ) {
 							$( '#location-dialog' )
@@ -68,7 +71,10 @@
 			},
 			mouseup: function( context, e ) {
 				if( context.modules.capture.state == "drawing" ) {
+					// bring the UI elements back up above the canvas
 					modules.capture.fn.endStroke( context );
+					$( '#markmaker-controls, #contributor-fields, #translator-fields, #markmaker-legal-line' )
+						.css( 'zIndex', 200 );
 				}
 			},
 			ready: function ( context, e ) {

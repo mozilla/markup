@@ -13,7 +13,6 @@ PROJECT_DOMAIN = ''
 PROJECT_DIR = os.path.realpath(os.path.dirname(__file__))
 
 
-
 # UNCOMMENT TO ENABLE SECURE SESSIONS
 # SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_HTTPONLY = True
@@ -42,8 +41,6 @@ DATABASES = {
         'PORT': settings_local.DB_PORT,             # Set to empty string for default. Not used with sqlite3.
     }
 }
-
-
 
 
 # Local time zone for this installation. Choices can be found here:
@@ -100,7 +97,7 @@ BABEL_FALLBACK = {'fy-nl': 'nl'}
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = PROJECT_PATH+'/static/'
+MEDIA_ROOT = PROJECT_PATH + '/static/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -136,10 +133,10 @@ MIDDLEWARE_CLASSES = (
     'ffdemo.middleware.SSLRedirect',
 )
 
-# ADMIN 
+# ADMIN
 CONTRIBUTOR_TYPE_CHOICES = (
-    ('c','contributor'),
-    ('t','translator'),
+    ('c', 'contributor'),
+    ('t', 'translator'),
 )
 LOGIN_REDIRECT_URL = "/#/moderate"
 
@@ -152,13 +149,13 @@ AXES_LOCKOUT_URL = "/auth/locked/"
 ROOT_URLCONF = 'ffdemo.urls'
 
 TEMPLATE_DIRS = (
-    PROJECT_PATH+'/templates_orig',
-    PROJECT_PATH+'/templates_orig/sammy',
+    PROJECT_PATH + '/templates_orig',
+    PROJECT_PATH + '/templates_orig/sammy',
 )
-
 # JINJA_TEMPLATE_DIRS = (
 #     PROJECT_PATH+'/templates',
 # )
+
 
 def JINJA_CONFIG():
     import jinja2
@@ -191,12 +188,12 @@ INSTALLED_APPS = (
 )
 
 FIXTURE_DIRS = (
-    PROJECT_PATH+'/fixtures/',
+    PROJECT_PATH + '/fixtures/',
 )
 SOUTH_TESTS_MIGRATE = False
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST =  settings_local.EMAIL_HOST
+EMAIL_HOST = settings_local.EMAIL_HOST
 EMAIL_PORT = settings_local.EMAIL_PORT
 EMAIL_HOST_USER = settings_local.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = settings_local.EMAIL_HOST_PASSWORD

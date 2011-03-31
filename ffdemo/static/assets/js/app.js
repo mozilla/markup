@@ -144,7 +144,7 @@
 	$( document ).ready( function () {
 		function browserSupportsRequiredFeatures() {
 			// detect canvas and native JSON support
-			return !!document.createElement('canvas').getContext && 
+			return !!( 'getContext' in document.createElement( 'canvas' ) ) && 
 				!!('JSON' in window);
 		}
 		if ( browserSupportsRequiredFeatures ) {

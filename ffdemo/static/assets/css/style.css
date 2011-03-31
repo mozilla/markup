@@ -1042,13 +1042,16 @@ footer #legal a:hover {
 #markmaker-legal-line {
 	font-size: 0.75em;
 	font-style: italic;
-	color: #aaaaaa;
 	width: 400px;
 	margin: 0 0 0 -200px;
 	position: absolute;
 	left: 50%;
 	text-align: center;
 	bottom: 102px;
+	z-index: 200;
+}
+#markmaker-legal-line a {
+	color: #666666;
 }
 .overlay-wrapper {
 	background: url('/media/assets/images/overlay.png') 0 0 repeat;
@@ -1077,13 +1080,24 @@ footer #legal a:hover {
 	color: #ff5400;
 	background: url('/media/assets/images/loader_light.gif') no-repeat 50% 31px;
 }
-#fallback,
 #markapp-error {
 	padding: 160px 0 0;
 	z-index: 300;
 	position: relative;
 }
-#fallback-content,
+#fallback {
+	height: 500px;
+	padding: 1px 0 0 0;
+}
+#fallback-content {
+	margin: 160px auto;
+	width: 420px;
+	font-size: 0.9em;
+	background: #ff5400;
+	border: 2px solid #ffffff;
+	color: #ffffff;
+	line-height: 20px;
+}
 #markapp-error-content {
 	margin: 0 auto;
 	width: 420px;
@@ -1091,7 +1105,7 @@ footer #legal a:hover {
 	background: #ff5400;
 	border: 2px solid #ffffff;
 	color: #ffffff;
-	line-height: 1.8em;
+	line-height: 20px;
 }
 #fallback-content p,
 #markapp-error-content p {

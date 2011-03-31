@@ -1,30 +1,26 @@
-# encoding: utf-8
 import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
-        # Adding unique constraint on 'Invitation', fields ['invite_code']
+        #Adding unique constraint on 'Invitation', fields ['invite_code']
         db.create_unique('markup_invitation', ['invite_code'])
 
         # Adding index on 'Mark', fields ['reference']
         db.create_index('markup_mark', ['reference'])
 
-
     def backwards(self, orm):
-        
         # Removing index on 'Mark', fields ['reference']
         db.delete_index('markup_mark', ['reference'])
 
         # Removing unique constraint on 'Invitation', fields ['invite_code']
         db.delete_unique('markup_invitation', ['invite_code'])
 
-
-    models = {
+        models = {
         'markup.invitation': {
             'Meta': {'object_name': 'Invitation'},
             'contributor_type': ('django.db.models.fields.CharField', [], {'max_length': '1'}),

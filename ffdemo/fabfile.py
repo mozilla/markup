@@ -24,11 +24,13 @@ env.project = 'ffdemo'
 env.django_env = 'ffenv'
 env.port = "10222"
 
+
 def _setup_path():
     env.root = os.path.join(env.home)
     env.code_root = os.path.join(env.root, env.project)
     env.virtualenv_root = os.path.join(env.root)
     env.settings = '%(project)s.settings_%(environment)s' % env
+
 
 def staging():
     """ use staging environment on remote host"""
@@ -37,6 +39,7 @@ def staging():
     env.hosts = ['209.20.77.205:10222']
     env.port = '10222'
     _setup_path()
+
 
 def deploy():
     """ rsync code to remote host """
@@ -61,6 +64,7 @@ def deploy():
     # run_migrations()
     apache_restart()
 
+
 def touch():
     """ touch wsgi file to trigger reload """
     require('code_root', provided_by=('staging'))
@@ -68,24 +72,25 @@ def touch():
     with cd(apache_dir):
         run('touch %s.wsgi' % env.environment)
 
+
 def run_migrations():
     with run('cd /var/www/staging/app/ffdemo'):
         run('python manage.py migrate markup')
-    
+
 
 def deploy_git():
     with run('cd /var/www/staging/app'):
         run('git pull')
     apache_reload()
 
-def apache_reload():    
+
+def apache_reload():
     """ reload Apache on remote host """
     require('root', provided_by=('staging'))
     sudo('/etc/init.d/apache2 reload')
 
-def apache_restart():    
+
+def apache_restart():
     """ restart Apache on remote host """
     require('root', provided_by=('staging'))
     sudo('/etc/init.d/apache2 restart')
-
-

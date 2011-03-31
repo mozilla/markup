@@ -179,6 +179,8 @@
 					showLoader: function( msg, custom_class ) {
 						var custom_class = typeof custom_class === "string" ? custom_class : '';
 						var msg = typeof msg === "string" ? msg : context.fn.getString( 'default-loading-msg' );
+						// hide any existing loaders
+						context.fn.hideLoader();
 						// append our loader
 						var $loader = $( '<div />' )
 							.width( context.width )
@@ -200,6 +202,8 @@
 					},
 					showError: function ( msg ) {
 						var msg = typeof msg === "string" ? msg : context.fn.getString( 'default-error-msg' );
+						// hide any existing errors
+						context.fn.hideError(); 
 						var $error = $( '<div />' )
 							.width( context.width )
 							.height( context.height )

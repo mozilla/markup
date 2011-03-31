@@ -4,25 +4,28 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding field 'Mark.contributor_locale'
-        db.add_column('markup_mark', 'contributor_locale', self.gf('django.db.models.fields.CharField')(max_length=4, null=True, blank=True), keep_default=False)
+        db.add_column('markup_mark',
+            'contributor_locale',
+            self.gf('django.db.models.fields.CharField')(max_length=4, null=True, blank=True), keep_default=False)
 
         # Adding field 'Mark.contributor'
-        db.add_column('markup_mark', 'contributor', self.gf('django.db.models.fields.CharField')(max_length=10, null=True, blank=True), keep_default=False)
-
+        db.add_column('markup_mark',
+            'contributor',
+            self.gf('django.db.models.fields.CharField')(max_length=10, null=True, blank=True), keep_default=False)
 
     def backwards(self, orm):
-        
+
         # Deleting field 'Mark.contributor_locale'
         db.delete_column('markup_mark', 'contributor_locale')
 
         # Deleting field 'Mark.contributor'
         db.delete_column('markup_mark', 'contributor')
-
 
     models = {
         'markup.invitation': {
