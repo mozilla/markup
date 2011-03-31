@@ -26,7 +26,7 @@
 		<div class="infobox-arrow"></div>
 	</div>
 	<div id="markmaker-legal-line">
-		<p>{% blocktrans %}Please keep in mind, your mark will be publicly viewable.{% endblocktrans %}</p>
+		<p>{% blocktrans %}Please keep in mind that your mark will be publicly viewed.{% endblocktrans %}</p>
 	</div>
 	<div id="information-dialog" style="display:none;">
 		<div class="infobox-inner">
@@ -36,14 +36,21 @@
 	</div>
 	<div id="contributor-fields" class="collapsible">
 		<h3>Contributor Info</h3>
-		<div class="field-wrapper">
-			<label>name</label>
-			<input type="text" id="contributor-name" />
+		<div class="fields group">
+			<div class="field-wrapper group">
+				<label>name</label>
+				<input type="text" id="contributor-name" placeholder="{{ _('first and last name') }}" />
+			</div>
+			<div class="field-wrapper group">
+				<label>url</label>
+				<input type="text" id="contributor-url"  placeholder="{{ _('http://domain.tld/') }}" />
+			</div>
+			<div class="field-wrapper group">
+				<label>quote</label>
+				<textarea id="contributor-quote" placeholder="{{ _('No quotes or special formating please.') }}"></textarea>
+			</div>
 		</div>
-		<div class="field-wrapper">
-			<label>quote</label>
-			<textarea id="contributor-quote"></textarea>
-		</div>
+		
 	</div>
 	<div id="translator-fields" class="collapsible">
 		<h3>Translator Info</h3>
@@ -52,5 +59,6 @@
 </div>
 <div class="translated-strings" style="display:none;">
 	<span id="submitting-mark">{{ _('Submitting Mark') }}</span>
+	<span id="loading-intro-msg">{{ _('Loading Mozilla MarkUp') }}</span>
 	<span id="submit-error">{% blocktrans %}Oops! Something went wrong on our end.<br />Please submit your mark again.{% endblocktrans %}</span>
 </div>

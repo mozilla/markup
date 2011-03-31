@@ -24,6 +24,7 @@
 				frameCount: 0,
 				width: 0,
 				height: 0,
+				timezoneOffset: 4, // number of hours distance between the DB server's timezone and GMT. Positive if you're trailing GMT, Negative if you're ahead
 				minWidth: 700,
 				minHeight: 500,
 				countries: [],
@@ -221,6 +222,19 @@
 							$( this ).remove();
 						} );
 					},
+					// given a Date object in servers timezone, this will convert it to the local time
+					localizeDate: function ( date ) {
+						// create Date object for current location
+						d = new Date();
+						// convert to msec
+						// add local time zone offset 
+						// get UTC time in msec
+						utc = date.getTime() - (d.getTimezoneOffset() * 60000);
+						// create new Date object for different city
+						// using supplied offset
+						nd = new Date( date.getTime() +  ( 3600000 * context.timezoneOffset ) );
+						return nd;
+					},
 					// parses translated strings out of div.translated-strings
 					// ol's are treated as arrays
 					// everything else as is
@@ -279,6 +293,15 @@
 							} else {
 								return false;
 							}
+						}
+					},
+					validate: {
+						url: function( url ) {
+							var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+							return regexp.test( url );
+						},
+						string: function ( string ) {
+							return ( typeof string === "string" && string.length != "" ) ? true : false; 
 						}
 					}
 				}

@@ -101,8 +101,7 @@ var Mark = ( function ( mark ) {
 		if ( distance < 1 ) distance = 1;
 		g.lineWidth = distance;
 		g.beginPath();
-		g.moveTo( p1.x, p1.y );
-		g.lineTo( p2.x, p2.y );
+		g.dashedLineTo( p1.x, p1.y, p2.x, p2.y, [6,4] );
 		g.closePath();
 		g.stroke();
 	},

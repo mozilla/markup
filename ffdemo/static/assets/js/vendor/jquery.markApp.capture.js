@@ -231,13 +231,17 @@
 					$( '#translator-fields' )
 						.find( '#translator-locale' )
 							.text( "'" + context.locale + "'" )
-							.end()
+							.end( )
+						.show( )
 						.collapsibleMod( )
+						.hide( )
 						.fadeIn( 'slow' );
 				} else if ( lC.invite_code && lC.contributor_type == "c" ) {
 					lC.$capture.addClass( 'contributor' );
 					$( '#contributor-fields' )
+						.show( )
 						.collapsibleMod( )
+						.hide( )
 						.fadeIn( 'slow' );
 				}
 			},
@@ -412,6 +416,8 @@
 					params.contributor = $( '#contributor-name' ).val();
 					// add the quote as the marks extra_info
 					lC.mark.extra_info = $( '#contributor-quote' ).val();
+					// add the contributor url as the marks contributor_url
+					lC.mark.contributor_url = $( '#contributor-url' ).val();
 					// re-stringify our points obj
 					params.points_obj_simplified = JSON.stringify( lC.mark );
 					params.invite = lC.invite_code;

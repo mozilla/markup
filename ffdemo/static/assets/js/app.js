@@ -21,7 +21,7 @@
 		this.get( '#/mark/new', function( context ) {
 			// unload the visualization if it's loaded
 			$( '#markapp' ).markApp( 'unloadModule', 'linear' );
-			
+			// update the nav
 			var modOptions = {
 				'state': 'drawing',
 				'invite_code': context.params['invite'],
@@ -37,6 +37,8 @@
 				// load the template
 				this.partial( 'makemark_sammy.html' )
 					.then( function() {
+						$( 'body' ).addClass( 'make-your-mark' );
+						
 						// init the capture interface, specifying that the intro should not be shown
 						$( '#markapp' ).markApp( 'addModule', { 'capture': modOptions } );
 						$( '#sammy' ).css( 'zIndex', '' );
@@ -125,6 +127,8 @@
 		
 		// other stuff
 		this.swap = function( content ) {
+			// update the nav
+			$( 'body' ).removeClass( 'make-your-mark' );
 			this.$element().fadeOut( 'fast', function() {
 				$( this ).html( content ).fadeIn( 'normal' );
 				$( '#markapp' ).trigger( 'ready' );

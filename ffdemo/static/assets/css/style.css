@@ -489,7 +489,7 @@ display: inline-block;
 }
 #contributor-fields input, 
 #contributor-fields textarea {
-	width: 250px;
+	width: 230px;
 	resize: none;
 	padding: 4px 2px;
 	font-size: 0.8em;
@@ -503,6 +503,7 @@ display: inline-block;
 	margin: 0px 5px 0px 0;
 	padding: 4px 0;
 	vertical-align: top;
+	float: left;
 }
 #view-source {
 	position: absolute;
@@ -684,30 +685,60 @@ display: inline-block;
 	position: absolute;
 	bottom: 12px;
 	left: 50%;
-	width: 206px;
-	padding: 10px 14px 10px 43px;
-	margin: 0 0 0 -80px;
+	width: 350px;
+	padding: 0;
+	margin: 0 0 0 -175px;
 	background: #f7f7f7;
 	z-index: 300;
 	color: #f26522;
 	opacity: 0.9;
 }
+#main-mark-information {
+	margin: 10px 14px 10px 116px;
+	position: relative;
+}
+#contributor-information {
+	background-color: #e0e0e0;
+	padding: 7px 12px 5px;
+}
+#contributor-information #mark-contributor-name {
+	float: left;
+	font-weight: bold;
+}
+#contributor-information #mark-contributor-url {
+	float: right;
+	font-size: 11px;
+	font-weight: bold;
+}
+#mark-gml-download,
 #mark-playback {
-	position: absolute;
-	top: 9px;
-	left: 10px;
-	width: 25px;
-	height: 25px;
-	text-indent: -9999px;
 	display: block;
-	background-image: url('/media/assets/images/playback.png');
 	background-repeat: no-repeat;
-	background-position: 0 0;
+	background-position: 50% 7px;
+	width: 42px;
+	height: 20px;
+	font-size: 11px;
+	text-align: center;
+	margin: 9px 8px 9px 10px;
+	padding: 36px 0 0;
+	background-color: #e0e0e0;
+}
+#mark-playback {
+	float: left;
+	text-transform: lowercase;
+	background-image: url('/media/assets/images/playback.gif');
+
+}
+#mark-gml-download {
+	float: left;
+	margin: 9px 0 9px 0;
+	background-position: 50% 12px;
+	background-image: url('/media/assets/images/gml_download.gif');
 }
 #mark-flag {
 	position: absolute;
-	top: 10px;
-	right: 12px;
+	top: 2px;
+	right: 0px;
 	width: 16px;
 	height: 10px;
 	text-indent: -9999px;
@@ -763,9 +794,7 @@ display: inline-block;
 #mark-information h4 {
 	margin-bottom: 5px;
 }
-#mark-contributor-name {
-	font-weight: bold;
-}
+
 #url-share label {
 }
 #url-share input {
@@ -966,13 +995,13 @@ footer #legal a:hover {
 	padding: 10px;
 }
 #contributor-quote-box p {
-	margin: 0 0 10px;
+	margin: 0;
 	padding: 0;
 }
 #contributor-quote-box #contributor-name {
-	text-align: right;
 	font-size: 10px;
-	margin-bottom: 0;
+	font-weight: bold;
+	margin-bottom: 4px;
 }
 #contributor-quote-box #contributor-quote {
 	font-style: italic;
@@ -1013,7 +1042,7 @@ footer #legal a:hover {
 #markmaker-legal-line {
 	font-size: 0.75em;
 	font-style: italic;
-	color: #bbbbbb;
+	color: #aaaaaa;
 	width: 400px;
 	margin: 0 0 0 -200px;
 	position: absolute;

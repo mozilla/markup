@@ -12,6 +12,7 @@ var Mark = ( function ( mark ) {
 		this.is_approved = is_approved;
 		this.contributor_name = null;
 		this.extra_info = null;
+		this.contributor_url = null;
 		
 		// colors for this mark
 		this.color = '0,0,0';
@@ -50,7 +51,7 @@ var Mark = ( function ( mark ) {
 			var firstPoint = this.strokes[0][0];
 			for ( var i = 1; i < this.strokes.length; i++ ) {
 				var p = this.strokes[i][0];
-				if ( p.x < firstPoint.x ) lastPoint = p;
+				if ( p.x < firstPoint.x ) firstPoint = p;
 			}
 			return firstPoint;
 		}
@@ -137,15 +138,13 @@ var Mark = ( function ( mark ) {
 			var buffer = 50;
 			if ( reverse ) {
 				this.position.x = mark.position.x - buffer - this.bWidth;
-				// this.x = mark.x + mark.firstPoint().x - this.lastPoint().x;
 				this.position.y = mark.position.y + mark.leftmostStrokeStart().y - this.rightmostStrokeEnd().y;
 				// this is based on a static computation in mark.renderer
 				// if you change it there, change it here
 				this.position.z =  mark.position.z - ( this.maxTime / 50 );
 			} else {
 				this.position.x = mark.position.x + mark.bWidth + this.leftmostStrokeStart().x + buffer;
-				// this.x = mark.x + mark.rightmostStrokeEnd().x - this.leftmostStrokeStart().x;
-				this.position.y = mark.position.y + mark.rightmostStrokeEnd().y - this.firstPoint().y;
+				this.position.y = mark.position.y + mark.rightmostStrokeEnd().y - this.leftmostStrokeStart().y;
 				// this is based on a static computation in mark.renderer
 				// if you change it there, change it here
 				this.position.z =  mark.position.z + ( mark.maxTime / 50 );

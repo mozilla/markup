@@ -64,13 +64,13 @@
 					}
 					if ( lC.xMark ) {
 						// RENDER THE X
-						var xScale = ( ( ( context.width / 2 ) - 200 ) / lC.xMark.bWidth );
-						var yScale = ( ( context.height + 200 ) / lC.xMark.bHeight );
+						var xScale = ( ( ( context.width / 2 ) ) / lC.xMark.bWidth );
+						var yScale = ( ( context.height + 800 ) / lC.xMark.bHeight );
 						Mark.renderer.renderMark( 
 							lC.layerManager.layers['mainMark'].context, 
 							lC.xMark, 
-							{ offset: {x: 10, y: -100 }, 
-								scale: {x: xScale, y: yScale, thickness: 5},
+							{ offset: {x: 10, y: -400 }, 
+								scale: {x: xScale, y: yScale, thickness: 6},
 								color: '0,0,0',
 								timer: lC.textScene.timers[lC.xMark.reference] } );
 					}
@@ -89,7 +89,7 @@
 				 * 4. dom elements animate up (1 sec)
 				 * 5. Make your Mark draws in (4 sec)
 				 * 
-				 * If any part of this fails, we revert to a simple intro where our intro screens if faded in.
+				 * If any part of this fails, we revert to a simple intro where our intro content is faded in.
 				 *
 				 */
 				$.when( modules.intro.fn.initInterface( context ), modules.intro.fn.loadMarks( context ) )
@@ -184,12 +184,14 @@
 				
 			},
 			loadMarks: function( context ) {
+				context.fn.showLoader( context.fn.getString( 'loading-intro-msg' ), 'overlay-light' );
 				return $.ajax( {
 						url: '/requests/get_translated_marks',
 						dataType: 'JSON'
 					} )
 					.success( function ( data ) {
 						modules.intro.fn.setupMarks( context, data.marks );
+						context.fn.hideLoader();
 					} );
 			},
 			setupMarks: function( context, marks ) {

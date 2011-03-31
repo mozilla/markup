@@ -331,6 +331,11 @@
 						e.preventDefault();
 						modules.linear.fn.replayCurrentMark( context );
 					} );
+				$( '#mark-gml-download' )
+					.click( function ( e ) {
+						e.preventDefault();
+						modules.linear.fn.downloadCurrentMark( context );
+					} );
 				$( '#mark-flag' )
 					.click( function( e ) {
 						e.preventDefault();
@@ -467,17 +472,8 @@
 								.removeAttr( 'class' )
 								.addClass( 'country-' + ( lC.country_code ? lC.country_code : 'all' ) );
 							// setup and show the stats
-							$( '#stats-number-of-marks' )
+							$( '#total-mark-count' )
 								.text( data.total_marks );
-							$( '#stats-number-of-countries' )
-								.text( data.total_countries );
-							var now = new Date();
-							var then = new Date( data.first_mark_at );
-							var days = Math.ceil( ( now.getTime() - then.getTime() ) / ( 1000 * 60 * 60 * 24 ) ); 
-							$( '#stats-number-of-days' )
-								.text( days );
-							$( '#stats' )
-								.fadeIn( 'fast' );
 							if( lC.country_code ) {
 								$( '#first-mark-link' )
 									.attr( 'href', '#/' + lC.linear_root + '/country/' + lC.country_code + '/' + data.country_first_mark );
@@ -491,7 +487,6 @@
 							}
 							// setup collapsibles
 							$( '#mark-browsing' ).collapsibleMod( );
-							$( '#stats' ).collapsibleMod( { 'collapsedHeight': 10 } );
 							
 							// if the contributor box is empty, fill it
 							if( $( '#contributor-select option' ).size() == 1 ) {
@@ -602,13 +597,14 @@
 					if( marks[i].reference in lC.marks ) continue;
 					var points_obj = JSON.parse( marks[i].points_obj_simplified );
 					// do some validation to make sure this mark wont break the viz
-					if( !( 'strokes' in points_obj ) || 
+					if( points_obj == null || !( 'strokes' in points_obj ) || 
 						points_obj.strokes.length == 0 ||
 						points_obj.strokes[0].length < 2 ) continue;
 					var mark = new Mark.gmlMark( points_obj.strokes, marks[i].reference, marks[i].country_code, marks[i].date_drawn, points_obj.rtl, marks[i].id, marks[i].is_approved );
 					if( marks[i].contributor ) {
 						mark.contributor_name = marks[i].contributor;
 						mark.extra_info = points_obj.extra_info;
+						mark.contributor_url = points_obj.contributor_url;
 						mark.color = '0,139,211';
 					}
 					// stash this mark
@@ -790,35 +786,60 @@
 				var mark = lC.currentMark;
 				// update the information
 				$( '#mark-id' ).text( mark.id );
+				
 				var d = new Date( mark.time );
+				// offset our date to GMT
+				d  = new Date( d.getTime() +  ( 3600000 * context.timezoneOffset ) );
 				// get our (hopefully) translated month abbreviation
 				var dateString = [];
-				dateString.push( context.fn.getString( 'month-abbreviations', d.getMonth() ) + " " + d.getDate() );
-				// dateString.push( $( '#month-abreviations li:eq(' + d.getMonth() + ')' ).text() + " " + d.getDate() );
+				// desired format is - 7:45pm GMT Mar 23, 2011 
 				dateString.push( d.getHours() + ":" + ( String(d.getMinutes()).length == 1 ? "0" + d.getMinutes() : d.getMinutes() ) );
-				if( mark.country_code ) {
+				dateString.push( "GMT" );
+				dateString.push( context.fn.getString( 'month-abbreviations', d.getMonth() ) + " " + d.getDate() + ", " + d.getFullYear() );
+				// dateString.push( $( '#month-abreviations li:eq(' + d.getMonth() + ')' ).text() + " " + d.getDate() );
+				if( mark.country_code) {
 					context.fn.withCountryCodes( function ( countries ) { 
-						$( '#mark-country' ).text( " / " + countries[mark.country_code] );
+						if( mark.country_code in countries ) {
+							$( '#mark-country' ).text( " / " + countries[mark.country_code] );
+						} else {
+							$( '#mark-country' ).text( "" );
+						}
 					} );
 				} else {
 					$( '#mark-country' ).text( "" );
 				}
 				
-				// set the contributor name, if we've got it
+				// show the contributor info if we've got it
 				if( mark.contributor_name ) {
-					$( '#mark-contributor-name' ).text( "- " + mark.contributor_name );
-					$( '#mark-flag' ).hide();
-					$( '#contributor-quote' )
-						.text( mark.extra_info )
-						.html( "&#8220;" + $( '#contributor-quote' ).text() + "&#8221;" );
+					// set the name
+					$( '#mark-contributor-name' ).text( mark.contributor_name );
 					$( '#contributor-name' )
-						.text( "- " + mark.contributor_name );
+						.text( mark.contributor_name );
+					// hide the flag
+					$( '#mark-flag' ).hide();
+					// show the extra info if we've got it
+					if( 'extra_info' in mark && mark.extra_info != null && mark.extra_info != "" ) {
+							$( '#contributor-quote' )
+								.text( "“" + mark.extra_info + "”" );
+					}
+					// show the contributors url if we've got it, and it's valid
+					if( 'contributor_url' in mark && context.fn.validate.url( mark.contributor_url ) ) {
+						$( '#mark-contributor-url' )
+							.text( mark.contributor_url.replace(/(ftp|http|https):\/\//, '').replace(/\/$/,'') )
+							.attr( 'href', mark.contributor_url );
+					} else {
+						$( '#mark-contributor-url' )
+							.text( '' )
+							.attr( 'href', '' );
+					}
+					$( '#contributor-information' ).show();
 				} else {
-					$( '#mark-contributor-name, #contributor-quote, #contributor-name' ).text( "" );
+					$( '#mark-contributor-name, #contributor-quote, #contributor-name, #mark-contributor-url' ).text( "" );
+					$( '#contributor-information' ).hide();
 					$( '#mark-flag' ).show();
 				}
 				
-				$( '#mark-timestamp' ).text( dateString.join( " / " )  );
+				$( '#mark-timestamp' ).text( dateString.join( " " )  );
 				$( '#url-share input' ).val( window.location.href ); 
 				// update the sharing links
 				if (lC.linear_root != "moderate")
@@ -842,6 +863,16 @@
 				// animate it in if it's hidden
 				$( '#mark-information' ).fadeIn( 'fast' );
 			},
+			resetMarkInformation: function ( context ) {
+				// reset all links
+				$( '#mark-information' )
+					.find( 'a' )
+					.attr( 'href', '#' )
+				// reset texts
+					.end()
+					.find( '#mark-id, #total-mark-count, #mark-timestamp, #mark-country' )
+					
+			},
 			hideMarkInformation: function( context ) {
 				$( '#mark-information' ).fadeOut( 'fast' );
 			},
@@ -850,6 +881,12 @@
 				var now = ( new Date() ).getTime();
 				lC.eventChange = true;
 				lC.scene.timers[lC.currentMark.reference] = { 'start': now, 'end': now + lC.currentMark.maxTime, 'speed': 1 };
+			},
+			downloadCurrentMark: function ( context ) {
+				var lC = context.modules.linear;
+				if ( lC.currentMark && lC.currentMark.reference ) {
+					window.open( '/gml/' + lC.currentMark.reference );
+				}
 			},
 			flagCurrentMark: function ( context ) {
 				var lC = context.modules.linear;

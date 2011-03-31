@@ -74,7 +74,7 @@
 				</div>
 			</section>
 			<section id="language">
-				<a id="current-locale" href="#">{{ locale_code }}</a>
+				<a id="current-locale" href="#">{{ LANGUAGE_CODE }}</a>
 				<ul id="language-selector">
 					{% for lang in LANGUAGES %}
 						{% ifequal lang.0 LANGUAGE_CODE %}
