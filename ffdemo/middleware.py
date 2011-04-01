@@ -42,7 +42,7 @@ SSL = 'SSL'
 
 class SSLRedirect:
 
-    process_view(self, request, view_func, view_args, view_kwargs):
+    def process_view(self, request, view_func, view_args, view_kwargs):
         if SSL in view_kwargs:
             secure = view_kwargs[SSL]
             del view_kwargs[SSL]
