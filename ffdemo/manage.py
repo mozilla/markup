@@ -2,16 +2,12 @@
 import os
 import site
 import sys
-from django.core.management import execute_manager
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 path = lambda *a: os.path.join(ROOT, *a)
 
 # Adjust the python path and put local packages in front.
 prev_sys_path = list(sys.path)
-
-site.addsitedir(path('apps'))
-site.addsitedir(path('lib'))
 
 # Local (project) vendor library
 site.addsitedir(path('vendor-local'))
@@ -44,6 +40,10 @@ except ImportError:
                      exist, it's causing an ImportError somehow.)\n"
     sys.stderr.write(error_message % __file__)
     sys.exit(1)
+
+# If we want to use django settings anywhere, we need to set up the required
+# environment variables.
+setup_environ(settings)
 
 if __name__ == "__main__":
     execute_manager(settings)
