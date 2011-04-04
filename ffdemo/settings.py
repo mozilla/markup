@@ -34,14 +34,24 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',       # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': settings_local.DB_NAME,             # Or path to database file if using sqlite3.
-        'USER': settings_local.DB_USER,             # Not used with sqlite3.
-        'PASSWORD': settings_local.DB_PASSWORD,     # Not used with sqlite3.
-        'HOST': settings_local.DB_HOST,             # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': settings_local.DB_PORT,             # Set to empty string for default. Not used with sqlite3.
+        'NAME': settings_local.DB_MASTER_NAME,             # Or path to database file if using sqlite3.
+        'USER': settings_local.DB_MASTER_USER,             # Not used with sqlite3.
+        'PASSWORD': settings_local.DB_MASTER_PASSWORD,     # Not used with sqlite3.
+        'HOST': settings_local.DB_MASTER_HOST,             # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': settings_local.DB_MASTER_PORT,             # Set to empty string for default. Not used with sqlite3.
+    },
+    'slave': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': settings_local.DB_SLAVE_NAME,
+        'USER': settings_local.DB_SLAVE_USER,
+        'PASSWORD': settings_local.DB_SLAVE_PASSWORD,
+        'HOST': settings_local.DB_SLAVE_HOST,
+        'PORT': settings_local.DB_SLAVE_PORT,
     }
 }
 
+SLAVE_DATABASES = ['slave']
+DATABASE_ROUTERS = ('multidb.MasterSlaveRouter',)
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -129,6 +139,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     #'django.middleware.locale.LocaleMiddleware',
+    #'multidb.middleware.PinningRouterMiddleware',
     'ffdemo.middleware.SQLLogMiddleware',
     'ffdemo.middleware.SSLRedirect',
 )

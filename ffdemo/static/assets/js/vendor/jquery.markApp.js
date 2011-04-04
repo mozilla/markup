@@ -176,6 +176,15 @@
 							} );
 						}
 					},
+					// saveState: function ( ) {
+					// 	context.fn.storeData( 'markApp-context', context );
+					// },
+					// restoreState: function ( ) {
+					// 	prevContext = context.fn.getData( 'markApp-context' );
+					// 	if ( prevContext ) {
+					// 		context = prevContext;
+					// 	}
+					// },
 					showLoader: function( msg, custom_class ) {
 						var custom_class = typeof custom_class === "string" ? custom_class : '';
 						var msg = typeof msg === "string" ? msg : context.fn.getString( 'default-loading-msg' );

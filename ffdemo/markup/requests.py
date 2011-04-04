@@ -100,26 +100,26 @@ def save_mark(request):
     if 'points_obj' in request.POST and 'points_obj_simplified' in request.POST:
     #    Cosntruct mark data
         mark_data = {'points_obj': request.POST['points_obj'], 'points_obj_simplified': request.POST['points_obj_simplified']}
-    if 'country_code' in request.POST:
-        mark_data['country_code'] = request.POST['country_code']
-        if 'invite' in request.POST:
-            mark_data['invite'] = request.POST['invite']
-            if 'contributor_locale' in request.POST:
-                mark_data['contributor_locale'] = request.POST['contributor_locale']
+        if 'country_code' in request.POST:
+            mark_data['country_code'] = request.POST['country_code']
+            if 'invite' in request.POST:
+                mark_data['invite'] = request.POST['invite']
+                if 'contributor_locale' in request.POST:
+                    mark_data['contributor_locale'] = request.POST['contributor_locale']
+                else:
+                   pass
+            if 'contributor' in request.POST:
+                mark_data['contributor'] = request.POST['contributor']
+            else:
+                pass
         else:
             pass
-        if 'contributor' in request.POST:
-            mark_data['contributor'] = request.POST['contributor']
-        else:
-            pass
-    else:
-        pass
 
-    #    Save new mark, handled by common.py
-    new_mark_reference = common.save_new_mark_with_data(mark_data)
-    #    Successful response, returning new mark reference
-    response['success'] = True
-    response['mark_reference'] = new_mark_reference
+        #    Save new mark, handled by common.py
+        new_mark_reference = common.save_new_mark_with_data(mark_data)
+        #    Successful response, returning new mark reference
+        response['success'] = True
+        response['mark_reference'] = new_mark_reference
     else:
         #    Error response
         response['success'] = False
@@ -207,10 +207,10 @@ def marks_by_offset(request):
                 marks_to_be_dumped = Mark.objects.exclude.exclude(contributor_locale__isnull=False).filter(country_code=request.GET['country_code'])[offset:max]
             else:
                 marks_to_be_dumped = Mark.objects.all()[offset:max]
-    else:
-        response['success'] = False
-        response['error'] = "Querying by offset also requires a 'max' POST var"
-        did_fail_get_marks = True
+        else:
+           response['success'] = False
+           response['error'] = "Querying by offset also requires a 'max' POST var"
+           did_fail_get_marks = True
     else:
         # No special query parameters, query for all marks
         marks_to_be_dumped = Mark.objects.exclude(contributor_locale__isnull=False)

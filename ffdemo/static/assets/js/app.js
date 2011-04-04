@@ -123,6 +123,9 @@
 				.markApp()
 				// and privide it a way of accessing the sammy app
 				.data( 'markApp-context' )['app'] = app;
+			// attempt to restore state
+			// $( '#markapp' )
+			// 	.data( 'markApp-context' ).fn.restoreState();
 		} );
 		
 		// other stuff

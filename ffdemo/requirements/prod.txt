@@ -3,6 +3,9 @@
 -e git://github.com/codekoala/django-axes.git#egg=django-axes
 -e git://github.com/kron4eg/django-localeurl.git#egg=django-localeurl
 
+# Master/Slave databases
+-e git://github.com/jbalogh/django-multidb-router.git#egg=django-multidb-router
+
 # Migrations
 -e git://github.com/simplegeo/django-south.git#egg=south
 

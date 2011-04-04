@@ -324,6 +324,8 @@
 					modules.capture.fn.drawStroke( context, simpStroke );
 					// recalculate the captured point count
 					lC.capturedPoints -= lC.currentStroke.length - simpStroke.length;
+					// resave our state
+					//context.fn.saveState( );
 				}
 				// set the currentStroke to null 
 				lC.currentStroke = null;
