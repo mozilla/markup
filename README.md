@@ -14,7 +14,7 @@ You need Python 2.6. Also, you probably want to run this application in a
 [virtualenv]: http://pypi.python.org/pypi/virtualenv
 
 To install virtualenv (if you don't have it already):
-	
+
     easy_install virtualenv
 
 And pip (package manager):
@@ -33,22 +33,22 @@ Prepare you development environment:
 Create a database and be sure to note the name then make a copy of settings_local.py.default called settings_local.py and update your database settings
 
 Sync your db:
-    
+
     python ffdemo/manage.py syncdb
-	
+
 Run the migrations
-	
+
     python ffdemo/manage.py migrate
-	
+
 Start your dev server:
     python ffdemo/manage.py runserver
 
-	
+
 ### Things to know
 
 Any time you open a new terminal window to work on this project, before to run:
     source ffenv/bin/activate
-	
+
 This sets up the virtual environment that has all the right versions of everything for the app
 
 We're using the Jinja2 templating engine rather than Django's default. You can use them fairly interchangeably, the tempalte loader will look for both, however Jinja2 templates live in the ffdemo/templates directory and Django original templates live in ffdemo/templates_orig
@@ -73,7 +73,7 @@ More info about South:
 		- easy_install South
 		- easy_install http://pyyaml.org/download/pyyaml/PyYAML-3.08.tar.gz
 
-		Setting up with a new database:	
+		Setting up with a new database:
 			- After you create the database, validate and sync up the models as per above, then:
 				- ./manage.py schemamigration markup --initial
 				- ./manage.py migrate markup
@@ -94,11 +94,11 @@ Run the invite-generation script. generate_invites.py takes two vars: number of 
 
 for 5 translator invites, run
      manage.py generate_invites 5 t
-for 10 contributor invites, run 
+for 10 contributor invites, run
      manage.py generate_invites 10 c
-     
 
-### Production 
+
+### Production
 
 For production environments, uncomment the following in settings:
     # CACHE_BACKEND = 'caching.backends.memcached://localhost:11211?timeout=500'
@@ -106,7 +106,7 @@ For production environments, uncomment the following in settings:
     # SESSION_COOKIE_SECURE = True
     # SESSION_COOKIE_HTTPONLY = True
 
-and set 
+and set
     REDIRECT_TO_SSL = True
 
 

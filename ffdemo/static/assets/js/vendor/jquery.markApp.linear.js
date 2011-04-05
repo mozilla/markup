@@ -126,9 +126,11 @@
 					// store this hover mark
 					lC.hoverMark = mark;
 					if ( lC.currentMark && lC.hoverMark.reference == lC.currentMark.reference && lC.hoverMark.contributor_name && $( '#mark-information' ).is( ':visible' ) ) {
-						$( '#contributor-quote-box' )
-							.fadeIn( 'fast' )
-							.css( { left: context.mouseX - 15, top: context.mouseY - $( '#contributor-quote-box' ).height() - 15 } );
+						if( $( '#contributor-quote-box' ).is( ':not(:visible)' ) ) {
+							$( '#contributor-quote-box' )
+								.fadeIn( 'fast' )
+								.css( { left: context.mouseX - 15, top: context.mouseY - $( '#contributor-quote-box' ).height() - 15 } );
+						}
 					} else {
 						$( '#contributor-quote-box:visible' ).fadeOut( 'fast' );
 						// set mark to the orange highlight color

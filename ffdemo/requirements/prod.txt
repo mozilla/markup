@@ -3,6 +3,9 @@
 -e git://github.com/codekoala/django-axes.git#egg=django-axes
 -e git://github.com/kron4eg/django-localeurl.git#egg=django-localeurl
 
+# L10n
+-e git://github.com/fwenzel/django-mozilla-product-details#egg=django-mozilla-product-details
+
 # Master/Slave databases
 -e git://github.com/jbalogh/django-multidb-router.git#egg=django-multidb-router
 

@@ -3,7 +3,11 @@
   "compressed_path": "assets/js/compressed.js",
   "bundle_dir": "assets/js",
   "bundles": {
-    "markApp": [
+    "markUp_common": [
+      [ "jquery", "1.5.1" ],
+      "common"
+    ],
+    "markUp_app": [
       "jquery.markApp",
       "jquery.markApp.linear",
       "jquery.markApp.capture",
@@ -26,7 +30,8 @@
       "tween",
       "sammy-0.6.3",
       "sammy.hash_push_proxy",
-      "sammy.template"
+      "sammy.template",
+      "app"
     ]
   },
   "compressed_suffix": ".min"

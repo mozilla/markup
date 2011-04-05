@@ -1,17 +1,15 @@
-import settings_local
 import os
 import re
+import logging
+
+from django.utils.functional import lazy
+
+logging.basicConfig()
 
 # Django settings for ff4 project.
-
-DEBUG = settings_local.DEBUG
-DEV = settings_local.DEV
-TEMPLATE_DEBUG = DEBUG
-
-PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
-PROJECT_DOMAIN = ''
-PROJECT_DIR = os.path.realpath(os.path.dirname(__file__))
-
+PROJECT_DIR = PROJECT_PATH = ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT_PACKAGE = os.path.basename(ROOT)
+path = lambda *a: os.path.join(ROOT, *a)
 
 # UNCOMMENT TO ENABLE SECURE SESSIONS
 # SESSION_COOKIE_SECURE = True
@@ -31,40 +29,12 @@ MANAGERS = ADMINS
 # Memcached!
 # CACHE_BACKEND = 'caching.backends.memcached://localhost:11211?timeout=500'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',       # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': settings_local.DB_MASTER_NAME,             # Or path to database file if using sqlite3.
-        'USER': settings_local.DB_MASTER_USER,             # Not used with sqlite3.
-        'PASSWORD': settings_local.DB_MASTER_PASSWORD,     # Not used with sqlite3.
-        'HOST': settings_local.DB_MASTER_HOST,             # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': settings_local.DB_MASTER_PORT,             # Set to empty string for default. Not used with sqlite3.
-    },
-    'slave': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': settings_local.DB_SLAVE_NAME,
-        'USER': settings_local.DB_SLAVE_USER,
-        'PASSWORD': settings_local.DB_SLAVE_PASSWORD,
-        'HOST': settings_local.DB_SLAVE_HOST,
-        'PORT': settings_local.DB_SLAVE_PORT,
-    }
-}
-
-SLAVE_DATABASES = ['slave']
+DATABASES = { }
 DATABASE_ROUTERS = ('multidb.MasterSlaveRouter',)
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
-TIME_ZONE = 'America/New_York'
 
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-US'
+## Internationalization.
+TIME_ZONE = 'America/Los_Angeles'
 
 SITE_ID = 1
 
@@ -76,24 +46,28 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
-# Accepted locales
-#INPUT_LANGUAGES = ('ar', 'bg', 'ca', 'cs', 'da', 'de', 'el', 'en-US', 'es',
-#                   'fr', 'fy-NL', 'gl', 'he', 'hu', 'id', 'it', 'ko', 'nb-NO',
-#                   'nl', 'pl', 'pt-PT', 'ro', 'ru', 'sk', 'sq', 'uk', 'vi',
-#                   'zh-CN', 'zh-TW')
+# Gettext text domain
+TEXT_DOMAIN = 'messages'
 
-gettext = lambda s: s
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'en-US'
+
+# Accepted locales
 LANGUAGES = (
-    ('de', gettext('German')),
-    ('en', gettext('English')),
-    ('fr', gettext('French')),
-    ('ru', gettext('Russian')),
+    ('de', 'German'),
+    ('en', 'English'),
+    ('fr', 'French'),
+    ('ru', 'Russian'),
 )
+
+# Where to store product details etc.
+PROD_DETAILS_DIR = path('lib/product_details_json')
+
 # default to accept-language header, per localeurl's settings
 LOCALEURL_USE_ACCEPT_LANGUAGE = True
 
 # don't url-localize requests
-
 LOCALE_INDEPENDENT_PATHS = (
     re.compile('requests/'),
     re.compile('/accounts/login/$'),
@@ -138,10 +112,6 @@ MIDDLEWARE_CLASSES = (
     'axes.middleware.FailedLoginMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    #'django.middleware.locale.LocaleMiddleware',
-    #'multidb.middleware.PinningRouterMiddleware',
-    'ffdemo.middleware.SQLLogMiddleware',
-    'ffdemo.middleware.SSLRedirect',
 )
 
 # ADMIN
@@ -196,16 +166,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'south',
     'axes',
+    'product_details',
 )
 
 FIXTURE_DIRS = (
     PROJECT_PATH + '/fixtures/',
 )
 SOUTH_TESTS_MIGRATE = False
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = settings_local.EMAIL_HOST
-EMAIL_PORT = settings_local.EMAIL_PORT
-EMAIL_HOST_USER = settings_local.EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = settings_local.EMAIL_HOST_PASSWORD
-EMAIL_USE_TLS = settings_local.EMAIL_USE_TLS

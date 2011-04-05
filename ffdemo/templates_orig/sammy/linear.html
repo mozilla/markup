@@ -1,12 +1,9 @@
 {% load i18n %}
-<!-- VISUALIZATION -->
-<!-- This template will load the linear view of all visualizations flowing one after the next. -->
 <div id="linear" class="autoResize">
-	<!-- These are per mark information, shown on hover of a single mark -->
 	<div id="mark-information">
 		<div id="contributor-information" class="group">
-			<h3 id="mark-contributor-name">Adam Miller</h3>
-			<a href="#" id="mark-contributor-url">scssrs.com</a>
+			<h3 id="mark-contributor-name"></h3>
+			<a href="#" id="mark-contributor-url"></a>
 		</div>
 		<div id="mark-controls">
 			<a id="mark-playback" href="#" title="{{ _('Replay this mark') }}">{{ _('Play') }}</a>
@@ -14,17 +11,15 @@
 		</div>
 		<div id="main-mark-information">
 			<a id="mark-flag" href="#" title="Flag as inappropriate">{{ _('Flag as inappropriate') }}</a>
-			<h3 id="mark-number">{{ _('Mark') }} <span id="mark-id">0</span> of <span id="total-mark-count">0</span> for an open Web.</h3>
+			<h3 id="mark-number">{% blocktrans %}Mark <span id="mark-id"></span> of <span id="total-mark-count"></span> for an open Web.{% endblocktrans %}</h3>
 			<h4><span id="mark-timestamp"></span><span id="mark-country"></span></h4>
-
 			<a href="#" id="facebook-share">{{ _('Share on Facebook') }}</a>
 			<a href="#" id="twitter-share">{{ _('Share on Twitter') }}</a>
 			<div id="url-share">
 				<label>{{ _('URL') }}</label>
-				<input value="http://ffdemomarkup.com/#/marks/:id" />
+				<input value="" />
 			</div>
 		</div>
-		
 	</div>
 	<div id="contributor-quote-box" style="display:none;">
 		<div class="infobox-inner">
@@ -33,7 +28,6 @@
 		</div>
 		<div class="infobox-arrow"></div>
 	</div>
-	<!-- This stuff is show errywhere -->
 	<div id="mark-browsing" class="collapsible">
 		<h3>{{ _('Mark Browsing') }}</h3>
 		<div id="mark-browsing-contents" >

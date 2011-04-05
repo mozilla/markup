@@ -15,20 +15,6 @@ from localeurl import utils
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, get_host
 
 
-class SQLLogMiddleware:
-    def process_response(self, request, response):
-        if settings.DEV and connection.queries:
-            time = sum([float(q['time']) for q in connection.queries])
-        return response
-
-
-class DetectReferrer:
-    def process_request(self, request):
-        if not request.session.get('HTTP_REFERER', False):
-            if(request.META.get('HTTP_REFERER')):
-                ref = urlparse(request.META.get('HTTP_REFERER'))
-                request.session['HTTP_REFERER'] = ref.hostname
-
 # SSL Middleware
 # via: http://djangosnippets.org/snippets/85/
 

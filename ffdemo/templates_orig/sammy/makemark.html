@@ -1,5 +1,4 @@
 {% load i18n %}
-
 <div id="markmaker" class="autoResize">
 	<div id="intro-main-copy">
 		<h1>{{ _('The Web is your creation') }}</h1>
@@ -35,22 +34,21 @@
 		<div class="infobox-arrow"></div>
 	</div>
 	<div id="contributor-fields" class="collapsible">
-		<h3>Contributor Info</h3>
+		<h3>{{ _('Contributor Info') }}</h3>
 		<div class="fields group">
 			<div class="field-wrapper group">
-				<label>name</label>
+				<label>{{ _('name') }}</label>
 				<input type="text" id="contributor-name" placeholder="{{ _('first and last name') }}" />
 			</div>
 			<div class="field-wrapper group">
-				<label>url</label>
+				<label>{{ _('url')}}</label>
 				<input type="text" id="contributor-url"  placeholder="{{ _('http://domain.tld/') }}" />
 			</div>
 			<div class="field-wrapper group">
-				<label>quote</label>
+				<label>{{ _('quote')}}</label>
 				<textarea id="contributor-quote" placeholder="{{ _('No quotes or special formating please.') }}"></textarea>
 			</div>
 		</div>
-		
 	</div>
 	<div id="translator-fields" class="collapsible">
 		<h3>Translator Info</h3>

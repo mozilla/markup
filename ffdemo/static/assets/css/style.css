@@ -791,6 +791,9 @@ display: inline-block;
 	margin: 0;
 	font-weight: normal;
 }
+#mark-information h3 {
+	margin: 0 0 3px;
+}
 #mark-information h4 {
 	margin-bottom: 5px;
 }

@@ -1,14 +1,40 @@
-DEBUG = True
+# This is a sample settings_local.py file.
+# Copy it and add your local settings here. 
+
+from settings import *
+
+TEMPLATE_DEBUG = DEBUG = True
 DEV = True
 
-DB_NAME = 'ffdemo_development'
-DB_USER = 'root'
-DB_PASSWORD = ''
-DB_HOST = ''
-DB_PORT = ''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ffdemo_development',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    },
+    'slave': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ffdemo_development',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
+}
+
+SLAVE_DATABASES = ['slave']
+
+ADMINS = (
+    # ('Your Name', 'your_email@domain.com'),
+)
+
+PROJECT_DOMAIN = ''
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST =  ''
+EMAIL_HOST = ''
 EMAIL_PORT = 587
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
