@@ -305,7 +305,9 @@ header h2
 	left: 344px;
 	width: 150px;
 	height: 40px;
-	background: url('/media/assets/images/coming-soon-tip-bg.png') top left no-repeat;
+	background-image: url('/media/assets/images/ui.png');
+	background-repeat: no-repeat;
+	background-position: 0 -176px;
 	color: white;
 	padding: 21px 0 0 9px;
 	font-size: 1.5em;
@@ -383,8 +385,9 @@ body.community ul #community a {
 #browse-marks a {
 	float: right;
 	display: block;
-	background-image: url('/media/assets/images/magnifying.png');
-	background-position: 0 0;
+	background-image: url('/media/assets/images/ui.png');
+	background-repeat: no-repeat;
+	background-position: 0 -901px;
 	font-size: 0.7em;
 	text-shadow: 0 0 1px rgba(0,0,0,.25);
 	height: 63px;
@@ -437,6 +440,7 @@ display: inline-block;
 	text-transform: lowercase;
 	font-weight: bold;
 	font-size: 0.9em;
+	background-image: url('/media/assets/images/ui.png');
 }
 #markmaker-controls li a.disabled {
 	opacity: 0.5;
@@ -444,18 +448,16 @@ display: inline-block;
 	cursor: not-allowed;
 }
 #markmaker-controls li#markmaker-submit a {
-	background-image: url('/media/assets/images/submit.png');
-	background-position: 50% 3px ;
+	background-position: 23px -1338px;
 }
 #markmaker-controls li#markmaker-reset a {
-	background-image: url('/media/assets/images/reset.png');
+	background-position: 11px -1266px;
 }
 #markmaker-controls li#markmaker-cancel a {
-	background-image: url('/media/assets/images/cancel.png');
-	background-position: 50% 5px;
+	background-position: 20px 0;
 }
 #markmaker-controls li#markmaker-location a {
-	background-image: url('/media/assets/images/location.png');
+	background-position: 22px -765px;
 }
 #markmaker-information {
 	position: absolute;
@@ -466,7 +468,9 @@ display: inline-block;
 	width: 30px;
 	height: 30px;
 	text-indent: -9999px;
-	background: url('/media/assets/images/i.png') 50% 50% no-repeat;
+	background-image: url('/media/assets/images/ui.png');
+	background-repeat: no-repeat;
+	background-position: 10px -607px;
 	cursor: pointer;
 }
 
@@ -520,8 +524,8 @@ display: inline-block;
 .collapsible h3 {
 	cursor: pointer;
 	background-color: #F2F2F2;
-	background-image: url('/media/assets/images/collapsible.png');
-	background-position: 97% 50%;
+	background-image: url('/media/assets/images/ui.png');
+	background-position: 100% -112px;
 	background-repeat: no-repeat;
 	color: #6E6E6E;
 	font-size: 10px;
@@ -529,7 +533,7 @@ display: inline-block;
 	padding: 5px;
 }
 .collapsibleMod-expanded h3 {
-	background-image: url('/media/assets/images/collapsed.png');
+	background-position: 100% -59px;
 }
 #stats {
 	position: absolute;
@@ -568,13 +572,13 @@ display: inline-block;
 
 #mark-browsing-controls {
 	list-style: none;
-	background-image: url('/media/assets/images/controls.png');
+	background-image: url('/media/assets/images/ui.png');
 	background-repeat: no-repeat;
-	background-position: 50% 36px;
+	background-position: 67px -303px;
 	width: 166px;
-	height: 112px;
+	height: 91px;
 	padding: 0;
-	margin: 10px 0;
+	margin: 15px 0;
 	position: relative;
 }
 #mark-browsing-controls li {
@@ -589,50 +593,49 @@ display: inline-block;
 	font-size: 0px;
 	font-weight: bold;
 	text-indent: -9000em;
+	background-image: url('/media/assets/images/ui.png');
+	background-repeat: no-repeat;
 }
 #mark-browsing-controls li a:hover {
 	opacity: 0.8;
 }
 #mark-browsing-zoom-in {
 	left: 48px;
-	top: 5px;
+	top: 0px;
 }
 #mark-browsing-zoom-out {
 	left: 48px;
-	bottom: 8px;
+	bottom: 0px;
 }
 #mark-browsing-next {
 	right: 21px;
-	top: 30px;
+	top: 22px;
 }
 #mark-browsing-prev {
 	left: 24px;
-	top: 30px;
+	top: 22px;
 }
 #mark-browsing-zoom-in a {
-	background-image: url('/media/assets/images/zoomIn.png');
-	background-position: 50% 100%;
+	background-position: 20px -1606px;
 	padding: 0 0 20px 0;
 	text-align: center;
 	width: 70px;
 }
 #mark-browsing-zoom-out a {
-	background-image: url('/media/assets/images/zoomOut.png');
 	background-position: 50% 0%;
+	background-position: 17px -1669px;
 	padding: 40px 0 0 0;
 	text-align: center;
 	width: 70px;
 }
 #mark-browsing-next a {
-	background-image: url('/media/assets/images/nextMark.png');
-	background-position: 0% 50%;
+	background-position: 0px -1038px;
 	padding: 10px 0 10px 36px;
 	text-align: right;
 	height: 11px;
 }
 #mark-browsing-prev a {
-	background-image: url("/media/assets/images/prevMark.png");
-	background-position: 100% 50%;
+	background-position: 6px -1189px;
 	height: 11px;
 	padding: 10px 34px 10px 0;
 	text-align: left;
@@ -643,15 +646,16 @@ display: inline-block;
 #country-select-label,
 #contributor-select-label {
 	display: inline-block;
-	background-image: url('/media/assets/images/location_small.png');
-	background-position: 0 0;
+	background-image: url('/media/assets/images/ui.png');
+	background-position: 0 -837px;
 	background-repeat: no-repeat;
 	text-indent:-9999px;
 	width: 14px;
 	height: 14px;
 }
 #contributor-select-label {
-	background-image: url('/media/assets/images/contributor_label.png');
+	
+	background-position: 0 -266px;
 }
 #country-select {
 	margin-bottom: 8px;
@@ -732,8 +736,9 @@ display: inline-block;
 #mark-gml-download {
 	float: left;
 	margin: 9px 0 9px 0;
-	background-position: 50% 12px;
-	background-image: url('/media/assets/images/gml_download.gif');
+	background-image: url('/media/assets/images/ui.png');
+	background-repeat: no-repeat;
+	background-position: 11px -528px;
 }
 #mark-flag {
 	position: absolute;
@@ -743,9 +748,9 @@ display: inline-block;
 	height: 10px;
 	text-indent: -9999px;
 	display: block;
-	background-image: url('/media/assets/images/flag.png');
+	background-image: url('/media/assets/images/ui.png');
 	background-repeat: no-repeat;
-	background-position: 0 0;
+	background-position: 0 -469px;
 }
 #mark-flag.disabled {
 	background-position: 0 -10px;
@@ -757,16 +762,16 @@ display: inline-block;
 	height: 23px;
 	display: block;
 	float: left;
-	background-position: 0 0;
+	background-image: url('/media/assets/images/ui.png');
 	background-repeat: no-repeat;
 	text-indent: -9999px;
 	margin-right: 2px;
 }
 #facebook-share {
-	background-image: url('/media/assets/images/facebook.png');
+	background-position: 0 -396px;
 }
 #twitter-share {
-	background-image: url('/media/assets/images/twitter.png');
+	background-position: 0 -1533px;
 }
 
 #delete-mark
@@ -866,12 +871,15 @@ footer #language #current-locale
 	font-size: 1.4em;
 	text-transform: uppercase;
 	padding: 5px 7px 7px 20px;
-	background: #2F2F30 url('/media/assets/images/locale_selector_arrow.png') 0 0 no-repeat;
+	background-image: url('/media/assets/images/ui.png');
+	background-repeat: no-repeat;
+	background-position: 0 -685px;
+	background-color: #2F2F30;
 }
 
 footer #language #current-locale.selected
 {
-	background-position: 0 -15px;
+	background-position: 0 -700px;
 }
 
 footer #language #language-selector
@@ -976,9 +984,9 @@ footer #legal a:hover {
 	background-color: #e4e4e4;
 }
 .infobox-arrow {
-	background-image: url('/media/assets/images/tri.png');
-	background-position: 100% 100%;
+	background-image: url('/media/assets/images/ui.png');
 	background-repeat: no-repeat;
+	background-position: 0 -1405px;
 	height: 14px;
 	width: 30px;
 }
@@ -1036,7 +1044,7 @@ footer #legal a:hover {
 	padding: 6px 10px;
 }
 #information-dialog .infobox-arrow {
-	background-image: url('/media/assets/images/tri_rtl.png');
+	background-position: 0 -1469px;
 	height: 14px;
 	width: 30px;
 	float: right;
