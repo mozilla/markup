@@ -20,7 +20,7 @@ class Migration(SchemaMigration):
         # Removing unique constraint on 'Invitation', fields ['invite_code']
         db.delete_unique('markup_invitation', ['invite_code'])
 
-        models = {
+    models = {
         'markup.invitation': {
             'Meta': {'object_name': 'Invitation'},
             'contributor_type': ('django.db.models.fields.CharField', [], {'max_length': '1'}),
