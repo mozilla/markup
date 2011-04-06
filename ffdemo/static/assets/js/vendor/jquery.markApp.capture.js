@@ -78,7 +78,7 @@
 				}
 			},
 			ready: function ( context, e ) {
-				var lC = context.modules.capture;				
+				var lC = context.modules.capture;
 				// hide errything
 				$( '#markmaker' )
 					.hide()
@@ -229,7 +229,11 @@
 						$( '#markmaker-information' ).fadeIn( 'slow' );
 					} );
 				}
-				
+				$( '#save-location-button' ).click( function ( e ) {
+					e.preventDefault();
+					$( '#location-dialog' ).fadeOut( );
+					return false;
+				} );
 				// special cases
 				if ( lC.invite_code && lC.contributor_type == "t" ) {
 					lC.captureLimit = 1000;
