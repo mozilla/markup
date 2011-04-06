@@ -3,6 +3,7 @@ from ffdemo.markup.models import Mark
 from ffdemo.markup import common
 from django.utils import simplejson
 from django.core import serializers
+from django.views.decorators.http import require_GET, require_POST
 import datetime
 from django.db.models import Q
 
@@ -34,7 +35,7 @@ def get_translated_marks(request):
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
 
-
+@require_POST
 def flag_mark(request):
     response = {'success': False}
     if 'reference' in request.POST and len(request.POST['reference']) > 0:
@@ -92,7 +93,7 @@ def init_viz_data(request):
         json_response = simplejson.dumps(response)
         return HttpResponse(json_response, 'application/json')
 
-
+@require_POST
 def save_mark(request):
     #    Default response
     response = {'success': False}
@@ -145,7 +146,7 @@ def delete_mark(request):
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
 
-
+@require_POST
 def approve_mark(request):
     #    Approve the mark // CHECK
     response = {'success': False}
