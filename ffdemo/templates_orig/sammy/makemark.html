@@ -17,9 +17,12 @@
 	<a id="markmaker-information">{{ _('Information') }}</a>
 	<div id="location-dialog" style="display:none;">
 		<div class="infobox-inner">
-			<select id="markmaker-country">
-				<option value="label">{{ _('Select country') }}</option>
-			</select>
+			<div class="group">
+				<select id="markmaker-country">
+					<option value="label">{{ _('Select country') }}</option>
+				</select>
+				<a href="#" id="save-location-button">{{ _('Save Location') }}</a>
+			</div>
 			<p>{% blocktrans %}Location is only used to associate marks with geographic regions.<br />See <a href="http://www.mozilla.com/en-US/firefox/geolocation/">Location Aware Browsing</a> for more information.{% endblocktrans %}</p>
 		</div>
 		<div class="infobox-arrow"></div>

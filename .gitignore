@@ -5,3 +5,5 @@ ffenv
 
 ffdemo/settings_local.py
 ffdemo/static/assets/js/markApp.js
+ffdemo/src
+ffdemo/build

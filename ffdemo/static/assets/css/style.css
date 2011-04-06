@@ -578,7 +578,7 @@ display: inline-block;
 	width: 166px;
 	height: 91px;
 	padding: 0;
-	margin: 15px 0;
+	margin: 20px 0 15px 0;
 	position: relative;
 }
 #mark-browsing-controls li {
@@ -986,7 +986,7 @@ footer #legal a:hover {
 .infobox-arrow {
 	background-image: url('/media/assets/images/ui.png');
 	background-repeat: no-repeat;
-	background-position: 0 -1405px;
+	background-position: 10px -1405px;
 	height: 14px;
 	width: 30px;
 }
@@ -1029,6 +1029,27 @@ footer #legal a:hover {
 }
 #location-dialog select {
 	
+}
+#location-dialog .ui-selectBox {
+	float: left;
+	margin-right: 10px;
+	height: 16px;
+}
+#location-dialog #save-location-button {
+	background-color: #aeaeae;
+	color: #ffffff;
+	height: 12px;
+	padding: 7px 10px 5px;
+	display: block;
+	float: left;
+}
+#location-dialog #save-location-button:after {
+	clear: both;
+}
+#location-dialog p {
+	margin: 6px 0;
+	padding: 0;
+	clear: both;
 }
 #information-dialog {
 	font-size: 0.7em;
