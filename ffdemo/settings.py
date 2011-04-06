@@ -53,6 +53,8 @@ TEXT_DOMAIN = 'messages'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-US'
 
+RESPONSYS_ID = ''
+
 # Accepted locales
 LANGUAGES = (
     ('de', 'German'),

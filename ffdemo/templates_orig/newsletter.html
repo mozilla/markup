@@ -2,26 +2,27 @@
 {% load i18n %}
 {% block content %}
 	<section id="static-content">
-		{% blocktrans %}
-		<p><strong>Read all about it in our Mozilla Firefox newsletter</strong></p>
+		
+		<p><strong>{% blocktrans %}Read all about it in our Mozilla Firefox newsletter{% endblocktrans %}</strong></p>
 
-		<p>Subscribe to our monthly updates and keep current with Mozilla news, including the latest tips and tricks for getting the most out of your Firefox browser. It’s the perfect way for us to keep in touch!</p>
+		<p>{% blocktrans %}Subscribe to our monthly updates and keep current with Mozilla news, including the latest tips and tricks for getting the most out of your Firefox browser. It’s the perfect way for us to keep in touch!{% endblocktrans %}</p>
 		
 		<form id="newsletter-form" action="http://awesomeness.mozilla.org/pub/rf" method="POST">
-			<p><label for="email">Your email address:</label><input type="text" id="email" name="EMAIL_ADDRESS_" /></p>
+			<p><label for="email">{{ _('Your email address:') }}</label><input type="text" id="email" name="EMAIL_ADDRESS_" /></p>
 			<p>
-				<label for="newsletter-countries">Country:</label>
+				<label for="newsletter-countries">{{ _('Country:') }}</label>
 				<select id="newsletter-countries" name="COUNTRY_">
-					<option val="label">Select your country</option>
+					<option val="label">{{ _('Select your country') }}</option>
 				</select>
 			</p>
-			<p><input type="submit" value="Sign me up!" /></p>		
-			<cite>We will only send you Mozilla-related information</cite>
-			<input type="hidden" name="_ri_" value="{{ datetime }}" />
+			<p><input type="submit" value="{{ _('Sign me up!') }}" /></p>
+			<cite>{{ _('We will only send you Mozilla-related information') }}</cite>
+			
+			<input type="hidden" name="_ri_" value="{{ responsysid }}" />
 			<input type="hidden" name="MOZILLA_AND_YOU_FLG" value="Y" />
 			<input type="hidden" name="MOZILLA_AND_YOU_DATE" value="{{ datetime }}" />
 		</form>
 		
-		{% endblocktrans %}
+		
 	</section>
 {% endblock %}
