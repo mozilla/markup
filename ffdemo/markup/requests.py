@@ -32,7 +32,7 @@ def get_translated_marks(request):
         response['error'] = "No marks to be parsed"
 
     json_response = simplejson.dumps(response)
-    return HttpResponse(json_response, 'application/javascript')
+    return HttpResponse(json_response, 'application/json')
 
 
 def flag_mark(request):
@@ -55,7 +55,7 @@ def flag_mark(request):
         response['error'] = "No mark specified"
 
     json_response = simplejson.dumps(response)
-    return HttpResponse(json_response, 'application/javascript')
+    return HttpResponse(json_response, 'application/json')
 
 
 def init_viz_data(request):
@@ -90,7 +90,7 @@ def init_viz_data(request):
         response['first_mark_at'] = all_marks[0].date_drawn.strftime("%a, %d %b %Y %I:%M:%S")
         response['total_countries'] = Mark.objects.values('country_code').distinct().count()
         json_response = simplejson.dumps(response)
-        return HttpResponse(json_response, 'application/javascript')
+        return HttpResponse(json_response, 'application/json')
 
 
 def save_mark(request):
@@ -126,7 +126,7 @@ def save_mark(request):
         response['error'] = 'missing data in POST request'
     #    Return response as json
     json_response = simplejson.dumps(response)
-    return HttpResponse(json_response, 'application/javascript')
+    return HttpResponse(json_response, 'application/json')
 
 
 def delete_mark(request):
@@ -143,7 +143,7 @@ def delete_mark(request):
         response['error'] = "No mark specified"
 
     json_response = simplejson.dumps(response)
-    return HttpResponse(json_response, 'application/javascript')
+    return HttpResponse(json_response, 'application/json')
 
 
 def approve_mark(request):
@@ -164,7 +164,7 @@ def approve_mark(request):
         response['error'] = "No mark specified"
 
     json_response = simplejson.dumps(response)
-    return HttpResponse(json_response, 'application/javascript')
+    return HttpResponse(json_response, 'application/json')
 
 
 def get_mark(request):
@@ -181,7 +181,7 @@ def get_mark(request):
     #    Decode simplified points data
     decoded_points_obj = common.decode_points_obj(mark.points_obj_simplified)
     #    Return raw
-    return HttpResponse(decoded_points_obj, 'application/javascript')
+    return HttpResponse(decoded_points_obj, 'application/json')
 
 
 def marks_by_offset(request):
@@ -236,7 +236,7 @@ def marks_by_offset(request):
         response['error'] = "No marks to be parsed"
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
-    return HttpResponse(json_response, 'application/javascript')
+    return HttpResponse(json_response, 'application/json')
 
 
 def marks_by_locale(request):
@@ -380,7 +380,7 @@ def marks_by_reference(request):
 
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
-    return HttpResponse(json_response, 'application/javascript')
+    return HttpResponse(json_response, 'application/json')
 
 
 def all_marks(request):
@@ -451,7 +451,7 @@ def all_marks(request):
             response['error'] = "No marks to be parsed"
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
-    return HttpResponse(json_response, 'application/javascript')
+    return HttpResponse(json_response, 'application/json')
 
 
 def marks_by_flagged(request):
@@ -482,7 +482,7 @@ def marks_by_flagged(request):
         response['error'] = "No marks to be parsed"
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
-    return HttpResponse(json_response, 'application/javascript')
+    return HttpResponse(json_response, 'application/json')
 
 
 def update_language(request):
