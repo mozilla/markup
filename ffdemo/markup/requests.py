@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.http import HttpResponseServerError
 from ffdemo.markup.models import Mark
 from ffdemo.markup import common
 from django.utils import simplejson
@@ -32,6 +33,7 @@ def get_translated_marks(request):
     else:
         response['success'] = False
         response['error'] = _("No marks to be parsed")
+        return HttpResponseServerError(response)
 
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
@@ -53,8 +55,10 @@ def flag_mark(request):
         except Mark.MultipleObjectsReturned:
             # should never [ever] happen, purely CYA
             response['error'] = _("Multiple marks returned")
+            return HttpResponseServerError(response)
     else:
         response['error'] = _("No mark specified")
+        return HttpResponseServerError(response)
 
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
@@ -126,6 +130,8 @@ def save_mark(request):
         #    Error response
         response['success'] = False
         response['error'] = _('missing data in POST request')
+        return HttpResponseServerError(response)
+
     #    Return response as json
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
@@ -141,8 +147,10 @@ def delete_mark(request):
             response['success'] = True
         except Mark.DoesNotExist:
             response['error'] = _('Mark does not exist')
+            return HttpResponseServerError(response)
     else:
         response['error'] = _("No mark specified")
+        return HttpResponseServerError(response)
 
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
@@ -162,8 +170,10 @@ def approve_mark(request):
                 response['success'] = True
         except Mark.DoesNotExist:
             response['error'] = _('Mark does not exist')
+            return HttpResponseServerError(response)
     else:
         response['error'] = _("No mark specified")
+        return HttpResponseServerError(response)
 
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
@@ -236,6 +246,7 @@ def marks_by_offset(request):
         #    No marks to dump
         response['success'] = False
         response['error'] = _("No marks to be parsed")
+        return HttpResponseServerError(response)
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
     return HttpResponse(json_response, 'application/json')
@@ -379,6 +390,7 @@ def marks_by_reference(request):
         #    No marks to dump
         response['success'] = False
         response['error'] = _("No marks to be parsed")
+        return HttpResponseServerError(response)
 
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
@@ -451,6 +463,7 @@ def all_marks(request):
             #    No marks to dump
             response['success'] = False
             response['error'] = _("No marks to be parsed")
+            return HttpResponseServerError(response)
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
     return HttpResponse(json_response, 'application/json')
@@ -482,6 +495,7 @@ def marks_by_flagged(request):
         #    No marks to dump
         response['success'] = False
         response['error'] = _("No marks to be parsed")
+        return HttpResponseServerError(response)
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
     return HttpResponse(json_response, 'application/json')
