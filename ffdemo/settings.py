@@ -112,6 +112,7 @@ MIDDLEWARE_CLASSES = (
     'axes.middleware.FailedLoginMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'ffdemo.middleware.SSLRedirect',
 )
 
 # ADMIN
