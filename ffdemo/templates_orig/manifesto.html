@@ -7,23 +7,19 @@
 {% block content %}
 	<section id="static-content">
 		<h1>{{ _('Manifesto') }}</h1>
-		{% blocktrans %}
-		<blockquote>"An open Net embraces free culture. That doesn't mean disrespecting the copyright of others. It means instead enabling others to share and build upon the work you want the Net to love. Practice the freedom you expect from others, by licensing your work as freely as you can."</blockquote>
-		<cite>- <a href="#">Lawrence Lessig for Mark Up</a></cite>
-		<p>The Web is an integral part of modern life.<br />
+		
+		<blockquote>{% blocktrans %}"An open Net embraces free culture. That doesn't mean disrespecting the copyright of others. It means instead enabling others to share and build upon the work you want the Net to love. Practice the freedom you expect from others, by licensing your work as freely as you can."{% endblocktrans %}</blockquote>
+		<cite>- <a href="#">{{ _('Lawrence Lessig for Mark Up') }}</a></cite>
+		<p>{% blocktrans %}The Web is an integral part of modern life.<br />
 		It is an educator, a communicator, an entertainer, an inspirer, a collaboration of all our creative efforts.<br />
-		It sparks movements and enables us to share our ideas, our thoughts, our dreams.</p>
-
-		<p>The Web is our creation.<br />
+		It sparks movements and enables us to share our ideas, our thoughts, our dreams.{% endblocktrans %}</p>
+		<p>{% blocktrans %}The Web is our creation.<br />
 		We are all contributors, the ones who use the Web every day.<br />
 		And all the comments and uploads we make add up to something bigger.<br />
-		This is why we believe that the Web must remain open and accessible to all.</p>
-
-		<p>Mark Up is a celebration of that freedom.<br />
+		This is why we believe that the Web must remain open and accessible to all.{% endblocktrans %}</p>
+		<p>{% blocktrans %}Mark Up is a celebration of that freedom.<br />
 		Each person’s mark is an individual expression on a continuous line symbolizing solidarity.<br />
-		It is a declaration and a chance to show your support for a people's Web.</p>
-
-		{% endblocktrans %}
+		It is a declaration and a chance to show your support for a people's Web.{% endblocktrans %}</p>
 	</section>
 {% endblock %}
 

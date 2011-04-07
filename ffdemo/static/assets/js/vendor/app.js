@@ -51,7 +51,7 @@
 			// unload the other modules if they're loaded
 			$( '#markapp' ).markApp( 'unloadModule', 'intro' );
 			$( '#markapp' ).markApp( 'unloadModule', 'capture' );
-			this.partial( '/en/moderate_sammy.html' )
+			this.partial( 'moderate_sammy.html' )
 				.then( function() {
 					// load the linear module
 					$( '#markapp' ).markApp( 'addModule', { 'linear': { 'is_flagged': true, 'linear_root': 'moderate' } } );
@@ -67,7 +67,7 @@
 				$( '#markapp' ).markApp( 'addModule', { 'linear': { 'is_flagged': true, 'linear_root': 'moderate', 'reference_mark': context.params['splat'][0], 'playback': context.params['playback'] } } );
 			} else {
 				// show all the signatures
-				this.partial( '/en/moderate_sammy.html' )
+				this.partial( 'moderate_sammy.html' )
 					.then( function() {
 						$( '#sammy' ).css( 'zIndex', '' );
 						$( '#markapp' ).css( { 'zIndex': 100, 'cursor': 'default' } );

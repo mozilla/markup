@@ -99,7 +99,7 @@ def community(request):
 
 @cache_page(60 * 30)
 def newsletter(request):
-    return render_response(request, 'newsletter.html', {'datetime': datetime.datetime.now()})
+    return render_response(request, 'newsletter.html', {'datetime': datetime.datetime.now(), 'responsysid': settings.RESPONSYS_ID })
 
 
 @cache_page(60 * 30)

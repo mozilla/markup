@@ -95,7 +95,9 @@
 						<li class="last"><a href="http://www.mozilla.com/legal/fraud-report/index.html" target="_blank">{{ _('Report Trademark Abuse') }}</a></li>
 					</ul>
 				</nav>
-				<p>{% blocktrans %}Except where otherwise noted, content on this site is licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/us/" target="_blank">Creative Commons Attribution Share-Alike License v3.0</a> or any later version.{% endblocktrans %}</p>
+				<p>{% blocktrans with "http://creativecommons.org/licenses/by-sa/3.0/us/" as cclicenseurl %}
+					Except where otherwise noted, content on this site is licensed under the <a href="{{ cclicenseurl }}" target="_blank">Creative Commons Attribution Share-Alike License v3.0</a> or any later version.
+					{% endblocktrans %}</p>
 			</section>
 		</footer>
 		<script src="/media/assets/js/markUp_common.min.js" type="text/javascript"></script>
