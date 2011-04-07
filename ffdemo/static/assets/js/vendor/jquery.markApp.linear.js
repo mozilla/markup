@@ -577,7 +577,8 @@
 						marks.shift( i, 1 );
 					}
 				}
-
+				// check again, if this is empty, return
+				if( marks.length == 0 ) return;
 				// sort our current marks so we can tell what buffer to load these into
 				var sortedMarks = [];
 				for ( var mark in lC.marks )
