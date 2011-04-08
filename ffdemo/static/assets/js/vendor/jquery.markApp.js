@@ -176,16 +176,8 @@
 							} );
 						}
 					},
-					// saveState: function ( ) {
-					// 	context.fn.storeData( 'markApp-context', context );
-					// },
-					// restoreState: function ( ) {
-					// 	prevContext = context.fn.getData( 'markApp-context' );
-					// 	if ( prevContext ) {
-					// 		context = prevContext;
-					// 	}
-					// },
-					showLoader: function( msg, custom_class ) {
+					showLoader: function( msg, custom_class, extraText, delay ) {
+						clearTimeout( context.loaderTimeout );
 						var custom_class = typeof custom_class === "string" ? custom_class : '';
 						var msg = typeof msg === "string" ? msg : context.fn.getString( 'default-loading-msg' );
 						// hide any existing loaders
@@ -200,19 +192,34 @@
 							.attr( 'id', 'markapp-loader' )
 							.append( $( '<div />' )
 								.text( msg ) );
-						context.$container
-							.append( $loader );
-						$loader.fadeIn( 'fast' );
+						if( extraText ) {
+							$loader
+								.append( $( '<p />' )
+									.html( extraText ) );
+						}
+						if ( delay && typeof delay === "number" ) {
+							context.loaderTimeout = setTimeout( function() {
+								context.$container
+									.append( $loader );
+								$loader.fadeIn( 'fast' );
+							}, delay );
+						} else {
+							context.$container
+								.append( $loader );
+							$loader.fadeIn( 'fast' );
+						}
 					},
 					hideLoader: function( ) {
+						clearTimeout( context.loaderTimeout );
 						$( '#markapp-loader' ).fadeOut( 'fast', function() {
 							$( this ).remove();
 						} );
 					},
-					showError: function ( msg ) {
+					showError: function ( msg, afterError ) {
 						var msg = typeof msg === "string" ? msg : context.fn.getString( 'default-error-msg' );
-						// hide any existing errors
+						// hide any existing errors or loaders
 						context.fn.hideError(); 
+						context.fn.hideLoader();
 						var $error = $( '<div />' )
 							.width( context.width )
 							.height( context.height )
@@ -220,6 +227,7 @@
 							.click( function ( e ) {
 								e.preventDefault();
 								context.fn.hideError();
+								if ( afterError && typeof afterError === "string" ) context.app.setLocation( afterError )
 							} )
 							.addClass( 'overlay-wrapper autoResize' )
 							.attr( 'id', 'markapp-error' )
@@ -234,19 +242,6 @@
 						$( '#markapp-error' ).fadeOut( 'fast', function() {
 							$( this ).remove();
 						} );
-					},
-					// given a Date object in servers timezone, this will convert it to the local time
-					localizeDate: function ( date ) {
-						// create Date object for current location
-						d = new Date();
-						// convert to msec
-						// add local time zone offset 
-						// get UTC time in msec
-						utc = date.getTime() - (d.getTimezoneOffset() * 60000);
-						// create new Date object for different city
-						// using supplied offset
-						nd = new Date( date.getTime() +  ( 3600000 * context.timezoneOffset ) );
-						return nd;
 					},
 					// parses translated strings out of div.translated-strings
 					// ol's are treated as arrays

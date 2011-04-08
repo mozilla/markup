@@ -2,10 +2,9 @@
 <div id="markmaker" class="autoResize">
 	<div id="intro-main-copy">
 		<h1>{{ _('The Web is your creation') }}</h1>
-		<p>{% blocktrans %}<strong>You are the ones using the Web every day.</strong> Every comment, upload and contribution you make adds up to something bigger. And we believe it should remain public and accessible to everyone.{% endblocktrans %}</p>
-		<p>{% blocktrans %}This is an open invitation to join the celebration of a Web that belongs to us all. Make your mark and show your support for the world\'s greatest public resource.{% endblocktrans %}</p>
+		<p>{% blocktrans %}<strong>Mark Up is a collection of all our individual marks on the Web.</strong>  Like the Web, it is our creation, and should remain public and accessible to everyone.  We invite you, the contributing writers, coders, and artists, to celebrate the worlds greatest public resource by taking ownership of the Web, and making your mark. {% endblocktrans %}</p>
 	</div>
-	<h2 id="click-anywhere"><a href="#/mark/new">{{ _('Click anywhere in the whitespace to begin your Mark') }}</a></h2>
+	<h2 id="click-anywhere"><a href="#/mark/new">{{ _('Click anywhere to begin your Mark') }}</a></h2>
 	<h3 id="make-your-mark">{{ _('Make Your Mark') }}</h3>
 	<h3 id="browse-marks"><a href="#/linear/">{{ _('browse Marks') }}</a></h3>
 	<ul id="markmaker-controls">
@@ -23,7 +22,7 @@
 				</select>
 				<a href="#" id="save-location-button">{{ _('Save Location') }}</a>
 			</div>
-			<p>{% blocktrans %}Location is only used to associate marks with geographic regions.<br />See <a href="http://www.mozilla.com/en-US/firefox/geolocation/">Location Aware Browsing</a> for more information.{% endblocktrans %}</p>
+			<p>{% blocktrans %}Location is only used to associate marks with geographic regions.<br />See <a href="http://www.mozilla.com/en-US/firefox/geolocation/" target="_blank">Location Aware Browsing</a> for more information.{% endblocktrans %}</p>
 		</div>
 		<div class="infobox-arrow"></div>
 	</div>
@@ -57,9 +56,17 @@
 		<h3>Translator Info</h3>
 		<p>{% blocktrans %}Please Translate "Make Your Mark" for the <span id="translator-locale"></span> locale.{% endblocktrans %}</p>
 	</div>
+	<div id="cursor-tooltip" style="display:none;">
+		<div class="infobox-inner">
+			<p></p>
+		</div>
+		<div class="infobox-arrow"></div>
+	</div>
 </div>
 <div class="translated-strings" style="display:none;">
 	<span id="submitting-mark">{{ _('Submitting Mark') }}</span>
 	<span id="loading-intro-msg">{{ _('Loading Mozilla MarkUp') }}</span>
 	<span id="submit-error">{% blocktrans %}Oops! Something went wrong on our end.<br />Please submit your mark again.{% endblocktrans %}</span>
+	<span id="cursor-tooltip-intro-msg">{{ _('Click anywhere to begin your mark.') }}</span>
+	<span id="cursor-tooltip-capture-msg">{{ _('The mouse cursor is a representation of when you are nearing the limit of your Mark') }}</span>
 </div>

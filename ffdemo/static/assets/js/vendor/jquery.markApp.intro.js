@@ -180,8 +180,6 @@
 					.trigger( 'resize.markApp', [context.width, context.height] )
 					.width( 0 )
 					.height( context.height );
-					
-				
 			},
 			loadMarks: function( context ) {
 				context.fn.showLoader( context.fn.getString( 'loading-intro-msg' ), 'overlay-light' );
@@ -274,11 +272,22 @@
 					$( '#click-anywhere' ).delay( 200 ).fadeIn( 'slow' );
 					$( '#browse-marks' ).delay( 100 ).fadeIn( 'slow' );
 				} );
+				// add the cursor tooltip, after a delay
+				setTimeout( function() {
+					context.$cursorTooltip = $( '#cursor-tooltip' )
+						.find( 'p' )
+							.text( context.fn.getString( 'cursor-tooltip-intro-msg' ) )
+							.end()
+						// move it off screen, in case it fades in before a mousemoveevent has fired
+						.css( { 'top': -400 } )
+						.fadeIn( 'fast' );
+				}, 3000 );
+				
 			},
 			startMarkAnimations: function ( context ) {
 				var lC = context.modules.intro;
 				modules.intro.fn.drawX( context );
-				// start drawing the translated mark
+				// start drawing the translated mark after 2 seconds delay
 				if( lC.curLocaleMark ) {
 					var now = ( new Date() ).getTime() + 2000;
 					lC.textScene.timers[lC.curLocaleMark.reference] = { 'start': now, 'end': now + lC.curLocaleMark.maxTime, 'speed': 2 };
