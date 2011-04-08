@@ -16,10 +16,6 @@ path = lambda *a: os.path.join(ROOT, *a)
 # SESSION_COOKIE_HTTPONLY = True
 # SESSION_COOKIE_DOMAIN = None
 
-# global for enabling SSL redirection of admin views
-# set True for properly configured production
-REDIRECT_TO_SSL = False
-
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
@@ -28,7 +24,6 @@ MANAGERS = ADMINS
 CACHES = { }
 DATABASES = { }
 DATABASE_ROUTERS = ('multidb.MasterSlaveRouter',)
-
 
 ## Internationalization.
 TIME_ZONE = 'America/Los_Angeles'
@@ -111,7 +106,6 @@ MIDDLEWARE_CLASSES = (
     'axes.middleware.FailedLoginMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    #'ffdemo.middleware.SSLRedirect',
 )
 
 # ADMIN
