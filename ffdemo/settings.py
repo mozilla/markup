@@ -25,10 +25,7 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
-# Memcached!
-# CACHE_BACKEND = 'caching.backends.memcached://localhost:11211?timeout=500'
-
+CACHES = { }
 DATABASES = { }
 DATABASE_ROUTERS = ('multidb.MasterSlaveRouter',)
 
