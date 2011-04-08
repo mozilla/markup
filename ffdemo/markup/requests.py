@@ -313,14 +313,22 @@ def marks_by_reference(request):
             response['error'] = _("Multiple marks found for reference")
             did_fail_get_marks = True
         if 'include_mark' in request.GET:
-            if int(request.GET['include_mark']) == 0:
-                include_mark = False
+            try:
+                if int(request.GET['include_mark']) == 0:
+                    include_mark = False
+            except ValueError:
+                return HttpResponseBadRequest()
 
     if 'include_forward' in request.GET:
-        include_forward = int(request.GET['include_forward'])
+        try:
+            include_forward = int(request.GET['include_forward'])
+        except ValueError:
+            return HttpResponseBadRequest()
         if 'include_back' in request.GET:
-            include_back = int(request.GET['include_back'])
-
+            try:
+                include_back = int(request.GET['include_back'])
+            except ValueError:
+                return HttpResponseBadRequest()
         if 'country_code' in request.GET:
             kountry_code = request.GET['country_code']
             all_marks = Mark.objects.exclude(flaggings__gte=1).filter(country_code=kountry_code, contributor_locale__isnull=True).order_by('id')

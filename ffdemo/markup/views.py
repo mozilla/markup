@@ -88,8 +88,11 @@ def makemark(request):
 @cache_page(30)
 def community(request):
     if 'offset' in request.GET:
-        offset = int(request.GET['offset'])
-        per_page = int(request.GET['per_page'])
+        try:
+            offset = int(request.GET['offset'])
+            per_page = int(request.GET['per_page'])
+        except ValueError:
+            return HttpResponseBadRequest()
         top_limit = offset + per_page
         all_marks = Mark.objects.exclude(flaggings__gte=1)[offset:top_limit]
     else:
