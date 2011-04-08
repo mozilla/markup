@@ -525,8 +525,8 @@
 						context.$cursorTooltip
 							.fadeIn()
 							.css( {
-								top: context.mouseY - context.$cursorTooltip.height() - 20,
-								left: context.mouseX - 12
+								top: context.mouseY - context.$cursorTooltip.height() - 32,
+								left: context.mouseX + 8
 							} );
 					}
 				} else if( ! context.mouseIn ) {

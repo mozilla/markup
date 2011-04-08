@@ -1028,7 +1028,7 @@ footer #legal a:hover {
 	max-width: 300px;
 	min-width: 150px;
 	position: absolute;
-	
+	z-index: 300;
 }
 #cursor-tooltip .infobox-inner {
 	background-color: #ff5224;
@@ -1038,7 +1038,7 @@ footer #legal a:hover {
 	font-size: 12px;
 }
 #cursor-tooltip .infobox-arrow {
-	background-image: url('/media/assets/images/arrow_orange.png');
+	background-image: url('/media/assets/images/arrow_orange2.png');
 	background-position: 10px 0;
 	background-repeat: no-repeat;
 }
