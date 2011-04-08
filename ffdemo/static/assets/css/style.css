@@ -371,6 +371,11 @@ body.community ul #community a {
 	margin: 0 auto;
 	padding-left: 370px;
 }
+#the-big-x {
+	position: absolute;
+	top: -50px;
+	left: 0px;
+}
 #browse-marks,
 #intro-main-copy,
 #click-anywhere {

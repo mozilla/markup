@@ -32,14 +32,6 @@
 			resize: function( context, e ) {
 				context.modules.intro.layerManager.resizeAll( context.width, context.height );
 				context.modules.intro.eventChange = true;
-				
-				if ( context.modules.intro.xAnimationComplete ) {
-					// redraw the X
-					modules.intro.fn.drawX( context );
-					// reposition and redraw the translateMark
-					
-				}
-				
 			},
 			loop: function ( context, e ) {
 				var lC = context.modules.intro;
@@ -176,6 +168,10 @@
 							$( '#markmaker, #browse-marks, #click-anywhere, #intro-main-copy' )
 								.css( { 'display': 'none' } );
 						}
+						$( '#the-big-x' )
+							.css( 'left', ( context.width / 2 ) - 760 )
+							.find( 'svg' )
+							.height( context.height + 100 );
 					} )
 					.trigger( 'resize.markApp', [context.width, context.height] )
 					.width( 0 )
@@ -286,23 +282,14 @@
 			},
 			startMarkAnimations: function ( context ) {
 				var lC = context.modules.intro;
-				modules.intro.fn.drawX( context );
+				// fade up the big X
+				$( '#the-big-x' )
+					.fadeIn( 'slow' );
 				// start drawing the translated mark after 2 seconds delay
 				if( lC.curLocaleMark ) {
 					var now = ( new Date() ).getTime() + 2000;
 					lC.textScene.timers[lC.curLocaleMark.reference] = { 'start': now, 'end': now + lC.curLocaleMark.maxTime, 'speed': 2 };
 				}
-			},
-			drawX: function ( context ) {
-				var lC = context.modules.intro;
-				// draw the X, with hardcoded data? good idea? maybe?
-				var xMarkData = {"strokes":[[{"x":177,"y":0,"z":0,"time":51,"speed":0,"angle":0,"significance":5},{"x":129,"y":60,"z":0,"time":255,"speed":0.45069390943299864,"angle":0.5880026035475675,"significance":1},{"x":123,"y":65,"z":0,"time":271,"speed":0.4931203163041915,"angle":0.7853981633974483,"significance":1},{"x":103,"y":89,"z":0,"time":339,"speed":0.45069390943299864,"angle":0.5880026035475675,"significance":1},{"x":56,"y":139,"z":0,"time":503,"speed":0.45073896963561083,"angle":0.7853981633974483,"significance":1},{"x":38,"y":162,"z":0,"time":584,"speed":0.3572203090978693,"angle":0.46364760900080615,"significance":1},{"x":9,"y":192,"z":0,"time":691,"speed":0.3535533905932738,"angle":0.7853981633974483,"significance":1},{"x":0,"y":206,"z":0,"time":727,"speed":0.45069390943299864,"angle":0.5880026035475675,"significance":5}],[{"x":11,"y":23,"z":0,"time":1178,"speed":0,"angle":0,"significance":5},{"x":30,"y":49,"z":0,"time":1246,"speed":0.32424352695503,"angle":5.639684198386302,"significance":1},{"x":55,"y":77,"z":0,"time":1321,"speed":0.48790367901871773,"angle":5.497787143782138,"significance":1},{"x":72,"y":100,"z":0,"time":1367,"speed":0.5216642390945547,"angle":5.695182703632019,"significance":1},{"x":85,"y":113,"z":0,"time":1408,"speed":0.5355917833779965,"angle":5.497787143782138,"significance":2},{"x":154,"y":175,"z":0,"time":1662,"speed":0.3311927108182759,"angle":5.497787143782138,"significance":1},{"x":186,"y":196,"z":0,"time":1802,"speed":0.2849548128987055,"angle":5.497787143782138,"significance":5}]],"country_code":"","time":1300925747439,"rtl":false,"maxTime":1802,"reference":"","hoverState":false,"renderedBounds":null,"id":null,"contributor_name":null,"extra_info":null,"color":"0,0,0","hoverColor":"0,139,211","x":454,"y":199,"position":{"x":0,"y":0,"z":0},"rotationAngle":{"x":0,"y":0,"z":0},"sX":0,"sY":0,"bWidth":186,"bHeight":206};
-				
-				lC.xMark = new Mark.gmlMark( xMarkData.strokes, "xMark" );
-				
-				lC.textScene.objects.push( lC.xMark ); 
-				var now = ( new Date() ).getTime();
-				lC.textScene.timers[lC.xMark.reference] = { 'start': now, 'end': now + lC.xMark.maxTime, 'speed': 1 };
 			},
 			// fallback function that doesn't bother with anything but the DOM elements
 			simpleIntro: function ( context ) {
@@ -312,6 +299,7 @@
 				.show()
 				.animate( { 'width': context.width }, 'slow', function () {
 					$( '#intro-main-copy' ).fadeIn( 'slow' );
+					$( '#the-big-x' ).fadeIn( 'slow' );
 					$( '#click-anywhere' ).delay( 200 ).fadeIn( 'slow' );
 					$( '#browse-marks' ).delay( 100 ).fadeIn( 'slow' );
 				} );
