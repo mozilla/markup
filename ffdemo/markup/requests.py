@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.http import HttpResponseServerError
 from ffdemo.markup.models import Mark
 from ffdemo.markup import common
 from django.utils import simplejson
@@ -6,6 +7,7 @@ from django.core import serializers
 from django.views.decorators.http import require_GET, require_POST
 import datetime
 from django.db.models import Q
+from django.utils.translation import gettext as _
 
 
 def get_translated_marks(request):
@@ -30,7 +32,8 @@ def get_translated_marks(request):
         response['marks'] = all_marks
     else:
         response['success'] = False
-        response['error'] = "No marks to be parsed"
+        response['error'] = _("No marks to be parsed")
+        return HttpResponseServerError(response)
 
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
@@ -48,12 +51,14 @@ def flag_mark(request):
                 mark.save()
                 response['success'] = True
         except Mark.DoesNotExist:
-            response['error'] = "Mark does not exist"
+            response['error'] = _("Mark does not exist")
         except Mark.MultipleObjectsReturned:
             # should never [ever] happen, purely CYA
-            response['error'] = "Multiple marks returned"
+            response['error'] = _("Multiple marks returned")
+            return HttpResponseServerError(response)
     else:
-        response['error'] = "No mark specified"
+        response['error'] = _("No mark specified")
+        return HttpResponseServerError(response)
 
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
@@ -124,7 +129,9 @@ def save_mark(request):
     else:
         #    Error response
         response['success'] = False
-        response['error'] = 'missing data in POST request'
+        response['error'] = _('missing data in POST request')
+        return HttpResponseServerError(response)
+
     #    Return response as json
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
@@ -139,9 +146,11 @@ def delete_mark(request):
             m.delete()
             response['success'] = True
         except Mark.DoesNotExist:
-            response['error'] = 'Mark does not exist'
+            response['error'] = _('Mark does not exist')
+            return HttpResponseServerError(response)
     else:
-        response['error'] = "No mark specified"
+        response['error'] = _("No mark specified")
+        return HttpResponseServerError(response)
 
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
@@ -160,9 +169,11 @@ def approve_mark(request):
                 m.save()
                 response['success'] = True
         except Mark.DoesNotExist:
-            response['error'] = 'Mark does not exist'
+            response['error'] = _('Mark does not exist')
+            return HttpResponseServerError(response)
     else:
-        response['error'] = "No mark specified"
+        response['error'] = _("No mark specified")
+        return HttpResponseServerError(response)
 
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
@@ -210,7 +221,7 @@ def marks_by_offset(request):
                 marks_to_be_dumped = Mark.objects.all()[offset:max]
         else:
            response['success'] = False
-           response['error'] = "Querying by offset also requires a 'max' POST var"
+           response['error'] = _("Querying by offset also requires a 'max' POST var")
            did_fail_get_marks = True
     else:
         # No special query parameters, query for all marks
@@ -234,7 +245,8 @@ def marks_by_offset(request):
     else:
         #    No marks to dump
         response['success'] = False
-        response['error'] = "No marks to be parsed"
+        response['error'] = _("No marks to be parsed")
+        return HttpResponseServerError(response)
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
     return HttpResponse(json_response, 'application/json')
@@ -285,11 +297,11 @@ def marks_by_reference(request):
             m_offset = Mark.objects.get(reference=reference_mark)
         except Mark.DoesNotExist:
             response['success'] = False
-            response['error'] = "Reference mark doesn't exist"
+            response['error'] = _("Reference mark doesn't exist")
             did_fail_get_marks = True
         except Mark.MultipleObjectsReturned:
             response['success'] = False
-            response['error'] = "Multiple marks found for reference"
+            response['error'] = _("Multiple marks found for reference")
             did_fail_get_marks = True
         if 'include_mark' in request.GET:
             if int(request.GET['include_mark']) == 0:
@@ -321,7 +333,7 @@ def marks_by_reference(request):
                             'id')[relative_include_back:offset_index + include_forward]
             else:
                 response['success'] = False
-                response['error'] = "No marks to be dumped"
+                response['error'] = _("No marks to be dumped")
                 did_fail_get_marks = True
         else:
             all_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True).order_by('id')
@@ -340,13 +352,13 @@ def marks_by_reference(request):
                             'id')[relative_include_back:offset_index + include_forward]
             except Mark.DoesNotExist:
                 response['success'] = False
-                response['error'] = "No marks to be dumped"
+                response['error'] = _("No marks to be dumped")
                 did_fail_get_marks = True
 
     else:
         # required param
         response['success'] = False
-        response['error'] = "Querying by reference requires a reference string"
+        response['error'] = _("Querying by reference requires a reference string")
         did_fail_get_marks = True
 
     # Check that we've got marks to dump
@@ -377,7 +389,8 @@ def marks_by_reference(request):
     else:
         #    No marks to dump
         response['success'] = False
-        response['error'] = "No marks to be parsed"
+        response['error'] = _("No marks to be parsed")
+        return HttpResponseServerError(response)
 
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
@@ -424,7 +437,7 @@ def all_marks(request):
                         contributor_locale__isnull=True).order_by('id')[offset:max]
         else:
             response['success'] = False
-            response['error'] = "Querying by offset also requires a 'max' POST var"
+            response['error'] = _("Querying by offset also requires a 'max' POST var")
             did_fail_get_marks = True
     else:
         #    We can also filter by country code here as well if need be
@@ -449,7 +462,8 @@ def all_marks(request):
         else:
             #    No marks to dump
             response['success'] = False
-            response['error'] = "No marks to be parsed"
+            response['error'] = _("No marks to be parsed")
+            return HttpResponseServerError(response)
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
     return HttpResponse(json_response, 'application/json')
@@ -480,7 +494,8 @@ def marks_by_flagged(request):
     else:
         #    No marks to dump
         response['success'] = False
-        response['error'] = "No marks to be parsed"
+        response['error'] = _("No marks to be parsed")
+        return HttpResponseServerError(response)
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
     return HttpResponse(json_response, 'application/json')
