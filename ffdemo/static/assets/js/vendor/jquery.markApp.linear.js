@@ -482,9 +482,27 @@
 									.attr( 'href', '#/' + lC.linear_root + '/country/' + lC.country_code + '/' + data.country_last_mark );
 							} else {
 								$( '#first-mark-link' )
-									.attr( 'href', '#/' + lC.linear_root + '/' + data.first_mark );
+									.click( function( e ) {
+										e.preventDefault();
+										if( lC.currentMark.reference == data.first_mark ) {
+											modules.linear.fn.centerCurrentMark( context, function() {
+												modules.linear.fn.showMarkInformation( context );
+											} );
+										} else {
+											context.app.setLocation( '#/' + lC.linear_root + '/' + data.first_mark );
+										}
+									} );
 								$( '#last-mark-link' )
-									.attr( 'href', '#/' + lC.linear_root + '/' + data.last_mark );
+									.click( function( e ) {
+										e.preventDefault();
+										if( lC.currentMark.reference == data.last_mark ) {
+											modules.linear.fn.centerCurrentMark( context, function() {
+												modules.linear.fn.showMarkInformation( context );
+											} );
+										} else {
+											context.app.setLocation( '#/' + lC.linear_root + '/' + data.last_mark );
+										}
+									} );
 							}
 							// setup collapsibles
 							$( '#mark-browsing' ).collapsibleMod( );

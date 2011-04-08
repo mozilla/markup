@@ -1036,6 +1036,8 @@ footer #legal a:hover {
 }
 #cursor-tooltip .infobox-inner p {
 	font-size: 12px;
+	padding: 5px 8px;
+	font-weight: bold;
 }
 #cursor-tooltip .infobox-arrow {
 	background-image: url('/media/assets/images/arrow_orange2.png');
@@ -1149,6 +1151,7 @@ footer #legal a:hover {
 	padding: 15px;
 	background: #ffffff;
 	color: #888888;
+	line-height: 20px;
 }
 #markapp-error {
 	padding: 160px 0 0;
