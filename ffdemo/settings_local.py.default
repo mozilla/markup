@@ -31,6 +31,12 @@ ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
 PROJECT_DOMAIN = ''
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
