@@ -64,7 +64,7 @@
 			$( '#markapp' ).markApp( 'unloadModule', 'capture' );
 			if ( $( '#linear' ).size() > 0 ) {
 				// already setup, just load the new reference mark into the module
-				$( '#markapp' ).markApp( 'addModule', { 'linear': { 'is_flagged': true, 'linear_root': 'moderate', 'reference_mark': context.params['splat'][0], 'playback': context.params['playback'] } } );
+				$( '#markapp' ).markApp( 'addModule', { 'linear': { 'is_flagged': true, 'linear_root': 'moderate', 'reference_mark': context.params['splat'][0] } } );
 			} else {
 				// show all the signatures
 				this.partial( 'moderate_sammy.html' )
@@ -72,7 +72,7 @@
 						$( '#sammy' ).css( 'zIndex', '' );
 						$( '#markapp' ).css( { 'zIndex': 100, 'cursor': 'default' } );
 						// load up the visualization
-						$( '#markapp' ).markApp( 'addModule', { 'linear': { 'is_flagged': true, 'linear_root': 'moderate', 'reference_mark': context.params['splat'][0], 'playback': context.params['playback'] } } );
+						$( '#markapp' ).markApp( 'addModule', { 'linear': { 'is_flagged': true, 'linear_root': 'moderate', 'reference_mark': context.params['splat'][0] } } );
 					} );
 			}
 		} );
@@ -103,7 +103,7 @@
 			$( '#markapp' ).markApp( 'unloadModule', 'capture' );
 			if ( $( '#linear' ).size() > 0 ) {
 				// already setup, just load the new reference mark into the module
-				$( '#markapp' ).markApp( 'addModule', { 'linear': { 'reference_mark': context.params['splat'][0], 'playback': context.params['playback'] } } );
+				$( '#markapp' ).markApp( 'addModule', { 'linear': { 'reference_mark': context.params['splat'][0], 'playback': context.params['playback'], 'show_thanks': context.params['be_grateful'] } } );
 			} else {
 				// show all the signatures
 				this.partial( 'linear_sammy.html' )
@@ -111,7 +111,7 @@
 						$( '#sammy' ).css( 'zIndex', '' );
 						$( '#markapp' ).css( { 'zIndex': 100, 'cursor': 'default' } );
 						// load up the visualization
-						$( '#markapp' ).markApp( 'addModule', { 'linear': { 'reference_mark': context.params['splat'][0], 'playback': context.params['playback'] } } );
+						$( '#markapp' ).markApp( 'addModule', { 'linear': { 'reference_mark': context.params['splat'][0], 'playback': context.params['playback'], 'show_thanks': context.params['be_grateful'] } } );
 					} );
 			}
 		} );
@@ -123,9 +123,6 @@
 				.markApp()
 				// and privide it a way of accessing the sammy app
 				.data( 'markApp-context' )['app'] = app;
-			// attempt to restore state
-			// $( '#markapp' )
-			// 	.data( 'markApp-context' ).fn.restoreState();
 		} );
 		
 		// other stuff

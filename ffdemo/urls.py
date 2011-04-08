@@ -23,7 +23,7 @@ urlpatterns += patterns('markup.views',
     (r'^$', 'home'),
     # sammy templates
     (r'linear_sammy.html$', 'linear_sammy'),
-    (r'makemark_sammy.html/$', 'makemark_sammy'),
+    (r'makemark_sammy.html$', 'makemark_sammy'),
     (r'^about/gml/$', 'about_gml'),
     (r'^about/code/$', 'code'),
     (r'^about/credits/$', 'credits'),
@@ -41,7 +41,7 @@ urlpatterns += patterns('markup.views',
     (r'^accounts/logout/$', django.contrib.auth.views.logout),
     (r'accounts/locked/$', 'account_locked'),
     (r'list_invites/$', 'list_invites'),
-    (r'moderate_sammy.html/$', 'moderate_sammy'),
+    (r'moderate_sammy.html$', 'moderate_sammy'),
 )
 
 urlpatterns += patterns('markup.requests',

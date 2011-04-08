@@ -75,6 +75,7 @@
 					modules.capture.fn.endStroke( context );
 					$( '#markmaker-controls, #contributor-fields, #translator-fields, #markmaker-legal-line' )
 						.css( 'zIndex', 200 );
+					// TODO - save our state here
 				}
 			},
 			ready: function ( context, e ) {
@@ -194,7 +195,7 @@
 				var lC = context.modules.capture;
 				// hide any intro stuff that might be being displayed
 				if( $( '#browse-marks' ).is( ':visible' ) ) {
-					$( '#browse-marks, #click-anywhere, #intro-main-copy' )
+					$( '#browse-marks, #click-anywhere, #intro-main-copy, #the-big-x' )
 						.fadeOut( 'fast' );
 					$( '#markmaker-legal-line' ).fadeIn( 'slow' );
 				} 
@@ -206,7 +207,7 @@
 						$( '#markmaker' ).css( 'background-position', '0 ' + ( context.height - 140 ) + 'px' );
 						
 						// if there are dialogs open, reposition them
-						if( $( '#location-dialog:visible').size() > 0  ) {
+						if( $( '#location-dialog:visible' ).size() > 0  ) {
 							$( '#location-dialog:visible' )
 								.css( {
 									'bottom': $( '#markmaker-location' ).height() + 25,
@@ -254,6 +255,19 @@
 						.hide( )
 						.fadeIn( 'slow' );
 				}
+				
+				// if we have a cursor tooltip, update the text and set the fadeout timer
+				context.$cursorTooltip = context.$cursorTooltip || $( '#cursor-tooltip' );
+				context.$cursorTooltip
+					.fadeIn( 'fast' )
+					.find( 'p' )
+						.text( context.fn.getString( 'cursor-tooltip-capture-msg' ) )
+						.end();
+				setTimeout( function() {
+					var cTT = context.$cursorTooltip;
+					delete context.$cursorTooltip;
+					cTT.fadeOut( 'fast' );
+				}, 5000 );
 			},
 			// fades out the intro content and switches into drawing mode
 			endIntro: function ( context ) {
@@ -328,8 +342,6 @@
 					modules.capture.fn.drawStroke( context, simpStroke );
 					// recalculate the captured point count
 					lC.capturedPoints -= lC.currentStroke.length - simpStroke.length;
-					// resave our state
-					//context.fn.saveState( );
 				}
 				// set the currentStroke to null 
 				lC.currentStroke = null;
@@ -448,7 +460,7 @@
 							// store the users mark for later access
 							context.fn.storeData( 'userMark', { 'reference': data.mark_reference, 'country_code': country_code } );
 							// now tell the app to redirect to our FRESH mark
-							context.app.setLocation( '#/linear/'+ data.mark_reference + '?playback=true' );
+							context.app.setLocation( '#/linear/'+ data.mark_reference + '?playback=true&be_grateful=true' );
 							// hide loader
 							context.fn.hideLoader();
 						}
@@ -508,6 +520,21 @@
 				// draw the cursor if the cursor is in the frame
 				if( context.mouseIn && ( lC.state == "drawing" || lC.state == "intro" ) ) {
 					modules.capture.fn.drawCursor( lC.layerManager.layers['liveDrawingLayer'].context, context.mouseX, context.mouseY, ( lC.captureLimit - lC.capturedPoints ) / lC.captureLimit  );
+					// move the tooltip here. 
+					if( context.$cursorTooltip ) {
+						context.$cursorTooltip
+							.fadeIn()
+							.css( {
+								top: context.mouseY - context.$cursorTooltip.height() - 32,
+								left: context.mouseX + 8
+							} );
+					}
+				} else if( ! context.mouseIn ) {
+					// move the tooltip here. 
+					if( context.$cursorTooltip ) {
+						context.$cursorTooltip
+							.fadeOut();
+					}
 				}
 			},
 			introLoop: function( context ) {

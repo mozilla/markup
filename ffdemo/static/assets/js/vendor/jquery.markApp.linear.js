@@ -9,6 +9,7 @@
 			reference_mark: null, // optional reference mark -- will init the visualization on this mark if passed
 			country_code: null, // optional country code -- only loads marks with this county code if present 
 			playback: false, // set this to true to immediately play back the initial mark
+			show_thanks: false, // if this is set to true, we assume we were redirected from the submission screen
 			is_flagged: false, // optional flagged flag -- only loads marks that are flagged (for use within moderation)
 			linear_root: 'linear'
 		},
@@ -398,7 +399,7 @@
 									modules.linear.fn.jumpToMark( context, lC.reference_mark, lC.playback );
 								} else {
 									// show the error message, with a link back to the main visualization link
-									context.fn.showError( context.fn.getString( 'no-marks-error-msg' ) );
+									context.fn.showError( context.fn.getString( 'no-marks-error-msg' ), '#/linear/' );
 								}
 								lC.requestingMarks = false;
 							}
@@ -433,7 +434,7 @@
 								}
 							} else {
 								// show the error message, with a link back to the main visualization link
-								context.fn.showError( context.fn.getString( 'no-marks-error-msg' ) );
+								context.fn.showError( context.fn.getString( 'no-marks-error-msg' ), '#/linear/' );
 							}
 							lC.requestingMarks = false;
 						}
@@ -552,10 +553,25 @@
 				if( options.reference && !( options.reference in lC.marks ) ) {
 					// if we're looking for a specific mark see if we already have that one
 					modules.linear.fn.dumpAllMarks( context );
-					context.fn.showLoader( context.fn.getString( 'loading-marks-msg' ), 'overlay-light' );
-				} else if ( ! options.reference ) {
-					context.fn.showLoader( context.fn.getString( 'loading-marks-msg' ), 'overlay-light' );
+				} 
+				// show the loader
+				if( !options.reference || ( options.reference && !(options.reference in lC.marks) ) ) {
+					// This is for all mark loading requests that aren't a result of normal buffer reloading
+					var extraInfo = context.fn.getString( 'regular-loading-msg' );
+					if( lC.show_thanks ) {
+						lC.show_thanks = false
+						extraInfo = context.fn.getString( 'submission-thanks-loading-msg' )
+					}
+					context.fn.showLoader( context.fn.getString( 'loading-marks-msg' ), 'overlay-light', extraInfo );
+				} else {
+					// if it's normal buffer reloading, show the loader on a delay
+					context.fn.showLoader( 
+						context.fn.getString( 'loading-marks-msg' ), 
+						'overlay-light', 
+						context.fn.getString( 'regular-loading-msg' ),
+						4000 );
 				}
+
 				$.ajax( {
 					url: url_to_load,
 					data: options,
@@ -565,6 +581,9 @@
 				.success( function ( data ) {
 					// hide the loader
 					context.fn.hideLoader();
+				} )
+				.error( function ( data ) {
+					context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
 				} );
 			},
 			setupMarks: function( context, marks ) {
@@ -577,7 +596,8 @@
 						marks.shift( i, 1 );
 					}
 				}
-
+				// check again, if this is empty, return
+				if( marks.length == 0 ) return;
 				// sort our current marks so we can tell what buffer to load these into
 				var sortedMarks = [];
 				for ( var mark in lC.marks )
@@ -908,7 +928,7 @@
 						context.fn.storeData( 'markFlaggings', lC.flaggings );
 					},
 					error: function ( data ) {
-						context.fn.showError( context.fn.getString( 'error-msg' ) );
+						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
 					}
 				} );
 				
@@ -956,7 +976,7 @@
 					},
 					error: function ( data ) {
 						// TODO translate this msg
-						context.fn.showError( context.fn.getString( 'error-msg' ) );
+						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
 					}
 				} );
 			},
@@ -975,7 +995,7 @@
 						lC.currentMark.is_approved = shouldApprove;
 					},
 					error: function ( data ) {
-						context.fn.showError( context.fn.getString( 'error-msg' ) );
+						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
 					}
 				} );
 			},

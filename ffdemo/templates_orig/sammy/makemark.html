@@ -2,10 +2,39 @@
 <div id="markmaker" class="autoResize">
 	<div id="intro-main-copy">
 		<h1>{{ _('The Web is your creation') }}</h1>
-		<p>{% blocktrans %}<strong>You are the ones using the Web every day.</strong> Every comment, upload and contribution you make adds up to something bigger. And we believe it should remain public and accessible to everyone.{% endblocktrans %}</p>
-		<p>{% blocktrans %}This is an open invitation to join the celebration of a Web that belongs to us all. Make your mark and show your support for the world\'s greatest public resource.{% endblocktrans %}</p>
+		<p>{% blocktrans %}<strong>Mark Up is a collection of all our individual marks on the Web.</strong>  Like the Web, it is our creation, and should remain public and accessible to everyone.  We invite you, the contributing writers, coders, and artists, to celebrate the worlds greatest public resource by taking ownership of the Web, and making your mark. {% endblocktrans %}</p>
 	</div>
-	<h2 id="click-anywhere"><a href="#/mark/new">{{ _('Click anywhere in the whitespace to begin your Mark') }}</a></h2>
+	<div id="the-big-x">
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMinYMin meet" width="1224px" height="792px" viewBox="0 0 1224 792" enable-background="new 0 0 1224 792" xml:space="preserve">
+		<g id="Layer_1" display="none">
+			<path display="inline" fill-rule="evenodd" clip-rule="evenodd" d="M816-97c87.916-2.688,37.294,85.749,13,117
+				c-30.264,38.931-96.577,79.788-116,103s-27.335,32.668-41,49c-26.93,35.01-57.494,67.122-84,103
+				c-16.653,22.542-34.166,44.127-50,68c-3.897,5.876-17.228,19.424-14,25c11.202,35.223,38.947,68.553,59,97
+				c58.998,83.695,129.565,155.93,224,204c26.559,13.52,62.671,26.923,93,34c15.449,3.605,38.232-2.668,50,5
+				c21.894,14.268,14.497,65.961,2,85c-33.953,51.726-136.456,26.34-183,4c-85.947-41.252-169.389-100.814-226-172
+				c-23.331-29.997-46.669-60.003-70-90c-8.666-13.332-17.334-26.668-26-40c-0.333,0-0.667,0-1,0c-18.332,39.996-36.668,80.004-55,120
+				c-21.665,62.994-43.335,126.006-65,189c-12.244,31.37-21.457,80.739-55,90c0-1.666,0-3.334,0-5c11.7-32.594,3.705-84.403-2-118
+				c-5.036-29.658,7.337-78.166,13-104c15.908-72.573,32.813-143.122,58-207c8.666-20.665,17.334-41.335,26-62
+				c6-11.666,12-23.334,18-35c-3.667-9.666-7.333-19.334-11-29c-7.333-27.331-14.667-54.669-22-82
+				c-16.045-62.063-23.672-125.848-42-185c-9.999-32.664-20.001-65.336-30-98c-8.999-20.998-18.001-42.002-27-63
+				c76.779,39.103,141.216,144.713,177,226c11.999,31.997,24.001,64.003,36,96c0.667-0.333,1.333-0.667,2-1
+				c10.472-36.963,46.599-63.172,68-91c45.154-58.712,91.206-113.961,149-160c19.042-15.169,33.894-35.797,55-49
+				C759.742-85.975,794.035-83.943,816-97z"/>
+		</g>
+		<g id="Layer_2">
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M405,475c64.012,118.065,139.136,215.681,253,284
+				c27.768,16.66,57.316,30.021,93,42c11.072,3.717,22.793,9.136,33,11c15.808,2.887,31.178-1.219,45,4
+				c21.542,8.133,21.188,50.264,12,74c-26.283,67.896-140.593,38.474-192,14c-141.305-67.271-239.556-176.736-319-300
+				c-31.881,61.434-60.74,130.734-85,203c-11.82,35.209-23.604,73.089-36,108c-11.828,33.311-22.438,72.428-55,88
+				c5.99-41.384-1.896-86.741-2-128c-0.095-37.508,8.334-77.391,16-114c22.08-105.453,55.84-206.441,99-289
+				c-50.08-146.25-67.506-325.168-132-457c56.225,32.41,95.12,83.81,129,138c34.193,54.692,63.43,116.188,83,184
+				c6.874-6.477,46.569-63.042,63-83c44.561-54.126,83.771-106.884,138-154c12.407-10.78,57.147-49.181,71.33-57.065
+				C637.768,32.686,673.176,15.46,697,13c20.811-2.149,50.657,5.325,53,25c1.636,13.746-15.679,56.016-22,67
+				c-19.771,34.351-53.602,61.791-86,88c-31.717,25.657-60.83,54.083-87,86C500.166,345.875,449.848,406.562,405,475z"/>
+		</g>
+		</svg>
+	</div>
+	<h2 id="click-anywhere"><a href="#/mark/new">{{ _('Click anywhere to begin your Mark') }}</a></h2>
 	<h3 id="make-your-mark">{{ _('Make Your Mark') }}</h3>
 	<h3 id="browse-marks"><a href="#/linear/">{{ _('browse Marks') }}</a></h3>
 	<ul id="markmaker-controls">
@@ -23,7 +52,7 @@
 				</select>
 				<a href="#" id="save-location-button">{{ _('Save Location') }}</a>
 			</div>
-			<p>{% blocktrans %}Location is only used to associate marks with geographic regions.<br />See <a href="http://www.mozilla.com/en-US/firefox/geolocation/">Location Aware Browsing</a> for more information.{% endblocktrans %}</p>
+			<p>{% blocktrans %}Location is only used to associate marks with geographic regions.<br />See <a href="http://www.mozilla.com/en-US/firefox/geolocation/" target="_blank">Location Aware Browsing</a> for more information.{% endblocktrans %}</p>
 		</div>
 		<div class="infobox-arrow"></div>
 	</div>
@@ -57,9 +86,17 @@
 		<h3>Translator Info</h3>
 		<p>{% blocktrans %}Please Translate "Make Your Mark" for the <span id="translator-locale"></span> locale.{% endblocktrans %}</p>
 	</div>
+	<div id="cursor-tooltip" style="display:none;">
+		<div class="infobox-inner">
+			<p></p>
+		</div>
+		<div class="infobox-arrow"></div>
+	</div>
 </div>
 <div class="translated-strings" style="display:none;">
 	<span id="submitting-mark">{{ _('Submitting Mark') }}</span>
 	<span id="loading-intro-msg">{{ _('Loading Mozilla MarkUp') }}</span>
 	<span id="submit-error">{% blocktrans %}Oops! Something went wrong on our end.<br />Please submit your mark again.{% endblocktrans %}</span>
+	<span id="cursor-tooltip-intro-msg">{{ _('Click anywhere to begin your mark.') }}</span>
+	<span id="cursor-tooltip-capture-msg">{{ _('Watch your ink level here as you make your Mark') }}</span>
 </div>

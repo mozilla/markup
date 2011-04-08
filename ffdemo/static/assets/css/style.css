@@ -353,6 +353,7 @@ body.community ul #community a {
 #sammy {
 	padding: 20px;
 	color: #333;
+	overflow: hidden;
 }
 #sammy a {
 	color: #F66C1E;
@@ -369,6 +370,11 @@ body.community ul #community a {
 	width: 600px;
 	margin: 0 auto;
 	padding-left: 370px;
+}
+#the-big-x {
+	position: absolute;
+	top: -50px;
+	left: 0px;
 }
 #browse-marks,
 #intro-main-copy,
@@ -1018,6 +1024,24 @@ footer #legal a:hover {
 	font-style: italic;
 	font-size: 11px;
 }
+#cursor-tooltip {
+	max-width: 300px;
+	min-width: 150px;
+	position: absolute;
+	z-index: 300;
+}
+#cursor-tooltip .infobox-inner {
+	background-color: #ff5224;
+	color: #ffffff;
+}
+#cursor-tooltip .infobox-inner p {
+	font-size: 12px;
+}
+#cursor-tooltip .infobox-arrow {
+	background-image: url('/media/assets/images/arrow_orange2.png');
+	background-position: 10px 0;
+	background-repeat: no-repeat;
+}
 #location-dialog {
 	width: 350px;
 	font-size: 0.7em;
@@ -1108,9 +1132,23 @@ footer #legal a:hover {
 	text-align: center;
 	width: 420px;
 }
+#markapp-loader p {
+	text-align: center;
+	margin: 30px 0;
+}
 #markapp-loader.overlay-light div {
 	color: #ff5400;
 	background: url('/media/assets/images/loader_light.gif') no-repeat 50% 31px;
+}
+#markapp-loader.overlay-light p {
+	text-align: center;
+	margin: 30px auto;
+	font-size: 12px;
+	font-weight: bold;
+	width: 400px;
+	padding: 15px;
+	background: #ffffff;
+	color: #888888;
 }
 #markapp-error {
 	padding: 160px 0 0;
@@ -1138,6 +1176,7 @@ footer #legal a:hover {
 	border: 2px solid #ffffff;
 	color: #ffffff;
 	line-height: 20px;
+	cursor: pointer;
 }
 #fallback-content p,
 #markapp-error-content p {
