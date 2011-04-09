@@ -1,23 +1,24 @@
 {% load gml_extras %}
-
 <gml spec='1.0'>
 <tag>
 <header>
+  <client>
+    <name>Markup</name>
+    <time>{{ date_drawn }}</time>
+  </client>
 </header>
 <drawing>
+  {% for points in obj_decoded.strokes %}
   <stroke>
-    {% for points in obj_decoded.strokes %}
-      {% for point in points %}
-        <pt>
-          <pres></pres>
-          <rot></rot>
-          <x>{{ point.x|normalize_point:obj_decoded.bWidth }}</x>
-          <y>{{ point.y|normalize_point:obj_decoded.bHeight }}</y>
-          <t></t>
-        </pt>
-      {% endfor %}
+    {% for point in points %}
+    <pt>
+      <x>{{ point.x|normalize_point:obj_decoded.bWidth }}</x>
+      <y>{{ point.y|normalize_point:obj_decoded.bHeight }}</y>
+      <t>{{ point.time }}</t>
+    </pt>
     {% endfor %}
   </stroke>
+  {% endfor %}
 </drawing>
 </tag>
 </gml>

@@ -19,6 +19,7 @@ from ffdemo.markup.forms import MarkForm
 from django.shortcuts import get_object_or_404
 from ffdemo.markup import common
 import datetime
+import time
 
 
 @cache_page(15)  # cache for 15 seconds
@@ -60,7 +61,8 @@ def evan(request):
 def gml(request, mark_reference):
     mark = get_object_or_404(Mark, reference=mark_reference)
     obj_decoded = simplejson.loads(common.decode_points_obj(mark.points_obj_simplified))
-    context = {'mark': mark, 'obj_decoded': obj_decoded}
+    date_drawn = int(time.mktime(mark.date_drawn.timetuple()))
+    context = {'mark': mark, 'obj_decoded': obj_decoded, 'date_drawn': date_drawn}
     return render_response(request, 'gml.xml', context, mimetype='application/xml')
 
 
