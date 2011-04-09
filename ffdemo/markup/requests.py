@@ -5,14 +5,14 @@ from ffdemo.markup import common
 from django.utils import simplejson
 from django.core import serializers
 from django.views.decorators.http import require_GET, require_POST
-import datetime
+from datetime import datetime, date, timedelta
 from django.db.models import Q
 from django.utils.translation import gettext as _
 
 
 def get_translated_marks(request):
     marks_to_be_dumped = None
-    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
+    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
     response = {'success': False}
     marks_to_be_dumped = Mark.objects.exclude(contributor_locale__isnull=True).order_by('id')
     if marks_to_be_dumped:
@@ -211,7 +211,7 @@ def marks_by_offset(request):
     #     country_code:      String  - filter by country-code
     #
     # returns json object including relevant marks with their attributes: id, reference string, points_obj, points_obj_simplified
-    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
+    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
     response = {'success': False}
     marks_to_be_dumped = None
     did_fail_get_marks = False
@@ -267,7 +267,7 @@ def marks_by_locale(request):
     #     max:           Integer - (defaults 15)
     #
     # returns json object including relevant marks with their attributes: id, reference string, points_obj, points_obj_simplified
-    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
+    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
     response = {'success': False}
 
     max_returned = 15
@@ -284,7 +284,7 @@ def marks_by_reference(request):
     #     include_mark:      Boolean - include the reference mark (defaults true)
     #     country_code:      String  - filter by country-code
     # returns json object including relevant marks with their attributes: id, reference string, points_obj, points_obj_simplified
-    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
+    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
     response = {'success': False}
     reference_mark = None
     include_back = 0
@@ -426,7 +426,7 @@ def all_marks(request):
     #
     # returns json object including relevant marks with their attributes: id, reference string, points_obj, points_obj_simplified
 
-    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
+    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
     response = {'success': False}
 
     include_back = 3
@@ -487,9 +487,40 @@ def all_marks(request):
     json_response = simplejson.dumps(response, default=dthandler)
     return HttpResponse(json_response, 'application/json')
 
+def recent_marks(request):
+    #    Get all recent marks (previous day)
+    #    This method can be queried via POST depending what the frontend requires
+    #    Handler for dumping datetime field as JSON
+    #
+    # returns json object including relevant marks with their attributes: id, reference string, points_obj, points_obj_simplified
+
+    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
+    response = {'success': False}
+
+    include_back = 3
+    include_forward = 15
+    include_mark = True
+    max_returned = 15
+
+    marks_to_be_dumped = None
+    did_fail_get_marks = False
+    yesterday = date.today()-timedelta(days=1)
+    marks_to_be_dumped = Mark.objects.filter(date_drawn__gte=yesterday)
+    all_marks = []
+    for m in marks_to_be_dumped:
+        #    We need to decode the points obj simplified
+        decoded_points_obj = common.decode_points_obj(m.points_obj_simplified)
+        #    Append to all marks
+        all_marks.append({'date_drawn': m.date_drawn.strftime("%a, %d %b %Y %I:%M:%S"), 'reference': m.reference, 'id': m.id, 'points_obj_simplified': decoded_points_obj, 'contributor': m.contributor, 'country_code': m.country_code, 'flaggings': m.flaggings})
+    response['success'] = True
+    response['marks'] = all_marks
+    import pdb; pdb.set_trace()
+    #    Dump and return
+    json_response = simplejson.dumps(response, default=dthandler)
+    return HttpResponse(json_response, 'application/json')
 
 def marks_by_flagged(request):
-    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
+    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
     response = {'success': False}
 
     include_back = 3
