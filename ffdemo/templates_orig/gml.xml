@@ -17,6 +17,11 @@
       <y>{{ obj_decoded.bHeight }}</y>
       <z>0</z>
     </screenBounds>
+		{% if mark.country_code %}
+		<location>
+			<country>{{ mark.country_code }}</country>
+		</location>
+		{% endif %}
   </environment>
 </header>
 <drawing>
