@@ -514,7 +514,6 @@ def recent_marks(request):
         all_marks.append({'date_drawn': m.date_drawn.strftime("%a, %d %b %Y %I:%M:%S"), 'reference': m.reference, 'id': m.id, 'points_obj_simplified': decoded_points_obj, 'contributor': m.contributor, 'country_code': m.country_code, 'flaggings': m.flaggings})
     response['success'] = True
     response['marks'] = all_marks
-    import pdb; pdb.set_trace()
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
     return HttpResponse(json_response, 'application/json')
