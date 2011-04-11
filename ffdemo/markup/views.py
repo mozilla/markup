@@ -63,7 +63,9 @@ def gml(request, mark_reference):
     obj_decoded = simplejson.loads(common.decode_points_obj(mark.points_obj_simplified))
     date_drawn = int(time.mktime(mark.date_drawn.timetuple()))
     context = {'mark': mark, 'obj_decoded': obj_decoded, 'date_drawn': date_drawn}
-    return render_response(request, 'gml.xml', context, mimetype='application/xml')
+    response = render_response(request, 'gml.xml', context, mimetype='application/xml')
+    response['Content-Disposition'] = "attachment; filename=%s.gml" % mark.reference
+    return response
 
 
 @cache_page(60 * 30)
