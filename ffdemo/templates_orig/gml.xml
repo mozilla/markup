@@ -6,6 +6,18 @@
     <name>Markup</name>
     <time>{{ date_drawn }}</time>
   </client>
+  <environment>
+    <up>
+      <x>0.0</x>
+      <y>-1.0</y>
+      <z>0.0</z>
+    </up>
+    <screenBounds>
+      <x>{{ obj_decoded.bWidth }}</x>
+      <y>{{ obj_decoded.bHeight }}</y>
+      <z>0</z>
+    </screenBounds>
+  </environment>
 </header>
 <drawing>
   {% for points in obj_decoded.strokes %}
