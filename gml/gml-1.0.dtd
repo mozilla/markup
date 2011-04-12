@@ -1,0 +1,219 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT gml (tag)>
+<!ATTLIST gml
+  xmlns CDATA #FIXED ''
+  spec CDATA #REQUIRED>
+
+<!ELEMENT tag (header,drawing)>
+<!ATTLIST tag
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT header (client,environment)>
+<!ATTLIST header
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT drawing (stroke)+>
+<!ATTLIST drawing
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT client (name,version,username,permalink,keywords,uniqueKey,ip,
+                  time,location)>
+<!ATTLIST client
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT environment (offset,rotation,up,screenBounds,origin,realScale,
+                       audio,background)>
+<!ATTLIST environment
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT stroke (info?,brush?,pt+)>
+<!ATTLIST stroke
+  xmlns CDATA #FIXED ''
+  isDrawing NMTOKEN #IMPLIED>
+
+<!ELEMENT name (#PCDATA)>
+<!ATTLIST name
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT version (#PCDATA)>
+<!ATTLIST version
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT username (#PCDATA)>
+<!ATTLIST username
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT permalink (#PCDATA)>
+<!ATTLIST permalink
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT keywords (#PCDATA)>
+<!ATTLIST keywords
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT uniqueKey (#PCDATA)>
+<!ATTLIST uniqueKey
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT ip (#PCDATA)>
+<!ATTLIST ip
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT time (#PCDATA)>
+<!ATTLIST time
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT location (lon,lat)>
+<!ATTLIST location
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT offset (x,y,z)>
+<!ATTLIST offset
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT rotation (x,y,z)>
+<!ATTLIST rotation
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT up (x,y,z)>
+<!ATTLIST up
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT screenBounds (x,y,z)>
+<!ATTLIST screenBounds
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT origin (x,y,z)>
+<!ATTLIST origin
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT realScale (x,y,z,unit)>
+<!ATTLIST realScale
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT audio (#PCDATA)>
+<!ATTLIST audio
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT background (#PCDATA)>
+<!ATTLIST background
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT info (curved)>
+<!ATTLIST info
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT brush ((mode,uniqueStyleID,spec,width,speedToWidthRatio,
+                  dripAmnt,dripSpeed,layerAbsolute)?,
+                 color,(dripVecRelativeToUp|layerRelative))>
+<!ATTLIST brush
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT pt ((pres,rot,dir)?,(x,y)?,(z,t)?)>
+<!ATTLIST pt
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT lon (#PCDATA)>
+<!ATTLIST lon
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT lat (#PCDATA)>
+<!ATTLIST lat
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT unit (#PCDATA)>
+<!ATTLIST unit
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT curved (#PCDATA)>
+<!ATTLIST curved
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT mode (#PCDATA)>
+<!ATTLIST mode
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT uniqueStyleID (#PCDATA)>
+<!ATTLIST uniqueStyleID
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT spec (#PCDATA)>
+<!ATTLIST spec
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT width (#PCDATA)>
+<!ATTLIST width
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT speedToWidthRatio (#PCDATA)>
+<!ATTLIST speedToWidthRatio
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT dripAmnt (#PCDATA)>
+<!ATTLIST dripAmnt
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT dripSpeed (#PCDATA)>
+<!ATTLIST dripSpeed
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT layerAbsolute (#PCDATA)>
+<!ATTLIST layerAbsolute
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT color (r,g,b,a?)>
+<!ATTLIST color
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT dripVecRelativeToUp (x,y,z)>
+<!ATTLIST dripVecRelativeToUp
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT layerRelative (#PCDATA)>
+<!ATTLIST layerRelative
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT pres (#PCDATA)>
+<!ATTLIST pres
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT rot (#PCDATA)>
+<!ATTLIST rot
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT dir (x,y,z)>
+<!ATTLIST dir
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT t (#PCDATA)>
+<!ATTLIST t
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT r (#PCDATA)>
+<!ATTLIST r
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT g (#PCDATA)>
+<!ATTLIST g
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT b (#PCDATA)>
+<!ATTLIST b
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT a (#PCDATA)>
+<!ATTLIST a
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT x (#PCDATA)>
+<!ATTLIST x
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT y (#PCDATA)>
+<!ATTLIST y
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT z (#PCDATA)>
+<!ATTLIST z
+  xmlns CDATA #FIXED ''>

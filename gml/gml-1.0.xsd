@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="gml">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tag"/>
+      </xs:sequence>
+      <xs:attribute name="spec" use="required" type="xs:decimal"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="header"/>
+        <xs:element ref="drawing"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="header">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="client"/>
+        <xs:element ref="environment"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="client">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="version"/>
+        <xs:element ref="username"/>
+        <xs:element ref="permalink"/>
+        <xs:element ref="keywords"/>
+        <xs:element ref="uniqueKey"/>
+        <xs:element ref="ip"/>
+        <xs:element ref="time"/>
+        <xs:element ref="location"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="version" type="xs:decimal"/>
+  <xs:element name="username" type="xs:NCName"/>
+  <xs:element name="permalink" type="xs:anyURI"/>
+  <xs:element name="keywords" type="xs:string"/>
+  <xs:element name="uniqueKey" type="xs:NMTOKEN"/>
+  <xs:element name="ip" type="xs:NMTOKEN"/>
+  <xs:element name="time" type="xs:integer"/>
+  <xs:element name="location">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="lon"/>
+        <xs:element ref="lat"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="lon" type="xs:decimal"/>
+  <xs:element name="lat" type="xs:decimal"/>
+  <xs:element name="environment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="offset"/>
+        <xs:element ref="rotation"/>
+        <xs:element ref="up"/>
+        <xs:element ref="screenBounds"/>
+        <xs:element ref="origin"/>
+        <xs:element ref="realScale"/>
+        <xs:element ref="audio"/>
+        <xs:element ref="background"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="offset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="x"/>
+        <xs:element ref="y"/>
+        <xs:element ref="z"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rotation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="x"/>
+        <xs:element ref="y"/>
+        <xs:element ref="z"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="up">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="x"/>
+        <xs:element ref="y"/>
+        <xs:element ref="z"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="screenBounds">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="x"/>
+        <xs:element ref="y"/>
+        <xs:element ref="z"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="origin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="x"/>
+        <xs:element ref="y"/>
+        <xs:element ref="z"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="realScale">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="x"/>
+        <xs:element ref="y"/>
+        <xs:element ref="z"/>
+        <xs:element ref="unit"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="unit" type="xs:NCName"/>
+  <xs:element name="audio" type="xs:NCName"/>
+  <xs:element name="background" type="xs:NCName"/>
+  <xs:element name="drawing">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="stroke"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stroke">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="info"/>
+        <xs:element minOccurs="0" ref="brush"/>
+        <xs:element maxOccurs="unbounded" ref="pt"/>
+      </xs:sequence>
+      <xs:attribute name="isDrawing" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="info">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="curved"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="curved" type="xs:boolean"/>
+  <xs:element name="brush">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:sequence minOccurs="0">
+          <xs:element ref="mode"/>
+          <xs:element ref="uniqueStyleID"/>
+          <xs:element ref="spec"/>
+          <xs:element ref="width"/>
+          <xs:element ref="speedToWidthRatio"/>
+          <xs:element ref="dripAmnt"/>
+          <xs:element ref="dripSpeed"/>
+          <xs:element ref="layerAbsolute"/>
+        </xs:sequence>
+        <xs:element ref="color"/>
+        <xs:choice>
+          <xs:element ref="dripVecRelativeToUp"/>
+          <xs:element ref="layerRelative"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mode" type="xs:integer"/>
+  <xs:element name="uniqueStyleID" type="xs:NCName"/>
+  <xs:element name="spec" type="xs:anyURI"/>
+  <xs:element name="width" type="xs:integer"/>
+  <xs:element name="speedToWidthRatio" type="xs:decimal"/>
+  <xs:element name="dripAmnt" type="xs:decimal"/>
+  <xs:element name="dripSpeed" type="xs:decimal"/>
+  <xs:element name="layerAbsolute" type="xs:integer"/>
+  <xs:element name="color">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="r"/>
+        <xs:element ref="g"/>
+        <xs:element ref="b"/>
+        <xs:element minOccurs="0" ref="a"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="r" type="xs:integer"/>
+  <xs:element name="g" type="xs:integer"/>
+  <xs:element name="b" type="xs:integer"/>
+  <xs:element name="a" type="xs:integer"/>
+  <xs:element name="dripVecRelativeToUp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="x"/>
+        <xs:element ref="y"/>
+        <xs:element ref="z"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="layerRelative" type="xs:string"/>
+  <xs:element name="pt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:sequence minOccurs="0">
+          <xs:element ref="x"/>
+          <xs:element ref="y"/>
+        </xs:sequence>
+        <xs:choice minOccurs="0">
+          <xs:sequence>
+            <xs:element ref="pres"/>
+            <xs:element ref="rot"/>
+            <xs:element ref="dir"/>
+          </xs:sequence>
+          <xs:sequence>
+            <xs:element ref="z"/>
+            <xs:element ref="t"/>
+          </xs:sequence>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pres" type="xs:decimal"/>
+  <xs:element name="rot" type="xs:decimal"/>
+  <xs:element name="dir">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="x"/>
+        <xs:element ref="y"/>
+        <xs:element ref="z"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="t" type="xs:decimal"/>
+  <xs:element name="x" type="xs:string"/>
+  <xs:element name="y" type="xs:string"/>
+  <xs:element name="z" type="xs:string"/>
+</xs:schema>
