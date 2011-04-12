@@ -57,6 +57,9 @@ def mozilla(request):
 def evan(request):
     return render_response(request, 'evan-roth.html')
 
+@cache_page(60 * 30)
+def collaborators(request):
+    return render_response(request, 'other-collaborators.html')
 
 def gml(request, mark_reference):
     mark = get_object_or_404(Mark, reference=mark_reference)
