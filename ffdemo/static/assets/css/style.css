@@ -320,7 +320,13 @@ body.community ul #community a {
 	background: #ff5400;
 	color: #000;
 }
-
+body.about-gml #about-gml a,
+body.about-mozilla #about-mozilla a,
+body.about-evan-roth #about-evan-roth a,
+body.about-other-collaborators #about-other-collaborators a,
+body.about-code #about-code a {
+	color: #ff5400;
+}
 #content {
 	width: 100%;
 	background-color: #ffffff;
@@ -1211,6 +1217,12 @@ footer #legal a:hover {
 #static-content h2 {
 	font-size: 1.3em;
 	margin: 2em 0 0.3em;
+}
+#static-content h2 span {
+	font-size: 0.7em;
+	margin-left: 10px;
+	font-weight: normal;
+	vertical-align: middle;
 }
 #static-content p {
 	line-height: 1.6em ;

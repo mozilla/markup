@@ -187,6 +187,11 @@
 							.width( context.width )
 							.height( context.height )
 							.hide()
+							.bind( 'click mousedown mouseup', function( e ) {
+								// interecept any click type events happening on the loader
+								e.preventDefault();
+								return false;
+							} )
 							.addClass( 'overlay-wrapper autoResize' )
 							.addClass( custom_class )
 							.attr( 'id', 'markapp-loader' )
