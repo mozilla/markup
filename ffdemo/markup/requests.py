@@ -13,7 +13,7 @@ from django.utils.translation import gettext as _
 def get_translated_marks(request):
     marks_to_be_dumped = None
     dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
-    response = {'success': False}
+    response = {'success': True}
     marks_to_be_dumped = Mark.objects.exclude(contributor_locale__isnull=True).order_by('id')
     if marks_to_be_dumped:
         all_marks = []
@@ -28,13 +28,7 @@ def get_translated_marks(request):
             'country_code': m.country_code,
             'is_approved': m.is_approved,
             'contributor_locale': m.contributor_locale})
-        response['success'] = True
         response['marks'] = all_marks
-    else:
-        response['success'] = False
-        response['error'] = _("No marks to be parsed")
-        json_response = simplejson.dumps(response)
-        return HttpResponseServerError(json_response, 'application/json')
 
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
