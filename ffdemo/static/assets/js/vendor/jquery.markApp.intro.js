@@ -186,6 +186,9 @@
 					.success( function ( data ) {
 						modules.intro.fn.setupMarks( context, data.marks );
 						context.fn.hideLoader();
+					} )
+					.error( function ( data ) {
+						context.fn.hideLoader();
 					} );
 			},
 			setupMarks: function( context, marks ) {
