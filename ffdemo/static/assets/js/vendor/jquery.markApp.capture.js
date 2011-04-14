@@ -97,7 +97,6 @@
 					.bind( 'mousedown', function( e ) {
 						e.preventDefault();
 						if( $( this ).is( ':not(.disabled)' ) ) {
-							console.log("go");
 							modules.capture.fn.submit( context );
 						}
 					} );
