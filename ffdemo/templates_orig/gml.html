@@ -7,7 +7,12 @@
 {% block about-content %}
 	<h1>{{ _('Graffiti Markup Language') }}</h1>
 	<div class="video">
-		<iframe src="http://player.vimeo.com/video/21450924" width="500" height="281" frameborder="0"></iframe>
+		<video width="500" height="281" controls=""><br>
+			<source src="http://videos.mozilla.org/serv/flux/markup/gml.mp4" type="video/mp4"><br>
+			<source src="http://videos.mozilla.org/serv/flux/markup/gml.webm" type="video/webm"><br>
+			<source src="http://videos.mozilla.org/serv/flux/markup/gml.theora.ogv" type="video/ogg"><br>
+			<iframe src="http://player.vimeo.com/video/21450924" width="500" height="281" frameborder="0"></iframe><br>
+		</video>
 	</div>
 	<p>{% blocktrans %}Graffiti Markup Language (.gml) is a universal, XML-based, open file format designed to store graffiti motion data (x coordinates, y coordinates and time). GML is intended to be a simple bridge between ink and code, promoting collaborations between graffiti writers and hackers.{% endblocktrans %}</p>
 	<p>{% blocktrans with "http://graffitimarkuplanguage.com" as gml_link %}For more information on .gml, and ways of connecting your Mark with other projects, go to <a href="{{ gml_link }}">http://graffitimarkuplanguage.com</a>.{% endblocktrans %}</p>
