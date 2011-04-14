@@ -92,10 +92,8 @@ SECRET_KEY = 'priU+iaciut#uV&aphlADo#zlep?i!rlethiu-wOuslapr2eSp'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    #'ffdemo.jinja.Loader',
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -127,18 +125,6 @@ TEMPLATE_DIRS = (
     PROJECT_PATH + '/templates_orig',
     PROJECT_PATH + '/templates_orig/sammy',
 )
-# JINJA_TEMPLATE_DIRS = (
-#     PROJECT_PATH+'/templates',
-# )
-
-
-def JINJA_CONFIG():
-    import jinja2
-    config = {'extensions': ['jinja2.ext.loopcontrols',
-                             'jinja2.ext.with_', 'caching.ext.cache'],
-              'finalize': lambda x: x if x is not None else ''}
-    return config
-
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
