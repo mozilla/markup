@@ -96,7 +96,10 @@
 					.addClass( 'disabled' )
 					.bind( 'mousedown', function( e ) {
 						e.preventDefault();
-						modules.capture.fn.submit( context );
+						if( $( this ).is( ':not(.disabled)' ) ) {
+							console.log("go");
+							modules.capture.fn.submit( context );
+						}
 					} );
 				// load the country codes into the dialog
 				context.fn.withCountryCodes( function ( countryCodes ) {
@@ -414,7 +417,9 @@
 			},
 			submit: function( context ) {
 				var lC = context.modules.capture;
-				if( lC.state == "submitting" ) return;
+				if( lC.state == "submitting" || 
+					lC.mark == null ||
+					lC.mark.strokes.length == 0 ) return;
 				if( lC.state != "preview" ) modules.capture.fn.closeShop( context );
 				// process our points, and send them off
 				lC.state = "submitting";
@@ -422,7 +427,6 @@
 				var data = {};
 				data.rtl = lC.rtl;
 				data.strokes = lC.strokes;
-				//data.locale = cfg.locale; // TODO - impliment location awareness
 				var points_obj = JSON.stringify( data );
 				var points_obj_simplified = JSON.stringify( lC.mark );
 				var country_code = $( '#markmaker-country' ).val() == "label" ? "" : $( '#markmaker-country' ).val();
