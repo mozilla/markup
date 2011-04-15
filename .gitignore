@@ -5,5 +5,10 @@ ffenv
 
 ffdemo/settings_local.py
 ffdemo/static/assets/js/markApp.js
+ffdemo/static/assets/js/Jimfile.js
+ffdemo/static/assets/js/markUp_app.js
+ffdemo/static/assets/js/markUp_common.js
 ffdemo/src
 ffdemo/build
+
+\.DS_Store
