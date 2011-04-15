@@ -6,8 +6,9 @@
 
 {% block about-content %}
 	<h1>{{ _('Code Repository') }}</h1>
-	{% blocktrans with "http://github.com/mozilla/markup" as githuburl %}<p>We believe creativity should be shared. We believe everything on the Web should be accessible to the people who contribute to it. And that's why we chose to make the code behind Mark Up public.</p>
-	<p>We encourage you to use the code below to keep creating, collaborating and contributing.</p>
-	<p><a href="{{ githuburl }}">Get Code at GitHub</a></p>{% endblocktrans %}
+	<p>{% blocktrans %}We believe creativity should be shared. We believe everything on the Web should be accessible to the people who contribute to it. And that's why we chose to make the code behind Mark Up public.{% endblocktrans %}</p>
+	<p>{% blocktrans %}We encourage you to use the code below to keep creating, collaborating and contributing.{% endblocktrans %}</p>
+	<p>{% blocktrans with "http://github.com/mozilla/markup" as githuburl %}<a href="{{ githuburl }}">Get Code at GitHub</a>{% endblocktrans %}</p>
+	<p>{% blocktrans with "mailto:markup@mozilla.org" as email_href %}Email <a href="{{ email_href }}">markup@mozilla.org</a> for more information or to submit your visualization of the MarkUp data set.{% endblocktrans %}</p>
 {% endblock %}
 
