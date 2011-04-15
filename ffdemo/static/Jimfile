@@ -5,7 +5,8 @@
   "bundles": {
     "markUp_common": [
       [ "jquery", "1.5.1" ],
-      "common"
+      "common",
+      "webtrends"
     ],
     "markUp_app": [
       "jquery.markApp",
