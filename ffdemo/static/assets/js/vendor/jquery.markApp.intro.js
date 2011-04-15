@@ -41,7 +41,7 @@
 				lC.layerManager.layers['viz'].clean();
 				Mark.renderer.renderScene( lC.vizScene, { width: context.width, height: context.height } );
 				
-				if( lC.curLocaleMark || lC.xMark ) {
+				if( lC.curLocaleMark ) {
 					lC.layerManager.layers['mainMark'].clean();
 					// render the locale mark
 					if( lC.curLocaleMark ) {
@@ -53,18 +53,6 @@
 									scale: {x: scale, y: scale, thickness: scale},
 									color: '255,84,0',
 									timer: lC.textScene.timers[lC.curLocaleMark.reference] } );
-					}
-					if ( lC.xMark ) {
-						// RENDER THE X
-						var xScale = ( ( ( context.width / 2 ) ) / lC.xMark.bWidth );
-						var yScale = ( ( context.height + 800 ) / lC.xMark.bHeight );
-						Mark.renderer.renderMark( 
-							lC.layerManager.layers['mainMark'].context, 
-							lC.xMark, 
-							{ offset: {x: 10, y: -400 }, 
-								scale: {x: xScale, y: yScale, thickness: 6},
-								color: '0,0,0',
-								timer: lC.textScene.timers[lC.xMark.reference] } );
 					}
 				}
 			},
@@ -168,10 +156,21 @@
 							$( '#markmaker, #browse-marks, #click-anywhere, #intro-main-copy' )
 								.css( { 'display': 'none' } );
 						}
+						wasHidden = false;
+						if( $( '#the-big-x' ).is( ':not(:visible)' ) ) {
+							wasHidden = true;
+							$( '#the-big-x' )
+								.css( 'display', 'block' );
+						}
 						$( '#the-big-x' )
-							.css( 'left', ( context.width / 2 ) - 760 )
 							.find( 'svg' )
 							.height( context.height + 100 );
+						$( '#the-big-x' )
+							.css( 'left', ( context.width / 2 ) -  ( parseInt( $( '#the-big-x svg' )[0].getAttribute( 'width' ) ) / 2 ) - 150 );
+						if( wasHidden ) {
+							$( '#the-big-x' )
+								.css( { 'display': 'none' } );
+						}
 					} )
 					.trigger( 'resize.markApp', [context.width, context.height] )
 					.width( 0 )

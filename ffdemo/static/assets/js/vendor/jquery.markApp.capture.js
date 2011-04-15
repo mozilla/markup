@@ -268,7 +268,9 @@
 				setTimeout( function() {
 					var cTT = context.$cursorTooltip;
 					delete context.$cursorTooltip;
-					cTT.fadeOut( 'fast' );
+					cTT
+					.stop( true, true )
+					.fadeOut( 'fast' );
 				}, 5000 );
 			},
 			// fades out the intro content and switches into drawing mode
@@ -366,7 +368,12 @@
 				} else {
 					// if this isn't the first stroke, draw a connecting line
 					if( lC.strokes.length >= 1 ) {
-						modules.capture.fn.drawGuide( lC.layerManager.layers['drawnLayer'].context, lC.lastX, lC.lastY, point.x, point.y );
+						modules.capture.fn.drawGuide( 
+							lC.layerManager.layers['drawnLayer'].context, 
+							lC.lastX, 
+							lC.lastY, 
+							point.x, 
+							point.y );
 					}
 				}
 				lC.currentStroke.push( point );
@@ -522,20 +529,29 @@
 				
 				// draw the cursor if the cursor is in the frame
 				if( context.mouseIn && ( lC.state == "drawing" || lC.state == "intro" ) ) {
-					modules.capture.fn.drawCursor( lC.layerManager.layers['liveDrawingLayer'].context, context.mouseX, context.mouseY, ( lC.captureLimit - lC.capturedPoints ) / lC.captureLimit  );
+					modules.capture.fn.drawCursor( 
+						lC.layerManager.layers['liveDrawingLayer'].context, 
+						context.mouseX, 
+						context.mouseY, 
+						( lC.captureLimit - lC.capturedPoints ) / lC.captureLimit  );
 					// move the tooltip here. 
 					if( context.$cursorTooltip ) {
 						context.$cursorTooltip
-							.fadeIn()
 							.css( {
 								top: context.mouseY - context.$cursorTooltip.height() - 32,
 								left: context.mouseX + 8
 							} );
+						if( context.$cursorTooltip.is( ':not(:visible)' ) ) {
+							context.$cursorTooltip
+								.stop( true, true )
+								.fadeIn( 'fast' );
+						}
 					}
 				} else if( ! context.mouseIn ) {
 					// move the tooltip here. 
 					if( context.$cursorTooltip ) {
 						context.$cursorTooltip
+							.stop( true, true )
 							.fadeOut();
 					}
 				}
@@ -564,7 +580,12 @@
 						x = lC.lastX;
 						y = lC.lastY;
 					}
-					modules.capture.fn.drawGuide( lC.layerManager.layers['liveDrawingLayer'].context, x, y, context.mouseX, context.mouseY );
+					modules.capture.fn.drawGuide( 
+						lC.layerManager.layers['liveDrawingLayer'].context, 
+						x, 
+						y, 
+						context.mouseX, 
+						context.mouseY );
 				}
 				
 			}

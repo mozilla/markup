@@ -51,8 +51,6 @@ Any time you open a new terminal window to work on this project, before to run:
 
 This sets up the virtual environment that has all the right versions of everything for the app
 
-We're using the Jinja2 templating engine rather than Django's default. You can use them fairly interchangeably, the tempalte loader will look for both, however Jinja2 templates live in the ffdemo/templates directory and Django original templates live in ffdemo/templates_orig
-
 We're using South for migrations on any django apps in the project. Learn more! http://south.aeracode.org/
 
 
