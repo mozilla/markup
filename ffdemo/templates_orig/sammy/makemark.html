@@ -23,7 +23,7 @@
 				</select>
 				<a href="#" id="save-location-button">{{ _('Save Location') }}</a>
 			</div>
-			<p>{% blocktrans %}Location is only used to associate marks with geographic regions.<br />See <a href="http://www.mozilla.com/en-US/firefox/geolocation/" target="_blank">Location Aware Browsing</a> for more information.{% endblocktrans %}</p>
+			<p>{% blocktrans with "http://www.mozilla.com/en-US/firefox/geolocation/?WT.mc_id=markup&WT.mc_ev=click" as location_info_url %}Location is only used to associate marks with geographic regions.<br />See <a href="{{ location_info_url }}" target="_blank">Location Aware Browsing</a> for more information.{% endblocktrans %}</p>
 		</div>
 		<div class="infobox-arrow"></div>
 	</div>

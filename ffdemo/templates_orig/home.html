@@ -8,8 +8,8 @@
 {% block content %}
 	<div id="fallback" class="overlay-wrapper">
 		<div id="fallback-content">
-			<p>{% blocktrans %}Oops! Your browser doesn’t support the features used on this site.
-			Please download a more modern browser like <a href="http://www.mozilla.com/products/download.html">Firefox 4</a>.{% endblocktrans %}</p>
+			<p>{% blocktrans with "http://www.mozilla.com/products/download.html?WT.mc_id=markup&WT.mc_ev=click" as download_url %}Oops! Your browser doesn’t support the features used on this site.
+			Please download a more modern browser like <a href="{{ download_url }}">Firefox 4</a>.{% endblocktrans %}</p>
 		</div>
 	</div>
 	<div id="sammy"></div>
