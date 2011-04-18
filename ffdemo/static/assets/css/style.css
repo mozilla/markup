@@ -389,7 +389,6 @@ body.about-code #about-code a {
 #intro-main-copy,
 #click-anywhere {
 	position: absolute;
-	z-index: 10;
 }
 #click-anywhere {
 	font-size: 0.9em;
