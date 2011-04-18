@@ -380,16 +380,21 @@ body.about-code #about-code a {
 #the-big-x {
 	position: absolute;
 	top: -50px;
-	left: 0px;
+	left: -100px;
+	bottom: -50px;
+	right: -10000px;
+	background-image: url('/media/assets/images/bigX.svg');
 }
 #browse-marks,
 #intro-main-copy,
 #click-anywhere {
 	position: absolute;
+	z-index: 10;
 }
 #click-anywhere {
 	font-size: 0.9em;
 	margin: 10px 0 0 0;
+	width: 350px;
 }
 #browse-marks {
 	z-index: 300;

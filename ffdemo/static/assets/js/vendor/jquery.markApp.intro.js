@@ -136,7 +136,7 @@
 					.unbind( 'resize.markApp' )
 					.bind( 'resize.markApp', function ( e, w, h ) {
 						// reposition the elements
-						var rAnchor = ( w / 2 ) + 485;
+						var rAnchor = ( w / 2 ) + Math.min( 500, ( w / 2 - 20 )  );
 						var bOffset = ( h - 140 ); // position of the background graphic
 						var wasHidden = false;
 						$( '#markmaker' ).css( 'background-position', '0 ' + bOffset + 'px' );
@@ -156,21 +156,15 @@
 							$( '#markmaker, #browse-marks, #click-anywhere, #intro-main-copy' )
 								.css( { 'display': 'none' } );
 						}
-						wasHidden = false;
-						if( $( '#the-big-x' ).is( ':not(:visible)' ) ) {
-							wasHidden = true;
-							$( '#the-big-x' )
-								.css( 'display', 'block' );
-						}
+						// set big x position according to our aspect ratio and how much off screen space is needed
+						xHeight = h + ( h / 5 );
+						xWidth = xHeight * 1.545;
 						$( '#the-big-x' )
-							.find( 'svg' )
-							.height( context.height + 100 );
-						$( '#the-big-x' )
-							.css( 'left', ( context.width / 2 ) -  ( parseInt( $( '#the-big-x svg' )[0].getAttribute( 'width' ) ) / 2 ) - 150 );
-						if( wasHidden ) {
-							$( '#the-big-x' )
-								.css( { 'display': 'none' } );
-						}
+							.css( {
+								'top': -( h / 5 ),
+								'bottom': -( h / 5 ),
+								'left': ( w / 2 ) - xWidth + ( ( xHeight - 500 ) ) 
+							} );
 					} )
 					.trigger( 'resize.markApp', [context.width, context.height] )
 					.width( 0 )
