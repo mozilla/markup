@@ -55,7 +55,26 @@ def mozilla(request):
 
 @cache_page(60 * 30)
 def evan(request):
-    return render_response(request, 'evan-roth.html')
+    evan_urls = {
+        'laser_url': 'http://graffitiresearchlab.com/projects/laser-tag/',
+        'throwies_url': 'http://graffitiresearchlab.com/projects/led-throwies/',
+        'glove_url': 'http://whiteglovetracking.com/',
+        'eyewriter_url': 'http://www.eyewriter.org/',
+        'graffiti_url': 'http://graffitianalysis.com/',
+        'jayz_url': 'http://www.youtube.com/watch?v=QftcJtvLr8g',
+        'research_url': 'http://www.graffitiresearchlab.com/',
+        'fat_url': 'http://fffff.at/',
+        'npr_url': 'http://www.npr.org/templates/story/story.php?storyId=124980282',
+        'nyt_url': 'http://evan-roth.com/press/High-Tech-Graffiti-Spray-Paint-Is-So-20th-Century-New-York-Times.pdf',
+        'liberation_url': 'http://evan-roth.com/press/C-est-graff-docteur.pdf',
+        'time_url': 'http://www.time.com/time/photogallery/0,29307,1911799_1912685,00.html',
+        'cnn_url': 'http://edition.cnn.com/2010/TECH/web/09/10/gif.images/index.html',
+        'guardian_url': 'http://www.guardian.co.uk/search?search=%22evan+roth%22&sitesearch-radio=guardian&go-guardian=Search',
+        'abc_url': 'http://abcnews.go.com/Technology/popup?id=2425229',
+        'esquire_url': 'http://www.esquire.com/features/best-brightest-2007/graffiti1207',
+        'juxtapoz_url': 'http://evan-roth.com/press/juxtapoz-2010-10-oct-eroth.pdf',
+    }
+    return render_response(request, 'evan-roth.html', evan_urls)
 
 @cache_page(60 * 30)
 def collaborators(request):
