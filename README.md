@@ -110,8 +110,11 @@ For production environments, uncomment the following in settings:
     # SESSION_COOKIE_SECURE = True
     # SESSION_COOKIE_HTTPONLY = True
 
-and set
-    REDIRECT_TO_SSL = True
+
+Also make sure your webserver serves SVG files with the right MIME type. In
+Apache, do this:
+
+     AddType image/svg+xml svg
 
 
 ## Javascript
