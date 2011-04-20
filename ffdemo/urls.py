@@ -1,3 +1,4 @@
+import django
 from django.conf.urls.defaults import *
 from django.conf import settings
 
@@ -11,8 +12,6 @@ urlpatterns = patterns('',
 )
 
 if settings.DEBUG:
-    import os
-    import django
     urlpatterns += patterns('',
         (r'^media/admin/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT + '/admin'}),
         (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
