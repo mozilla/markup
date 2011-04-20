@@ -138,19 +138,24 @@ def save_mark(request):
 def delete_mark(request):
     #    Completely remove the mark
     response = {'success': False}
-    if 'reference' in request.POST and len(request.POST['reference']) > 0:
-        try:
-            m = Mark.objects.get(reference=request.POST['reference'])
-            m.delete()
-            response['success'] = True
-        except Mark.DoesNotExist:
-            response['error'] = _('Mark does not exist')
-            json_response = simplejson.dumps(response)
-            return HttpResponseServerError(json_response, 'application/json')
-    else:
-        response['error'] = _("No mark specified")
+    if not request.user.is_authenticated():
+        response['error'] = _('Authentication required')
         json_response = simplejson.dumps(response)
         return HttpResponseServerError(json_response, 'application/json')
+    else:
+        if 'reference' in request.POST and len(request.POST['reference']) > 0:
+            try:
+                m = Mark.objects.get(reference=request.POST['reference'])
+                m.delete()
+                response['success'] = True
+            except Mark.DoesNotExist:
+                response['error'] = _('Mark does not exist')
+                json_response = simplejson.dumps(response)
+                return HttpResponseServerError(json_response, 'application/json')
+        else:
+            response['error'] = _("No mark specified")
+            json_response = simplejson.dumps(response)
+            return HttpResponseServerError(json_response, 'application/json')
 
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
@@ -159,23 +164,28 @@ def delete_mark(request):
 def approve_mark(request):
     #    Approve the mark // CHECK
     response = {'success': False}
-    if 'reference' in request.POST and len(request.POST['reference']) > 0:
-        try:
-            m = Mark.objects.get(reference=request.POST['reference'])
-            should_approve = False
-            if request.POST['should_approve'] == "true":
-                should_approve = True
-                m.is_approved = should_approve
-                m.save()
-                response['success'] = True
-        except Mark.DoesNotExist:
-            response['error'] = _('Mark does not exist')
-            json_response = simplejson.dumps(response)
-            return HttpResponseServerError(json_response, 'application/json')
-    else:
-        response['error'] = _("No mark specified")
+    if not request.user.is_authenticated():
+        response['error'] = _('Authentication required')
         json_response = simplejson.dumps(response)
         return HttpResponseServerError(json_response, 'application/json')
+    else:
+        if 'reference' in request.POST and len(request.POST['reference']) > 0:
+            try:
+                m = Mark.objects.get(reference=request.POST['reference'])
+                should_approve = False
+                if request.POST['should_approve'] == "true":
+                    should_approve = True
+                    m.is_approved = should_approve
+                    m.save()
+                    response['success'] = True
+            except Mark.DoesNotExist:
+                response['error'] = _('Mark does not exist')
+                json_response = simplejson.dumps(response)
+                return HttpResponseServerError(json_response, 'application/json')
+        else:
+            response['error'] = _("No mark specified")
+            json_response = simplejson.dumps(response)
+            return HttpResponseServerError(json_response, 'application/json')
 
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
