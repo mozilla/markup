@@ -30,7 +30,7 @@ Prepare you development environment:
 
     pip install -r requirements/dev.txt -r requirements/compiled.txt
 
-Create a database and be sure to note the name then make a copy of settings_local.py.default called settings_local.py and update your database settings
+Create a database and be sure to note the name then make a copy of ``settings_local.py.default`` called ``settings_local.py`` and update your database settings
 
 Sync your db:
 
@@ -41,12 +41,14 @@ Run the migrations
     python ffdemo/manage.py migrate
 
 Start your dev server:
+
     python ffdemo/manage.py runserver
 
 
 ### Things to know
 
 Any time you open a new terminal window to work on this project, before to run:
+
     source ffenv/bin/activate
 
 This sets up the virtual environment that has all the right versions of everything for the app
@@ -88,17 +90,21 @@ More info about South:
 
 ### Generate Invites
 
-Run the invite-generation script. generate_invites.py takes two vars: number of invites to generate, and type of invites to generate. invite-types are 't' for translator, or 'c' for contributor.
+Run the invite-generation script. ``generate_invites.py`` takes two vars: number of invites to generate, and type of invites to generate. invite-types are 't' for translator, or 'c' for contributor.
 
 for 5 translator invites, run
+
      manage.py generate_invites 5 t
+
 for 10 contributor invites, run
+
      manage.py generate_invites 10 c
 
 
 ### Production
 
 For production environments, uncomment the following in settings:
+
     # CACHE_BACKEND = 'caching.backends.memcached://localhost:11211?timeout=500'
 
     # SESSION_COOKIE_SECURE = True
