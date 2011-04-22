@@ -1030,31 +1030,36 @@
 			},
 			centerCurrentMark: function( context, callback ) {
 				var lC = context.modules.linear;
-				if( !lC.currentMark ) return false;
-				modules.linear.fn.showMarkInformation( context );
-				// stop movement
-				lC.cameraChange.aX = 0;
-				lC.cameraChange.vX = 0;
-				lC.cameraChange.aZ = 0;
-				lC.cameraChange.vZ = 0;
-				// tween the camera to the mark
-				var speed = Math.abs( lC.currentMark.position.x - lC.scene.camera.position.x ) / 2;
-				speed = Math.max( 1000, speed );
-				
-				// var speed = Math.min( 8000, Math.max( 1000, speed) );
-				var tween = 'cameraEase' in lC.tweens ? lC.tweens['cameraEase'] : new TWEEN.Tween( lC.scene.camera.position );
-				tween
-					.to( { 
-						x: lC.currentMark.position.x + ( lC.currentMark.bWidth / 2 ), 
-						y: lC.currentMark.position.y + ( lC.currentMark.bHeight / 2 ),
-						z: lC.currentMark.position.z - 1000 }, speed )
-					.onComplete( function( ) {
-						delete lC.tweens['cameraEase'];
-						if ( typeof callback === "function" ) callback( this );
-					} )
-					.easing( speed > 1200 ? TWEEN.Easing.Quadratic.EaseInOut : TWEEN.Easing.Quartic.EaseInOut )
-					.start();
-				lC.tweens['cameraEase'] = tween;
+				if( !lC.currentMark ) {
+					// if we dont have a current mark, trigger an event change so render changes get shown anyway
+					lC.eventChange = true;
+					return false;
+				} else {
+						modules.linear.fn.showMarkInformation( context );
+						// stop movement
+						lC.cameraChange.aX = 0;
+						lC.cameraChange.vX = 0;
+						lC.cameraChange.aZ = 0;
+						lC.cameraChange.vZ = 0;
+						// tween the camera to the mark
+						var speed = Math.abs( lC.currentMark.position.x - lC.scene.camera.position.x ) / 2;
+						speed = Math.max( 1000, speed );
+
+						// var speed = Math.min( 8000, Math.max( 1000, speed) );
+						var tween = 'cameraEase' in lC.tweens ? lC.tweens['cameraEase'] : new TWEEN.Tween( lC.scene.camera.position );
+						tween
+							.to( { 
+								x: lC.currentMark.position.x + ( lC.currentMark.bWidth / 2 ), 
+								y: lC.currentMark.position.y + ( lC.currentMark.bHeight / 2 ),
+								z: lC.currentMark.position.z - 1000 }, speed )
+							.onComplete( function( ) {
+								delete lC.tweens['cameraEase'];
+								if ( typeof callback === "function" ) callback( this );
+							} )
+							.easing( speed > 1200 ? TWEEN.Easing.Quadratic.EaseInOut : TWEEN.Easing.Quartic.EaseInOut )
+							.start();
+						lC.tweens['cameraEase'] = tween;	
+				}
 			}
 		}
 	};
