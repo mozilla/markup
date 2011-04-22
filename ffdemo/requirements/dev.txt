@@ -1,1 +1,4 @@
 -r prod.txt
+
+# L10n
+translate-toolkit==1.6.0

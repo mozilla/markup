@@ -73,6 +73,32 @@ LOCALE_INDEPENDENT_PATHS = (
 # Fallbacks for locales that are not recognized by Babel. Bug 596981.
 BABEL_FALLBACK = {'fy-nl': 'nl'}
 
+
+# Tells the extract script what files to look for l10n in and what function
+# handles the extraction. The Tower library expects this.
+DOMAIN_METHODS = {
+    'messages': [
+        # Normally, apps would be in apps/ and templates in templates/.
+        # Not so here.
+        ('markup/**.py',
+            'tower.management.commands.extract.extract_tower_python'),
+        ('templates_orig/**.html',
+            'lib.shoehorn_l10n.tower_blocktrans.extract_django_template'),
+    ],
+}
+TOWER_KEYWORDS = {
+    #'_lazy': None,
+}
+
+# Fake Jinja2 config for tower. Don't ask. (If you must, bug 647352).
+def JINJA_CONFIG():
+    return {'extensions': []}
+
+# tower-ize django's blocktrans
+import lib.shoehorn_l10n.templatetag
+lib.shoehorn_l10n.templatetag.monkeypatch()
+
+
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = PROJECT_PATH + '/static/'
@@ -145,6 +171,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'south',
+    'tower',
     'axes',
     'product_details',
 )
