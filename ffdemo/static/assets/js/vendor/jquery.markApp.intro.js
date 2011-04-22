@@ -35,24 +35,29 @@
 			},
 			loop: function ( context, e ) {
 				var lC = context.modules.intro;
-
-				// update the position of the camera and draw the viz preview
-				TWEEN.update();
-				lC.layerManager.layers['viz'].clean();
-				Mark.renderer.renderScene( lC.vizScene, { width: context.width, height: context.height } );
-				
-				if( lC.curLocaleMark ) {
-					lC.layerManager.layers['mainMark'].clean();
-					// render the locale mark
+				if( ! lC.animationComplete ) {
+					// update the position of the camera and draw the viz preview
+					TWEEN.update();
+					lC.layerManager.layers['viz'].clean();
+					Mark.renderer.renderScene( lC.vizScene, { width: context.width, height: context.height } );
 					if( lC.curLocaleMark ) {
-							var scale = 500 / lC.curLocaleMark.bWidth;
-							Mark.renderer.renderMark( 
-								lC.layerManager.layers['mainMark'].context, 
-								lC.curLocaleMark, 
-								{ offset: {x: (context.width / 2) - 115, y: context.height - 240 }, 
-									scale: {x: scale, y: scale, thickness: scale},
-									color: '255,84,0',
-									timer: lC.textScene.timers[lC.curLocaleMark.reference] } );
+						lC.layerManager.layers['mainMark'].clean();
+						var scale = 500 / lC.curLocaleMark.bWidth;
+						Mark.renderer.renderMark( 
+							lC.layerManager.layers['mainMark'].context, 
+							lC.curLocaleMark, 
+							{ offset: {x: (context.width / 2) - 115, y: context.height - 240 }, 
+								scale: {x: scale, y: scale, thickness: scale},
+								color: '255,84,0',
+								timer: lC.textScene.timers[lC.curLocaleMark.reference] } );
+						// check if the animation is completed
+						if( lC.curLocaleMark.reference in lC.textScene.timers ) {
+							var now = ( new Date() ).getTime();
+							if( lC.textScene.timers[lC.curLocaleMark.reference].end < now ) {
+								lC.animationComplete = true;
+								delete lC.textScene.timers[lC.curLocaleMark.reference];
+							}
+						}
 					}
 				}
 			},
@@ -298,6 +303,7 @@
 					$( '#the-big-x' ).fadeIn( 'slow' );
 					$( '#click-anywhere' ).delay( 200 ).fadeIn( 'slow' );
 					$( '#browse-marks' ).delay( 100 ).fadeIn( 'slow' );
+					lC.animationComplete = true;
 				} );
 			}
 		}
