@@ -415,7 +415,7 @@
 							if( data.success ) {
 								modules.linear.fn.setupMarks( context, data.marks );
 								// after we load the marks, back the camera away and zoom to the first one
-								if( firstMark = lC.marks[data.marks[0].reference] ) {
+								if( firstMark = lC.marks[lC.rightBuffer[0]] ) {
 									lC.scene.camera.position.x = -4000;
 									lC.scene.camera.position.z = -3000;
 									var tween = 'cameraEase' in lC.tweens ? lC.tweens['cameraEase'] : new TWEEN.Tween( lC.scene.camera.position );
@@ -632,8 +632,11 @@
 					lC.marks[buffer[ reverse ? 0 : buffer.length - 1 ]] :
 					lC.scene.objects[ reverse ? 0 : lC.scene.objects.length - 1];
 				for ( var i = 0; i < marks.length; i++ ) {
-					// if we already have this one, on to the next one
-					if( marks[i].reference in lC.marks ) continue;
+					// if we already have this one, OR if the points data seems suspect, on to the next one
+					if( marks[i].reference in lC.marks ||
+						typeof( marks[i].points_obj_simplified ) === "undefined" ||
+						marks[i].points_obj_simplified == null ||
+						marks[i].points_obj_simplified == "" ) continue;
 					var points_obj = JSON.parse( marks[i].points_obj_simplified );
 					// do some validation to make sure this mark wont break the viz
 					if( points_obj == null || !( 'strokes' in points_obj ) || 
