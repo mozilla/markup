@@ -1,379 +1,694 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-21 23:03-0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=ASCII\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: settings.py:69
-msgid "German"
+#: markup/requests.py:49 markup/requests.py:152 markup/requests.py:182
+msgid "Mark does not exist"
 msgstr ""
 
-#: settings.py:70
-msgid "English"
+#: markup/requests.py:52
+msgid "Multiple marks returned"
 msgstr ""
 
-#: settings.py:71
-msgid "French"
+#: markup/requests.py:56 markup/requests.py:156 markup/requests.py:186
+msgid "No mark specified"
 msgstr ""
 
-#: settings.py:72
-msgid "Russian"
+#: markup/requests.py:129
+msgid "missing data in POST request"
 msgstr ""
 
-#: templates_orig/about.html:8
+#: markup/requests.py:142 markup/requests.py:168
+msgid "Authentication required"
+msgstr ""
+
+#: markup/requests.py:236 markup/requests.py:462
+msgid "Querying by offset also requires a 'max' POST var"
+msgstr ""
+
+#: markup/requests.py:260 markup/requests.py:413 markup/requests.py:487 markup/requests.py:550
+msgid "No marks to be parsed"
+msgstr ""
+
+#: markup/requests.py:313
+msgid "Reference mark doesn't exist"
+msgstr ""
+
+#: markup/requests.py:317
+msgid "Multiple marks found for reference"
+msgstr ""
+
+#: markup/requests.py:357 markup/requests.py:376
+msgid "No marks to be dumped"
+msgstr ""
+
+#: markup/requests.py:382
+msgid "Querying by reference requires a reference string"
+msgstr ""
+
+#: templates_orig/about.html:11 templates_orig/mozilla.html:8
 msgid "About Mozilla"
 msgstr ""
 
-#: templates_orig/about.html:9
+#: templates_orig/about.html:12 templates_orig/sammy/linear.html:10
 msgid "GML"
 msgstr ""
 
-#: templates_orig/about.html:10 templates_orig/evan-roth.html:8
+#: templates_orig/about.html:13 templates_orig/base.html:55 templates_orig/evan-roth.html:8
 msgid "Evan Roth"
 msgstr ""
 
-#: templates_orig/about.html:11
+#: templates_orig/about.html:14 templates_orig/other-collaborators.html:8
+msgid "Other Collaborators"
+msgstr ""
+
+#: templates_orig/about.html:15 templates_orig/code.html:8
 msgid "Code Repository"
 msgstr ""
 
-#: templates_orig/code.html:8
+#: templates_orig/about.html:21
 msgid "Behind the Code"
 msgstr ""
 
-#: templates_orig/community.html:9
+#: templates_orig/about.html:22
+msgid ""
+"A non-profit company dedicated to placing the future of the Web in the hands of the people.<br /> An artist inspired by graffiti and free culture.<br /> What happens when these two like-minded "
+"entities come together?"
+msgstr ""
+
+#: templates_orig/about.html:27
+msgid "Heres where youll find more information on Mozilla, Evan Roth and the project born of their collaboration."
+msgstr ""
+
+#: templates_orig/about.html:29
+msgid "Learn more about Mark Up, its mission and the contribution from respected open Web advocate Lawrence Lessig <a href=\"/manifesto\">here</a>."
+msgstr ""
+
+#: templates_orig/base.html:8 templates_orig/base.html:12 templates_orig/base.html:16 templates_orig/base.html:19 templates_orig/base_min.html:5
+msgid "Mozilla Firefox Mark Up"
+msgstr ""
+
+#: templates_orig/base.html:9
+msgid "The Web is your creation. Show your support to keep it open and accessible to all. Make your mark."
+msgstr ""
+
+#: templates_orig/base.html:17
+msgid "The Web is your creation. And, Mark Up is an open invitation to show your support for keeping the Web public and accessible to all. Make your mark."
+msgstr ""
+
+#: templates_orig/base.html:32
+msgid "Mozilla"
+msgstr ""
+
+#: templates_orig/base.html:33
+msgid "Mozilla Mark Up"
+msgstr ""
+
+#: templates_orig/base.html:38
+msgid "Coming soon"
+msgstr ""
+
+#: templates_orig/base.html:40 templates_orig/sammy/makemark.html:9
+msgid "Make Your Mark"
+msgstr ""
+
+#: templates_orig/base.html:41 templates_orig/manifesto.html:9
+msgid "Manifesto"
+msgstr ""
+
+#: templates_orig/base.html:42
+msgid "Behind The Code"
+msgstr ""
+
+#: templates_orig/base.html:43 templates_orig/community.html:9
 msgid "Community"
 msgstr ""
 
-#: templates_orig/evan-roth.html:9
+#: templates_orig/base.html:44 templates_orig/base.html:70 templates_orig/base.html:71
+msgid "Download Firefox 4"
+msgstr ""
+
+#: templates_orig/base.html:56
+msgid "Collaborating with Mark Up"
+msgstr ""
+
+#: templates_orig/base.html:57
+msgid "Learn more about our collaboration with artist Evan Roth and Lawrence Lessig's contribution."
+msgstr ""
+
+#: templates_orig/base.html:60
+msgid "Mozilla Newsletter"
+msgstr ""
+
+#: templates_orig/base.html:61
+msgid "Read all about it"
+msgstr ""
+
+#: templates_orig/base.html:62
+msgid "Subscribe to Mozilla's monthly email newsletter and receive the latest tips and tricks for getting the most out of Firefox."
+msgstr ""
+
+#: templates_orig/base.html:65
+msgid "Web Of Wonders"
+msgstr ""
+
+#: templates_orig/base.html:66
+msgid "Web O'(pen) Wonder"
+msgstr ""
+
+#: templates_orig/base.html:67
+msgid "Want to see what the Web is really capable of? Explore the Web O' Wonder demo gallery and prepare to be amazed!"
+msgstr ""
+
+#: templates_orig/base.html:72
+msgid "Enjoy the latest version featuring a new look, more speed and other awesomeness."
+msgstr ""
+
+#: templates_orig/base.html:89
 msgid ""
-"Evan Roth is an artist and researcher based in Paris whose work explores the "
-"intersection of free culture and popular culture. His notable projects "
-"include <a href=\"http://graffitiresearchlab.com/projects/laser-tag/\">L.A.S."
-"E.R. Tag</a> and <a href=\"http://graffitiresearchlab.com/projects/led-"
-"throwies/\">LED Throwies</a> (Graffiti Research Lab), <a href=\"http://"
-"whiteglovetracking.com/\">White Glove Tracking</a>, <a href=\"http://www."
-"eyewriter.org/\">EyeWriter</a>, <a href=\"http://graffitianalysis.com/"
-"\">Graffiti Analysis</a> and a collaboration with <a href=\"http://www."
-"youtube.com/watch?v=QftcJtvLr8g\">Jay-Z</a> on the first open source rap "
-"video. Roth's work is in the permanent collection of the MoMA (NYC) and has "
-"been exhibited widely in the Americas, Europe and Asia, including the "
-"Pompidou (Paris), the Kunsthalle (Vienna), the Tate (London), the Fondation "
-"Cartier (Paris) and the front page of Youtube. Roth has received numerous "
-"awards for his work, including the <a href=\"http://new.aec.at/repair/en/"
-"program/prix-ars-electronica/\">Golden Nica</a> from Prix Ars Electronica, "
-"Rhizome/The New Museum commissions (<a href=\"http://rhizome.org/"
-"commissions/2007/\">2007</a>, <a href=\"http://rhizome.org/commissions/2009/"
-"\">2009</a>), the <a href=\"http://2010.futureeverything.org/abouttheawards/"
-"eyewriter2\">Future Everything Award</a> and Brit Insurance Designs of the "
-"Year (<a href=\"http://www.designsoftheyear.com/2010/02/05/evan-roth-"
-"graffiti-taxonomy-paris-france/\">1</a>, <a href=\"http://www."
-"designsoftheyear.com/2010/02/10/members-of-free-art-and-technology-graffiti-"
-"research-lab-openframeworks-the-ebeling-group-and-tony-quan-the-eyewriter-"
-"usa/\">2</a>)."
+"The Mozilla Firefox Mark Up campaign is a publicly accessible campaign site. If you choose to use your formal signature, then please recognize that it will be viewable to those with whom you share "
+"it online as well as to anyone who comes to this site."
+msgstr ""
+
+#: templates_orig/base.html:90
+msgid ""
+"Mozilla appeals to your sense of propriety and we ask that you avoid offensive or unlawful marks. Mozilla reserves the right to remove marks that are offensive and/or violate the law. See Mozillas "
+"Legal Notices for more information."
+msgstr ""
+
+#: templates_orig/base.html:93
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates_orig/base.html:94
+msgid "Legal Notices"
+msgstr ""
+
+#: templates_orig/base.html:95
+msgid "Report Trademark Abuse"
+msgstr ""
+
+#: templates_orig/base.html:98
+msgid ""
+"Except where otherwise noted, content on this site is licensed under the <a href=\"%(cclicenseurl)s\" target=\"_blank\">Creative Commons Attribution Share-Alike License v3.0</a> or any later "
+"version."
+msgstr ""
+
+#: templates_orig/code.html:9
+msgid ""
+"We believe creativity should be shared. We believe everything on the Web should be accessible to the people who contribute to it. And that's why we chose to make the code behind Mark Up public."
+msgstr ""
+
+#: templates_orig/code.html:10
+msgid "We encourage you to use the code below to keep creating, collaborating and contributing."
+msgstr ""
+
+#: templates_orig/code.html:11
+msgid "<a href=\"%(githuburl)s\">Get Code at GitHub</a>"
+msgstr ""
+
+#: templates_orig/code.html:12
+msgid "Email <a href=\"%(email_href)s\">markup@mozilla.org</a> for more information or to submit your visualization of the MarkUp data set."
 msgstr ""
 
 #: templates_orig/evan-roth.html:10
 msgid ""
-"Roth is co-founder of the <a href=\"http://www.graffitiresearchlab.com/"
-"\">Graffiti Research Lab</a> and the <a href=\"http://fffff.at/\">Free Art "
-"&amp; Technology Lab (F.A.T. Lab)</a>, a web based, open source research and "
-"development lab. In addition, at the Parsons School of Design, he has "
-"developed and continues to teach courses on viral media for artists, where "
-"grades depend on Internet attention metrics, and urban hacking, a course a "
-"New York City councilman has declared \"an invitation to break the law.\" "
-"Roth and his work have been featured in multiple outlets, including <a href="
-"\"http://www.npr.org/templates/story/story.php?storyId=124980282\">NPR</a>, "
-"the New York Times (<a href=\"http://www.nytimes.com/2006/06/25/arts/"
-"design/25daya.html?_r=1\">1</a>, <a href=\"http://www.nytimes.com/2007/08/12/"
-"nyregion/thecity/12graf.html\">2</a>, <a href=\"http://www.nytimes.com/ref/"
-"weekinreview/buzzwords2008.html\">3</a>), <a href=\"http://www.liberation.fr/"
-"recherche/?q=%22evan+roth%22\">Liberation</a>, Time magazine (<a href="
-"\"http://www.time.com/time/magazine/article/0,9171,1691618,00.html\">1</a>, "
-"<a href=\"http://www.time.com/time/arts/article/0,8599,1730645,00.html\">2</"
-"a>, <a href=\"http://www.time.com/time/"
-"photogallery/0,29307,1911799_1912685,00.html\">3</a>), <a href=\"http://"
-"edition.cnn.com/2010/TECH/web/09/10/gif.images/index.html\">CNN</a>, <a href="
-"\"http://browse.guardian.co.uk/search?search=%22evan+roth%22&sitesearch-"
-"radio=guardian&go-guardian=Search\">the Guardian</a>, <a href=\"http://"
-"abcnews.go.com/Technology/popup?id=2425229\">ABC News</a>, and <a href="
-"\"http://www.esquire.com/features/best-brightest-2007/"
-"graffiti1207\">Esquire</a>."
+"Evan Roth is an artist and researcher based in Paris who explores the intersection of free culture and popular culture, making work simultaneously for the contemporary art world and the \"bored at "
+"work\" network. His notable pieces include <a href=\"%(laser_url)s\">L.A.S.E.R. Tag</a> and <a href=\"%(throwies_url)s\">LED Throwies</a> (Graffiti Research Lab), <a href=\"%(glove_url)s\">White "
+"Glove Tracking</a>, <a href=\"%(eyewriter_url)s\">EyeWriter</a>, <a href=\"%(graffiti_url)s\">Graffiti Analysis</a> and a collaboration with <a href=\"%(jayz_url)s\">Jay-Z</a> on the first open "
+"source rap video. Roth's work is in the permanent collection of the Museum of Modern Art NYC and has been exhibited widely in the Americas, Europe and Asia, including the Centre Pompidou, the "
+"Kunsthalle Wien, the Tate, the Fondation Cartier and the front page of Youtube. Roth has received numerous awards for his work, including the Golden Nica from Prix Ars Electronica, Rhizome/The New "
+"Museum commissions, the Future Everything Award, the inaugural Transmediale Open Web Award and the Design Museum London's Designs of the Year."
+msgstr ""
+
+#: templates_orig/evan-roth.html:11
+msgid ""
+"Roth is co-founder of the <a href=\"%(research_url)s\">Graffiti Research Lab</a> and the <a href=\"%(fat_url)s\">Free Art & Technology Lab</a> (F.A.T. Lab), a web based, open source research and "
+"development lab. Roth and his work have been featured in multiple outlets, including <a href=\"%(npr_url)s\">NPR</a>, the <a href=\"%(nyt_url)s\">New York Times</a>, <a href=\"%(liberation_url)s"
+"\">Liberation</a>, <a href=\"%(time_url)s\">Time magazine</a>, <a href=\"%(cnn_url)s\">CNN</a>, <a href=\"%(guardian_url)s\">the Guardian</a>, <a href=\"%(abc_url)s\">ABC News</a>, <a href="
+"\"%(esquire_url)s\">Esquire</a> and <a href=\"%(juxtapoz_url)s\">Juxtapoz</a>."
 msgstr ""
 
 #: templates_orig/gml.html:8
 msgid "Graffiti Markup Language"
 msgstr ""
 
-#: templates_orig/gml.html:9
+#: templates_orig/gml.html:17
 msgid ""
-"Graffiti Markup Language (.gml) is a universal, XML-based, open file format "
-"designed to store graffiti motion data (x coordinates, y coordinates and "
-"time). GML is intended to be a simple bridge between ink and code, promoting "
-"collaborations between graffiti writers and hackers. GML is today’s new "
-"digital standard for tomorrow’s vandals."
+"Graffiti Markup Language (.gml) is a universal, XML-based, open file format designed to store graffiti motion data (x coordinates, y coordinates and time). GML is intended to be a simple bridge "
+"between ink and code, promoting collaborations between graffiti writers and hackers."
 msgstr ""
 
-#: templates_orig/home.html:20
+#: templates_orig/gml.html:18
+msgid "For more information on .gml, and ways of connecting your Mark with other projects, go to <a href=\"%(gml_link)s\">http://graffitimarkuplanguage.com</a>."
+msgstr ""
+
+#: templates_orig/home.html:11
+msgid "Oops! Your browser doesnt support the features used on this site. Please download a more modern browser like <a href=\"%(download_url)s\">Firefox 4</a>."
+msgstr ""
+
+#: templates_orig/home.html:18
+msgid "An error occured. Please try your request again."
+msgstr ""
+
+#: templates_orig/home.html:19
+msgid "Loading"
+msgstr ""
+
+#: templates_orig/list_invites.html:7
+msgid "id"
+msgstr ""
+
+#: templates_orig/list_invites.html:8
+msgid "invite code"
+msgstr ""
+
+#: templates_orig/list_invites.html:9
+msgid "type"
+msgstr ""
+
+#: templates_orig/list_invites.html:10
+msgid "used at"
+msgstr ""
+
+#: templates_orig/list_invites.html:11 templates_orig/sammy/makemark.html:47
+msgid "url"
+msgstr ""
+
+#: templates_orig/manifesto.html:11
 msgid ""
-"Oops! Your browser doesn’t support the features used on this site.\n"
-"\t\t\tPlease download a more modern browser like <a href=\"http://www."
-"mozilla.com/products/download.html\">Firefox 4</a>."
+"\"An open Net embraces free culture. That doesn't mean disrespecting the copyright of others. It means instead enabling others to share and build upon the work you want the Net to love. Practice "
+"the freedom you expect from others, by licensing your work as freely as you can.\""
 msgstr ""
 
-#: templates_orig/sammy/home.html:1
-msgid "The Internet is your creation"
+#: templates_orig/manifesto.html:12
+msgid "- <a href=\"%(lessig_mark_url)s\">Lawrence Lessig for Mark Up"
 msgstr ""
 
-#: templates_orig/sammy/home.html:2
+#: templates_orig/manifesto.html:13
 msgid ""
-"<em>Leave your mark to keep it open and free.</em> Nulla a purus sem, sit "
-"amet gravida massa. In eget risus ut urna auctor mattis vel eget metus. "
-"Morbi blandit lobortis imperdiet. Nam vulputate felis vel lectus congue "
-"fringilla. Nam tristique erat a massa convallis luctus. Sed fermentum "
-"vestibulum sollicitudin."
+"The Web is an integral part of modern life.<br /> It is an educator, a communicator, an entertainer, an inspirer, a collaboration of all our creative efforts.<br /> It sparks movements and enables "
+"us to share our ideas, our thoughts, our dreams."
 msgstr ""
 
-#: templates_orig/sammy/home.html:3 templates_orig/sammy/makemark.html:7
-msgid "Click anywhere in the whitespace to begin your Mark"
+#: templates_orig/manifesto.html:16
+msgid ""
+"The Web is our creation.<br /> We are all contributors, the ones who use the Web every day.<br /> And all the comments and uploads we make add up to something bigger.<br /> This is why we believe "
+"that the Web must remain open and accessible to all."
 msgstr ""
 
-#: templates_orig/sammy/home.html:4 templates_orig/sammy/makemark.html:9
-msgid "browse Marks"
+#: templates_orig/manifesto.html:20
+msgid ""
+"Mark Up is a celebration of that freedom.<br /> Each persons mark is an individual expression on a continuous line symbolizing solidarity.<br /> It is a declaration and a chance to show your "
+"support for a people's Web."
 msgstr ""
 
-#: templates_orig/sammy/linear.html:6 templates_orig/sammy/moderate.html:6
+#: templates_orig/mozilla.html:9
+msgid ""
+"Mozilla is a global, non-profit organization dedicated to making the Web better. We believe in principle over profit, and that the Internet is a shared public resource to be cared for, not a "
+"commodity to be sold. We work with a worldwide community to create free, open source software like Mozilla Firefox, and to innovate for the benefit of the individual and the betterment of the Web. "
+"The result is great products built by passionate people and better choices for everyone. For more information, visit <a href=\"%(moz_url)s\">www.mozilla.org</a>."
+msgstr ""
+
+#: templates_orig/mozilla.html:10
+msgid "Special Thanks"
+msgstr ""
+
+#: templates_orig/mozilla.html:11
+msgid "Special thanks to <a href=\"%(evan_url)s\">Evan Roth</a> for his contributions to the MarkUP project."
+msgstr ""
+
+#: templates_orig/newsletter.html:6
+msgid "Read all about it in our Mozilla Firefox newsletter"
+msgstr ""
+
+#: templates_orig/newsletter.html:8
+msgid ""
+"Subscribe to our monthly updates and keep current with Mozilla news, including the latest tips and tricks for getting the most out of your Firefox browser. Its the perfect way for us to keep in "
+"touch!"
+msgstr ""
+
+#: templates_orig/newsletter.html:11
+msgid "Your email address:"
+msgstr ""
+
+#: templates_orig/newsletter.html:13
+msgid "Country:"
+msgstr ""
+
+#: templates_orig/newsletter.html:15
+msgid "Select your country"
+msgstr ""
+
+#: templates_orig/newsletter.html:18
+msgid "Sign me up!"
+msgstr ""
+
+#: templates_orig/newsletter.html:19
+msgid "We will only send you Mozilla-related information"
+msgstr ""
+
+#: templates_orig/other-collaborators.html:10 templates_orig/other-collaborators.html:11
+msgid "Golan Levin"
+msgstr ""
+
+#: templates_orig/other-collaborators.html:10 templates_orig/other-collaborators.html:14 templates_orig/other-collaborators.html:18
+msgid "project coming soon"
+msgstr ""
+
+#: templates_orig/other-collaborators.html:12
+msgid ""
+"Golan Levin's work explores the intersection of abstract communication and interactivity. Through performances, digital artifacts, and virtual environments, often created with a variety of "
+"collaborators, Levin applies creative twists to digital technologies that highlight our relationship with machines and make visible our ways of interacting with each other. Levin is Associate "
+"Professor of Electronic Art and Director of the STUDIO for Creative Inquiry at Carnegie Mellon University, Pittsburgh."
+msgstr ""
+
+#: templates_orig/other-collaborators.html:14 templates_orig/other-collaborators.html:15
+msgid "Amanda Cox"
+msgstr ""
+
+#: templates_orig/other-collaborators.html:16
+msgid ""
+"Amanda Cox is a graphics editor at the New York Times, where she creates charts and maps for the newspaper and its Web site. She is primarily interested in revealing patterns, uncovering structure "
+"and finding new ways of looking at things. Before joining the Times in 2005, Cox received a master's degree in statistics from the University of Washington and a bachelor's degree in mathematics "
+"and economics from St. Olaf College."
+msgstr ""
+
+#: templates_orig/other-collaborators.html:18 templates_orig/other-collaborators.html:19
+msgid "Jeff Larson"
+msgstr ""
+
+#: templates_orig/other-collaborators.html:20
+msgid ""
+"Jeff Larson is a Developer at ProPublica where he works with reporters and editors to create news applications. Previously, he worked as the Online Director of the Nation and as an Editorial "
+"Assistant at W.W. Norton. He graduated with a degree in English Literature from UCSC. His favorite language is JavaScript."
+msgstr ""
+
+#: templates_orig/registration/locked.html:5
+msgid "You have been locked out. Please try again in >1 hour"
+msgstr ""
+
+#: templates_orig/registration/login.html:20
+msgid "Username"
+msgstr ""
+
+#: templates_orig/registration/login.html:24
+msgid "Password"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:9
 msgid "Replay this mark"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:7
+#: templates_orig/sammy/linear.html:9
+msgid "Play"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:10
+msgid "Download the GML for this mark"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:13
 msgid "Flag as inappropriate"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:8 templates_orig/sammy/moderate.html:7
-msgid "Mark"
+#: templates_orig/sammy/linear.html:14
+msgid "Mark <span id=\"mark-id\"></span> of <span id=\"total-mark-count\"></span> for an open Web."
 msgstr ""
 
-#: templates_orig/sammy/linear.html:11
+#: templates_orig/sammy/linear.html:16
 msgid "Share on Facebook"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:12
+#: templates_orig/sammy/linear.html:17
 msgid "Share on Twitter"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:14
+#: templates_orig/sammy/linear.html:19
 msgid "URL"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:20
+#: templates_orig/sammy/linear.html:32
 msgid "Mark Browsing"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:22
+#: templates_orig/sammy/linear.html:35
 msgid "zoom in"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:23
+#: templates_orig/sammy/linear.html:36
 msgid "zoom out"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:24
+#: templates_orig/sammy/linear.html:37
 msgid "right"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:25
+#: templates_orig/sammy/linear.html:38
 msgid "left"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:28
+#: templates_orig/sammy/linear.html:42
 msgid "location:"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:30
+#: templates_orig/sammy/linear.html:44
 msgid "All countries"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:34
+#: templates_orig/sammy/linear.html:48
+msgid "contributor:"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:50
+msgid "View a contributor"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:55
 msgid "view yours"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:35
+#: templates_orig/sammy/linear.html:56
 msgid "view first"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:36
+#: templates_orig/sammy/linear.html:57
 msgid "view last"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:40
-msgid "Mark Stats"
-msgstr ""
-
-#: templates_orig/sammy/linear.html:42
-msgid "<span id=\"stats-number-of-marks\"></span> Marks for an open Web"
-msgstr ""
-
-#: templates_orig/sammy/linear.html:43
-msgid "On <span id=\"stats-number-of-countries\"></span> different countries"
-msgstr ""
-
-#: templates_orig/sammy/linear.html:44
-msgid "Over <span id=\"stats-number-of-days\"></span> days"
-msgstr ""
-
-#: templates_orig/sammy/linear.html:48 templates_orig/sammy/moderate.html:13
+#: templates_orig/sammy/linear.html:62 templates_orig/sammy/moderate.html:15
 msgid "view source"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:52 templates_orig/sammy/moderate.html:17
-msgid "jan"
+#: templates_orig/sammy/linear.html:66 templates_orig/sammy/moderate.html:19
+msgid "Jan"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:53 templates_orig/sammy/moderate.html:18
-msgid "feb"
+#: templates_orig/sammy/linear.html:67 templates_orig/sammy/moderate.html:20
+msgid "Feb"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:54 templates_orig/sammy/moderate.html:19
-msgid "mar"
+#: templates_orig/sammy/linear.html:68 templates_orig/sammy/moderate.html:21
+msgid "Mar"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:55 templates_orig/sammy/moderate.html:20
-msgid "apr"
+#: templates_orig/sammy/linear.html:69 templates_orig/sammy/moderate.html:22
+msgid "Apr"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:56 templates_orig/sammy/moderate.html:21
-msgid "may"
+#: templates_orig/sammy/linear.html:70 templates_orig/sammy/moderate.html:23
+msgid "May"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:57 templates_orig/sammy/moderate.html:22
-msgid "jun"
+#: templates_orig/sammy/linear.html:71 templates_orig/sammy/moderate.html:24
+msgid "Jun"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:58 templates_orig/sammy/moderate.html:23
-msgid "jul"
+#: templates_orig/sammy/linear.html:72 templates_orig/sammy/moderate.html:25
+msgid "Jul"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:59 templates_orig/sammy/moderate.html:24
-msgid "aug"
+#: templates_orig/sammy/linear.html:73 templates_orig/sammy/moderate.html:26
+msgid "Aug"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:60 templates_orig/sammy/moderate.html:25
-msgid "sep"
+#: templates_orig/sammy/linear.html:74 templates_orig/sammy/moderate.html:27
+msgid "Sep"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:61 templates_orig/sammy/moderate.html:26
-msgid "oct"
+#: templates_orig/sammy/linear.html:75 templates_orig/sammy/moderate.html:28
+msgid "Oct"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:62 templates_orig/sammy/moderate.html:27
-msgid "nov"
+#: templates_orig/sammy/linear.html:76 templates_orig/sammy/moderate.html:29
+msgid "Nov"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:63 templates_orig/sammy/moderate.html:28
-msgid "dec"
+#: templates_orig/sammy/linear.html:77 templates_orig/sammy/moderate.html:30
+msgid "Dec"
 msgstr ""
 
-#: templates_orig/sammy/linear.html:65
-msgid ""
-"Mozilla Firefox Mark Up. The internet is your creation. Show your support to "
-"keep it open and free. Make your mark."
+#: templates_orig/sammy/linear.html:79 templates_orig/sammy/moderate.html:32
+msgid "Mozilla Firefox Mark Up. The internet is your creation. Show your support to keep it open and free. Make your mark."
 msgstr ""
 
-#: templates_orig/sammy/linear.html:66
-msgid ""
-"The internet is your creation. Show your support to keep it open and free. "
-"Make your mark."
+#: templates_orig/sammy/linear.html:80 templates_orig/sammy/moderate.html:33
+msgid "The Web is your creation. Show your support to keep it open and accessible to all. Make your mark. (moz.ly)"
 msgstr ""
 
-#: templates_orig/sammy/makemark.html:3
+#: templates_orig/sammy/linear.html:81 templates_orig/sammy/moderate.html:34
+msgid "Loading Marks"
+msgstr ""
+
+#: templates_orig/sammy/linear.html:82
+msgid "Oops! Something went wrong on our end.<br />Please click anywhere to start at the beginning of the marks and try again."
+msgstr ""
+
+#: templates_orig/sammy/linear.html:83
+msgid "We couldn't find any marks for your current selection.<br />Please click anywhere to start at the beginning of the marks and try again."
+msgstr ""
+
+#: templates_orig/sammy/linear.html:84
+msgid "Thank you for contributing your Mark.<br />Please be patient as we add your Mark to the global collection in support of an open and public Web."
+msgstr ""
+
+#: templates_orig/sammy/linear.html:85
+msgid "Please be patient as we load the Marks in support of an open and public Web."
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:4
 msgid "The Web is your creation"
-msgstr ""
-
-#: templates_orig/sammy/makemark.html:4
-msgid "You are the ones using the Web every day."
-msgstr ""
-
-#: templates_orig/sammy/makemark.html:4
-msgid ""
-"You are the writers, the coders, the artists. Each comment, upload, and "
-"contribution you make adds up to something bigger. The Web is created by "
-"everyone, and we believe it should remain free and accessible to everyone, "
-"with all people controlling their own online journeys."
 msgstr ""
 
 #: templates_orig/sammy/makemark.html:5
 msgid ""
-"This is an open invitation to join the celebration of a Web that belongs to "
-"all of us. Make your mark and show your support for the world’s greatest "
-"public resource."
+"<strong>Mark Up is a collection of all our individual marks on the Web.</strong> Like the Web, it is our creation, and should remain public and accessible to everyone. We invite you, the "
+"contributing writers, coders, and artists, to celebrate the worlds greatest public resource by taking ownership of the Web, and making your mark."
 msgstr ""
 
-#: templates_orig/sammy/makemark.html:8
-msgid "Make Your Mark"
+#: templates_orig/sammy/makemark.html:8 templates_orig/sammy/makemark.html:71
+msgid "Click anywhere to begin your Mark"
 msgstr ""
 
-#: templates_orig/sammy/makemark.html:11
-msgid "Submit"
+#: templates_orig/sammy/makemark.html:10
+msgid "browse Marks"
 msgstr ""
 
 #: templates_orig/sammy/makemark.html:12
-msgid "Reset"
+msgid "Submit"
 msgstr ""
 
 #: templates_orig/sammy/makemark.html:13
-msgid "Cancel"
+msgid "Reset"
 msgstr ""
 
 #: templates_orig/sammy/makemark.html:14
+msgid "Cancel"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:15
 msgid "Location"
 msgstr ""
 
-#: templates_orig/sammy/makemark.html:16
+#: templates_orig/sammy/makemark.html:17
 msgid "Information"
 msgstr ""
 
-#: templates_orig/sammy/makemark.html:20
-msgid "Select your country"
-msgstr ""
-
 #: templates_orig/sammy/makemark.html:22
-msgid ""
-"Location is only used to associate marks with geographic regions.<br />See "
-"<a href=\"http://www.mozilla.com/en-US/firefox/geolocation/\">http://www."
-"mozilla.com/en-US/firefox/geolocation/</a> for more information."
+msgid "Select country"
 msgstr ""
 
-#: templates_orig/sammy/makemark.html:28
-msgid "Click anywhere to begin your mark"
+#: templates_orig/sammy/makemark.html:24
+msgid "Save Location"
 msgstr ""
 
-#: templates_orig/sammy/makemark.html:34
-msgid "Submitting Mark"
+#: templates_orig/sammy/makemark.html:26
+msgid "Location is only used to associate marks with geographic regions.<br />See <a href=\"%(location_info_url)s\" target=\"_blank\">Location Aware Browsing</a> for more information."
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:31
+msgid "Please keep in mind that your mark will be publicly viewed."
 msgstr ""
 
 #: templates_orig/sammy/makemark.html:35
-msgid ""
-"Oops! Something went wrong on our end.<br />Please submit your mark again."
+msgid "Click anywhere on the screen to begin your mark. The mouse cursor shows the amount of ink left with which to make your mark."
 msgstr ""
 
-#: templates_orig/sammy/moderate.html:9
-msgid "Delete Mark"
+#: templates_orig/sammy/makemark.html:40
+msgid "Contributor Info"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:43
+msgid "name"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:44
+msgid "first and last name"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:48
+msgid "http://domain.tld/"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:51
+msgid "quote"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:52
+msgid "No quotes or special formating please."
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:57
+msgid "Translator Info"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:58
+msgid "Please Translate \"Make Your Mark\" for the <span id=\"translator-locale\"></span> locale."
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:68
+msgid "Submitting Mark"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:69
+msgid "Loading Mozilla MarkUp"
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:70
+msgid "Oops! Something went wrong on our end.<br />Please submit your mark again."
+msgstr ""
+
+#: templates_orig/sammy/makemark.html:72
+msgid "Watch your ink level here as you make your Mark"
+msgstr ""
+
+#: templates_orig/sammy/moderate.html:5
+msgid "play"
+msgstr ""
+
+#: templates_orig/sammy/moderate.html:8
+msgid "Mark"
 msgstr ""
 
 #: templates_orig/sammy/moderate.html:10
+msgid "Delete Mark"
+msgstr ""
+
+#: templates_orig/sammy/moderate.html:11
 msgid "Approve Mark"
+msgstr ""
+
+#: templates_orig/sammy/moderate.html:35
+msgid "Oops! Something went wrong on our end.<br />Please start at <a href=\"#/linear/\">the beginning of the marks</a> and try again."
+msgstr ""
+
+#: templates_orig/sammy/moderate.html:36
+msgid "We couldn't find any marks for your current selection.<br />Please start at <a href=\"#/moderate\">the beginning of the marks</a> and try again."
 msgstr ""
