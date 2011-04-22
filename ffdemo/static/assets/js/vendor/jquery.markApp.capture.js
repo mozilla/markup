@@ -313,8 +313,6 @@
 				lC.captureTime = ( new Date() ).getTime();
 				lC.rtl = context.mouseX > $( window ).width() / 2;
 				lC.mark = new Mark.gmlMark( [], '', '', lC.captureTime, lC.rtl );
-				// remove the disabled styling from the submit and reset buttons
-				$( '#markmaker-submit a, #markmaker-reset a' ).removeClass( 'disabled' );
 			},
 			endMark: function ( context ) {
 				var lC = context.modules.capture;
@@ -332,8 +330,21 @@
 			},
 			endStroke: function ( context ) {
 				var lC = context.modules.capture;
-				// ignore strokes with less than three points
-				if ( lC.currentStroke.length > 2 ) {
+				// ignore strokes with less than four points
+				if ( lC.currentStroke.length >= 4 ) {
+					if( lC.mark.strokes.length == 0 ) {
+						// this is the first stroke captured - enable the submit and reset controls
+						$( '#markmaker-submit a, #markmaker-reset a' ).removeClass( 'disabled' );
+					} else {
+						// not the first stroke, so connect this one to the last
+						var lStroke = lC.mark.strokes[lC.mark.strokes.length - 1];
+						modules.capture.fn.drawGuide( 
+							lC.layerManager.layers['drawnLayer'].context, 
+							lStroke[lStroke.length - 1].x, 
+							lStroke[lStroke.length - 1].y, 
+							lC.currentStroke[0].x, 
+							lC.currentStroke[0].y );
+					}
 					// close out this stroke
 					lC.strokes.push( lC.currentStroke );
 					// run the simplification algorithim
@@ -365,16 +376,6 @@
 					point.speed = lastPoint.speedToPoint( point );
 					point.setAngleFromPoint( lastPoint );
 					point.smoothAgainst( lastPoint, 1/100 );
-				} else {
-					// if this isn't the first stroke, draw a connecting line
-					if( lC.strokes.length >= 1 ) {
-						modules.capture.fn.drawGuide( 
-							lC.layerManager.layers['drawnLayer'].context, 
-							lC.lastX, 
-							lC.lastY, 
-							point.x, 
-							point.y );
-					}
 				}
 				lC.currentStroke.push( point );
 				lC.lastX = point.x;
@@ -571,21 +572,33 @@
 				}
 				if( ! context.mouseIn ) return;
 				if( ! context.mouseDown ) {
-					// draw the guide
+					// draw the idle guide
 					var x, y;
-					if( lC.strokes.length == 0 ) {
+					if( lC.mark == null || lC.mark.strokes.length == 0 ) {
+						// draw the guide from the closest screen edge
 						x = context.mouseX > $( window ).width() / 2 ? lC.layerManager.layers['liveDrawingLayer'].canvas.width : 0,
 						y = context.mouseY;
 					} else {
-						x = lC.lastX;
-						y = lC.lastY;
+						// draw the guide from the last point in the previous stroke
+						var lStroke = lC.mark.strokes[lC.mark.strokes.length - 1];
+						x = lStroke[lStroke.length - 1].x;
+						y = lStroke[lStroke.length - 1].y;
 					}
 					modules.capture.fn.drawGuide( 
 						lC.layerManager.layers['liveDrawingLayer'].context, 
-						x, 
-						y, 
+						x,
+						y,
 						context.mouseX, 
 						context.mouseY );
+				} else if( lC.mark != null && lC.currentStroke != null && lC.mark.strokes.length > 0 && lC.currentStroke.length > 0 ) {
+					// draw the drawtime guide
+					var lStroke = lC.mark.strokes[lC.mark.strokes.length - 1];
+					modules.capture.fn.drawGuide( 
+						lC.layerManager.layers['liveDrawingLayer'].context, 
+						lStroke[lStroke.length - 1].x, 
+						lStroke[lStroke.length - 1].y, 
+						lC.currentStroke[0].x, 
+						lC.currentStroke[0].y );
 				}
 				
 			}

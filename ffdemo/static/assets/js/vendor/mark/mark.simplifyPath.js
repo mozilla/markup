@@ -58,10 +58,14 @@ var Mark = ( function ( mark ) {
 		},
 		// returns a simplified version of a stroke based on the passed tolerance
 		simplifyPath: function( points, tolerance ) {
-			var arr = mark.simplification.douglasPeucker( points, tolerance );
-			// always have to push the very last point on so it doesn't get left off
-			arr.push( points[points.length - 1 ] );
-			return arr;
+			var simpPoints = [];
+			// always retain the first point
+			simpPoints.push( points.shift() );
+			simpPoints = simpPoints.concat( mark.simplification.douglasPeucker( points, tolerance ) );
+			// and always retain the last two points
+			simpPoints.push( points[points.length - 2] );
+			simpPoints.push( points[points.length - 1] );
+			return simpPoints;
 		},
 		// weights a stroke based on the passed tolerances 
 		weightPath: function( points, tolerances ) {

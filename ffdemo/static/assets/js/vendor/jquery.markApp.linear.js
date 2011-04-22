@@ -484,7 +484,7 @@
 								$( '#first-mark-link' )
 									.click( function( e ) {
 										e.preventDefault();
-										if( lC.currentMark.reference == data.first_mark ) {
+										if( lC.currentMark != null && lC.currentMark.reference == data.first_mark ) {
 											modules.linear.fn.centerCurrentMark( context, function() {
 												modules.linear.fn.showMarkInformation( context );
 											} );
@@ -495,7 +495,7 @@
 								$( '#last-mark-link' )
 									.click( function( e ) {
 										e.preventDefault();
-										if( lC.currentMark.reference == data.last_mark ) {
+										if( lC.currentMark != null && lC.currentMark.reference == data.last_mark ) {
 											modules.linear.fn.centerCurrentMark( context, function() {
 												modules.linear.fn.showMarkInformation( context );
 											} );
@@ -575,7 +575,7 @@
 				// show the loader
 				if( !options.reference || ( options.reference && !(options.reference in lC.marks) ) ) {
 					// This is for all mark loading requests that aren't a result of normal buffer reloading
-					var extraInfo = context.fn.getString( 'regular-loading-msg' );
+					var extraInfo = context.fn.getString( 'default-loading-msg' );
 					if( lC.show_thanks ) {
 						lC.show_thanks = false
 						extraInfo = context.fn.getString( 'submission-thanks-loading-msg' )
@@ -586,7 +586,7 @@
 					context.fn.showLoader( 
 						context.fn.getString( 'loading-marks-msg' ), 
 						'overlay-light', 
-						context.fn.getString( 'regular-loading-msg' ),
+						context.fn.getString( 'default-loading-msg' ),
 						4000 );
 				}
 
@@ -894,7 +894,7 @@
 					$("#approve-mark-checkbox").attr('checked', mark.is_approved);
 				}
 				// give the flag the appropriate class
-				if( lC.currentMark.reference in lC.flaggings ) {
+				if( lC.currentMark != null && lC.currentMark.reference in lC.flaggings ) {
 					$( '#mark-flag').addClass( 'disabled' );
 				} else {
 					$( '#mark-flag').removeClass( 'disabled' );
@@ -923,14 +923,14 @@
 			},
 			downloadCurrentMark: function ( context ) {
 				var lC = context.modules.linear;
-				if ( lC.currentMark && lC.currentMark.reference ) {
+				if ( lC.currentMark != null && lC.currentMark.reference ) {
 					window.open( '/gml/' + lC.currentMark.reference );
 				}
 			},
 			flagCurrentMark: function ( context ) {
 				var lC = context.modules.linear;
 				// if this user has already flagged this mark, return
-				if( lC.currentMark.reference in lC.flaggings ) return;
+				if( lC.currentMark != null && lC.currentMark.reference in lC.flaggings ) return;
 				$.ajax( {
 					url: '/requests/flag_mark',
 					data: {
@@ -953,44 +953,22 @@
 			},
 			deleteCurrentMark: function ( context ) {
 				var lC = context.modules.linear;
+				var targetMarkReference = lC.currentMark.reference;
 				$.ajax( {
 					url: '/requests/delete_mark',
 					data: {
-						'reference': lC.currentMark.reference
+						'reference': targetMarkReference
 					},
 					type: 'POST',
 					dataType: 'JSON',
 					success: function( data ) {
-						
-						var deletedMarkReference = lC.currentMark.reference,
-							deletedMarkIndex = null;
 						//	Delete current mark from marks data
-						delete lC.marks[lC.currentMark.reference];
+						// delete lC.marks[targetMarkReference];
+						// then remove it from the screen
+						modules.linear.fn.removeMarkFromScreen( context, targetMarkReference );
+						// hide mark details and set the current mark to nada
 						lC.currentMark = null;
-						
-						// remove the mark from the scene and reposition the rest
-						for ( var i=0; i < lC.scene.objects.length; i++ ) {
-							// start at the left and run through until you find the deleted mark
-							if( !deletedMarkIndex && lC.scene.objects[i].reference != deletedMarkReference ) continue;
-							// remove it
-							if( !deletedMarkIndex ) {
-								deletedMarkIndex = i;
-								lC.scene.objects.splice( i, 1 );
-								// set current mark to the next one
-								lC.currentMark = lC.scene.objects[i];
-							}
-							// reposition everything after it
-							if ( i == 0 ) {
-								lC.scene.objects[i].positionToStart( );
-							} else {
-								lC.scene.objects[i].positionRelativeTo( lC.scene.objects[i-1] );
-							}
-						}
-						// update the URL
-						context.app.setLocation( '#/' + lC.linear_root + '/' + lC.currentMark.reference );
-						
-						lC.eventChange = true;
-
+						modules.linear.fn.hideMarkInformation( context );
 					},
 					error: function ( data ) {
 						// TODO translate this msg
@@ -1000,22 +978,52 @@
 			},
 			approveCurrentMark: function ( context, shouldApprove ) {
 				var lC = context.modules.linear;
+				var targetMarkReference = lC.currentMark.reference;
 				$.ajax( {
 					url: '/requests/approve_mark',
 					data: {
-						'reference': lC.currentMark.reference,
+						'reference': targetMarkReference,
 						'should_approve': shouldApprove
 					},
 					type: 'POST',
 					dataType: 'JSON',
 					success: function( data ) {
-						//	Update approved status locally
-						lC.currentMark.is_approved = shouldApprove;
+						//	Delete current mark from marks data
+						// delete lC.marks[targetMarkReference];
+						// then remove it from the screen
+						modules.linear.fn.removeMarkFromScreen( context, targetMarkReference );
+						// hide mark details and set the current mark to nada
+						lC.currentMark = null;
+						modules.linear.fn.hideMarkInformation( context );
+						
 					},
 					error: function ( data ) {
 						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
 					}
 				} );
+			},
+			removeMarkFromScreen: function( context, mark_ref ) {
+				var lC = context.modules.linear;
+				var deletedMarkReference = mark_ref,
+					deletedMarkIndex = null;
+				// remove the mark from the scene and reposition the rest
+				for ( var i=0; i < lC.scene.objects.length; i++ ) {
+					// start at the left and run through until you find the deleted mark
+					if( !deletedMarkIndex && lC.scene.objects[i].reference != deletedMarkReference ) continue;
+					// remove it -- this is run only on the deleted mark
+					if( !deletedMarkIndex ) {
+						deletedMarkIndex = i;
+						lC.scene.objects.splice( i, 1 );
+					} else {
+						// reposition everything after it
+						if ( i == 0 ) {
+							lC.scene.objects[i].positionToStart( );
+						} else {
+							lC.scene.objects[i].positionRelativeTo( lC.scene.objects[i-1] );
+						}
+					}
+				}
+				lC.eventChange = true;
 			},
 			centerCurrentMark: function( context, callback ) {
 				var lC = context.modules.linear;

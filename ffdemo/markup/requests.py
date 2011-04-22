@@ -531,7 +531,7 @@ def marks_by_flagged(request):
     include_mark = True
     max_returned = 15
 
-    marks_to_be_dumped = Mark.objects.filter(flaggings__gte=1).order_by('id')  # CHECK offset?
+    marks_to_be_dumped = Mark.objects.filter(flaggings__gte=1).exclude(is_approved=1).order_by('id')  # CHECK offset?
 
     #    Check that we've got marks to dump
     if marks_to_be_dumped:
