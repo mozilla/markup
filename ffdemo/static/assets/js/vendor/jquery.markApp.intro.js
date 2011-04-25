@@ -135,6 +135,7 @@
 					lC.$intro.remove();
 					lC.initialized = false;
 				} );
+				// cancel tweens? callbacks?
 			},
 			initInterface: function ( context ) {
 				$( '#markmaker' )
@@ -191,16 +192,11 @@
 			},
 			setupMarks: function( context, marks ) {
 				var lC = context.modules.intro;
-				// FXIME - if this is empty, throw an error
 				if( typeof marks === "undefined" || marks.length == 0 ) return;
 				// set our layer's visiblity to 0
 				$( lC.layerManager.layers['viz'].canvas ).css( 'opacity', 0 );
 				// sort the marks randomly
 				marks.sort( function( a, b ) { return ( Math.round( Math.random() ) - 0.5 ); } );
-				// // duplicate marks until we've got 25
-				// 			while ( marks.length < 25 ) {
-				// 				marks = marks.concat( marks );
-				// 			}
 				var pMark = null;
 				// add them to the scene
 				for ( var i = 0; i < marks.length; i++ ) {
@@ -231,6 +227,7 @@
 			},
 			runVizPreview: function ( context ) {
 				var lC = context.modules.intro;
+				if( ! lC.initialized ) return false;
 				// can't do this on less than three marks
 				if( lC.vizScene.objects.length < 3 ) return;
 				// move the camera way back
@@ -260,6 +257,7 @@
 			},
 			startDomAnimation: function ( context ) {
 				var lC = context.modules.intro;
+				// if( ! lC.initialized ) return false;
 				$( '#markmaker' )
 				.width( 0 )
 				.show()
@@ -283,6 +281,7 @@
 			},
 			startMarkAnimations: function ( context ) {
 				var lC = context.modules.intro;
+				if( ! lC.initialized ) return false;
 				// fade up the big X
 				$( '#the-big-x' )
 					.fadeIn( 'slow' );
@@ -290,11 +289,14 @@
 				if( lC.curLocaleMark ) {
 					var now = ( new Date() ).getTime() + 2000;
 					lC.textScene.timers[lC.curLocaleMark.reference] = { 'start': now, 'end': now + lC.curLocaleMark.maxTime, 'speed': 2 };
+				} else {
+					lC.animationComplete = true;
 				}
 			},
 			// fallback function that doesn't bother with anything but the DOM elements
 			simpleIntro: function ( context ) {
 				var lC = context.modules.intro;
+				if( ! lC.initialized ) return false;
 				$( '#markmaker' )
 				.width( 0 )
 				.show()

@@ -40,6 +40,8 @@
 				}
 			},
 			mousemove: function( context, e ) {
+				// Draw the cursor
+				modules.capture.fn.commonLoop( context );
 				if ( context.mouseDown && context.modules.capture.state == "drawing" )
 					modules.capture.fn.capturePoint( context );
 			},
@@ -76,6 +78,29 @@
 					$( '#markmaker-controls, #contributor-fields, #translator-fields, #markmaker-legal-line' )
 						.css( 'zIndex', 200 );
 					// TODO - save our state here
+				}
+			},
+			mouseout: function( context, e ) {
+				var lC = context.modules.capture;
+				lC.layerManager.layers['liveDrawingLayer'].clean();
+				if( context.$cursorTooltip ) {
+					// set timeout for hiding the tooltip
+					clearTimeout( context.tooltipFader );
+					context.tooltipFader = setTimeout( function() {
+						context.$cursorTooltip
+						.stop( true, true )
+						.fadeOut( 'fast' );
+					}, 100 );
+				}
+			},
+			mouseover: function( context, e ) {
+				if( context.$cursorTooltip ) {
+					clearTimeout( context.tooltipFader );
+					context.tooltipFader = setTimeout( function() {
+						context.$cursorTooltip
+						.stop( true, true )
+						.fadeIn( 'fast' );
+					}, 100 );
 				}
 			},
 			ready: function ( context, e ) {
@@ -129,8 +154,6 @@
 				if ( !lC.initialized ) return;
 				// increment the frame counter
 				lC.frameCount++;
-				// Draw the cursor
-				modules.capture.fn.commonLoop( context );
 				// state specific code
 				switch( context.modules.capture.state ) {
 					case "drawing":
@@ -524,10 +547,8 @@
 			},
 			commonLoop: function( context ) {
 				var lC = context.modules.capture;
-				
 				// clear the drawing layer
 				lC.layerManager.layers['liveDrawingLayer'].clean();
-				
 				// draw the cursor if the cursor is in the frame
 				if( context.mouseIn && ( lC.state == "drawing" || lC.state == "intro" ) ) {
 					modules.capture.fn.drawCursor( 
@@ -542,18 +563,6 @@
 								top: context.mouseY - context.$cursorTooltip.height() - 32,
 								left: context.mouseX + 8
 							} );
-						if( context.$cursorTooltip.is( ':not(:visible)' ) ) {
-							context.$cursorTooltip
-								.stop( true, true )
-								.fadeIn( 'fast' );
-						}
-					}
-				} else if( ! context.mouseIn ) {
-					// move the tooltip here. 
-					if( context.$cursorTooltip ) {
-						context.$cursorTooltip
-							.stop( true, true )
-							.fadeOut();
 					}
 				}
 			},

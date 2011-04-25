@@ -148,8 +148,6 @@
 						}
 					},
 					loop: function( e ) {
-						// reset the delay
-						setTimeout( function() { context.fn.loop( ); }, 42 );
 						// incremenet the counter
 						context.frameCount++;
 						// dispatch the event
@@ -333,7 +331,7 @@
 					return context.fn.trigger( e.type, e );
 				} );
 			// start the loop
-			context.fn.loop();
+			setInterval( context.fn.loop, 42 );
 		}
 		
 		// Convert the arguments to an array to make this easier
