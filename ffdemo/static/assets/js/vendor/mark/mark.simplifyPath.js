@@ -61,7 +61,7 @@ var Mark = ( function ( mark ) {
 			var simpPoints = [];
 			// always retain the first point
 			simpPoints.push( points.shift() );
-			simpPoints = simpPoints.concat( mark.simplification.douglasPeucker( points, tolerance ) );
+			simpPoints = simpPoints.concat( mark.simplification.douglasPeucker( points.slice( 0, -1 ), tolerance ) );
 			// and always retain the last two points
 			simpPoints.push( points[points.length - 2] );
 			simpPoints.push( points[points.length - 1] );
