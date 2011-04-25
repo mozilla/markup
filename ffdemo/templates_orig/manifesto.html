@@ -3,13 +3,13 @@
 {% block bodytag %}
   <body class="manifesto">
 {% endblock %}
-
 {% block content %}
 	<section id="static-content">
-		<h1>{{ _('Manifesto') }}</h1>
+		<h1>{{ _('We Believe') }}</h1>
 		
 		<blockquote>{% blocktrans %}"An open Net embraces free culture. That doesn't mean disrespecting the copyright of others. It means instead enabling others to share and build upon the work you want the Net to love. Practice the freedom you expect from others, by licensing your work as freely as you can."{% endblocktrans %}</blockquote>
 		<cite>{% blocktrans with '#' as lessig_mark_url %}- <a href="{{ lessig_mark_url }}">Lawrence Lessig for Mark Up{% endblocktrans %}</a></cite>
+		<h3>{% blocktrans %}By making a mark you are indicating that you also believe that&hellip;{% endblocktrans %}</h3>
 		<p>{% blocktrans %}The Web is an integral part of modern life.<br />
 		It is an educator, a communicator, an entertainer, an inspirer, a collaboration of all our creative efforts.<br />
 		It sparks movements and enables us to share our ideas, our thoughts, our dreams.{% endblocktrans %}</p>
@@ -20,6 +20,8 @@
 		<p>{% blocktrans %}Mark Up is a celebration of that freedom.<br />
 		Each person’s mark is an individual expression on a continuous line symbolizing solidarity.<br />
 		It is a declaration and a chance to show your support for a people's Web.{% endblocktrans %}</p>
+		<h2>{{ _('About Mozilla') }}</h2>
+		<p>{% blocktrans with "http://www.mozilla.org/" as moz_url %}Mozilla is a global, non-profit organization dedicated to making the Web better. We believe in principle over profit, and that the Internet is a shared public resource to be cared for, not a commodity to be sold. We work with a worldwide community to create free, open source software like Mozilla Firefox, and to innovate for the benefit of the individual and the betterment of the Web. The result is great products built by passionate people and better choices for everyone. For more information, visit <a href="{{ moz_url }}">www.mozilla.org</a>.{% endblocktrans %}</p>
 	</section>
 {% endblock %}
 

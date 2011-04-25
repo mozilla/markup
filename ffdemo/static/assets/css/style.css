@@ -1228,6 +1228,10 @@ footer #legal a:hover {
 	font-weight: normal;
 	vertical-align: middle;
 }
+#static-content h3 {
+	font-size: 1.1em;
+	margin: 2em 0 0.4em;
+}
 #static-content p {
 	line-height: 1.6em ;
 	font-size: 1em;
