@@ -1259,6 +1259,9 @@ footer #legal a:hover {
 #static-content .col-main {
 	width: 700px;
 }
+#static-content .video {
+  padding-bottom: 50px;
+}
 #about-nav ul {
 	list-style: none;
 	padding: 88px 0 10px 0;
