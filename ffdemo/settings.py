@@ -90,6 +90,8 @@ DOMAIN_METHODS = {
 TOWER_KEYWORDS = {
     #'_lazy': None,
 }
+# The POT headers take care of the encoding.
+TOWER_ADD_HEADERS = True
 
 # Fake Jinja2 config for tower. Don't ask. (If you must, bug 647352).
 def JINJA_CONFIG():

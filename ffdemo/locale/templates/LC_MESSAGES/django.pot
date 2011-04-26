@@ -1,3 +1,17 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-26 12:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.6.0\n"
+
 #: markup/requests.py:49
 #: markup/requests.py:152
 #: markup/requests.py:182
@@ -53,6 +67,7 @@ msgid "Querying by reference requires a reference string"
 msgstr ""
 
 #: templates_orig/about.html:11
+#: templates_orig/manifesto.html:23
 #: templates_orig/mozilla.html:8
 msgid "About Mozilla"
 msgstr ""
@@ -63,8 +78,8 @@ msgid "GML"
 msgstr ""
 
 #: templates_orig/about.html:13
-#: templates_orig/base.html:55
-#: templates_orig/evan-roth.html:8
+#: templates_orig/base.html:58
+#: templates_orig/evan-roth.html:11
 msgid "Evan Roth"
 msgstr ""
 
@@ -84,9 +99,10 @@ msgstr ""
 
 #: templates_orig/about.html:22
 msgid ""
-"A non-profit company dedicated to placing the future of the Web in the hands "
-"of the people.<br /> An artist inspired by graffiti and free culture.<br /> "
-"What happens when these two like-minded entities come together?"
+"Mozilla is a non-profit organization dedicated to placing the future of the "
+"Web in the hands of the people.<br /> An artist inspired by graffiti and "
+"free culture.<br /> What happens when these two like-minded entities come "
+"together?"
 msgstr ""
 
 #: templates_orig/about.html:27
@@ -101,108 +117,108 @@ msgid ""
 "open Web advocate Lawrence Lessig <a href=\"/manifesto\">here</a>."
 msgstr ""
 
-#: templates_orig/base.html:8
-#: templates_orig/base.html:12
-#: templates_orig/base.html:16
+#: templates_orig/base.html:11
+#: templates_orig/base.html:15
 #: templates_orig/base.html:19
+#: templates_orig/base.html:22
 #: templates_orig/base_min.html:5
 msgid "Mozilla Firefox Mark Up"
 msgstr ""
 
-#: templates_orig/base.html:9
+#: templates_orig/base.html:12
 msgid ""
 "The Web is your creation. Show your support to keep it open and accessible "
 "to all. Make your mark."
 msgstr ""
 
-#: templates_orig/base.html:17
+#: templates_orig/base.html:20
 msgid ""
 "The Web is your creation. And, Mark Up is an open invitation to show your "
 "support for keeping the Web public and accessible to all. Make your mark."
 msgstr ""
 
-#: templates_orig/base.html:32
+#: templates_orig/base.html:35
 msgid "Mozilla"
 msgstr ""
 
-#: templates_orig/base.html:33
+#: templates_orig/base.html:36
 msgid "Mozilla Mark Up"
 msgstr ""
 
-#: templates_orig/base.html:38
+#: templates_orig/base.html:41
 msgid "Coming soon"
 msgstr ""
 
-#: templates_orig/base.html:40
+#: templates_orig/base.html:43
 #: templates_orig/sammy/makemark.html:9
 msgid "Make Your Mark"
 msgstr ""
 
-#: templates_orig/base.html:41
-#: templates_orig/manifesto.html:9
-msgid "Manifesto"
+#: templates_orig/base.html:44
+#: templates_orig/manifesto.html:8
+msgid "We Believe"
 msgstr ""
 
-#: templates_orig/base.html:42
+#: templates_orig/base.html:45
 msgid "Behind The Code"
 msgstr ""
 
-#: templates_orig/base.html:43
+#: templates_orig/base.html:46
 #: templates_orig/community.html:9
 msgid "Community"
 msgstr ""
 
-#: templates_orig/base.html:44
-#: templates_orig/base.html:70
-#: templates_orig/base.html:71
+#: templates_orig/base.html:47
+#: templates_orig/base.html:73
+#: templates_orig/base.html:74
 msgid "Download Firefox 4"
 msgstr ""
 
-#: templates_orig/base.html:56
+#: templates_orig/base.html:59
 msgid "Collaborating with Mark Up"
 msgstr ""
 
-#: templates_orig/base.html:57
+#: templates_orig/base.html:60
 msgid ""
 "Learn more about our collaboration with artist Evan Roth and Lawrence "
 "Lessig's contribution."
 msgstr ""
 
-#: templates_orig/base.html:60
+#: templates_orig/base.html:63
 msgid "Mozilla Newsletter"
 msgstr ""
 
-#: templates_orig/base.html:61
+#: templates_orig/base.html:64
 msgid "Read all about it"
 msgstr ""
 
-#: templates_orig/base.html:62
+#: templates_orig/base.html:65
 msgid ""
 "Subscribe to Mozilla's monthly email newsletter and receive the latest tips "
 "and tricks for getting the most out of Firefox."
 msgstr ""
 
-#: templates_orig/base.html:65
+#: templates_orig/base.html:68
 msgid "Web Of Wonders"
 msgstr ""
 
-#: templates_orig/base.html:66
+#: templates_orig/base.html:69
 msgid "Web O'(pen) Wonder"
 msgstr ""
 
-#: templates_orig/base.html:67
+#: templates_orig/base.html:70
 msgid ""
 "Want to see what the Web is really capable of? Explore the Web O' Wonder "
 "demo gallery and prepare to be amazed!"
 msgstr ""
 
-#: templates_orig/base.html:72
+#: templates_orig/base.html:75
 msgid ""
 "Enjoy the latest version featuring a new look, more speed and other "
 "awesomeness."
 msgstr ""
 
-#: templates_orig/base.html:89
+#: templates_orig/base.html:92
 msgid ""
 "The Mozilla Firefox Mark Up campaign is a publicly accessible campaign site. "
 "If you choose to use your formal signature, then please recognize that it "
@@ -210,7 +226,7 @@ msgid ""
 "who comes to this site."
 msgstr ""
 
-#: templates_orig/base.html:90
+#: templates_orig/base.html:93
 msgid ""
 "Mozilla appeals to your sense of propriety and we ask that you avoid "
 "offensive or unlawful marks. Mozilla reserves the right to remove marks that "
@@ -218,19 +234,19 @@ msgid ""
 "more information."
 msgstr ""
 
-#: templates_orig/base.html:93
+#: templates_orig/base.html:96
 msgid "Privacy Policy"
 msgstr ""
 
-#: templates_orig/base.html:94
+#: templates_orig/base.html:97
 msgid "Legal Notices"
 msgstr ""
 
-#: templates_orig/base.html:95
+#: templates_orig/base.html:98
 msgid "Report Trademark Abuse"
 msgstr ""
 
-#: templates_orig/base.html:98
+#: templates_orig/base.html:101
 msgid ""
 "Except where otherwise noted, content on this site is licensed under the <a "
 "href=\"%(cclicenseurl)s\" target=\"_blank\">Creative Commons Attribution Share-"
@@ -260,7 +276,7 @@ msgid ""
 "or to submit your visualization of the MarkUp data set."
 msgstr ""
 
-#: templates_orig/evan-roth.html:10
+#: templates_orig/evan-roth.html:13
 msgid ""
 "Evan Roth is an artist and researcher based in Paris who explores the "
 "intersection of free culture and popular culture, making work simultaneously "
@@ -280,7 +296,7 @@ msgid ""
 "Museum London's Designs of the Year."
 msgstr ""
 
-#: templates_orig/evan-roth.html:11
+#: templates_orig/evan-roth.html:14
 msgid ""
 "Roth is co-founder of the <a href=\"%(research_url)s\">Graffiti Research "
 "Lab</a> and the <a href=\"%(fat_url)s\">Free Art & Technology Lab</a> (F.A.T. "
@@ -293,11 +309,11 @@ msgid ""
 "(esquire_url)s\">Esquire</a> and <a href=\"%(juxtapoz_url)s\">Juxtapoz</a>."
 msgstr ""
 
-#: templates_orig/gml.html:8
+#: templates_orig/gml.html:11
 msgid "Graffiti Markup Language"
 msgstr ""
 
-#: templates_orig/gml.html:17
+#: templates_orig/gml.html:20
 msgid ""
 "Graffiti Markup Language (.gml) is a universal, XML-based, open file format "
 "designed to store graffiti motion data (x coordinates, y coordinates and "
@@ -305,7 +321,7 @@ msgid ""
 "collaborations between graffiti writers and hackers."
 msgstr ""
 
-#: templates_orig/gml.html:18
+#: templates_orig/gml.html:21
 msgid ""
 "For more information on .gml, and ways of connecting your Mark with other "
 "projects, go to <a href=\"%"
@@ -348,7 +364,7 @@ msgstr ""
 msgid "url"
 msgstr ""
 
-#: templates_orig/manifesto.html:11
+#: templates_orig/manifesto.html:10
 msgid ""
 "\"An open Net embraces free culture. That doesn't mean disrespecting the "
 "copyright of others. It means instead enabling others to share and build "
@@ -356,8 +372,12 @@ msgid ""
 "others, by licensing your work as freely as you can.\""
 msgstr ""
 
-#: templates_orig/manifesto.html:12
+#: templates_orig/manifesto.html:11
 msgid "- <a href=\"%(lessig_mark_url)s\">Lawrence Lessig for Mark Up"
+msgstr ""
+
+#: templates_orig/manifesto.html:12
+msgid "By making a mark you are indicating that you also believe that&hellip;"
 msgstr ""
 
 #: templates_orig/manifesto.html:13
@@ -383,6 +403,7 @@ msgid ""
 "is a declaration and a chance to show your support for a people's Web."
 msgstr ""
 
+#: templates_orig/manifesto.html:24
 #: templates_orig/mozilla.html:9
 msgid ""
 "Mozilla is a global, non-profit organization dedicated to making the Web "
@@ -489,6 +510,10 @@ msgstr ""
 
 #: templates_orig/registration/locked.html:5
 msgid "You have been locked out. Please try again in >1 hour"
+msgstr ""
+
+#: templates_orig/registration/login.html:10
+msgid "Your username and password didn't match. Please try again."
 msgstr ""
 
 #: templates_orig/registration/login.html:20
