@@ -67,7 +67,6 @@
 						// start a new stroke unless we already have a stroke open for some reason
 						if( !context.modules.capture.currentStroke ) modules.capture.fn.startStroke( context );
 						modules.capture.fn.endIntro( context );
-						
 						break;
 				}
 			},
@@ -82,7 +81,7 @@
 			},
 			mouseout: function( context, e ) {
 				var lC = context.modules.capture;
-				lC.layerManager.layers['liveDrawingLayer'].clean();
+				lC.layerManager.layers['cursorLayer'].clean();
 				if( context.$cursorTooltip ) {
 					// set timeout for hiding the tooltip
 					clearTimeout( context.tooltipFader );
@@ -195,6 +194,7 @@
 
 					// add two layers for the interface to use
 					lC.layerManager.addLayer( 'drawnLayer' );
+					lC.layerManager.addLayer( 'cursorLayer' );
 					lC.layerManager.addLayer( 'liveDrawingLayer' );
 
 					// trigger resize so our new layers are sized to fit
@@ -212,9 +212,6 @@
 					lC.$capture.remove();
 					lC.initialized = false;
 				} );
-			},
-			initIntro: function ( context ) {
-				
 			},
 			initDrawing: function ( context ) {
 				var lC = context.modules.capture;
@@ -548,11 +545,11 @@
 			commonLoop: function( context ) {
 				var lC = context.modules.capture;
 				// clear the drawing layer
-				lC.layerManager.layers['liveDrawingLayer'].clean();
+				lC.layerManager.layers['cursorLayer'].clean();
 				// draw the cursor if the cursor is in the frame
 				if( context.mouseIn && ( lC.state == "drawing" || lC.state == "intro" ) ) {
 					modules.capture.fn.drawCursor( 
-						lC.layerManager.layers['liveDrawingLayer'].context, 
+						lC.layerManager.layers['cursorLayer'].context, 
 						context.mouseX, 
 						context.mouseY, 
 						( lC.captureLimit - lC.capturedPoints ) / lC.captureLimit  );
@@ -566,12 +563,10 @@
 					}
 				}
 			},
-			introLoop: function( context ) {
-				
-			},
 			drawLoop: function( context ) {
 				var lC = context.modules.capture;
 				// Clean the drawing layer
+				lC.layerManager.layers['liveDrawingLayer'].clean();
 				if( lC.currentStroke && lC.currentStroke.length > 0 ) {
 					// draw out what we've got in the stroke buffer
 					Mark.thickBrush( lC.layerManager.layers['liveDrawingLayer'].context, [lC.currentStroke] );
