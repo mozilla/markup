@@ -25,10 +25,10 @@ CACHES = { }
 DATABASES = { }
 DATABASE_ROUTERS = ('multidb.MasterSlaveRouter',)
 
+SITE_ID = 1
+
 ## Internationalization.
 TIME_ZONE = 'America/Los_Angeles'
-
-SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -44,16 +44,16 @@ TEXT_DOMAIN = 'django'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-US'
+SUPPORTED_LANGUAGES = ('de', 'en-US', 'fr', 'ru')
 
-RESPONSYS_ID = ''
-
-# Accepted locales
-LANGUAGES = (
-    ('de', 'German'),
-    ('en', 'English'),
-    ('fr', 'French'),
-    ('ru', 'Russian'),
-)
+# Accepted locales:
+# Override Django's built-in with our native names
+class LazyLangs(dict):
+    def __new__(self):
+        from product_details import product_details
+        return tuple([(lang, product_details.languages[lang]['native'])
+                      for lang in SUPPORTED_LANGUAGES])
+LANGUAGES = lazy(LazyLangs, tuple)()
 
 # Where to store product details etc.
 PROD_DETAILS_DIR = path('lib/product_details_json')
@@ -70,9 +70,6 @@ LOCALE_INDEPENDENT_PATHS = (
 )
 
 #RTL_LANGUAGES = ('ar', 'he',)  # ('fa', 'fa-IR')
-# Fallbacks for locales that are not recognized by Babel. Bug 596981.
-BABEL_FALLBACK = {'fy-nl': 'nl'}
-
 
 # Tells the extract script what files to look for l10n in and what function
 # handles the extraction. The Tower library expects this.
@@ -183,3 +180,7 @@ FIXTURE_DIRS = (
     PROJECT_PATH + '/fixtures/',
 )
 SOUTH_TESTS_MIGRATE = False
+
+
+# Newsletter Foo
+RESPONSYS_ID = ''
