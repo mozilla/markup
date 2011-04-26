@@ -125,6 +125,12 @@ Apache, do this:
 
 ## L10n
 
+The ``ffdemo/locale`` directory is kept in SVN. After checking out from git,
+you want to separately check out that dir like this:
+
+    cd ffdemo
+    svn checkout http://svn.mozilla.org/projects/l10n-misc/trunk/markup/locale
+
 Markup uses the [tower][tower] library for string extraction. To extract
 strings from template files, run something like:
 
