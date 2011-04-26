@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-26 12:41-0700\n"
+"POT-Creation-Date: 2011-04-26 13:36-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: de\n"
@@ -86,7 +86,7 @@ msgid ""
 msgstr ""
 
 #: templates_orig/about.html:27
-msgid "Hereâs where youâll find more information on Mozilla, Evan Roth and the project born of their collaboration."
+msgid "Here's where you'll find more information on Mozilla, Evan Roth and the project born of their collaboration."
 msgstr ""
 
 #: templates_orig/about.html:29
@@ -181,7 +181,7 @@ msgstr ""
 
 #: templates_orig/base.html:93
 msgid ""
-"Mozilla appeals to your sense of propriety and we ask that you avoid offensive or unlawful marks. Mozilla reserves the right to remove marks that are offensive and/or violate the law. See Mozillaâs "
+"Mozilla appeals to your sense of propriety and we ask that you avoid offensive or unlawful marks. Mozilla reserves the right to remove marks that are offensive and/or violate the law. See Mozilla's "
 "Legal Notices for more information."
 msgstr ""
 
@@ -253,7 +253,7 @@ msgid "For more information on .gml, and ways of connecting your Mark with other
 msgstr ""
 
 #: templates_orig/home.html:11
-msgid "Oops! Your browser doesnât support the features used on this site. Please download a more modern browser like <a href=\"%(download_url)s\">Firefox 4</a>."
+msgid "Oops! Your browser doesn't support the features used on this site. Please download a more modern browser like <a href=\"%(download_url)s\">Firefox 4</a>."
 msgstr ""
 
 #: templates_orig/home.html:18
@@ -312,7 +312,7 @@ msgstr ""
 
 #: templates_orig/manifesto.html:20
 msgid ""
-"Mark Up is a celebration of that freedom.<br /> Each personâs mark is an individual expression on a continuous line symbolizing solidarity.<br /> It is a declaration and a chance to show your "
+"Mark Up is a celebration of that freedom.<br /> Each person's mark is an individual expression on a continuous line symbolizing solidarity.<br /> It is a declaration and a chance to show your "
 "support for a people's Web."
 msgstr ""
 
@@ -337,7 +337,7 @@ msgstr ""
 
 #: templates_orig/newsletter.html:8
 msgid ""
-"Subscribe to our monthly updates and keep current with Mozilla news, including the latest tips and tricks for getting the most out of your Firefox browser. Itâs the perfect way for us to keep in "
+"Subscribe to our monthly updates and keep current with Mozilla news, including the latest tips and tricks for getting the most out of your Firefox browser. It's the perfect way for us to keep in "
 "touch!"
 msgstr ""
 
