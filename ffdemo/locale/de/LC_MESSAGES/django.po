@@ -217,7 +217,7 @@ msgid "<a href=\"%(githuburl)s\">Get Code at GitHub</a>"
 msgstr ""
 
 #: templates_orig/code.html:12
-msgid "Email <a href=\"%(email_href)s\">markup@mozilla.org</a> for more information or to submit your visualization of the MarkUp data set."
+msgid "Email <a href=\"%(email_href)s\">markup@mozilla.org</a> for more information or to submit your visualization of the Mark Up data set."
 msgstr ""
 
 #: templates_orig/evan-roth.html:13
@@ -668,7 +668,7 @@ msgid "Submitting Mark"
 msgstr ""
 
 #: templates_orig/sammy/makemark.html:69
-msgid "Loading Mozilla MarkUp"
+msgid "Loading Mozilla Mark Up"
 msgstr ""
 
 #: templates_orig/sammy/makemark.html:70

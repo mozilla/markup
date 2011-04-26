@@ -1,7 +1,7 @@
 Markup
 ===
 
-Firefox MarkUp is a [Django][Django]-based web application...
+Firefox Mark Up is a [Django][Django]-based web application...
 [Django]: http://www.djangoproject.com/
 
 Getting Started
@@ -119,7 +119,7 @@ Apache, do this:
 
 ## Javascript (Minification)
 
-[Jim][Jim] is used for managing the JavaScript in Mozilla MarkUp. More information is available [here][Jim].
+[Jim][Jim] is used for managing the JavaScript in Mozilla Mark Up. More information is available [here][Jim].
 [Jim]: https://github.com/quirkey/jim
 
 
