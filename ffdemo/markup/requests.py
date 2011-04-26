@@ -87,13 +87,13 @@ def init_viz_data(request):
     else:
         pass
 
-        response['max_id'] = all_marks[all_marks.count() - 1].id
-        response['last_mark'] = all_marks[all_marks.count() - 1].reference
-        response['first_mark'] = all_marks[0].reference
-        response['first_mark_at'] = all_marks[0].date_drawn.strftime("%a, %d %b %Y %I:%M:%S")
-        response['total_countries'] = Mark.objects.values('country_code').distinct().count()
-        json_response = simplejson.dumps(response)
-        return HttpResponse(json_response, 'application/json')
+    response['max_id'] = all_marks[all_marks.count() - 1].id
+    response['last_mark'] = all_marks[all_marks.count() - 1].reference
+    response['first_mark'] = all_marks[0].reference
+    response['first_mark_at'] = all_marks[0].date_drawn.strftime("%a, %d %b %Y %I:%M:%S")
+    response['total_countries'] = Mark.objects.values('country_code').distinct().count()
+    json_response = simplejson.dumps(response)
+    return HttpResponse(json_response, 'application/json')
 
 @require_POST
 def save_mark(request):
