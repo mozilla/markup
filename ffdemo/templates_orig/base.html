@@ -1,8 +1,11 @@
 {% load i18n %}
 
+{% get_current_language as LANG %}
+{% get_current_language_bidi as LANG_BIDI %}
+
 {% load localeurl_tags %}
 <!DOCTYPE html> 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="{{ LANG }}" dir="{% if LANG_BIDI %}rtl{% else %}ltr{% endif %}"> 
 	<head> 
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="title" content="{{ _('Mozilla Firefox Mark Up') }}">
@@ -87,7 +90,7 @@
 			</section>
 			<section id='legal'>
 				<p class="legal-blurb">{% blocktrans %}The Mozilla Firefox Mark Up campaign is a publicly accessible campaign site. If you choose to use your formal signature, then please recognize that it will be viewable to those with whom you share it online as well as to anyone who comes to this site.{% endblocktrans %}</p>
-				<p class="legal-blurb last">{% blocktrans %}Mozilla appeals to your sense of propriety and we ask that you avoid offensive or unlawful marks. Mozilla reserves the right to remove marks that are offensive and/or violate the law. See Mozilla’s Legal Notices for more information.{% endblocktrans %}</p>
+				<p class="legal-blurb last">{% blocktrans %}Mozilla appeals to your sense of propriety and we ask that you avoid offensive or unlawful marks. Mozilla reserves the right to remove marks that are offensive and/or violate the law. See Mozilla's Legal Notices for more information.{% endblocktrans %}</p>
 				<nav id="legal-links">
 					<ul>
 						<li><a href="http://www.mozilla.com/privacy-policy.html?WT.mc_id=markup&WT.mc_ev=click" target="_blank">{{ _('Privacy Policy') }}</a></li>

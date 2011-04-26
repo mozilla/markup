@@ -1,6 +1,6 @@
 *.py[co]
-*.pot
 *.mo
+*.[mp]o~
 ffenv
 
 ffdemo/settings_local.py

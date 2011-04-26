@@ -117,7 +117,26 @@ Apache, do this:
      AddType image/svg+xml svg
 
 
-## Javascript
+## Javascript (Minification)
 
-[Jim][Jim] is used for managing the javascript in Mozilla MarkUp. More information is available [here][Jim].
+[Jim][Jim] is used for managing the JavaScript in Mozilla MarkUp. More information is available [here][Jim].
 [Jim]: https://github.com/quirkey/jim
+
+
+## L10n
+
+Markup uses the [tower][tower] library for string extraction. To extract
+strings from template files, run something like:
+
+    ./manage.py extract
+    ./manage.py verbatimize --rename
+    ./manage.py merge
+
+For more information, consult the tower docs.
+
+To compile .po files into .mo, run:
+
+    cd locale
+    ./compile-mo.sh .
+
+[tower]: https://github.com/clouserw/tower
