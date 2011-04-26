@@ -18,6 +18,7 @@
       "jquery.socialShare",
       "jquery.ui-selectBox",
       "canvas_extensions",
+      "canvg",
       "mark.layer",
       "mark.layerManager",
       "mark.gmlPoint",

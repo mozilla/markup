@@ -30,13 +30,15 @@ var Mark = ( function ( mark ) {
 		// resize all layers to the passed width and height
 		this.resizeAll = function( w, h ) {
 			for( var layer in this.layers ) {
-				this.layers[layer].setSize( w, h );
+				if( this.layers[layer].autoResize )
+					this.layers[layer].setSize( w, h );
 			}
 		};
 		
 		this.init();
 	
 	};
+	
 	return mark;
 	
 }( Mark || {} ) );

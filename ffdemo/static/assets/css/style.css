@@ -349,7 +349,6 @@ body.about-code #about-code a {
 	background: transparent;
 	position: absolute;
 	top: 0;
-	width: 100%;
 }
 
 #site-info {
@@ -371,7 +370,6 @@ body.about-code #about-code a {
 	background-repeat: repeat-x;
 	background-position: 0 70%;
 }
-
 #intro-content {
 	width: 600px;
 	margin: 0 auto;
@@ -382,8 +380,7 @@ body.about-code #about-code a {
 	top: -50px;
 	left: -100px;
 	bottom: -50px;
-	right: -10000px;
-	background-image: url('/media/assets/images/bigX.svg');
+	right: -100px;
 }
 #browse-marks,
 #intro-main-copy,

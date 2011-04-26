@@ -7,16 +7,17 @@ var Mark = ( function ( mark ) {
 		this.dirtyRectangles = [];
 		this.layerName = name;
 		this.manager = manager;
-	
+		this.autoResize = true;
+		
 		this.clean = function() {
 			if( this.dirtyRectangles.length == 0 ) {
 				// if theres no dirtyRectangles, clear the whole thing (probably not the best default)
 				this.context.clearRect( 0, 0, this.canvas.width, this.canvas.height );
 			} else {
 				// loop through dirty rectangles, and run clearRect on each
-				for( var i = 0; i< this.dirtyRectangles.length; i++ ) {
-					var rect = this.dirtyRectangles[i];
-					this.context.clearRect( i.x, i.y, i.w, i.h );
+				while( this.dirtyRectangles.length > 0 ) {
+					var dR = this.dirtyRectangles.pop();
+					this.context.clearRect( dR.x, dR.y, dR.w, dR.h );
 				}
 			}
 		};

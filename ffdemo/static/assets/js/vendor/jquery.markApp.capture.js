@@ -40,10 +40,10 @@
 				}
 			},
 			mousemove: function( context, e ) {
-				// Draw the cursor
-				modules.capture.fn.commonLoop( context );
 				if ( context.mouseDown && context.modules.capture.state == "drawing" )
 					modules.capture.fn.capturePoint( context );
+				// Draw the cursor
+				modules.capture.fn.updateCursor( context );
 			},
 			mousedown: function( context, e ) {
 				switch ( context.modules.capture.state ) {
@@ -86,19 +86,25 @@
 					// set timeout for hiding the tooltip
 					clearTimeout( context.tooltipFader );
 					context.tooltipFader = setTimeout( function() {
-						context.$cursorTooltip
-						.stop( true, true )
-						.fadeOut( 'fast' );
+						if( context.$cursorTooltip ) {
+							context.$cursorTooltip
+							.stop( true, true )
+							.fadeOut( 'fast' );
+						}
 					}, 100 );
 				}
 			},
 			mouseover: function( context, e ) {
+				// Draw the cursor
+				modules.capture.fn.updateCursor( context, true );
 				if( context.$cursorTooltip ) {
 					clearTimeout( context.tooltipFader );
 					context.tooltipFader = setTimeout( function() {
-						context.$cursorTooltip
-						.stop( true, true )
-						.fadeIn( 'fast' );
+						if ( context.$cursorTooltip ) {
+							context.$cursorTooltip
+							.stop( true, true )
+							.fadeIn( 'fast' );
+						}
 					}, 100 );
 				}
 			},
@@ -192,11 +198,13 @@
 
 					lC.layerManager = new Mark.layerManager( lC.$capture.get( 0 ) );
 
+					// setup our cursor
+					modules.capture.fn.initCursor( context );
+					
 					// add two layers for the interface to use
 					lC.layerManager.addLayer( 'drawnLayer' );
-					lC.layerManager.addLayer( 'cursorLayer' );
 					lC.layerManager.addLayer( 'liveDrawingLayer' );
-
+					
 					// trigger resize so our new layers are sized to fit
 					context.fn.trigger( 'resize' );
 					
@@ -284,7 +292,10 @@
 					.fadeIn( 'fast' )
 					.find( 'p' )
 						.text( context.fn.getString( 'cursor-tooltip-capture-msg' ) )
-						.end();
+						.end()
+					// move it off screen, in case it fades in before a mousemoveevent has fired
+					.css( { 'top': -400 } )
+					.fadeIn( 'fast' );
 				setTimeout( function() {
 					var cTT = context.$cursorTooltip;
 					delete context.$cursorTooltip;
@@ -518,49 +529,60 @@
 				g.closePath();
 				g.stroke();
 			},
-			drawCursor: function ( g, x, y, per ) {
+			drawCursor: function ( layer, per ) {
+				var g = layer.context;
+				// clear the drawing layer
+				layer.clean();
+				// redraw it
 				g.strokeStyle = '#ff5400';
 				g.fillStyle = '#000000';
 				// draw stroke
 				g.beginPath();
-				g.moveTo( x, y );
-				g.lineTo( x + 1, y - 8 );
-				g.lineTo( x + 20, y - 27 );
-				g.lineTo( x + 23, y - 23 );
-				g.lineTo( x, y );
+				g.moveTo( 0, 29 );
+				g.lineTo( 1, 21 );
+				g.lineTo( 20, 2 );
+				g.lineTo( 23, 6 );
+				g.lineTo( 0, 29 );
 				g.closePath();
 				g.stroke();
 				// draw filling
 				per *= 18.5;
 				per += 4.5;
 				g.beginPath();
-				g.moveTo( x, y );
-				g.lineTo( x + 1, y - 8 );
-				g.lineTo( x + ( per - 3 ), y - ( per + 4 ) );
-				g.lineTo( x + per, y - per );
-				g.lineTo( x, y );
+				g.moveTo( 0, 29 );
+				g.lineTo( 1, 21 );
+				g.lineTo( ( per - 3 ), 29 - ( per + 4 ) );
+				g.lineTo( per, 29 - per );
+				g.lineTo( 0, 29 );
 				g.closePath();
 				g.fill();
+				layer.dirtyRectangles.push( { 'x': 0, 'y': 0, 'w': 30, 'h': 30 } );
 			},
-			commonLoop: function( context ) {
+			initCursor: function( context ) {
 				var lC = context.modules.capture;
-				// clear the drawing layer
-				lC.layerManager.layers['cursorLayer'].clean();
-				// draw the cursor if the cursor is in the frame
-				if( context.mouseIn && ( lC.state == "drawing" || lC.state == "intro" ) ) {
+				lC.layerManager.addLayer( 'cursorLayer' );
+				lC.layerManager.layers['cursorLayer'].autoResize = false;
+				lC.layerManager.layers['cursorLayer'].setSize( 25, 29 );
+			},
+			updateCursor: function( context, forceRedraw ) {
+				var lC = context.modules.capture;
+				// always move it
+				$( lC.layerManager.layers['cursorLayer'].canvas )
+								.css( {'top': context.mouseY - 29, 'left': context.mouseX } );
+				// redraw it if the ink level has changed
+				if( forceRedraw || lC.capturedPoints != lC.lastPointCount ) {
+					lC.lastPointCount = lC.capturedPoints;
 					modules.capture.fn.drawCursor( 
-						lC.layerManager.layers['cursorLayer'].context, 
-						context.mouseX, 
-						context.mouseY, 
+						lC.layerManager.layers['cursorLayer'],
 						( lC.captureLimit - lC.capturedPoints ) / lC.captureLimit  );
-					// move the tooltip here. 
-					if( context.$cursorTooltip ) {
-						context.$cursorTooltip
-							.css( {
-								top: context.mouseY - context.$cursorTooltip.height() - 32,
-								left: context.mouseX + 8
-							} );
-					}
+				}
+				// move the tooltip here. 
+				if( context.$cursorTooltip ) {
+					context.$cursorTooltip
+						.css( {
+							top: context.mouseY - context.$cursorTooltip.height() - 32,
+							left: context.mouseX + 8
+						} );
 				}
 			},
 			drawLoop: function( context ) {
