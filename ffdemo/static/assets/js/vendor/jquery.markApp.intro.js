@@ -155,11 +155,17 @@
 							.css( { 'top': bOffset + 12, 'left': rAnchor - $( '#intro-main-copy' ).width() } );
 						$( '#intro-main-copy' )
 							.css( { 'top': bOffset - $( '#intro-main-copy' ).height() - 100, 'left': rAnchor - $( '#intro-main-copy' ).width() } );
+						$( '#learn-more-link' )
+							.css( {
+								'top': $( '#learn-more-target' ).position().top - 5,
+								'left': Math.ceil( $( '#learn-more-target' ).position().left ) + 4
+							} );
+						modules.intro.fn.drawX( context );
+						
 						if( wasHidden ) {
 							$( '#markmaker, #browse-marks, #click-anywhere, #intro-main-copy' )
 								.css( { 'display': 'none' } );
 						}
-						modules.intro.fn.drawX( context );
 					} )
 					.trigger( 'resize.markApp', [context.width, context.height] )
 					.width( 0 )
