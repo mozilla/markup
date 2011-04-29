@@ -161,7 +161,7 @@ def delete_mark(request):
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
 
-def delete_al_based_on_ip(request):
+def delete_all_based_on_ip(request):
     #    Completely remove all marks based on IP
     response = {'success': False}
     if not request.user.is_authenticated():
@@ -509,9 +509,7 @@ def all_marks(request):
         else:
             #    No marks to dump
             response['success'] = False
-            response['error'] = _("No marks to be parsed")
-            json_response = simplejson.dumps(response)
-            return HttpResponseServerError(json_response, 'application/json')
+            response['error'] = _("No marks available")
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
     return HttpResponse(json_response, 'application/json')
@@ -566,7 +564,7 @@ def marks_by_flagged(request):
             #    We need to decode the points obj simplified
             decoded_points_obj = common.decode_points_obj(m.points_obj_simplified)
             #    Append to all marks
-            all_marks.append({'date_drawn': m.date_drawn, 'reference': m.reference, 'id': m.id, 'points_obj_simplified': decoded_points_obj, 'contributor': m.contributor, 'country_code': m.country_code, 'is_approved': m.is_approved})
+            all_marks.append({'date_drawn': m.date_drawn, 'reference': m.reference, 'id': m.id, 'points_obj_simplified': decoded_points_obj, 'contributor': m.contributor, 'country_code': m.country_code, 'is_approved': m.is_approved, 'ip_address': m.ip_address})
         response['success'] = True
         response['marks'] = all_marks
     else:
