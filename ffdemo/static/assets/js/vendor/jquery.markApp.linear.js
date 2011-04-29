@@ -351,6 +351,11 @@
 						e.preventDefault();
 						modules.linear.fn.deleteCurrentMark( context );
 					} );
+				$( '#delete-all-from-ip' )
+					.click( function( e ) {
+						e.preventDefault();
+						modules.linear.fn.deleteAllFromIp( context );
+					} );
 				$( '#approve-mark-checkbox' )
 					.change( function( e ) {
 						e.preventDefault();
@@ -972,6 +977,27 @@
 						// hide mark details and set the current mark to nada
 						lC.currentMark = null;
 						modules.linear.fn.hideMarkInformation( context );
+					},
+					error: function ( data ) {
+						// TODO translate this msg
+						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
+					}
+				} );
+			},
+			deleteAllFromIp: function ( context ) {
+				var lC = context.modules.linear;
+				var targetMarkIp = lC.currentMark.reference;
+				$.ajax( {
+					url: '/requests/delete_all_based_on_ip',
+					data: {
+						'ip': targetMarkIp
+					},
+					type: 'POST',
+					dataType: 'JSON',
+					success: function( data ) {
+						// Delete all and reload the page
+						// Doing one by one could get expensive
+						location.reload();
 					},
 					error: function ( data ) {
 						// TODO translate this msg
