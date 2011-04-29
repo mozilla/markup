@@ -99,6 +99,7 @@ def init_viz_data(request):
 def save_mark(request):
     #    Default response
     response = {'success': False}
+
     #    Check for mandatory POST data
     if 'points_obj' in request.POST and 'points_obj_simplified' in request.POST:
     #    Cosntruct mark data
@@ -119,7 +120,7 @@ def save_mark(request):
             pass
 
         #    Save new mark, handled by common.py
-        new_mark_reference = common.save_new_mark_with_data(mark_data)
+        new_mark_reference = common.save_new_mark_with_data(mark_data, request.META['REMOTE_ADDR'])
         #    Successful response, returning new mark reference
         response['success'] = True
         response['mark_reference'] = new_mark_reference
@@ -154,6 +155,30 @@ def delete_mark(request):
                 return HttpResponseServerError(json_response, 'application/json')
         else:
             response['error'] = _("No mark specified")
+            json_response = simplejson.dumps(response)
+            return HttpResponseServerError(json_response, 'application/json')
+
+    json_response = simplejson.dumps(response)
+    return HttpResponse(json_response, 'application/json')
+
+def delete_al_based_on_ip(request):
+    #    Completely remove all marks based on IP
+    response = {'success': False}
+    if not request.user.is_authenticated():
+        response['error'] = _('Authentication required')
+        json_response = simplejson.dumps(response)
+        return HttpResponseServerError(json_response, 'application/json')
+    else:
+        if 'ip' in request.POST and len(request.POST['ip']) > 0:
+            try:
+                Mark.objects.filter(ip_address=request.POST['ip']).delete()
+                response['success'] = True
+            except Mark.DoesNotExist:
+                response['error'] = _('Marks from IP address do not exist')
+                json_response = simplejson.dumps(response)
+                return HttpResponseServerError(json_response, 'application/json')
+        else:
+            response['error'] = _("No IP address specified")
             json_response = simplejson.dumps(response)
             return HttpResponseServerError(json_response, 'application/json')
 
