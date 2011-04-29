@@ -644,7 +644,7 @@
 						marks[i].points_obj_simplified == "" ) continue;
 					var points_obj = JSON.parse( marks[i].points_obj_simplified );
 					// do some validation to make sure this mark wont break the viz
-					if( points_obj == null || !( 'strokes' in points_obj ) || 
+					if( points_obj == null || !(points_obj instanceof Object) || !( 'strokes' in points_obj ) || 
 						points_obj.strokes.length == 0 ||
 						points_obj.strokes[0].length < 2 ) continue;
 					var mark = new Mark.gmlMark( points_obj.strokes, marks[i].reference, marks[i].country_code, marks[i].date_drawn, points_obj.rtl, marks[i].id, marks[i].is_approved );
