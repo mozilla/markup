@@ -18,6 +18,8 @@ class Mark(models.Model):
     # contributor attrs
     contributor_locale = models.CharField(max_length=5, blank=True, null=True)
     contributor = models.CharField(max_length=75, blank=True, null=True)
+    duplicate_check = models.BigIntegerField(default=0)
+    ip_address = models.CharField(max_length=128, blank=True, null=True)
 
     def __unicode__(self):
         return unicode(self.date_drawn)

@@ -40,7 +40,7 @@ def decode_mark_objects(data):
     return
 
 
-def save_new_mark_with_data(data):
+def save_new_mark_with_data(data, ip_address):
     # Remove whitespace from raw full points obj
     stripped_points_obj_full = re.sub(r'\s', '', data['points_obj'])
     # remove whitespace where not in extra_info (the contributor quote)
@@ -59,8 +59,16 @@ def save_new_mark_with_data(data):
     # Encode both
     encoded_points_obj_full = stripped_points_obj_full.encode('base64', 'strict')
     encoded_points_obj_simplified = stripped_points_obj_simplified.encode('base64', 'strict')
+
+    # Ensure duplicates aren't being introduced
+    existing_mark = Mark.objects.filter(duplicate_check=hash(stripped_points_obj_full))
+    if existing_mark:
+        return existing_mark.reference
+
     # New mark
     new_mark = Mark.objects.create()
+    new_mark.duplicate_check = hash(stripped_points_obj_full)
+    new_mark.ip_address = ip_address
     new_mark.points_obj = encoded_points_obj_full
     new_mark.points_obj_simplified = encoded_points_obj_simplified
     new_mark.reference = short_url.encode_url(new_mark.id)

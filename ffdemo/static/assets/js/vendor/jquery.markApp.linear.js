@@ -351,6 +351,11 @@
 						e.preventDefault();
 						modules.linear.fn.deleteCurrentMark( context );
 					} );
+				$( '#delete-all-from-ip' )
+					.click( function( e ) {
+						e.preventDefault();
+						modules.linear.fn.deleteAllFromIp( context );
+					} );
 				$( '#approve-mark-checkbox' )
 					.change( function( e ) {
 						e.preventDefault();
@@ -639,7 +644,7 @@
 						marks[i].points_obj_simplified == "" ) continue;
 					var points_obj = JSON.parse( marks[i].points_obj_simplified );
 					// do some validation to make sure this mark wont break the viz
-					if( points_obj == null || !( 'strokes' in points_obj ) || 
+					if( points_obj == null || !(points_obj instanceof Object) || !( 'strokes' in points_obj ) || 
 						points_obj.strokes.length == 0 ||
 						points_obj.strokes[0].length < 2 ) continue;
 					var mark = new Mark.gmlMark( points_obj.strokes, marks[i].reference, marks[i].country_code, marks[i].date_drawn, points_obj.rtl, marks[i].id, marks[i].is_approved );
@@ -972,6 +977,27 @@
 						// hide mark details and set the current mark to nada
 						lC.currentMark = null;
 						modules.linear.fn.hideMarkInformation( context );
+					},
+					error: function ( data ) {
+						// TODO translate this msg
+						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
+					}
+				} );
+			},
+			deleteAllFromIp: function ( context ) {
+				var lC = context.modules.linear;
+				var targetMarkIp = lC.currentMark.reference;
+				$.ajax( {
+					url: '/requests/delete_all_based_on_ip',
+					data: {
+						'ip': targetMarkIp
+					},
+					type: 'POST',
+					dataType: 'JSON',
+					success: function( data ) {
+						// Delete all and reload the page
+						// Doing one by one could get expensive
+						location.reload();
 					},
 					error: function ( data ) {
 						// TODO translate this msg
