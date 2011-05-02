@@ -336,7 +336,8 @@ body.about-code #about-code a {
 	min-height: 500px;
 }
 #sammy,
-#markapp {
+#markapp,
+.overlay-wrapper {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -1179,12 +1180,13 @@ footer #legal a:hover {
 }
 #fallback-content {
 	margin: 160px auto;
-	width: 420px;
+	width: 400px;
 	font-size: 0.9em;
 	background: #ff5400;
 	border: 2px solid #ffffff;
 	color: #ffffff;
 	line-height: 20px;
+	padding: 10px 30px 0;
 }
 #markapp-error-content {
 	margin: 0 auto;
@@ -1195,6 +1197,12 @@ footer #legal a:hover {
 	color: #ffffff;
 	line-height: 20px;
 	cursor: pointer;
+	padding: 10px 30px 0;
+}
+#fallback-content h3,
+#markapp-error-content h3 {
+	font-size: 20px;
+	margin: 10px 0 5px;
 }
 #fallback-content p,
 #markapp-error-content p {
@@ -1202,7 +1210,7 @@ footer #legal a:hover {
 	background-position: 10px 100%;
 	background-repeat: no-repeat;
 	margin: 0 0 -18px;
-	padding: 30px 50px 50px;
+	padding: 10px 0 40px;
 	font-size: 13px;
 }
 #fallback-content p a,
