@@ -23,5 +23,14 @@ $( document ).ready( function () {
 			}
 		} );
 	}
+	
+	//	Try binding click event to locale here
+	$("#current-locale").click(function ()
+	{
+		$( this ).parent().find("ul").toggle();
+		$( this ).toggleClass("selected");
+		return false;
+	});
+	
 } );
 
