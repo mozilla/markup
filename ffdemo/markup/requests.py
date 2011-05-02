@@ -244,6 +244,7 @@ def marks_by_offset(request):
     response = {'success': False}
     marks_to_be_dumped = None
     did_fail_get_marks = False
+    max_returned = 50
 
     #    We've got an offset to play with
     if 'offset' in request.GET:
@@ -251,6 +252,8 @@ def marks_by_offset(request):
         if 'max' in request.GET:
             offset = request.GET['offset']
             max = request.GET['max']
+            if max > max_returned:
+                max = max_returned
             #    We can also filter by country code if need be
             if 'country_code' in request.GET:
                 marks_to_be_dumped = Mark.objects.exclude.exclude(contributor_locale__isnull=False).filter(country_code=request.GET['country_code'])[offset:max]
@@ -318,6 +321,7 @@ def marks_by_reference(request):
     reference_mark = None
     include_back = 0
     include_forward = 15
+    max_before_after = 50
     include_mark = True
     country_code = None
     marks_to_be_dumped = None
@@ -351,11 +355,15 @@ def marks_by_reference(request):
     if 'include_forward' in request.GET:
         try:
             include_forward = int(request.GET['include_forward'])
+            if include_forward > max_before_after:
+                include_forward = max_before_after
         except ValueError:
             return HttpResponseBadRequest()
         if 'include_back' in request.GET:
             try:
                 include_back = int(request.GET['include_back'])
+                if include_back > max_before_after:
+                    include_back = max_before_after
             except ValueError:
                 return HttpResponseBadRequest()
         if 'country_code' in request.GET:
@@ -451,7 +459,7 @@ def all_marks(request):
     #
     #     offset:        Integer -
     #     max:           Integer - (defaults 15)
-    #     country_code:      String  - filter by country-code
+    #     country_code:  String  - filter by country-code
     #
     # returns json object including relevant marks with their attributes: id, reference string, points_obj, points_obj_simplified
 
@@ -461,7 +469,7 @@ def all_marks(request):
     include_back = 3
     include_forward = 15
     include_mark = True
-    max_returned = 15
+    max_returned = 50
 
     marks_to_be_dumped = None
     did_fail_get_marks = False
@@ -472,6 +480,8 @@ def all_marks(request):
         if 'max' in request.GET:
             offset = request.GET['offset']
             max = request.GET['max']
+            if max > max_returned:
+              max = max_returned
             # We can also filter by country code if need be
             if 'country_code' in request.GET:
                 marks_to_be_dumped = Mark.objects.exclude(

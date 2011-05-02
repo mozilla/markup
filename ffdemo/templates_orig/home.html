@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block js %}
-<!--script src="/media/assets/js/markUp_app.min.js" type="text/javascript"></script-->
+{% if DEBUG == True %}
 <script src="/media/assets/js/vendor/jquery.markApp.js" type="text/javascript"></script>
 <script src="/media/assets/js/vendor/jquery.markApp.linear.js" type="text/javascript"></script>
 <script src="/media/assets/js/vendor/jquery.markApp.capture.js" type="text/javascript"></script>
@@ -28,6 +28,10 @@
 <script src="/media/assets/js/vendor/plugins/sammy.hash_push_proxy.js" type="text/javascript"></script>
 <script src="/media/assets/js/vendor/plugins/sammy.template.js" type="text/javascript"></script>
 <script src="/media/assets/js/vendor/app.js" type="text/javascript"></script>
+{% else %}
+<script src="/media/assets/js/markUp_app.min.js" type="text/javascript"></script>
+{% endif %}
+
 {% endblock %}
 
 {% block content %}
