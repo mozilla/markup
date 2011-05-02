@@ -9,7 +9,14 @@
 
 {% block about-content %}
 	<h1>{{ _('Evan Roth') }}</h1>
-	<img src="/media/assets/images/evan_roth_bio.jpg" width="300" height="250" alt="Evan Roth" />
+	<div class="video">
+		<video width="500" height="281" controls="" poster="/media/assets/images/evan_roth_video.jpg"><br>
+			<source src="http://videos.mozilla.org/serv/flux/markup/evan-interview.mp4" type="video/mp4"><br>
+			<source src="http://videos.mozilla.org/serv/flux/markup/evan-interview.webm" type="video/webm"><br>
+			<source src="http://videos.mozilla.org/serv/flux/markup/evan-interview.theora.ogv" type="video/ogg"><br>
+				<iframe width="500" height="281" src="http://www.youtube.com/embed/MdiDq1b2Ib8" frameborder="0" allowfullscreen></iframe>
+		</video>
+	</div>
   <p>{% blocktrans %}Evan Roth is an artist and researcher based in Paris who explores the intersection of free culture and popular culture, making work simultaneously for the contemporary art world and the "bored at work" network. His notable pieces include <a href="{{ laser_url }}">L.A.S.E.R. Tag</a> and <a href="{{ throwies_url }}">LED Throwies</a> (Graffiti Research Lab), <a href="{{ glove_url }}">White Glove Tracking</a>, <a href="{{ eyewriter_url }}">EyeWriter</a>, <a href="{{ graffiti_url }}">Graffiti Analysis</a> and a collaboration with <a href="{{ jayz_url }}">Jay-Z</a> on the first open source rap video. Roth's work is in the permanent collection of the Museum of Modern Art NYC and has been exhibited widely in the Americas, Europe and Asia, including the Centre Pompidou, the Kunsthalle Wien, the Tate, the Fondation Cartier and the front page of Youtube. Roth has received numerous awards for his work, including the Golden Nica from Prix Ars Electronica, Rhizome/The New Museum commissions, the Future Everything Award, the inaugural Transmediale Open Web Award and the Design Museum London's Designs of the Year.{% endblocktrans %}</p>
   <p>{% blocktrans %}Roth is co-founder of the <a href="{{ research_url }}">Graffiti Research Lab</a> and the <a href="{{ fat_url }}">Free Art & Technology Lab</a> (F.A.T. Lab), a web based, open source research and development lab. Roth and his work have been featured in multiple outlets, including <a href="{{ npr_url }}">NPR</a>, the <a href="{{ nyt_url }}">New York Times</a>, <a href="{{ liberation_url }}">Liberation</a>, <a href="{{ time_url }}">Time magazine</a>, <a href="{{ cnn_url }}">CNN</a>, <a href="{{ guardian_url }}">the Guardian</a>, <a href="{{ abc_url }}">ABC News</a>, <a href="{{ esquire_url }}">Esquire</a> and <a href="{{ juxtapoz_url }}">Juxtapoz</a>.{% endblocktrans %}</p>
 {% endblock %}
