@@ -1,5 +1,5 @@
 var Mark = ( function ( mark ) { 
-	mark.gmlMark = function( strokes, reference, country_code, time, rtl, id, is_approved ) {
+	mark.gmlMark = function( strokes, reference, country_code, time, rtl, id, is_approved, ip_address ) {
 		this.strokes = strokes;
 		this.country_code = country_code; 
 		this.time = time;
@@ -10,6 +10,7 @@ var Mark = ( function ( mark ) {
 		this.renderedBounds = null;
 		this.id = id ? id : null;
 		this.is_approved = is_approved;
+        this.ip_address = ip_address;
 		this.contributor_name = null;
 		this.extra_info = null;
 		this.contributor_url = null;

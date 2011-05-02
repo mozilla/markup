@@ -646,7 +646,7 @@
 					if( points_obj == null || !(points_obj instanceof Object) || !( 'strokes' in points_obj ) || 
 						points_obj.strokes.length == 0 ||
 						points_obj.strokes[0].length < 2 ) continue;
-					var mark = new Mark.gmlMark( points_obj.strokes, marks[i].reference, marks[i].country_code, marks[i].date_drawn, points_obj.rtl, marks[i].id, marks[i].is_approved );
+					var mark = new Mark.gmlMark( points_obj.strokes, marks[i].reference, marks[i].country_code, marks[i].date_drawn, points_obj.rtl, marks[i].id, marks[i].is_approved, marks[i].ip_address );
 					if( marks[i].contributor ) {
 						mark.contributor_name = marks[i].contributor;
 						mark.extra_info = points_obj.extra_info;
@@ -1000,7 +1000,7 @@
 			},
 			deleteAllFromIp: function ( context ) {
 				var lC = context.modules.linear;
-				var targetMarkIp = lC.currentMark.reference;
+				var targetMarkIp = lC.currentMark.ip_address;
 				$.ajax( {
 					url: '/requests/delete_all_based_on_ip',
 					data: {

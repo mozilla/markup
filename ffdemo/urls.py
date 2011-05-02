@@ -60,5 +60,6 @@ urlpatterns += patterns('markup.requests',
     (r'^requests/marks_by_reference/?$', 'marks_by_reference'),
     (r'^requests/marks_by_flagged/?$', 'marks_by_flagged'),
     (r'^requests/delete_mark/?$', 'delete_mark'),
+    (r'^requests/delete_all_based_on_ip/?', 'delete_all_based_on_ip'),
     (r'^requests/approve_mark/?$', 'approve_mark'),
 )
