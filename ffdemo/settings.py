@@ -67,6 +67,7 @@ LOCALE_INDEPENDENT_PATHS = (
     re.compile('/accounts/login/$'),
     re.compile('/accounts/logout/$'),
     re.compile('/i18n/'),
+    re.compile('/debug/'),
 )
 
 #RTL_LANGUAGES = ('ar', 'he',)  # ('fa', 'fa-IR')

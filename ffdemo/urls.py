@@ -16,6 +16,8 @@ if settings.DEBUG:
         (r'^media/admin/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT + '/admin'}),
         (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
         (r'^templates/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT + '/assets/templates'}),
+        (r'^debug/500/$', 'django.views.generic.simple.direct_to_template', {'template': '500.html'}),
+        (r'^debug/404/$', 'django.views.generic.simple.direct_to_template', {'template': '404.html'}),
     )
 
 urlpatterns += patterns('markup.views',
