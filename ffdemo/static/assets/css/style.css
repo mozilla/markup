@@ -1312,7 +1312,11 @@ footer #legal a:hover {
 {
 	margin-left: 0;
 }
-
+#newsletter-form .field-with-errors {
+	background-color: #FEFEFE;
+	border: 3px solid #FF5400;
+	padding: 3px;
+}
 
 #main-links:after,
 .ui-selectBox:after,

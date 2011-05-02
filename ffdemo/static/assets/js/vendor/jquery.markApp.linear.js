@@ -50,11 +50,13 @@
 						// arrow up
 						e.preventDefault();
 						lC.cameraChange.aZ = 10;
+						modules.linear.fn.hideContributorInformation( context );
 						break;
 					case 40:
 						// arrow down
 						e.preventDefault();
 						lC.cameraChange.aZ = -10;
+						modules.linear.fn.hideContributorInformation( context );
 						break;
 					case 39:
 						// arrow right -- pan the camera to the right
@@ -63,6 +65,7 @@
 						lC.cameraChange.aX = 10;
 						// hide mark info
 						modules.linear.fn.hideMarkInformation( context );
+						modules.linear.fn.hideContributorInformation( context );
 						break;
 					case 37:
 						// arrow left -- pan the camera to the left
@@ -71,6 +74,7 @@
 						lC.cameraChange.aX = -10;
 						// hide mark info
 						modules.linear.fn.hideMarkInformation( context );
+						modules.linear.fn.hideContributorInformation( context );
 						break;
 				}
 			},
@@ -126,22 +130,12 @@
 					if( lC.hoverMark ) lC.hoverMark.color = lC.hoverMark.contributor_name ? '0,139,211' : '0,0,0';
 					// store this hover mark
 					lC.hoverMark = mark;
-					if ( lC.currentMark && lC.hoverMark.reference == lC.currentMark.reference && lC.hoverMark.contributor_name && $( '#mark-information' ).is( ':visible' ) ) {
-						if( $( '#contributor-quote-box' ).is( ':not(:visible)' ) ) {
-							$( '#contributor-quote-box' )
-								.fadeIn( 'fast' )
-								.css( { left: context.mouseX - 15, top: context.mouseY - $( '#contributor-quote-box' ).height() - 15 } );
-						}
-					} else {
-						$( '#contributor-quote-box:visible' ).fadeOut( 'fast' );
-						// set mark to the orange highlight color
+					// set mark to the orange highlight color
+					if( lC.hoverMark.reference != lC.currentMark.reference )
 						lC.hoverMark.color = '255,111,40';
-					}
 				} else if ( lC.hoverMark ) {
 					lC.hoverMark.color = lC.hoverMark.contributor_name ? '0,139,211' : '0,0,0';
 					lC.hoverMark = null;
-					// fade out any contributor quotes we might happen to be showing 
-					$( '#contributor-quote-box:visible' ).fadeOut( 'fast' );
 				}
 				
 			},
@@ -294,10 +288,12 @@
 						$( this ).data( 'mouseDown', true );
 						if( $( this ).is( '#mark-browsing-zoom-in a, #mark-browsing-zoom-out a' ) ) {
 							context.modules.linear.cameraChange.aZ = $( this ).is( '#mark-browsing-zoom-in a' ) ? 10 : -10;
+							modules.linear.fn.hideContributorInformation( context );
 						} else if ( $( this ).is( '#mark-browsing-next a, #mark-browsing-prev a' ) ) {
 							context.modules.linear.cameraChange.aX = $( this ).is( '#mark-browsing-next a' ) ? 10 : -10;
 							// hide the mark information
 							modules.linear.fn.hideMarkInformation( context );
+							modules.linear.fn.hideContributorInformation( context );
 						}
 					} );
 					// populate our country filter select box
@@ -405,6 +401,7 @@
 								} else {
 									// show the error message, with a link back to the main visualization link
 									context.fn.showError( context.fn.getString( 'no-marks-error-msg' ), '#/linear/' );
+									lC.eventChange = true;
 								}
 								lC.requestingMarks = false;
 							}
@@ -440,6 +437,7 @@
 							} else {
 								// show the error message, with a link back to the main visualization link
 								context.fn.showError( context.fn.getString( 'no-marks-error-msg' ), '#/linear/' );
+								lC.eventChange = true;
 							}
 							lC.requestingMarks = false;
 						}
@@ -607,6 +605,7 @@
 				} )
 				.error( function ( data ) {
 					context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
+					lC.eventChange = true;
 				} );
 			},
 			setupMarks: function( context, marks ) {
@@ -881,7 +880,7 @@
 					}
 					$( '#contributor-information' ).show();
 				} else {
-					$( '#mark-contributor-name, #contributor-quote, #contributor-name, #mark-contributor-url' ).text( "" );
+					modules.linear.fn.hideContributorInformation( context );
 					$( '#contributor-information' ).hide();
 					$( '#mark-flag' ).show();
 				}
@@ -910,6 +909,23 @@
 				// animate it in if it's hidden
 				$( '#mark-information' ).fadeIn( 'fast' );
 			},
+			hideMarkInformation: function( context ) {
+				$( '#mark-information' ).fadeOut( 'fast' );
+			},
+			showContributorInformation: function( context ) {
+				var lC = context.modules.linear;
+				$( '#contributor-quote-box' )
+					.css( { 
+						'left': lC.currentMark.renderedBounds.minX, 
+						'top': lC.currentMark.renderedBounds.minY - $( '#contributor-quote-box' ).height() - 15 
+					} )
+					.fadeIn( 'fast' );
+			},
+			hideContributorInformation: function( context ) {
+				$( '#contributor-quote-box' ).fadeOut( 'fast', function() {
+					$( '#contributor-quote, #contributor-name' ).text( "" );
+				} );
+			},
 			resetMarkInformation: function ( context ) {
 				// reset all links
 				$( '#mark-information' )
@@ -919,9 +935,6 @@
 					.end()
 					.find( '#mark-id, #total-mark-count, #mark-timestamp, #mark-country' )
 					
-			},
-			hideMarkInformation: function( context ) {
-				$( '#mark-information' ).fadeOut( 'fast' );
 			},
 			replayCurrentMark: function ( context ) {
 				var lC = context.modules.linear;
@@ -955,6 +968,7 @@
 					},
 					error: function ( data ) {
 						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
+						lC.eventChange = true;
 					}
 				} );
 				
@@ -979,8 +993,8 @@
 						modules.linear.fn.hideMarkInformation( context );
 					},
 					error: function ( data ) {
-						// TODO translate this msg
 						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
+						lC.eventChange = true; 
 					}
 				} );
 			},
@@ -1000,8 +1014,8 @@
 						location.reload();
 					},
 					error: function ( data ) {
-						// TODO translate this msg
 						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
+						lC.eventChange = true;
 					}
 				} );
 			},
@@ -1028,6 +1042,7 @@
 					},
 					error: function ( data ) {
 						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
+						lC.eventChange = true;
 					}
 				} );
 			},
@@ -1081,6 +1096,9 @@
 							.onComplete( function( ) {
 								delete lC.tweens['cameraEase'];
 								if ( typeof callback === "function" ) callback( this );
+								if( lC.currentMark.contributor_name ) {
+									modules.linear.fn.showContributorInformation( context );
+								}
 							} )
 							.easing( speed > 1200 ? TWEEN.Easing.Quadratic.EaseInOut : TWEEN.Easing.Quartic.EaseInOut )
 							.start();
