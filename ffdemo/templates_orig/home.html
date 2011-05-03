@@ -2,11 +2,18 @@
 {% load i18n %}
 
 {% block js %}
+<script type="text/javascript" charset="utf-8">
+	// placing this inline ensures it will run as soon as the page loads, and that fallback content is removed as soon as possible
+	function browserSupportsRequiredFeatures() { return !!( 'getContext' in document.createElement( 'canvas' ) ) && !!( 'JSON' in window ); };
+	if ( browserSupportsRequiredFeatures ) {
+		// remove the placeholder content
+		var elem = document.getElementById( 'fallback' )
+		if ( elem ) {
+			elem.parentNode.removeChild( elem );
+		}
+	}
+</script>
 {% if DEBUG == True %}
-<script src="/media/assets/js/vendor/jquery.markApp.js" type="text/javascript"></script>
-<script src="/media/assets/js/vendor/jquery.markApp.linear.js" type="text/javascript"></script>
-<script src="/media/assets/js/vendor/jquery.markApp.capture.js" type="text/javascript"></script>
-<script src="/media/assets/js/vendor/jquery.markApp.intro.js" type="text/javascript"></script>
 <script src="/media/assets/js/vendor/jquery.delayedBind.js" type="text/javascript"></script>
 <script src="/media/assets/js/vendor/jquery.collapsibleMod.js" type="text/javascript"></script>
 <script src="/media/assets/js/vendor/jquery.socialShare.js" type="text/javascript"></script>
@@ -27,6 +34,10 @@
 <script src="/media/assets/js/vendor/sammy-0.6.3.js" type="text/javascript"></script>
 <script src="/media/assets/js/vendor/plugins/sammy.hash_push_proxy.js" type="text/javascript"></script>
 <script src="/media/assets/js/vendor/plugins/sammy.template.js" type="text/javascript"></script>
+<script src="/media/assets/js/vendor/jquery.markApp.js" type="text/javascript"></script>
+<script src="/media/assets/js/vendor/jquery.markApp.linear.js" type="text/javascript"></script>
+<script src="/media/assets/js/vendor/jquery.markApp.capture.js" type="text/javascript"></script>
+<script src="/media/assets/js/vendor/jquery.markApp.intro.js" type="text/javascript"></script>
 <script src="/media/assets/js/vendor/app.js" type="text/javascript"></script>
 {% else %}
 <script src="/media/assets/js/markUp_app.min.js" type="text/javascript"></script>

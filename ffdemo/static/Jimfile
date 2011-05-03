@@ -9,10 +9,6 @@
       "webtrends"
     ],
     "markUp_app": [
-      "jquery.markApp",
-      "jquery.markApp.linear",
-      "jquery.markApp.capture",
-      "jquery.markApp.intro",
       "jquery.delayedBind",
       "jquery.collapsibleMod",
       "jquery.socialShare",
@@ -33,6 +29,10 @@
       "sammy-0.6.3",
       "sammy.hash_push_proxy",
       "sammy.template",
+      "jquery.markApp",
+      "jquery.markApp.linear",
+      "jquery.markApp.capture",
+      "jquery.markApp.intro",
       "app"
     ]
   },

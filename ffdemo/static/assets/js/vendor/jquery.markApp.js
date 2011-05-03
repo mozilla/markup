@@ -56,8 +56,8 @@
 					},
 					mousemove: function( e ) {
 						// was using the layerX/Y property here, but IE9 was changing the value as the scroll changed. 
-						context.mouseX = e.offsetX;
-						context.mouseY = e.offsetY;
+						context.mouseX = e.offsetX || e.layerX;
+						context.mouseY = e.offsetY || e.layerY;
 					},
 					mousedown: function( e ) {
 						if( 'preventDefault' in e ) e.preventDefault();
