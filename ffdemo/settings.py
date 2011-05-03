@@ -176,6 +176,7 @@ INSTALLED_APPS = (
     'tower',
     'axes',
     'product_details',
+    'commonware.response.cookies',
 )
 
 FIXTURE_DIRS = (
