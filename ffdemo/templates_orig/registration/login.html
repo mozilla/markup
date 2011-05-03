@@ -4,7 +4,7 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<!-- shouldn't really get here... -->
+<p>{{ _("You are already logged in.") }}</p>
 {% else %}
 {% if form.errors %}
 <p>{{ _("Your username and password didn't match. Please try again.") }}</p>
