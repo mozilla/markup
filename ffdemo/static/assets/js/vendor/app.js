@@ -1,17 +1,3 @@
-// check for feature compliance here, outside of the ready event in order to run this as quickly as possible
-function browserSupportsRequiredFeatures() {
-	// detect canvas and native JSON support
-	return !!( 'getContext' in document.createElement( 'canvas' ) ) && 
-		!!( 'JSON' in window );
-}
-if ( browserSupportsRequiredFeatures ) {
-	// remove the placeholder content
-	var elem = document.getElementById( 'fallback' )
-	if ( elem ) {
-		elem.parentNode.removeChild( elem );
-	}
-}
-
 ( function( $ ) {
 	var app = $.sammy( '#sammy', function() {
 		// ROUTES
@@ -156,6 +142,12 @@ if ( browserSupportsRequiredFeatures ) {
 	} );
 	
 	$( document ).ready( function () {
+		// duplicated from the inline script for clarity 
+		function browserSupportsRequiredFeatures() {
+			// detect canvas and native JSON support
+			return !!( 'getContext' in document.createElement( 'canvas' ) ) && 
+				!!( 'JSON' in window );
+		}
 		if ( browserSupportsRequiredFeatures ) {
 			// run the app
 			app.run( '#/' );

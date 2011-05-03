@@ -131,7 +131,7 @@
 					// store this hover mark
 					lC.hoverMark = mark;
 					// set mark to the orange highlight color
-					if( lC.hoverMark.reference != lC.currentMark.reference )
+					if( lC.currentMark == null || lC.hoverMark.reference != lC.currentMark.reference )
 						lC.hoverMark.color = '255,111,40';
 				} else if ( lC.hoverMark ) {
 					lC.hoverMark.color = lC.hoverMark.contributor_name ? '0,139,211' : '0,0,0';
