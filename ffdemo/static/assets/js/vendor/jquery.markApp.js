@@ -55,8 +55,9 @@
 							.trigger( 'resize.markApp', [availableWidth, availableHeight] );
 					},
 					mousemove: function( e ) {
-						context.mouseX = e.layerX;
-						context.mouseY = e.layerY;
+						// was using the layerX/Y property here, but IE9 was changing the value as the scroll changed. 
+						context.mouseX = e.offsetX;
+						context.mouseY = e.offsetY;
 					},
 					mousedown: function( e ) {
 						if( 'preventDefault' in e ) e.preventDefault();
