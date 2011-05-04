@@ -68,6 +68,7 @@ LOCALE_INDEPENDENT_PATHS = (
     re.compile('/accounts/logout/$'),
     re.compile('/i18n/'),
     re.compile('/debug/'),
+#    re.compile('/newsletter/subscribe$'),
 )
 
 #RTL_LANGUAGES = ('ar', 'he',)  # ('fa', 'fa-IR')
@@ -167,6 +168,7 @@ SERIALIZATION_MODULES = {
 INSTALLED_APPS = (
     'localeurl',
     'ffdemo.markup',
+    'ffdemo.responsys',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -184,6 +186,5 @@ FIXTURE_DIRS = (
 )
 SOUTH_TESTS_MIGRATE = False
 
-
 # Newsletter Foo
-RESPONSYS_ID = 'MOZILLA_AND_YOU'
+RESPONSYS_CAMPAIGN = 'MOZILLA_AND_YOU'

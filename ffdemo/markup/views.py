@@ -125,10 +125,15 @@ def community(request):
         all_marks = Mark.objects.exclude(flaggings__gte=1)
     return render_response(request, 'community.html', {'all_marks': all_marks})
 
+#TODO move to top
+from django.utils import translation
+from ffdemo.responsys import forms
 
-@cache_page(60 * 30)
+#@cache_page(60 * 30)
 def newsletter(request):
-    return render_response(request, 'newsletter.html', {'datetime': datetime.datetime.now(), 'responsysid': settings.RESPONSYS_ID })
+    form = forms.EmailSubscribeForm()
+    return render_response(request, 'newsletter.html', {'datetime': datetime.datetime.now(), 'locale': translation.get_language(), 'form': form }
+)
 
 
 @cache_page(60 * 30)

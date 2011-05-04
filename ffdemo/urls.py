@@ -63,3 +63,7 @@ urlpatterns += patterns('markup.requests',
     (r'^requests/delete_all_based_on_ip/?', 'delete_all_based_on_ip'),
     (r'^requests/approve_mark/?$', 'approve_mark'),
 )
+
+urlpatterns += patterns('responsys.views',
+    (r'^newsletter/subscribe$', 'subscribe'),
+)
