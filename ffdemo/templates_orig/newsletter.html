@@ -7,10 +7,7 @@
 		<p><strong>{% blocktrans %}Read all about it in our Mozilla Firefox newsletter{% endblocktrans %}</strong></p>
 
 		<p>{% blocktrans %}Subscribe to our monthly updates and keep current with Mozilla news, including the latest tips and tricks for getting the most out of your Firefox browser. It's the perfect way for us to keep in touch!{% endblocktrans %}</p>
-		{# TODO {{ url('responsys_subscribe') }} #}
-                {# TODO {{locale}} is en-us which not gonna workie #}
-<script type="text/javascript">
-//Wack hack attack to avoid bringing L10n back
+<script type="text/javascript">{# Wack hack attack to avoid bringing L10n back #}
                 {% if form.errors.optin %}
 window.MarkupOptinError = true;
                 {% endif %}
@@ -18,15 +15,12 @@ window.MarkupOptinError = true;
 window.MarkupEmailError = true;
                 {% endif %}
 </script>
-		<form id="newsletter-form" 
-                      action="/en-US/newsletter/subscribe" 
-                      method="POST">
+		<form id="newsletter-form" action="/{{locale}}/newsletter/subscribe" method="POST">
 			<p><label for="id_email">{{ _('Your email address:') }}</label>{{form.email}}</p>
 			<p>
 				<label for="newsletter-countries">{{ _('Country:') }}</label>
 				<select id="newsletter-countries" name="country">
 					<option value="label">{{ _('Select your country') }}</option>
-                                        <option value="us" selected>USA</option>
 				</select>
 			</p>
                         <p><label for="id_optin" id="privacy-check-label">

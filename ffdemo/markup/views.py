@@ -6,6 +6,7 @@ from django.utils import translation
 from django.utils.translation import ugettext_lazy as _lazy
 from django.utils.translation import ugettext as _
 from django.utils import simplejson
+from django.utils import translation
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.template.loader import get_template
@@ -16,6 +17,7 @@ from django.core.context_processors import csrf
 from ffdemo.utils.render import render_response
 from ffdemo.markup.models import Mark, Invitation
 from ffdemo.markup.forms import MarkForm
+from ffdemo.responsys.forms import EmailSubscribeForm
 from django.shortcuts import get_object_or_404
 from ffdemo.markup import common
 import datetime
@@ -125,16 +127,13 @@ def community(request):
         all_marks = Mark.objects.exclude(flaggings__gte=1)
     return render_response(request, 'community.html', {'all_marks': all_marks})
 
-#TODO move to top
-from django.utils import translation
-from ffdemo.responsys import forms
-
-#@cache_page(60 * 30)
+@cache_page(60 * 30)
 def newsletter(request):
-    form = forms.EmailSubscribeForm()
-    return render_response(request, 'newsletter.html', {'datetime': datetime.datetime.now(), 'locale': translation.get_language(), 'form': form }
-)
-
+    form = EmailSubscribeForm()
+    return render_response(request, 'newsletter.html', {
+            'locale': translation.get_language(), 
+            'form': form, 
+            })
 
 @cache_page(60 * 30)
 def home_sammy(request):
