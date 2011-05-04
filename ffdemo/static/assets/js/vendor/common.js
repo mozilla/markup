@@ -33,14 +33,21 @@ $( document ).ready( function () {
 	$( '#newsletter-form' ).submit( function( e ) {
 		$( '.field-with-errors' )
 			.removeClass( 'field-with-errors' );
-		if( isValidEmailAddress( $( '#email' ).val() ) ) {
-			return true;
-		} else {
+                if ($( '#id_email' ).val() !== true) {
 			e.preventDefault();
-			$( '#email' )
+			$( '#id_optin' )
 				.addClass( 'field-with-errors' );
 			return false;
-		}
+                } else {
+		    if( isValidEmailAddress( $( '#id_email' ).val() )) {
+		    	return true;
+  		    } else {
+			e.preventDefault();
+			$( '#id_email' )
+				.addClass( 'field-with-errors' );
+			return false;
+		   }
+                }
 	} );
 	
 	//	Try binding click event to locale here
