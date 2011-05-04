@@ -9,21 +9,10 @@
 		<p>{% blocktrans %}Subscribe to our monthly updates and keep current with Mozilla news, including the latest tips and tricks for getting the most out of your Firefox browser. It's the perfect way for us to keep in touch!{% endblocktrans %}</p>
 		{# TODO {{ url('responsys_subscribe') }} #}
                 {# TODO {{locale}} is en-us which not gonna workie #}
-lasdjkf
-		<form id="newsletter-form" 
-                      action="/en-US/newsletter/subscribe" 
-                      method="POST">
-{{ field.errors }}
-<hr>
-                  {% if form.errors %}
-                      <ol>
-                        {% for error in form.errors %}
-                            <li>{{error|escape}}</li>
-                        {% endfor %}
-                        </ol>
-                  {% endif %}
-			<p><label for="email">{{ _('Your email address:') }}</label>
-{{form.email}} {{email}}</p>
+
+		<form id="newsletter-form" action="/en-US/newsletter/subscribe" method="POST">
+                        {{ field.errors }}
+			<p><label for="email">{{ _('Your email address:') }}</label>{{form.email}}</p>
 			<p>
 				<label for="newsletter-countries">{{ _('Country:') }}</label>
 				<select id="newsletter-countries" name="country">
@@ -32,11 +21,9 @@ lasdjkf
 			</p>
                         <p><label for="privacy-check" id="privacy-check-label">
                             <span class="error-wrapper">{{form.optin}}</span>
-                            <span class="title">I agree to the <a href="/en-US/privacy-policy">Mozilla Privacy Policy</a></span></label></p>
+                            <span class="title">I agree to the <a href="http://mozilla.com/en-US/privacy-policy">Mozilla Privacy Policy</a></span></label></p>
 			<p><input type="submit" value="{{ _('Sign me up!') }}" /></p>
 			<cite>{{ _('We will only send you Mozilla-related information') }}</cite>
-		</form>
-		
-		
+		</form>		
 	</section>
 {% endblock %}
