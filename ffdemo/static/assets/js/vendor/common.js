@@ -49,7 +49,14 @@ $( document ).ready( function () {
 		   }
                 }
 	} );
-	
+	//Page load, check for errors
+        if (window.MarkupOptinError) {
+           $('id_optin').addClass( 'field-with-errors' );
+        }
+        if (window.MarkupEmailError) {
+           $('id_email').addClass( 'field-with-errors' );
+        }
+
 	//	Try binding click event to locale here
 	$("#current-locale").click(function ()
 	{

@@ -9,19 +9,29 @@
 		<p>{% blocktrans %}Subscribe to our monthly updates and keep current with Mozilla news, including the latest tips and tricks for getting the most out of your Firefox browser. It's the perfect way for us to keep in touch!{% endblocktrans %}</p>
 		{# TODO {{ url('responsys_subscribe') }} #}
                 {# TODO {{locale}} is en-us which not gonna workie #}
-
-		<form id="newsletter-form" action="/en-US/newsletter/subscribe" method="POST">
-                        {{ field.errors }}
-			<p><label for="email">{{ _('Your email address:') }}</label>{{form.email}}</p>
+<script type="text/javascript">
+//Wack hack attack to avoid bringing L10n back
+                {% if form.errors.optin %}
+var window.MarkupOptinError = true;
+                {% endif %}
+                {% if form.errors.email %}
+var window.MarkupEmailError = true;
+                {% endif %}
+</script>
+		<form id="newsletter-form" 
+                      action="/en-US/newsletter/subscribe" 
+                      method="POST">
+			<p><label for="id_email">{{ _('Your email address:') }}</label>{{form.email}}</p>
 			<p>
 				<label for="newsletter-countries">{{ _('Country:') }}</label>
 				<select id="newsletter-countries" name="country">
-					<option val="label">{{ _('Select your country') }}</option>
+					<option value="label">{{ _('Select your country') }}</option>
+                                        <option value="us" selected>USA</option>
 				</select>
 			</p>
-                        <p><label for="privacy-check" id="privacy-check-label">
+                        <p><label for="id_optin" id="privacy-check-label">
                             <span class="error-wrapper">{{form.optin}}</span>
-                            <span class="title">I agree to the <a href="http://mozilla.com/en-US/privacy-policy">Mozilla Privacy Policy</a></span></label></p>
+                            <span class="title">{% blocktrans with 'http://mozilla.com/en-US/privacy-policy' as policy %}I agree to the <a href="{{policy}}">Mozilla Privacy Policy</a>{% endblocktrans %}</span></label></p>
 			<p><input type="submit" value="{{ _('Sign me up!') }}" /></p>
 			<cite>{{ _('We will only send you Mozilla-related information') }}</cite>
 		</form>		
