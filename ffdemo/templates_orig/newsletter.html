@@ -12,10 +12,10 @@
 <script type="text/javascript">
 //Wack hack attack to avoid bringing L10n back
                 {% if form.errors.optin %}
-var window.MarkupOptinError = true;
+window.MarkupOptinError = true;
                 {% endif %}
                 {% if form.errors.email %}
-var window.MarkupEmailError = true;
+window.MarkupEmailError = true;
                 {% endif %}
 </script>
 		<form id="newsletter-form" 

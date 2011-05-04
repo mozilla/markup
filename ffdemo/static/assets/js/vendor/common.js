@@ -33,9 +33,10 @@ $( document ).ready( function () {
 	$( '#newsletter-form' ).submit( function( e ) {
 		$( '.field-with-errors' )
 			.removeClass( 'field-with-errors' );
-                if ($( '#id_email' ).val() !== true) {
+                if ($( '#id_optin' ).attr('checked') === false) {
 			e.preventDefault();
-			$( '#id_optin' )
+                        /* checkbox, let's make the label have error style instaed */
+			$( '#id_optin' ).parent().parent()
 				.addClass( 'field-with-errors' );
 			return false;
                 } else {
@@ -51,10 +52,10 @@ $( document ).ready( function () {
 	} );
 	//Page load, check for errors
         if (window.MarkupOptinError) {
-           $('id_optin').addClass( 'field-with-errors' );
+           $('#id_optin').addClass( 'field-with-errors' );
         }
         if (window.MarkupEmailError) {
-           $('id_email').addClass( 'field-with-errors' );
+           $('#id_email').addClass( 'field-with-errors' );
         }
 
 	//	Try binding click event to locale here

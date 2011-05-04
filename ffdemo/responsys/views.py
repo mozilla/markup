@@ -1,4 +1,5 @@
-# ASYNC by default, settings to override
+import datetime
+
 try:
     from django.conf import settings
 except ImportError:
@@ -37,4 +38,7 @@ def subscribe(request):
 
             return redirect('home')
      # Not a POST or an Error 
-    return render_response(request, 'newsletter.html', {'datetime': datetime.datetime.now(), 'locale': translation.get_language(), 'form': form }
+    return render_response(request, 'newsletter.html', {
+            'locale': translation.get_language(), 
+            'form': form,
+            })
