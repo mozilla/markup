@@ -33,7 +33,9 @@
 			hoverMark: null, // holds the mark currently being hovered over
 			currentMark: null,
 			playbackTimes: {}, // used for storing mark playback times by reference
-			eventChange: false // flag to tell the render loop if the mouse is causing changes that need rendered
+			eventChange: false, // flag to tell the render loop if the mouse is causing changes that need rendered
+			defaultMarkData: { "strokes" : 
+	[[{"x":0,"y":82,"z":0,"time":10,"speed":0,"angle":0,"significance":5},{"x":0,"y":81,"z":0,"time":22,"speed":0.01,"angle":3.141592653589793,"significance":1},{"x":0,"y":68,"z":0,"time":90,"speed":0.14,"angle":3.141592653589793,"significance":1},{"x":7,"y":50,"z":0,"time":123,"speed":0.3332047301658354,"angle":3.4903636571737002,"significance":2},{"x":20,"y":29,"z":0,"time":190,"speed":0.44260858235390116,"angle":3.7618421395726145,"significance":1},{"x":35,"y":17,"z":0,"time":223,"speed":0.5762215285808054,"angle":4.003762708257019,"significance":3},{"x":58,"y":3,"z":0,"time":290,"speed":0.4742504557822676,"angle":4.193242866138167,"significance":1},{"x":70,"y":0,"z":0,"time":323,"speed":0.47415714694603095,"angle":4.4674103172578254,"significance":4},{"x":89,"y":1,"z":0,"time":390,"speed":0.3578095606057776,"angle":4.877537657799317,"significance":1},{"x":98,"y":8,"z":0,"time":441,"speed":0.24237752293712705,"angle":5.497787143782138,"significance":4},{"x":103,"y":23,"z":0,"time":490,"speed":0.3523095960802789,"angle":6.004885648174475,"significance":1},{"x":106,"y":27,"z":0,"time":514,"speed":0.3023095960802789,"angle":5.639684198386302,"significance":1},{"x":110,"y":49,"z":0,"time":574,"speed":0.28327886186626583,"angle":6.085789747329706,"significance":1},{"x":110,"y":78,"z":0,"time":691,"speed":0.22047619047619046,"angle":0,"significance":3},{"x":104,"y":93,"z":0,"time":762,"speed":0.20327890704543544,"angle":0.46364760900080615,"significance":1},{"x":92,"y":106,"z":0,"time":824,"speed":0.2368807716974934,"angle":0.7853981633974483,"significance":2},{"x":78,"y":114,"z":0,"time":890,"speed":0.2912068342692647,"angle":1.0303768265243125,"significance":1},{"x":61,"y":121,"z":0,"time":974,"speed":0.22842754885103755,"angle":1.1071487177940904,"significance":2},{"x":54,"y":128,"z":0,"time":1024,"speed":0.21428541322730657,"angle":0.7853981633974483,"significance":1},{"x":49,"y":136,"z":0,"time":1075,"speed":0.20030840419244383,"angle":0.5880026035475675,"significance":2},{"x":47,"y":149,"z":0,"time":1125,"speed":0.24253562503633297,"angle":0.244978663126864,"significance":1},{"x":47,"y":191,"z":0,"time":1508,"speed":0.09529411764705882,"angle":0,"significance":1},{"x":47,"y":192,"z":0,"time":1542,"speed":0.08529411764705883,"angle":0,"significance":5}],[{"x":43,"y":225,"z":0,"time":1997,"speed":0,"angle":0,"significance":5},{"x":42,"y":225,"z":0,"time":2013,"speed":0.01,"angle":1.5707963267948966,"significance":1},{"x":39,"y":227,"z":0,"time":2063,"speed":0.0482842712474619,"angle":0.7853981633974483,"significance":1},{"x":38,"y":230,"z":0,"time":2096,"speed":0.08242640687119286,"angle":0.7853981633974483,"significance":1},{"x":38,"y":242,"z":0,"time":2280,"speed":0.048823529411764724,"angle":0,"significance":3},{"x":42,"y":244,"z":0,"time":2347,"speed":0.07710780065922662,"angle":5.497787143782138,"significance":1},{"x":52,"y":243,"z":0,"time":2498,"speed":0.05555555555555555,"angle":4.71238898038469,"significance":3},{"x":55,"y":239,"z":0,"time":2567,"speed":0.0744322927564787,"angle":3.9269908169872414,"significance":1},{"x":55,"y":231,"z":0,"time":2684,"speed":0.05882352941176471,"angle":3.141592653589793,"significance":1},{"x":53,"y":227,"z":0,"time":2731,"speed":0.07318903308077031,"angle":3.141592653589793,"significance":2},{"x":51,"y":225,"z":0,"time":2772,"speed":0.06904689745703935,"angle":2.356194490192345,"significance":1},{"x":44,"y":224,"z":0,"time":2860,"speed":0.07710579232757896,"angle":2.0344439357957027,"significance":1},{"x":39,"y":224,"z":0,"time":2941,"speed":0.04710579232757896,"angle":1.5707963267948966,"significance":1},{"x":39,"y":226,"z":0,"time":3021,"speed":0.027105792327578954,"angle":0,"significance":1},{"x":39,"y":227,"z":0,"time":3049,"speed":0.03571428571428571,"angle":0,"significance":5}]],"country_code":"","time":1304623497951,"rtl":false,"maxTime":3049,"reference":"","hoverState":false,"renderedBounds":null,"id":null,"contributor_name":null,"extra_info":null,"contributor_url":null,"color":"0,0,0","x":494,"y":101,"position":{"x":0,"y":0,"z":0},"rotationAngle":{"x":0,"y":0,"z":0},"sX":0,"sY":0,"bWidth":110,"bHeight":244}
 		},
 		evt: {
 			ready: function ( context, e ) {
@@ -636,16 +638,25 @@
 					lC.marks[buffer[ reverse ? 0 : buffer.length - 1 ]] :
 					lC.scene.objects[ reverse ? 0 : lC.scene.objects.length - 1];
 				for ( var i = 0; i < marks.length; i++ ) {
-					// if we already have this one, OR if the points data seems suspect, on to the next one
-					if( marks[i].reference in lC.marks ||
-						typeof( marks[i].points_obj_simplified ) === "undefined" ||
+					// if the points data seems suspect, use our default mark data instead
+					if( typeof( marks[i].points_obj_simplified ) === "undefined" ||
 						marks[i].points_obj_simplified == null ||
-						marks[i].points_obj_simplified == "" ) continue;
-					var points_obj = JSON.parse( marks[i].points_obj_simplified );
-					// do some validation to make sure this mark wont break the viz
-					if( points_obj == null || !(points_obj instanceof Object) || !( 'strokes' in points_obj ) || 
-						points_obj.strokes.length == 0 ||
-						points_obj.strokes[0].length < 2 ) continue;
+						marks[i].points_obj_simplified == "" ) {
+						var points_obj = lC.defaultMarkData;
+					} else {
+						try {
+							var points_obj = JSON.parse( marks[i].points_obj_simplified );
+						} catch( e ) {
+							// catch errors parsing the json
+							var points_obj = lC.defaultMarkData;
+						}
+						// if the points_obj seems like it
+						if( points_obj == null || !(points_obj instanceof Object) || !( 'strokes' in points_obj ) || 
+							points_obj.strokes.length == 0 ||
+							points_obj.strokes[0].length < 2 ) {
+							points_obj = lC.defaultMarkData;
+						}
+					}
 					var mark = new Mark.gmlMark( points_obj.strokes, marks[i].reference, marks[i].country_code, marks[i].date_drawn, points_obj.rtl, marks[i].id, marks[i].is_approved, marks[i].ip_address );
 					if( marks[i].contributor ) {
 						mark.contributor_name = marks[i].contributor;

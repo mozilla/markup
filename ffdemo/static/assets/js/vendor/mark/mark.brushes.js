@@ -8,7 +8,7 @@ var Mark = ( function ( mark ) {
 		var p = Mark.renderer.translatePoint( strokes[0][0], translateOptions );
 		var bounds = { minX: p.x, maxX: p.x, minY: p.y, maxY: p.y };
 		// if this mark isn't even close to being on screen, just return
-		if ( ( w && h ) && ( p.x > w*2 || p.x < -w || p.y > h*2 || p.y < -h || p.z > mark.dof || p.z < 0 ) ) return;
+		if ( ( w && h ) && ( p.x > w*2 || p.x < -w || p.y > h*2 || p.y < -h || p.z > mark.dof*2 || p.z < 0 ) ) return;
 		// iterate
 		for( var i = 0; i < strokes.length; i++ ) {
 			if( typeof( strokes[i] ) == "undefined" || strokes[i].length <= 1 ) continue;
@@ -94,11 +94,11 @@ var Mark = ( function ( mark ) {
 		p2 = Mark.renderer.translatePoint( p2, tO );
 		// if these points are both off the screen, don't render the line
 		if ( ( p1.x > w || p1.x < 0 || p1.y > h || p1.y < 0 ) && ( p2.x > w || p2.x < 0 || p2.y > h || p2.y < 0 )  ) return;
-		// if these points are out of the dof, don't render the line
-		if ( p1.z && p2.z && ( p1.z > mark.dof || p1.z < 0 ) && ( p2.z > mark.dof || p2.z < 0 ) ) return;
+		// if either of these points are out of the dof, don't render the line
+		if ( p1.z && p2.z && ( ( p1.z > mark.dof || p1.z < 0 ) || ( p2.z > mark.dof || p2.z < 0 ) ) ) return;
 		g.strokeStyle = 'rgba(0,0,0,' + ( ( mark.dof - p1.z ) / (mark.dof*2) )+')';
-		var distance = 3 * (2/p1.z) * ( h / 2 );
-		if ( distance < 1 ) distance = 1;
+		var distance = (4/(p1.z+p2.z)) * ( h / 2 );
+		distance = Math.min( Math.max( distance, 1 ), 4 );
 		g.lineWidth = distance;
 		g.beginPath();
 		g.dashedLineTo( p1.x, p1.y, p2.x, p2.y, [6,4] );
