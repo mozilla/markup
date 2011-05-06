@@ -1,11 +1,8 @@
 {% load i18n %}
 
-{% get_current_language as LANG %}
-{% get_current_language_bidi as LANG_BIDI %}
-
 {% load localeurl_tags %}
 <!DOCTYPE html> 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="{{ LANG }}" dir="{% if LANG_BIDI %}rtl{% else %}ltr{% endif %}"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="{{ LANG }}" dir="{{ DIR }}"> 
 	<head> 
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="title" content="{{ _('Mozilla Firefox Mark Up') }}">

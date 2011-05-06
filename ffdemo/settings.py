@@ -63,6 +63,7 @@ class LazyLangs(dict):
 
 LANGUAGES = lazy(LazyLangs, dict)()
 
+
 # Where to store product details etc.
 PROD_DETAILS_DIR = path('lib/product_details_json')
 
@@ -172,7 +173,7 @@ def JINJA_CONFIG():
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
-    'django.core.context_processors.i18n',
+    'commons.context_processors.i18n',
     'django.contrib.auth.context_processors.auth',
 )
 
