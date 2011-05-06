@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% comment %}
+
+These strings are not used in 1.0, but will be used in 1.1.  We landed them
+without the features they correspond to so that the localizers start the 
+translation early.
+
+See: https://bugzilla.mozilla.org/show_bug.cgi?id=654880
+     https://bugzilla.mozilla.org/show_bug.cgi?id=654883
+
+{% endcomment %}
+
+
+{% block content %}
+    <p>{{ _('Processing your mark…') }}</p>
+    <p>{{ _('Thanks for submitting your mark! Use your mouse or keyboard keys to browse the other marks Internet users like you have made for the open Web!') }}</p>
+{% endblock %}
