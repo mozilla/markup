@@ -79,11 +79,11 @@
 			<section id="language">
 				<a id="current-locale" href="#">{{ LANGUAGE_CODE }}</a>
 				<ul id="language-selector">
-					{% for lang in LANGUAGES %}
-						{% ifequal lang.0 LANGUAGE_CODE %}
-							<li class="selected">{{ lang.1 }}</li>
+					{% for langcode, langlabel in LANGUAGES.items %}
+						{% ifequal langcode LANGUAGE_CODE %}
+							<li class="selected">{{ langlabel }}</li>
 						{% else %}
-							<li><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.1 }}</a></li>
+							<li><a href="{{ request.path|chlocale:langcode }}">{{ langlabel }}</a></li>
 						{% endifequal %}
 					{% endfor %}
 				</ul>

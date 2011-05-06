@@ -40,10 +40,10 @@
 				}
 			},
 			mousemove: function( context, e ) {
-				if( context.modules.capture.state == "drawing" ) {
-					if ( context.mouseDown )
+				if( context.modules.capture.state == "drawing" && context.mouseDown )
 						modules.capture.fn.capturePoint( context );
 					// Draw the cursor
+				if( context.modules.capture.state == "drawing" || context.modules.capture.state == "intro" ) {
 					modules.capture.fn.updateCursor( context );
 				}
 			},
@@ -572,7 +572,7 @@
 			updateCursor: function( context, forceRedraw ) {
 				var lC = context.modules.capture;
 				// we should never update the cursor if we're not in drawing mode
-				if( lC.state != "drawing" ) return;
+				if( lC.state != "drawing" && lC.state != "intro" ) return;
 				// always move it
 				$( lC.layerManager.layers['cursorLayer'].canvas )
 					.css( {'top': context.mouseY - 29, 'left': context.mouseX } );
