@@ -84,16 +84,16 @@
 			<section id="language">
 				<a id="current-locale" href="#">{{ LANGUAGE_CODE }}</a>
 				<ul id="language-selector">
-					{% for lang in LANGUAGES %}
-						{% ifequal lang.0 LANGUAGE_CODE %}
-							<li class="selected">{{ lang.1 }}</li>
+					{% for langcode, langlabel in LANGUAGES.items %}
+						{% ifequal langcode LANGUAGE_CODE %}
+							<li class="selected">{{ langlabel }}</li>
 						{% else %}
-							<li><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.1 }}</a></li>
+							<li><a href="{{ request.path|chlocale:langcode }}">{{ langlabel }}</a></li>
 						{% endifequal %}
 					{% endfor %}
 				</ul>
 			</section>
-			<section id='legal'>
+                        <section id='legal'>
 				<p class="legal-blurb">{% blocktrans %}The Mozilla Firefox Mark Up campaign is a publicly accessible campaign site. If you choose to use your formal signature, then please recognize that it will be viewable to those with whom you share it online as well as to anyone who comes to this site.{% endblocktrans %}</p>
 				<p class="legal-blurb last">{% blocktrans %}Mozilla appeals to your sense of propriety and we ask that you avoid offensive or unlawful marks. Mozilla reserves the right to remove marks that are offensive and/or violate the law. See Mozilla's Legal Notices for more information.{% endblocktrans %}</p>
 				<nav id="legal-links">
