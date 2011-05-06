@@ -40,10 +40,12 @@
 				}
 			},
 			mousemove: function( context, e ) {
-				if ( context.mouseDown && context.modules.capture.state == "drawing" )
-					modules.capture.fn.capturePoint( context );
-				// Draw the cursor
-				modules.capture.fn.updateCursor( context );
+				if( context.modules.capture.state == "drawing" ) {
+					if ( context.mouseDown )
+						modules.capture.fn.capturePoint( context );
+					// Draw the cursor
+					modules.capture.fn.updateCursor( context );
+				}
 			},
 			mousedown: function( context, e ) {
 				switch ( context.modules.capture.state ) {
@@ -452,6 +454,7 @@
 				g.stroke();
 				// set our cursor back to normal
 				$( '#markapp' ).css( { 'cursor': 'default' } );
+				lC.layerManager.layers['cursorLayer'].clean();
 			},
 			submit: function( context ) {
 				var lC = context.modules.capture;
@@ -546,16 +549,18 @@
 				g.closePath();
 				g.stroke();
 				// draw filling
-				per *= 18.5;
-				per += 4.5;
-				g.beginPath();
-				g.moveTo( 0, 29 );
-				g.lineTo( 1, 21 );
-				g.lineTo( ( per - 3 ), 29 - ( per + 4 ) );
-				g.lineTo( per, 29 - per );
-				g.lineTo( 0, 29 );
-				g.closePath();
-				g.fill();
+				if( per > 0 ) {
+					per *= 18.5;
+					per += 4.5;
+					g.beginPath();
+					g.moveTo( 0, 29 );
+					g.lineTo( 1, 21 );
+					g.lineTo( ( per - 3 ), 29 - ( per + 4 ) );
+					g.lineTo( per, 29 - per );
+					g.lineTo( 0, 29 );
+					g.closePath();
+					g.fill();
+				}
 				layer.dirtyRectangles.push( { 'x': 0, 'y': 0, 'w': 30, 'h': 30 } );
 			},
 			initCursor: function( context ) {
@@ -566,9 +571,11 @@
 			},
 			updateCursor: function( context, forceRedraw ) {
 				var lC = context.modules.capture;
+				// we should never update the cursor if we're not in drawing mode
+				if( lC.state != "drawing" ) return;
 				// always move it
 				$( lC.layerManager.layers['cursorLayer'].canvas )
-								.css( {'top': context.mouseY - 29, 'left': context.mouseX } );
+					.css( {'top': context.mouseY - 29, 'left': context.mouseX } );
 				// redraw it if the ink level has changed
 				if( forceRedraw || lC.capturedPoints != lC.lastPointCount ) {
 					lC.lastPointCount = lC.capturedPoints;
