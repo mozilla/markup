@@ -1069,6 +1069,7 @@
 					if( !deletedMarkIndex ) {
 						deletedMarkIndex = i;
 						lC.scene.objects.splice( i, 1 );
+						i--;
 					} else {
 						// reposition everything after it
 						if ( i == 0 ) {
