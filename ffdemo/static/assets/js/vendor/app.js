@@ -53,6 +53,8 @@
 			$( '#markapp' ).markApp( 'unloadModule', 'capture' );
 			this.partial( 'moderate_sammy.html' )
 				.then( function() {
+					$( '#sammy' ).css( 'zIndex', '' );
+					$( '#markapp' ).css( { 'zIndex': 100, 'cursor': 'default' } );
 					// load the linear module
 					$( '#markapp' ).markApp( 'addModule', { 'linear': { 'is_flagged': true, 'linear_root': 'moderate' } } );
 				} );
