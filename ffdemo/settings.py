@@ -122,6 +122,7 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'commons.middleware.LocaleURLMiddleware',
+    'django.middleware.http.SetRemoteAddrFromForwardedFor',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
