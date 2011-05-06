@@ -38,40 +38,36 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
+# Paths that don't require a locale prefix.
+SUPPORTED_NONLOCALES = ('media', 'admin', 'requests')
+
 # Gettext text domain
 TEXT_DOMAIN = 'django'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-US'
-SUPPORTED_LANGUAGES = ('de', 'en-US', 'fr', 'ru')
+KNOWN_LANGUAGES = ('en-US', 'ar', 'ca', 'cs', 'de', 'el', 'es', 'eu', 'fr', 'ga', 'he', 'hu', 'id', 'it', 'ja', 'ko', 'nl', 'pl', 'rm', 'ru', 'si', 'sl', 'sq', 'th', 'tr', 'zh-CN', 'zh-TW')
 
-# Accepted locales:
+# List of RTL locales known to this project. Subset of LANGUAGES.
+RTL_LANGUAGES = ('ar',)  # ('ar', 'fa', 'fa-IR', 'he')
+
+LANGUAGE_URL_MAP = dict([(i.lower(), i) for i in KNOWN_LANGUAGES])
+
 # Override Django's built-in with our native names
 class LazyLangs(dict):
     def __new__(self):
         from product_details import product_details
-        return tuple([(lang, product_details.languages[lang]['native'])
-                      for lang in SUPPORTED_LANGUAGES])
-LANGUAGES = lazy(LazyLangs, tuple)()
+        return dict([(lang.lower(), product_details.languages[lang]['native'])
+                     for lang in KNOWN_LANGUAGES])
+
+LANGUAGES = lazy(LazyLangs, dict)()
 
 # Where to store product details etc.
 PROD_DETAILS_DIR = path('lib/product_details_json')
 
 # default to accept-language header, per localeurl's settings
 LOCALEURL_USE_ACCEPT_LANGUAGE = True
-
-# don't url-localize requests
-LOCALE_INDEPENDENT_PATHS = (
-    re.compile('requests/'),
-    re.compile('/accounts/login/$'),
-    re.compile('/accounts/logout/$'),
-    re.compile('/i18n/'),
-    re.compile('/debug/'),
-#    re.compile('/newsletter/subscribe$'),
-)
-
-#RTL_LANGUAGES = ('ar', 'he',)  # ('fa', 'fa-IR')
 
 # Tells the extract script what files to look for l10n in and what function
 # handles the extraction. The Tower library expects this.
@@ -125,7 +121,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'localeurl.middleware.LocaleURLMiddleware',
+    'commons.middleware.LocaleURLMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -155,6 +151,25 @@ TEMPLATE_DIRS = (
     PROJECT_PATH + '/templates_orig/sammy',
 )
 
+def JINJA_CONFIG():
+    import jinja2
+    from django.conf import settings
+#    from caching.base import cache
+    config = {'extensions': ['tower.template.i18n', 'jinja2.ext.do',
+                             'jinja2.ext.with_', 'jinja2.ext.loopcontrols'],
+              'finalize': lambda x: x if x is not None else ''}
+#    if 'memcached' in cache.scheme and not settings.DEBUG:
+        # We're passing the _cache object directly to jinja because
+        # Django can't store binary directly; it enforces unicode on it.
+        # Details: http://jinja.pocoo.org/2/documentation/api#bytecode-cache
+        # and in the errors you get when you try it the other way.
+#        bc = jinja2.MemcachedBytecodeCache(cache._cache,
+#                                           "%sj2:" % settings.CACHE_PREFIX)
+#        config['cache_size'] = -1 # Never clear the cache
+#        config['bytecode_cache'] = bc
+    return config
+
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.i18n',
@@ -167,6 +182,9 @@ SERIALIZATION_MODULES = {
 
 INSTALLED_APPS = (
     'localeurl',
+
+    'tower',  # for ./manage.py extract (L10n)
+
     'ffdemo.markup',
     'ffdemo.responsys',
     'django.contrib.auth',
