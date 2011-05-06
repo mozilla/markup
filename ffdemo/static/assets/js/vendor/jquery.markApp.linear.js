@@ -617,7 +617,8 @@
 				// get rid of marks we've already got
 				for( var i = 0; i < marks.length; i++ ) {
 					if( marks[i].reference in lC.marks ) {
-						marks.shift( i, 1 );
+						marks.splice( i, 1 );
+						i--;
 					}
 				}
 				// check again, if this is empty, return
