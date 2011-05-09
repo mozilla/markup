@@ -28,6 +28,7 @@ cd -
 echo -e Updating locale..
 cd $LOCALE_DIR
 svn up
+./compile.sh
 cd -
 
 echo -e Done
