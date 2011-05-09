@@ -74,13 +74,13 @@
 				</div>
 			</section>
 			<section id="language">
-				<a id="current-locale" href="#">{{ LANGUAGE_CODE }}</a>
+				<a id="current-locale" href="#">{{ LANG }}</a>
 				<ul id="language-selector">
 					{% for langcode, langlabel in LANGUAGES.items %}
-						{% ifequal langcode LANGUAGE_CODE %}
+						{% ifequal langcode LANG|lower %}
 							<li class="selected">{{ langlabel }}</li>
 						{% else %}
-							<li><a href="{{ request.path|chlocale:langcode }}">{{ langlabel }}</a></li>
+							<li><a href="/{{ langcode }}">{{ langlabel }}</a></li>
 						{% endifequal %}
 					{% endfor %}
 				</ul>
