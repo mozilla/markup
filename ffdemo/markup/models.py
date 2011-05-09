@@ -8,8 +8,9 @@ import os
 
 
 class Mark(models.Model):
+    id = models.BigIntegerField(primary_key=True)
     date_drawn = models.DateTimeField(auto_now_add=True, db_index=True)
-    reference = models.CharField(max_length=50, blank=True, db_index=True, unique=True)
+    reference = models.CharField(max_length=50, blank=True, unique=True)
     points_obj = models.TextField(blank=True)
     points_obj_simplified = models.TextField(blank=True)
     country_code = models.CharField(max_length=2, blank=True)
@@ -26,7 +27,8 @@ class Mark(models.Model):
 
 
 class Invitation(models.Model):
-        invite_code = models.SlugField(max_length=50, unique=True, db_index=True)
+        id = models.BigIntegerField(primary_key=True)
+        invite_code = models.SlugField(max_length=50, unique=True)
         contributor_type = models.CharField(max_length=1, choices=settings.CONTRIBUTOR_TYPE_CHOICES)
         used_at = models.DateTimeField(blank=True, null=True, db_index=True)
 
