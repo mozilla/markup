@@ -8,8 +8,6 @@ except ImportError:
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 
-from django.utils import translation
-
 from ffdemo.utils.render import render_response
 
 from  . import forms
@@ -33,12 +31,8 @@ def subscribe(request):
                                 data['email'],
                                 'text',
                                 responsys.make_source_url(request),
-                                translation.get_language(),
+                                request.locale,
                                 data['country'])
-
             return HttpResponseRedirect('/')
      # Not a POST or an Error 
-    return render_response(request, 'newsletter.html', {
-            'locale': translation.get_language(), 
-            'form': form,
-            })
+    return render_response(request, 'newsletter.html', {'form': form})

@@ -2,11 +2,9 @@ import json
 import string
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.utils.encoding import force_unicode
-from django.utils import translation
 from django.utils.translation import ugettext_lazy as _lazy
 from django.utils.translation import ugettext as _
 from django.utils import simplejson
-from django.utils import translation
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.template.loader import get_template
@@ -130,10 +128,7 @@ def community(request):
 @cache_page(60 * 30)
 def newsletter(request):
     form = EmailSubscribeForm()
-    return render_response(request, 'newsletter.html', {
-            'locale': translation.get_language(), 
-            'form': form, 
-            })
+    return render_response(request, 'newsletter.html', {'form': form})
 
 @cache_page(60 * 30)
 def home_sammy(request):

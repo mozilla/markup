@@ -63,6 +63,7 @@ class LazyLangs(dict):
 
 LANGUAGES = lazy(LazyLangs, dict)()
 
+
 # Where to store product details etc.
 PROD_DETAILS_DIR = path('lib/product_details_json')
 
@@ -122,6 +123,7 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'commons.middleware.LocaleURLMiddleware',
+    'django.middleware.http.SetRemoteAddrFromForwardedFor',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -172,7 +174,7 @@ def JINJA_CONFIG():
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
-    'django.core.context_processors.i18n',
+    'commons.context_processors.i18n',
     'django.contrib.auth.context_processors.auth',
 )
 

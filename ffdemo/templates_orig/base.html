@@ -1,11 +1,8 @@
 {% load i18n %}
 
-{% get_current_language as LANG %}
-{% get_current_language_bidi as LANG_BIDI %}
-
 {% load localeurl_tags %}
 <!DOCTYPE html> 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="{{ LANG }}" dir="{% if LANG_BIDI %}rtl{% else %}ltr{% endif %}"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" lang="{{ LANG }}" dir="{{ DIR }}"> 
 	<head> 
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="title" content="{{ _('Mozilla Firefox Mark Up') }}">
@@ -77,13 +74,13 @@
 				</div>
 			</section>
 			<section id="language">
-				<a id="current-locale" href="#">{{ LANGUAGE_CODE }}</a>
+				<a id="current-locale" href="#">{{ LANG }}</a>
 				<ul id="language-selector">
-					{% for lang in LANGUAGES %}
-						{% ifequal lang.0 LANGUAGE_CODE %}
-							<li class="selected">{{ lang.1 }}</li>
+					{% for langcode, langlabel in LANGUAGES.items %}
+						{% ifequal langcode LANG|lower %}
+							<li class="selected">{{ langlabel }}</li>
 						{% else %}
-							<li><a href="{{ request.path|chlocale:lang.0 }}">{{ lang.1 }}</a></li>
+							<li><a href="/{{ langcode }}">{{ langlabel }}</a></li>
 						{% endifequal %}
 					{% endfor %}
 				</ul>
