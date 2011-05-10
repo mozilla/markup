@@ -40,6 +40,10 @@ Run the migrations
 
     python ffdemo/manage.py migrate
 
+Run one fixup
+    mysql -uusername -ppassword markup_db < markup/migrations/0012_fix_autoinc.sql
+    
+
 Start your dev server:
 
     python ffdemo/manage.py runserver
