@@ -135,6 +135,19 @@
 				} );
 			},
 			initInterface: function ( context ) {
+				// size the magnify glass graphic
+				$( '#markmaker, #browse-marks' ).css( { 'display': 'block' } );
+				var textWidth = $( '#browse-marks a' ).width();
+				// TODO - set min/max limits on this, and factor out space for the handle
+				$( '#browse-marks img' )
+					.css( {
+						'left': -$( '#browse-marks a' ).width(),
+						'top': -$( '#browse-marks a' ).width(),
+						'width': $( '#browse-marks a' ).width() * 3,
+						'height': $( '#browse-marks a' ).width() * 3
+					} );
+				$( '#markmaker, #browse-marks' ).hide();
+				// setup the onresize handler
 				$( '#markmaker' )
 					.unbind( 'resize.markApp' )
 					.bind( 'resize.markApp', function ( e, w, h ) {
