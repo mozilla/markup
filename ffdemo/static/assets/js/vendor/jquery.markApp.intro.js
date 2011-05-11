@@ -136,7 +136,11 @@
 			},
 			initInterface: function ( context ) {
 				// size the magnify glass graphic
-				$( '#markmaker, #browse-marks' ).css( { 'display': 'block' } );
+				if( !$( '#markmaker' ).is( ':visible' ) ) {
+					wasHidden = true;
+					$( '#markmaker, #browse-marks' )
+						.css( { 'display': 'block' } );
+				}
 				var textWidth = $( '#browse-marks a' ).width();
 				var magWidth = Math.min( Math.max( ( ( textWidth + 60 ) * 1.2 ), 100 ), 209 );
 				$( '#browse-marks img' )
@@ -146,7 +150,10 @@
 					} )
 					.attr( 'width', magWidth )
 					.attr( 'height', magWidth );
-				$( '#markmaker, #browse-marks' ).hide();
+				if( wasHidden ) {
+					$( '#markmaker, #browse-marks' )
+						.css( { 'display': 'none' } );
+				}
 				// setup the onresize handler
 				$( '#markmaker' )
 					.unbind( 'resize.markApp' )

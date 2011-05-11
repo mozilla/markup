@@ -226,7 +226,7 @@
 			initDrawing: function ( context ) {
 				var lC = context.modules.capture;
 				// hide any intro stuff that might be being displayed
-				if( $( '#browse-marks' ).is( ':visible' ) ) {
+				if( $( '#intro-main-copy' ).is( ':visible' ) ) {
 					$( '#browse-marks, #click-anywhere, #intro-main-copy, #the-big-x' )
 						.fadeOut( 'fast' );
 					$( '#markmaker-legal-line' ).fadeIn( 'slow' );
