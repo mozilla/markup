@@ -395,7 +395,8 @@ body.about-code #about-code a {
 }
 #browse-marks {
 	z-index: 300;
-	max-width: 76px;
+	min-width: 50px;
+	min-height: 50px;
 }
 #browse-marks a {
 	position: absolute;
