@@ -47,7 +47,26 @@ TEXT_DOMAIN = 'django'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-US'
-KNOWN_LANGUAGES = ('en-US', 'ar', 'ca', 'cs', 'de', 'el', 'es', 'eu', 'fr', 'ga', 'he', 'hu', 'id', 'it', 'ja', 'ko', 'nl', 'pl', 'rm', 'ru', 'si', 'sl', 'sq', 'th', 'tr', 'zh-CN', 'zh-TW')
+KNOWN_LANGUAGES = (
+    'en-US',
+    'ar',
+    'ca',
+    'de',
+    'el',
+    'es',
+    'fr',
+    'fy-NL',
+    'gl',
+    'id',
+    'ja',
+    'ko',
+    'nl',
+    'pl',
+    'pt-BR',
+    'sl',
+    'sq',
+    'zh-TW',
+)
 
 # List of RTL locales known to this project. Subset of LANGUAGES.
 RTL_LANGUAGES = ('ar',)  # ('ar', 'fa', 'fa-IR', 'he')
