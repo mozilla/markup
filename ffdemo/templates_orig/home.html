@@ -11,14 +11,29 @@
 		if ( elem ) {
 			elem.parentNode.removeChild( elem );
 		}
+	} else {
+		// unhide the noscript fallback content
+		var elem = document.getElementById( 'fallback' );
+		if ( elem ) {
+			// remove the display none
+			elem.removeAttribute( 'style' );
+		}
 	}
 </script>
 <script src="/media/assets/js/markUp_app.min.js" type="text/javascript"></script>
-
+<script src="/media/assets/js/vendor/app.js" type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}
-	<div id="fallback" class="overlay-wrapper">
+	<noscript>
+		<div id="fallback" class="overlay-wrapper">
+			<div id="fallback-content">
+				<p>{% blocktrans with "http://www.mozilla.com/products/download.html?WT.mc_id=markup&WT.mc_ev=click" as download_url %}Oops! Your browser doesn't support the features used on this site.
+				Please download a more modern browser like <a href="{{ download_url }}">Firefox 4</a>.{% endblocktrans %}</p>
+			</div>
+		</div>
+	</noscript>
+	<div id="fallback" class="overlay-wrapper" style="display:none;">
 		<div id="fallback-content">
 			<p>{% blocktrans with "http://www.mozilla.com/products/download.html?WT.mc_id=markup&WT.mc_ev=click" as download_url %}Oops! Your browser doesn't support the features used on this site.
 			Please download a more modern browser like <a href="{{ download_url }}">Firefox 4</a>.{% endblocktrans %}</p>
