@@ -138,14 +138,14 @@
 				// size the magnify glass graphic
 				$( '#markmaker, #browse-marks' ).css( { 'display': 'block' } );
 				var textWidth = $( '#browse-marks a' ).width();
-				// TODO - set min/max limits on this, and factor out space for the handle
+				var magWidth = Math.min( Math.max( ( ( textWidth + 60 ) * 1.2 ), 100 ), 209 );
 				$( '#browse-marks img' )
 					.css( {
-						'left': -$( '#browse-marks a' ).width(),
-						'top': -$( '#browse-marks a' ).width(),
-						'width': $( '#browse-marks a' ).width() * 3,
-						'height': $( '#browse-marks a' ).width() * 3
-					} );
+						'left': -32,
+						'top': -(textWidth / 2) - 18
+					} )
+					.attr( 'width', magWidth )
+					.attr( 'height', magWidth );
 				$( '#markmaker, #browse-marks' ).hide();
 				// setup the onresize handler
 				$( '#markmaker' )
@@ -163,7 +163,7 @@
 								.css( { 'display': 'block' } );
 						}
 						$( '#browse-marks' )
-							.css( { 'top': bOffset - 50, 'left': rAnchor - 85 } );
+							.css( { 'top': bOffset - 30, 'left': rAnchor - 85 } );
 						$( '#click-anywhere' )
 							.css( { 'top': bOffset + 12, 'left': rAnchor - $( '#intro-main-copy' ).width() } );
 						$( '#intro-main-copy' )
