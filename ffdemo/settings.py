@@ -6,6 +6,46 @@ from django.utils.functional import lazy
 
 logging.basicConfig()
 
+# Accepted locales on dev and prod.  Change these lists to control which 
+# locales are turned on on dev and prod.  Then, assign one of them to 
+# KNOWN_LANGUAGES below.  These are near the top to avoid merge conflict risk from 
+# git pull.
+KNOWN_LANGUAGES_DEV = (
+    'en-US',
+    'ar',
+    'ca',
+    'de',
+    'el',
+    'es',
+    'fr',
+    'fy-NL',
+    'gl',
+    'id',
+    'ja',
+    'ko',
+    'nl',
+    'pl',
+    'pt-BR',
+    'sl',
+    'sq',
+    'zh-TW',
+)
+
+KNOWN_LANGUAGES_PROD = (
+    'en-US',
+    'ca',
+    'de',
+    'es',
+    'fr',
+    'fy-NL',
+    'ja',
+    'nl',
+    'pl',
+    'pt-BR',
+    'sq',
+    'zh-TW',
+)
+
 # Django settings for ff4 project.
 PROJECT_DIR = PROJECT_PATH = ROOT = os.path.dirname(os.path.abspath(__file__))
 ROOT_PACKAGE = os.path.basename(ROOT)
@@ -47,26 +87,9 @@ TEXT_DOMAIN = 'django'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-US'
-KNOWN_LANGUAGES = (
-    'en-US',
-    'ar',
-    'ca',
-    'de',
-    'el',
-    'es',
-    'fr',
-    'fy-NL',
-    'gl',
-    'id',
-    'ja',
-    'ko',
-    'nl',
-    'pl',
-    'pt-BR',
-    'sl',
-    'sq',
-    'zh-TW',
-)
+
+# Accepted locales.  One of: KNOWN_LANGUAGES_DEV, KNOWN_LANGUAGES_PROD
+KNOWN_LANGUAGES = KNOWN_LANGUAGES_DEV
 
 # List of RTL locales known to this project. Subset of LANGUAGES.
 RTL_LANGUAGES = ('ar',)  # ('ar', 'fa', 'fa-IR', 'he')
