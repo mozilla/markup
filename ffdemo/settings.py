@@ -33,6 +33,7 @@ KNOWN_LANGUAGES_DEV = (
 
 KNOWN_LANGUAGES_PROD = (
     'en-US',
+    'ar',
     'ca',
     'de',
     'es',
