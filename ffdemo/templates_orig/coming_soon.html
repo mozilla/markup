@@ -1,0 +1,13 @@
+{% extends "about.html" %}
+{% load i18n %}
+
+{% block bodytag %}
+  <body class="behind-the-code">
+{% endblock %}
+
+{% block about-content %}
+	<h1>{{ _('The Web is your creation') }}</h1>
+	
+  <p>{% blocktrans %}Mark Up is a collection of all our individual marks on the Web. Soon we will invite you to celebrate the world’s greatest public resource by taking ownership of the Web. Please check back to make your mark.{% endblocktrans %}</p>
+ 
+{% endblock %}
