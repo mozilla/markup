@@ -388,7 +388,12 @@ def marks_by_reference(request):
                 response['error'] = _("No marks to be dumped")
                 did_fail_get_marks = True
         else:
-            offset_index = m_offset.id - (m_offset.id - (Mark.objects.count()-1))
+            all_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True).order_by('id')
+            total_marks = all_marks.count()
+            for i, item in enumerate(all_marks):
+                if item.reference == reference_mark:
+                    offset_index = i
+                    break
             relative_include_back = offset_index - include_back
             if relative_include_back < 0:
                 relative_include_back = 0
