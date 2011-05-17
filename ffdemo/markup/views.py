@@ -31,6 +31,10 @@ def home(request):
 @cache_page(60 * 30)  # cache for 30 minutes
 def about(request):
     return render_response(request, 'about.html')
+    
+@cache_page(60 * 30)  # cache for 30 minutes
+def coming_soon(request):
+    return render_response(request, 'coming_soon.html')
 
 
 @cache_page(60 * 30)

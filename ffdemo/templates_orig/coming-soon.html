@@ -1,0 +1,15 @@
+{% extends "about.html" %}
+{% load i18n %}
+
+{% block bodytag %}
+  <body class="behind-the-code">
+{% endblock %}
+
+{% block about-content %}
+	<h1>{{ _('Comming Soon') }}</h1>
+	
+  <p>{% blocktrans %}Lorem Ipsum Dollar Amit.
+  
+  {% endblocktrans %}</p>
+ 
+{% endblock %}
