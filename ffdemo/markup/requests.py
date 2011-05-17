@@ -73,7 +73,6 @@ def init_viz_data(request):
     response['contributor_marks'] = []
     contributor_marks = common.decode_mark_objects(Mark.objects.exclude(contributor__isnull=True).order_by('id'))
     response['contributor_marks'] = contributor_marks
-    all_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True).order_by('id')
     if 'country_code' in request.GET and len(request.GET['country_code']) > 0:
         country_marks = Mark.objects.exclude(flaggings__gte=1).filter(
             contributor_locale__isnull=True, country_code=request.GET['country_code']).order_by('id')
@@ -87,10 +86,15 @@ def init_viz_data(request):
     else:
         pass
 
-    response['max_id'] = all_marks[all_marks.count() - 1].id
-    response['last_mark'] = all_marks[all_marks.count() - 1].reference
-    response['first_mark'] = all_marks[0].reference
-    response['first_mark_at'] = all_marks[0].date_drawn.strftime("%a, %d %b %Y %I:%M:%S")
+    # Grab first and last mark
+    all_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True)
+    last_mark = all_marks.order_by('-id')[0]
+    first_mark = all_marks.order_by('id')[0]
+
+    response['max_id'] = last_mark.id
+    response['last_mark'] = last_mark.reference
+    response['first_mark'] = first_mark.reference
+    response['first_mark_at'] = first_mark.date_drawn.strftime("%a, %d %b %Y %I:%M:%S")
     response['total_countries'] = Mark.objects.values('country_code').distinct().count()
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
