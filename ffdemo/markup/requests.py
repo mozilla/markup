@@ -73,7 +73,6 @@ def init_viz_data(request):
     response['contributor_marks'] = []
     contributor_marks = common.decode_mark_objects(Mark.objects.exclude(contributor__isnull=True).order_by('id'))
     response['contributor_marks'] = contributor_marks
-    all_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True).order_by('id')
     if 'country_code' in request.GET and len(request.GET['country_code']) > 0:
         country_marks = Mark.objects.exclude(flaggings__gte=1).filter(
             contributor_locale__isnull=True, country_code=request.GET['country_code']).order_by('id')
@@ -87,10 +86,15 @@ def init_viz_data(request):
     else:
         pass
 
-    response['max_id'] = all_marks[all_marks.count() - 1].id
-    response['last_mark'] = all_marks[all_marks.count() - 1].reference
-    response['first_mark'] = all_marks[0].reference
-    response['first_mark_at'] = all_marks[0].date_drawn.strftime("%a, %d %b %Y %I:%M:%S")
+    # Grab first and last mark
+    all_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True)
+    last_mark = all_marks.order_by('-id')[0]
+    first_mark = all_marks.order_by('id')[0]
+
+    response['max_id'] = last_mark.id
+    response['last_mark'] = last_mark.reference
+    response['first_mark'] = first_mark.reference
+    response['first_mark_at'] = first_mark.date_drawn.strftime("%a, %d %b %Y %I:%M:%S")
     response['total_countries'] = Mark.objects.values('country_code').distinct().count()
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
@@ -359,6 +363,7 @@ def marks_by_reference(request):
                 include_forward = max_before_after
         except ValueError:
             return HttpResponseBadRequest()
+
         if 'include_back' in request.GET:
             try:
                 include_back = int(request.GET['include_back'])
@@ -366,38 +371,32 @@ def marks_by_reference(request):
                     include_back = max_before_after
             except ValueError:
                 return HttpResponseBadRequest()
+
         if 'country_code' in request.GET:
             kountry_code = request.GET['country_code']
-            offset_index = m_offset.id - (m_offset.id - (Mark.objects.count()-1))
-            relative_include_back = offset_index - include_back
-            if relative_include_back < 0:
-                relative_include_back = 0
-            unflagged_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True)
-            if len(unflagged_marks) > 0:
-                marks_to_be_dumped = unflagged_marks.exclude(
-                    flaggings__gte=1,
-                    contributor_locale__isnull=False).filter(
-                        country_code=kountry_code,
-                        contributor_locale__isnull=True).order_by(
-                            'id')[relative_include_back:offset_index + include_forward]
-            else:
-                response['success'] = False
-                response['error'] = _("No marks to be dumped")
-                did_fail_get_marks = True
+            all_marks = Mark.objects.exclude(flaggings__gte=1).filter(country_code=kountry_code, contributor_locale__isnull=True).order_by('id')
         else:
-            offset_index = m_offset.id - (m_offset.id - (Mark.objects.count()-1))
-            relative_include_back = offset_index - include_back
-            if relative_include_back < 0:
-                relative_include_back = 0
-            try:
-                marks_to_be_dumped = Mark.objects.exclude(
-                    flaggings__gte=1).filter(
-                        contributor_locale__isnull=True).order_by(
-                            'id')[relative_include_back:offset_index + include_forward]
-            except Mark.DoesNotExist:
-                response['success'] = False
-                response['error'] = _("No marks to be dumped")
-                did_fail_get_marks = True
+            all_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True).order_by('id')
+
+        # Find mark to start with backwards, if requested.
+        if include_back:
+            # m_offset is our reference mark
+            back_marks = list(all_marks.order_by('-id').filter(id__lt=m_offset.id)[:include_back])
+            # These marks needed to be queried in reverse. Undo that now.
+            back_marks.reverse()
+        else:
+            back_marks = []
+
+        # Find last, forward mark
+        forward_marks = list(all_marks.filter(id__gt=m_offset.id)[:include_forward])
+
+        # Combine backwards and forward marks with reference.
+        marks_to_be_dumped = back_marks + [m_offset] + forward_marks
+
+        if not marks_to_be_dumped:
+            response['success'] = False
+            response['error'] = _("No marks to be dumped")
+            did_fail_get_marks = True
 
     else:
         # required param

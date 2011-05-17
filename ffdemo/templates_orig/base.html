@@ -33,6 +33,7 @@
 				<h1><a href="/">{{ _('Mozilla Mark Up') }}</a></h1>
 			</section>
 		</header>
+		{% block markupmainnavigation %}
 		<section id="main-navigation">
 			<nav>
 				<div id="coming-soon-tip">{{ _('Coming soon') }}</div>
@@ -45,6 +46,7 @@
 				</ul>
 			</nav>
 		</section>
+		{% endblock markupmainnavigation %}
 		<section id="content">
 			{% block content %}{% endblock %}
 		</section>
