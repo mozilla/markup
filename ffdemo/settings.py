@@ -36,6 +36,7 @@ KNOWN_LANGUAGES_PROD = (
     'ar',
     'ca',
     'de',
+    'el',
     'es',
     'fr',
     'fy-NL',
