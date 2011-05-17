@@ -377,15 +377,13 @@ def marks_by_reference(request):
             relative_include_back = offset_index - include_back
             if relative_include_back < 0:
                 relative_include_back = 0
+
             unflagged_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True)
-            if len(unflagged_marks) > 0:
-                marks_to_be_dumped = unflagged_marks.exclude(
-                    flaggings__gte=1,
-                    contributor_locale__isnull=False).filter(
-                        country_code=kountry_code,
-                        contributor_locale__isnull=True).order_by(
-                            'id')[relative_include_back:offset_index + include_forward]
-            else:
+            marks_to_be_dumped = unflagged_marks.filter(
+                    country_code=kountry_code,
+                    contributor_locale__isnull=True).order_by(
+                        'id')[relative_include_back:offset_index + include_forward]
+            if not marks_to_be_dumped:
                 response['success'] = False
                 response['error'] = _("No marks to be dumped")
                 did_fail_get_marks = True
