@@ -1,10 +1,12 @@
+from datetime import datetime
+from hashlib import md5
+import re
 
+from django.db import transaction
 
 from ffdemo.markup.models import Mark
 from ffdemo.markup.models import Invitation
 from ffdemo.utils import short_url
-from datetime import datetime
-import re
 
 
 def get_invite_from_code(c):
@@ -40,6 +42,7 @@ def decode_mark_objects(data):
     return
 
 
+@transaction.commit_on_success
 def save_new_mark_with_data(data, ip_address):
     # Remove whitespace from raw full points obj
     stripped_points_obj_full = re.sub(r'\s', '', data['points_obj'])
