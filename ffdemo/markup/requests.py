@@ -368,12 +368,7 @@ def marks_by_reference(request):
                 return HttpResponseBadRequest()
         if 'country_code' in request.GET:
             kountry_code = request.GET['country_code']
-            all_marks = Mark.objects.exclude(flaggings__gte=1).filter(country_code=kountry_code, contributor_locale__isnull=True).order_by('id')
-            total_marks = all_marks.count()
-            for i, item in enumerate(all_marks):
-                if item.reference == reference_mark:
-                    offset_index = i
-                    break
+            offset_index = m_offset.id - (m_offset.id - (Mark.objects.count()-1))
             relative_include_back = offset_index - include_back
             if relative_include_back < 0:
                 relative_include_back = 0
@@ -492,14 +487,8 @@ def all_marks(request):
             response['error'] = _("Querying by offset also requires a 'max' POST var")
             did_fail_get_marks = True
     else:
-        #    We can also filter by country code here as well if need be
-        if 'country_code' in request.GET:
-            marks_to_be_dumped = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True,
-                country_code=request.GET['country_code'])
-        else:
-            #    No special query parameters, query for all marks
-            marks_to_be_dumped = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True)
-        #    Check that we've got marks to dump
+        did_fail_get_marks = True
+
     if not did_fail_get_marks:
         if marks_to_be_dumped:
             #    Dump out
