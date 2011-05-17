@@ -63,7 +63,7 @@ def save_new_mark_with_data(data, ip_address):
     # Ensure duplicates aren't being introduced
     existing_mark = Mark.objects.filter(duplicate_check=hash(stripped_points_obj_full))
     if existing_mark:
-        return existing_mark.reference
+        return existing_mark[0].reference
 
     # New mark
     new_mark = Mark.objects.create()
