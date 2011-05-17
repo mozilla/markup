@@ -359,6 +359,7 @@ def marks_by_reference(request):
                 include_forward = max_before_after
         except ValueError:
             return HttpResponseBadRequest()
+
         if 'include_back' in request.GET:
             try:
                 include_back = int(request.GET['include_back'])
@@ -366,46 +367,32 @@ def marks_by_reference(request):
                     include_back = max_before_after
             except ValueError:
                 return HttpResponseBadRequest()
+
         if 'country_code' in request.GET:
             kountry_code = request.GET['country_code']
             all_marks = Mark.objects.exclude(flaggings__gte=1).filter(country_code=kountry_code, contributor_locale__isnull=True).order_by('id')
-            total_marks = all_marks.count()
-            for i, item in enumerate(all_marks):
-                if item.reference == reference_mark:
-                    offset_index = i
-                    break
-            relative_include_back = offset_index - include_back
-            if relative_include_back < 0:
-                relative_include_back = 0
-
-            unflagged_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True)
-            marks_to_be_dumped = unflagged_marks.filter(
-                    country_code=kountry_code,
-                    contributor_locale__isnull=True).order_by(
-                        'id')[relative_include_back:offset_index + include_forward]
-            if not marks_to_be_dumped:
-                response['success'] = False
-                response['error'] = _("No marks to be dumped")
-                did_fail_get_marks = True
         else:
             all_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True).order_by('id')
-            total_marks = all_marks.count()
-            for i, item in enumerate(all_marks):
-                if item.reference == reference_mark:
-                    offset_index = i
-                    break
-            relative_include_back = offset_index - include_back
-            if relative_include_back < 0:
-                relative_include_back = 0
-            try:
-                marks_to_be_dumped = Mark.objects.exclude(
-                    flaggings__gte=1).filter(
-                        contributor_locale__isnull=True).order_by(
-                            'id')[relative_include_back:offset_index + include_forward]
-            except Mark.DoesNotExist:
-                response['success'] = False
-                response['error'] = _("No marks to be dumped")
-                did_fail_get_marks = True
+
+        # Find mark to start with backwards, if requested.
+        if include_back:
+            # m_offset is our reference mark
+            back_marks = list(all_marks.order_by('-id').filter(id__lt=m_offset.id)[:include_back])
+            # These marks needed to be queried in reverse. Undo that now.
+            back_marks.reverse()
+        else:
+            back_marks = []
+
+        # Find last, forward mark
+        forward_marks = list(all_marks.filter(id__gt=m_offset.id)[:include_forward])
+
+        # Combine backwards and forward marks with reference.
+        marks_to_be_dumped = back_marks + [m_offset] + forward_marks
+
+        if not marks_to_be_dumped:
+            response['success'] = False
+            response['error'] = _("No marks to be dumped")
+            did_fail_get_marks = True
 
     else:
         # required param
