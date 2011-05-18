@@ -228,9 +228,6 @@ SERIALIZATION_MODULES = {
 
 INSTALLED_APPS = (
     'localeurl',
-
-    'tower',  # for ./manage.py extract (L10n)
-
     'ffdemo.markup',
     'ffdemo.responsys',
     'django.contrib.auth',
