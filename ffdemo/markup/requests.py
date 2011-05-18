@@ -114,20 +114,20 @@ def save_mark(request):
                 mark_data['invite'] = request.POST['invite']
                 if 'contributor_locale' in request.POST:
                     mark_data['contributor_locale'] = request.POST['contributor_locale']
-                else:
-                   pass
             if 'contributor' in request.POST:
                 mark_data['contributor'] = request.POST['contributor']
-            else:
-                pass
-        else:
-            pass
 
-        #    Save new mark, handled by common.py
-        new_mark_reference = common.save_new_mark_with_data(mark_data, request.META['REMOTE_ADDR'])
-        #    Successful response, returning new mark reference
-        response['success'] = True
-        response['mark_reference'] = new_mark_reference
+        try:
+            #    Confirm that what we're getting is in fact JSON
+            simplejson.loads(simplejson.dumps(dict(mark_data)))
+            #    Save new mark, handled by common.py
+            new_mark_reference = common.save_new_mark_with_data(mark_data, request.META['REMOTE_ADDR'])
+            #    Successful response, returning new mark reference
+            response['success'] = True
+            response['mark_reference'] = new_mark_reference
+        except ValueError:
+            response['success'] = False
+            response['error'] = _('invalid JSON in the POST request')
     else:
         #    Error response
         response['success'] = False
