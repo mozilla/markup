@@ -75,9 +75,9 @@ def save_new_mark_with_data(data, ip_address):
     new_mark.points_obj = encoded_points_obj_full
     new_mark.points_obj_simplified = encoded_points_obj_simplified
     new_mark.reference = short_url.encode_url(new_mark.id)
+    invite = None
     if 'country_code' in data:
         new_mark.country_code = data['country_code']
-        invite = None
         if 'invite' in data:
             invite = get_invite_from_code(data['invite'])
             if invite and 'contributor_locale' in data and len(data['contributor_locale']) > 0:
