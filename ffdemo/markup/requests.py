@@ -123,6 +123,9 @@ def save_mark(request):
             #    Confirms existence of stroke and chooses random stroke to confirm structure
             ran = json['strokes'][0][random.randrange(0, len(json['strokes'][0]))]
             ran['angle']; ran['significance']; ran['time']; ran['y']; ran['x']; ran['z']; ran['speed'] 
+            #    Confirms size below 30, 150k
+            if len(str(json)) > 150000 and len(request.POST['points_obj_simplified']) > 30000:
+                raise ValueError
             #    Save new mark, handled by common.py
             new_mark_reference = common.save_new_mark_with_data(mark_data, request.META['REMOTE_ADDR'])
             #    Successful response, returning new mark reference
