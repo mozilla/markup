@@ -8,7 +8,7 @@ from django.views.decorators.http import require_GET, require_POST
 from datetime import datetime, date, timedelta
 from django.db.models import Q
 from django.utils.translation import gettext as _
-
+import random
 
 def get_translated_marks(request):
     marks_to_be_dumped = None
@@ -119,13 +119,16 @@ def save_mark(request):
 
         try:
             #    Confirm that what we're getting is in fact JSON
-            simplejson.loads(simplejson.dumps(dict(mark_data)))
+            json = simplejson.loads(request.POST['points_obj'])
+            #    Confirms existence of stroke and chooses random stroke to confirm structure
+            ran = json['strokes'][0][random.randrange(0, len(json['strokes'][0]))]
+            ran['angle']; ran['significance']; ran['time']; ran['y']; ran['x']; ran['z']; ran['speed'] 
             #    Save new mark, handled by common.py
             new_mark_reference = common.save_new_mark_with_data(mark_data, request.META['REMOTE_ADDR'])
             #    Successful response, returning new mark reference
             response['success'] = True
             response['mark_reference'] = new_mark_reference
-        except ValueError:
+        except ValueError, KeyError:
             response['success'] = False
             response['error'] = _('invalid JSON in the POST request')
     else:
