@@ -11,6 +11,7 @@ from django.template.loader import get_template
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.cache import cache_page
+from django.views.decorators.http import require_GET, require_POST
 from django.core.context_processors import csrf
 from ffdemo.utils.render import render_response
 from ffdemo.markup.models import Mark, Invitation
@@ -104,9 +105,9 @@ def mark(request, mark_reference):
     return render_response(request, 'mark.html', {'mark': mark})
 
 
+@require_POST
 def makemark(request):
-    if request.method == "POST":
-        mark_form = MarkForm(request.POST)
+    mark_form = MarkForm(request.POST)
     if mark_form.is_valid():
         mark_data = {'points_obj': mark_form.cleaned_data['points_obj'], 'country_code': mark_form.cleaned_data['country_code']}
         common.save_new_mark_with_data(mark_data)
