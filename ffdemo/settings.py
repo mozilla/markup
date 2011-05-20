@@ -252,3 +252,6 @@ RESPONSYS_CAMPAIGN = 'MOZILLA_AND_YOU'
 
 # Default bcrypt salt for hashing IP addresses. Change me.
 IP_HASH_SALT = '$2a$12$gphCwUtQA3ijuFazDyo.Ku'
+
+# Default, override in settings_local
+RAW_MARKS_DIR = '/tmp'
