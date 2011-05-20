@@ -53,3 +53,6 @@ EMAIL_USE_TLS = True
 
 # Replace with the actual Responsys Sekret ID
 RESPONSYS = "ResponsysIdHere"
+
+# Stores raw json files on the drive
+RAW_MARKS_DIR = '/tmp'
