@@ -6,9 +6,9 @@ from django.utils.functional import lazy
 
 logging.basicConfig()
 
-# Accepted locales on dev and prod.  Change these lists to control which 
-# locales are turned on on dev and prod.  Then, assign one of them to 
-# KNOWN_LANGUAGES below.  These are near the top to avoid merge conflict risk from 
+# Accepted locales on dev and prod.  Change these lists to control which
+# locales are turned on on dev and prod.  Then, assign one of them to
+# KNOWN_LANGUAGES below.  These are near the top to avoid merge conflict risk from
 # git pull.
 KNOWN_LANGUAGES_DEV = (
     'en-US',
@@ -249,3 +249,6 @@ SOUTH_TESTS_MIGRATE = False
 
 # Newsletter Foo
 RESPONSYS_CAMPAIGN = 'MOZILLA_AND_YOU'
+
+# Default bcrypt salt for hashing IP addresses. Change me.
+IP_HASH_SALT = '$2a$12$gphCwUtQA3ijuFazDyo.Ku'
