@@ -18,13 +18,11 @@ def get_translated_marks(request):
     if marks_to_be_dumped:
         all_marks = []
         for m in marks_to_be_dumped:
-            # We need to decode the points obj simplified
-            decoded_points_obj = common.decode_points_obj(m.points_obj_simplified)
             # Append to all marks
             all_marks.append({'date_drawn': m.date_drawn.strftime("%a, %d %b %Y %I:%M:%S"),
             'reference': m.reference,
             'id': m.id,
-            'points_obj_simplified': decoded_points_obj,
+            'points_obj_simplified': m.points_obj_simplified,
             'country_code': m.country_code,
             'is_approved': m.is_approved,
             'contributor_locale': m.contributor_locale})
@@ -71,7 +69,7 @@ def init_viz_data(request):
     response['country_first_mark_at'] = ''
     # for contributed marks
     response['contributor_marks'] = []
-    contributor_marks = common.decode_mark_objects(Mark.objects.exclude(contributor__isnull=True).order_by('id'))
+    contributor_marks = common.pack_mark_objects(Mark.objects.exclude(contributor__isnull=True).order_by('id'))
     response['contributor_marks'] = contributor_marks
     if 'country_code' in request.GET and len(request.GET['country_code']) > 0:
         country_marks = Mark.objects.exclude(flaggings__gte=1).filter(
@@ -237,10 +235,7 @@ def get_mark(request):
         pass
     previous_marks = ""
     next_marks = ""
-    #    Decode simplified points data
-    decoded_points_obj = common.decode_points_obj(mark.points_obj_simplified)
-    #    Return raw
-    return HttpResponse(decoded_points_obj, 'application/json')
+    return HttpResponse(mark.points_obj_simplified, 'application/json')
 
 
 def marks_by_offset(request):
@@ -282,13 +277,11 @@ def marks_by_offset(request):
             #    Dump out
             all_marks = []
             for m in marks_to_be_dumped:
-                #    We need to decode the points obj simplified
-                decoded_points_obj = common.decode_points_obj(m.points_obj_simplified)
                 #    Append to all marks
                 all_marks.append({'date_drawn': m.date_drawn.strftime(
                     "%a, %d %b %Y %I:%M:%S"),
                     'reference': m.reference,
-                    'points_obj_simplified': decoded_points_obj,
+                    'points_obj_simplified': m.points_obj_simplified,
                     'contributor': m.contributor, 'country_code': m.country_code})
             response['success'] = True
             response['marks'] = all_marks
@@ -423,14 +416,12 @@ def marks_by_reference(request):
                     if include_mark == False and is_reference_mark:
                         pass
                     else:
-                        #    We need to decode the points obj simplified
-                        decoded_points_obj = common.decode_points_obj(m.points_obj_simplified)
                         #    Append to all marks
                         all_marks.append({'is_reference_mark': is_reference_mark,
                             'date_drawn': m.date_drawn.strftime("%a, %d %b %Y %I:%M:%S"),
                             'reference': m.reference,
                             'id': m.id,
-                            'points_obj_simplified': decoded_points_obj,
+                            'points_obj_simplified': m.points_obj_simplified,
                             'contributor': m.contributor,
                             'country_code': m.country_code})
             response['success'] = True
@@ -499,10 +490,8 @@ def all_marks(request):
             #    Dump out
             all_marks = []
             for m in marks_to_be_dumped:
-                #    We need to decode the points obj simplified
-                decoded_points_obj = common.decode_points_obj(m.points_obj_simplified)
                 #    Append to all marks
-                all_marks.append({'date_drawn': m.date_drawn.strftime("%a, %d %b %Y %I:%M:%S"), 'reference': m.reference, 'id': m.id, 'points_obj_simplified': decoded_points_obj, 'contributor': m.contributor, 'country_code': m.country_code, 'flaggings': m.flaggings})
+                all_marks.append({'date_drawn': m.date_drawn.strftime("%a, %d %b %Y %I:%M:%S"), 'reference': m.reference, 'id': m.id, 'points_obj_simplified': m.points_obj_simplified, 'contributor': m.contributor, 'country_code': m.country_code, 'flaggings': m.flaggings})
             response['success'] = True
             response['marks'] = all_marks
         else:
@@ -534,10 +523,8 @@ def recent_marks(request):
     marks_to_be_dumped = Mark.objects.filter(date_drawn__gte=yesterday)
     all_marks = []
     for m in marks_to_be_dumped:
-        #    We need to decode the points obj simplified
-        decoded_points_obj = common.decode_points_obj(m.points_obj_simplified)
         #    Append to all marks
-        all_marks.append({'date_drawn': m.date_drawn.strftime("%a, %d %b %Y %I:%M:%S"), 'reference': m.reference, 'id': m.id, 'points_obj_simplified': decoded_points_obj, 'contributor': m.contributor, 'country_code': m.country_code, 'flaggings': m.flaggings})
+        all_marks.append({'date_drawn': m.date_drawn.strftime("%a, %d %b %Y %I:%M:%S"), 'reference': m.reference, 'id': m.id, 'points_obj_simplified': m.points_obj_simplified, 'contributor': m.contributor, 'country_code': m.country_code, 'flaggings': m.flaggings})
     response['success'] = True
     response['marks'] = all_marks
     #    Dump and return
@@ -560,10 +547,8 @@ def marks_by_flagged(request):
         #    Dump out
         all_marks = []
         for m in marks_to_be_dumped:
-            #    We need to decode the points obj simplified
-            decoded_points_obj = common.decode_points_obj(m.points_obj_simplified)
             #    Append to all marks
-            all_marks.append({'date_drawn': m.date_drawn, 'reference': m.reference, 'id': m.id, 'points_obj_simplified': decoded_points_obj, 'contributor': m.contributor, 'country_code': m.country_code, 'is_approved': m.is_approved, 'ip_address': m.ip_address})
+            all_marks.append({'date_drawn': m.date_drawn, 'reference': m.reference, 'id': m.id, 'points_obj_simplified': m.points_obj_simplified, 'contributor': m.contributor, 'country_code': m.country_code, 'is_approved': m.is_approved, 'ip_address': m.ip_address})
         response['success'] = True
         response['marks'] = all_marks
     else:

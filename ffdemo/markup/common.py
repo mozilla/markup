@@ -7,6 +7,7 @@ from django.db import transaction
 from ffdemo.markup.models import Mark
 from ffdemo.markup.models import Invitation
 from ffdemo.utils import short_url
+from django.conf import settings
 
 
 def get_invite_from_code(c):
@@ -22,19 +23,17 @@ def get_translated_marks():
         return
 
 
-def decode_mark_objects(data):
+def pack_mark_objects(data):
     """convenience method to unpack marks for request return"""
     if data:
         all_marks = []
         for m in data:
-            # We need to decode the points obj simplified
-            decoded_points_obj = decode_points_obj(m.points_obj_simplified)
             # Append to all marks
             all_marks.append(
                 {'date_drawn': m.date_drawn.strftime("%a, %d %b %Y %I:%M:%S"),
                  'reference': m.reference,
                  'id': m.id,
-                 'points_obj_simplified': decoded_points_obj,
+                 'points_obj_simplified': m.points_obj_simplified,
                  'country_code': m.country_code,
                  'contributor': m.contributor,
                  'is_approved': m.is_approved})
@@ -59,9 +58,6 @@ def save_new_mark_with_data(data, ip_address):
         stripped_points_obj_simplified = re.sub(r'\s',
             '',
             data['points_obj_simplified'])
-    # Encode both
-    encoded_points_obj_full = stripped_points_obj_full.encode('base64', 'strict')
-    encoded_points_obj_simplified = stripped_points_obj_simplified.encode('base64', 'strict')
 
     # Ensure duplicates aren't being introduced
     existing_mark = Mark.objects.filter(duplicate_check=hash(stripped_points_obj_full))
@@ -70,11 +66,15 @@ def save_new_mark_with_data(data, ip_address):
 
     # New mark
     new_mark = Mark.objects.create()
+    reference = short_url.encode_url(new_mark.id)
     new_mark.duplicate_check = hash(stripped_points_obj_full)
     new_mark.ip_address = ip_address
-    new_mark.points_obj = encoded_points_obj_full
-    new_mark.points_obj_simplified = encoded_points_obj_simplified
-    new_mark.reference = short_url.encode_url(new_mark.id)
+    new_mark.points_obj_simplified = stripped_points_obj_simplified
+    new_mark.reference = reference
+    # Store full raw data on drive
+    with open(settings.RAW_MARKS_DIR + '/' + reference + '.json' , 'w') as f:
+        f.write(stripped_points_obj_full)
+
     invite = None
     if 'country_code' in data:
         new_mark.country_code = data['country_code']
@@ -96,9 +96,3 @@ def save_new_mark_with_data(data, ip_address):
         invite.used_at = datetime.now()
         invite.save()
     return new_mark.reference
-
-
-def decode_points_obj(obj):
-    returned_str = str(obj)
-    decoded_data = returned_str.decode('base64', 'strict')
-    return decoded_data
