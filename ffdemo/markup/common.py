@@ -1,6 +1,7 @@
 from datetime import datetime
 from hashlib import md5
 import re
+import bcrypt
 
 from django.db import transaction
 
@@ -68,7 +69,7 @@ def save_new_mark_with_data(data, ip_address):
     new_mark = Mark.objects.create()
     reference = short_url.encode_url(new_mark.id)
     new_mark.duplicate_check = hash(stripped_points_obj_full)
-    new_mark.ip_address = ip_address
+    new_mark.ip_address = bcrypt.hashpw(ip_address, settings.IP_HASH_SALT)
     new_mark.points_obj_simplified = stripped_points_obj_simplified
     new_mark.reference = reference
     # Store full raw data on drive

@@ -57,3 +57,6 @@ RESPONSYS = "ResponsysIdHere"
 # Stores raw json files on the drive
 RAW_MARKS_DIR = '/tmp'
 ENABLE_RAW_MARKS = False
+
+# IP address hash salt
+IP_HASH_SALT = '$2a$12$u0i/vBOK7TBpzXqF7j0utO'
