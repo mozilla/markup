@@ -1,6 +1,9 @@
 # Imaging
 PIL==1.1.7
 
+# Encryption
+py-bcrypt
+
 # Database
 MySQL-python==1.2.3
 
