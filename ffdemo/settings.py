@@ -255,3 +255,4 @@ IP_HASH_SALT = '$2a$12$gphCwUtQA3ijuFazDyo.Ku'
 
 # Default, override in settings_local
 RAW_MARKS_DIR = '/tmp'
+ENABLE_RAW_MARKS = True

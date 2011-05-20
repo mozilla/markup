@@ -72,8 +72,9 @@ def save_new_mark_with_data(data, ip_address):
     new_mark.points_obj_simplified = stripped_points_obj_simplified
     new_mark.reference = reference
     # Store full raw data on drive
-    with open(settings.RAW_MARKS_DIR + '/' + reference + '.json' , 'w') as f:
-        f.write(stripped_points_obj_full)
+    if settings.ENABLE_RAW_MARKS:
+        with open(settings.RAW_MARKS_DIR + '/' + reference + '.json' , 'w') as f:
+            f.write(stripped_points_obj_full)
 
     invite = None
     if 'country_code' in data:

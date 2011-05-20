@@ -56,3 +56,4 @@ RESPONSYS = "ResponsysIdHere"
 
 # Stores raw json files on the drive
 RAW_MARKS_DIR = '/tmp'
+ENABLE_RAW_MARKS = False
