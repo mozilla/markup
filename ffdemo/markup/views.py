@@ -82,9 +82,6 @@ def evan(request):
     return render_response(request, 'evan-roth.html', evan_urls)
 
 @cache_page(60 * 30)
-def collaborators(request):
-    return render_response(request, 'other-collaborators.html')
-
 def gml(request, mark_reference):
     mark = get_object_or_404(Mark, reference=mark_reference)
     obj_decoded = simplejson.loads(common.decode_points_obj(mark.points_obj_simplified))
