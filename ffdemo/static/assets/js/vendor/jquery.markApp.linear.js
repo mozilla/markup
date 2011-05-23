@@ -594,7 +594,6 @@
 						context.fn.getString( 'default-loading-msg' ),
 						4000 );
 				}
-				console.log("loading marks");
 				$.ajax( {
 					url: url_to_load,
 					data: options,
