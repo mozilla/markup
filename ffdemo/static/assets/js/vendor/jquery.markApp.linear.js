@@ -594,7 +594,7 @@
 						context.fn.getString( 'default-loading-msg' ),
 						4000 );
 				}
-
+				console.log("loading marks");
 				$.ajax( {
 					url: url_to_load,
 					data: options,
@@ -605,8 +605,14 @@
 					// hide the loader
 					context.fn.hideLoader();
 				} )
-				.error( function ( data ) {
-					context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
+				.error( function ( request, textStatus, errorThrown ) {
+					switch( request.status ) {
+						case 404: 
+							context.fn.showError( context.fn.getString( 'no-marks-error-msg' ), '#/linear/' );
+							break;
+						default: 
+							context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
+					}
 					lC.eventChange = true;
 				} );
 			},
