@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.http import HttpResponseNotFound
 from django.http import HttpResponseServerError
 from ffdemo.markup.models import Mark
 from ffdemo.markup import common
@@ -376,9 +377,9 @@ def marks_by_reference(request):
             all_marks = Mark.objects.exclude(flaggings__gte=1).filter(country_code=kountry_code, contributor_locale__isnull=True).order_by('id')
         else:
             all_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True).order_by('id')
-
+        import pdb; pdb.set_trace()
         # Find mark to start with backwards, if requested.
-        if include_back:
+        if include_back and not did_fail_get_marks:
             # m_offset is our reference mark
             back_marks = list(all_marks.order_by('-id').filter(id__lt=m_offset.id)[:include_back])
             # These marks needed to be queried in reverse. Undo that now.
@@ -386,11 +387,12 @@ def marks_by_reference(request):
         else:
             back_marks = []
 
-        # Find last, forward mark
-        forward_marks = list(all_marks.filter(id__gt=m_offset.id)[:include_forward])
+        if not did_fail_get_marks:
+            # Find last, forward mark
+            forward_marks = list(all_marks.filter(id__gt=m_offset.id)[:include_forward])
 
-        # Combine backwards and forward marks with reference.
-        marks_to_be_dumped = back_marks + [m_offset] + forward_marks
+            # Combine backwards and forward marks with reference.
+            marks_to_be_dumped = back_marks + [m_offset] + forward_marks
 
         if not marks_to_be_dumped:
             response['success'] = False
@@ -431,7 +433,7 @@ def marks_by_reference(request):
         response['success'] = False
         response['error'] = _("No marks to be parsed")
         json_response = simplejson.dumps(response)
-        return HttpResponseServerError(json_response, 'application/json')
+        return HttpResponseNotFound(json_response, 'application/json')
 
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
