@@ -377,7 +377,7 @@ def marks_by_reference(request):
             all_marks = Mark.objects.exclude(flaggings__gte=1).filter(country_code=kountry_code, contributor_locale__isnull=True).order_by('id')
         else:
             all_marks = Mark.objects.exclude(flaggings__gte=1).filter(contributor_locale__isnull=True).order_by('id')
-        import pdb; pdb.set_trace()
+
         # Find mark to start with backwards, if requested.
         if include_back and not did_fail_get_marks:
             # m_offset is our reference mark
