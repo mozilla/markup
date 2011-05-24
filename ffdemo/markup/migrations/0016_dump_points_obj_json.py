@@ -7,7 +7,7 @@ from django.conf import settings
 
 
 class Migration(SchemaMigration):
-    
+
     no_dry_run = True
 
     def forwards(self, orm):
@@ -17,7 +17,7 @@ class Migration(SchemaMigration):
             with open(settings.RAW_MARKS_DIR + '/' + mark.reference + '.json' , 'w') as f:
                 print "Dumping JSON for: " + mark.reference
                 f.write(mark.points_obj.decode('base64', 'strict'))
-    
+
     def backwards(self, orm):
 
         # Retrieve full raw data on drive
@@ -25,8 +25,8 @@ class Migration(SchemaMigration):
             with open(settings.RAW_MARKS_DIR + '/' + mark.reference + '.json') as f:
                 mark.points_obj = f.read().encode('base64', 'strict')
                 mark.save()
-    
-    
+
+
     models = {
         'markup.mark': {
             'Meta': {'object_name': 'Mark'},
@@ -44,5 +44,5 @@ class Migration(SchemaMigration):
             'reference': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'unique': 'True', 'max_length': '50', 'blank': 'True'})
         }
     }
-    
+
     complete_apps = ['markup']
