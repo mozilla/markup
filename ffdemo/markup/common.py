@@ -42,7 +42,6 @@ def pack_mark_objects(data):
     return
 
 
-@transaction.commit_on_success
 def save_new_mark_with_data(data, ip_address):
     # Remove whitespace from raw full points obj
     stripped_points_obj_full = re.sub(r'\s', '', data['points_obj'])
@@ -65,18 +64,25 @@ def save_new_mark_with_data(data, ip_address):
     if existing_mark:
         return existing_mark[0].reference
 
-    # New mark
-    new_mark = Mark.objects.create()
-    reference = short_url.encode_url(new_mark.id)
-    new_mark.duplicate_check = hash(stripped_points_obj_full)
-    new_mark.ip_address = bcrypt.hashpw(ip_address, settings.IP_HASH_SALT)
-    new_mark.points_obj_simplified = stripped_points_obj_simplified
-    new_mark.reference = reference
     # Store full raw data on drive
     if settings.ENABLE_RAW_MARKS:
         with open(settings.RAW_MARKS_DIR + '/' + reference + '.json' , 'w') as f:
             f.write(stripped_points_obj_full)
 
+    # Prepare obscured IP address
+    obscurred_ip = bcrypt.hashpw(ip_address, settings.IP_HASH_SALT)
+    # Create and return Mark
+    reference = create_save_mark(hash(stripped_points_obj_full), obscurred_ip, stripped_points_obj_simplified, data)
+    return reference
+
+@transaction.commit_on_success
+def create_save_mark(duplicate_hash, obscurred_ip, stripped_points_obj_simplified, data):
+    new_mark = Mark.objects.create()
+    reference = short_url.encode_url(new_mark.id)
+    new_mark.duplicate_check = duplicate_hash
+    new_mark.ip_address = obscurred_ip
+    new_mark.points_obj_simplified = stripped_points_obj_simplified
+    new_mark.reference = reference
     invite = None
     if 'country_code' in data:
         new_mark.country_code = data['country_code']
@@ -84,17 +90,12 @@ def save_new_mark_with_data(data, ip_address):
             invite = get_invite_from_code(data['invite'])
             if invite and 'contributor_locale' in data and len(data['contributor_locale']) > 0:
                 new_mark.contributor_locale = data['contributor_locale']
-            else:
-                pass
             if invite and 'contributor' in data and len(data['contributor']) > 0:
                 new_mark.contributor = data['contributor']
-            else:
-                pass
-        else:
-            pass
 
     new_mark.save()
     if invite:
         invite.used_at = datetime.now()
         invite.save()
     return new_mark.reference
+
