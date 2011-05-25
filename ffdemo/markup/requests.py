@@ -1,6 +1,5 @@
-from django.http import HttpResponse
-from django.http import HttpResponseNotFound
-from django.http import HttpResponseServerError
+from django.http import (HttpResponse, HttpResponseBadRequest,
+                         HttpResponseNotFound, HttpResponseServerError)
 from ffdemo.markup.models import Mark
 from ffdemo.markup import common
 from django.utils import simplejson
@@ -121,7 +120,7 @@ def save_mark(request):
             json = simplejson.loads(request.POST['points_obj'])
             #    Confirms existence of stroke and chooses random stroke to confirm structure
             ran = json['strokes'][0][random.randrange(0, len(json['strokes'][0]))]
-            ran['angle']; ran['significance']; ran['time']; ran['y']; ran['x']; ran['z']; ran['speed'] 
+            ran['angle']; ran['significance']; ran['time']; ran['y']; ran['x']; ran['z']; ran['speed']
             #    Confirms size below 30, 150k
             if len(str(json)) > 250000 or len(request.POST['points_obj_simplified']) > 50000:
                 raise ValueError
