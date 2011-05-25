@@ -463,9 +463,15 @@ def all_marks(request):
 
     #    We've got an offset to play with
     if 'offset' in request.GET:
-    # An offset requires a max value to be returned from this offset
+        offset = request.GET['offset']
+        import pdb; pdb.set_trace()
+        # An offset must be a positive number
+        if int(offset) < 0:
+            response['success'] = False
+            response['error'] = _("Offset must be greater than zero")
+            return HttpResponseBadRequest(simplejson.dumps(response, default=dthandler))
+        # An offset requires a max value to be returned from this offset
         if 'max' in request.GET:
-            offset = request.GET['offset']
             max = request.GET['max']
             if max > max_returned:
               max = max_returned
@@ -482,7 +488,7 @@ def all_marks(request):
         else:
             response['success'] = False
             response['error'] = _("Querying by offset also requires a 'max' POST var")
-            did_fail_get_marks = True
+            return HttpResponseBadRequest(simplejson.dumps(response, default=dthandler))
     else:
         did_fail_get_marks = True
 
