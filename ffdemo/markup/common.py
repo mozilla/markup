@@ -64,15 +64,18 @@ def save_new_mark_with_data(data, ip_address):
     if existing_mark:
         return existing_mark[0].reference
 
-    # Store full raw data on drive
-    if settings.ENABLE_RAW_MARKS:
-        with open(settings.RAW_MARKS_DIR + '/' + reference + '.json' , 'w') as f:
-            f.write(stripped_points_obj_full)
-
     # Prepare obscured IP address
     obscurred_ip = bcrypt.hashpw(ip_address, settings.IP_HASH_SALT)
     # Create and return Mark
-    reference = create_save_mark(hash(stripped_points_obj_full), obscurred_ip, stripped_points_obj_simplified, data)
+    try:
+        reference = create_save_mark(hash(stripped_points_obj_full), obscurred_ip, stripped_points_obj_simplified, data)
+    except:
+        raise
+    else:
+        # Store full raw data on drive
+        if settings.ENABLE_RAW_MARKS:
+            with open(settings.RAW_MARKS_DIR + '/' + reference + '.json' , 'w') as f:
+                f.write(stripped_points_obj_full)
     return reference
 
 @transaction.commit_on_success
