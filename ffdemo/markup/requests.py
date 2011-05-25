@@ -464,7 +464,6 @@ def all_marks(request):
     #    We've got an offset to play with
     if 'offset' in request.GET:
         offset = request.GET['offset']
-        import pdb; pdb.set_trace()
         # An offset must be a positive number
         if int(offset) < 0:
             response['success'] = False
