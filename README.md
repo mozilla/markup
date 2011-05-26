@@ -102,6 +102,15 @@ for 10 contributor invites, run
      manage.py generate_invites 10 c
 
 
+### User management
+
+The app uses Django's [user account management][django-users] commands:
+
+    ./manage.py createsuperuser  # to create a new moderator
+    ./manage.py changepassword bob  # to change bob's password
+    # Deleting users is currently only possible through the database.
+
+
 ### Production
 
 For production environments, uncomment the following in settings:
