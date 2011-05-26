@@ -324,7 +324,7 @@ def marks_by_reference(request):
     reference_mark = None
     include_back = 0
     include_forward = 15
-    max_before_after = 50
+    max_before_after = 20
     include_mark = True
     country_code = None
     marks_to_be_dumped = None
