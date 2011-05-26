@@ -355,13 +355,13 @@ def marks_by_reference(request):
             except ValueError:
                 return HttpResponseBadRequest()
 
-    if 'include_forward' in request.GET:
-        try:
-            include_forward = int(request.GET['include_forward'])
-            if include_forward > max_before_after:
-                include_forward = max_before_after
-        except ValueError:
-            return HttpResponseBadRequest()
+        if 'include_forward' in request.GET:
+            try:
+                include_forward = int(request.GET['include_forward'])
+                if include_forward > max_before_after:
+                    include_forward = max_before_after
+            except ValueError:
+                return HttpResponseBadRequest()
 
         if 'include_back' in request.GET:
             try:
