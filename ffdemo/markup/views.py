@@ -85,7 +85,7 @@ def evan(request):
 def gml(request, mark_reference):
     mark = get_object_or_404(Mark, reference=mark_reference)
     date_drawn = int(time.mktime(mark.date_drawn.timetuple()))
-    context = {'mark': mark, 'obj_decoded': mark.points_obj_simplified, 'date_drawn': date_drawn}
+    context = {'mark': mark, 'obj_decoded': simplejson.loads(mark.points_obj_simplified), 'date_drawn': date_drawn}
     response = render_response(request, 'gml.xml', context, mimetype='application/xml')
     response['Content-Disposition'] = "attachment; filename=%s.gml" % mark.reference
     return response
