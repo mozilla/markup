@@ -6,48 +6,6 @@ from django.utils.functional import lazy
 
 logging.basicConfig()
 
-# Accepted locales on dev and prod.  Change these lists to control which
-# locales are turned on on dev and prod.  Then, assign one of them to
-# KNOWN_LANGUAGES below.  These are near the top to avoid merge conflict risk from
-# git pull.
-KNOWN_LANGUAGES_DEV = (
-    'en-US',
-    'ar',
-    'ca',
-    'de',
-    'el',
-    'es',
-    'fr',
-    'fy-NL',
-    'gl',
-    'id',
-    'ja',
-    'ko',
-    'nl',
-    'pl',
-    'pt-BR',
-    'sl',
-    'sq',
-    'zh-TW',
-)
-
-KNOWN_LANGUAGES_PROD = (
-    'en-US',
-    'ar',
-    'ca',
-    'de',
-    'el',
-    'es',
-    'fr',
-    'fy-NL',
-    'ja',
-    'nl',
-    'pl',
-    'pt-BR',
-    'sq',
-    'zh-TW',
-)
-
 # Django settings for ff4 project.
 PROJECT_DIR = PROJECT_PATH = ROOT = os.path.dirname(os.path.abspath(__file__))
 ROOT_PACKAGE = os.path.basename(ROOT)
@@ -90,8 +48,49 @@ TEXT_DOMAIN = 'django'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-US'
 
+# Accepted locales on dev and prod.  Change these lists to control which 
+# locales are turned on on dev and prod.  Then, assign one of them to 
+# KNOWN_LANGUAGES below (or in settings_local).
+KNOWN_LANGUAGES_DEV = (
+    'en-US',
+    'ar',
+    'ca',
+    'de',
+    'el',
+    'es',
+    'fr',
+    'fy-NL',
+    'gl',
+    'id',
+    'ja',
+    'ko',
+    'nl',
+    'pl',
+    'pt-BR',
+    'sl',
+    'sq',
+    'zh-TW',
+)
+
+KNOWN_LANGUAGES_PROD = (
+    'en-US',
+    'ar',
+    'ca',
+    'de',
+    'el',
+    'es',
+    'fr',
+    'fy-NL',
+    'ja',
+    'nl',
+    'pl',
+    'pt-BR',
+    'sq',
+    'zh-TW',
+)
+
 # Accepted locales.  One of: KNOWN_LANGUAGES_DEV, KNOWN_LANGUAGES_PROD
-KNOWN_LANGUAGES = KNOWN_LANGUAGES_DEV
+KNOWN_LANGUAGES = KNOWN_LANGUAGES_PROD
 
 # List of RTL locales known to this project. Subset of LANGUAGES.
 RTL_LANGUAGES = ('ar',)  # ('ar', 'fa', 'fa-IR', 'he')
@@ -101,9 +100,10 @@ LANGUAGE_URL_MAP = dict([(i.lower(), i) for i in KNOWN_LANGUAGES])
 # Override Django's built-in with our native names
 class LazyLangs(dict):
     def __new__(self):
+        from django.conf import settings
         from product_details import product_details
         return dict([(lang.lower(), product_details.languages[lang]['native'])
-                     for lang in KNOWN_LANGUAGES])
+                     for lang in settings.KNOWN_LANGUAGES])
 
 LANGUAGES = lazy(LazyLangs, dict)()
 

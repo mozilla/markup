@@ -6,6 +6,11 @@ from settings import *
 TEMPLATE_DEBUG = DEBUG = True
 DEV = True
 
+# Accepted locales.  One of: KNOWN_LNGUAGES_DEV, KNOWN_LANGUAGES_PROD
+KNOWN_LANGUAGES = KNOWN_LANGUAGES_DEV
+# Redifine settings that depend on KNOWN_LANGUAGES.  Don't change them here.
+LANGUAGE_URL_MAP = dict([(i.lower(), i) for i in KNOWN_LANGUAGES])
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
