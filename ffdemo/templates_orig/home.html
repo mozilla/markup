@@ -4,7 +4,7 @@
 {% block js %}
 <script type="text/javascript" charset="utf-8">
 	// placing this inline ensures it will run as soon as the page loads, and that fallback content is removed as soon as possible
-	function browserSupportsRequiredFeatures() { return !!( 'getContext' in document.createElement( 'canvas' ) ) && !!( 'JSON' in window ); };
+	function browserSupportsRequiredFeatures() { var elem = document.createElement('canvas'); return !!(elem.getContext && elem.getContext('2d'); }
 	if ( browserSupportsRequiredFeatures ) {
 		// remove the placeholder content
 		var elem = document.getElementById( 'fallback' )
