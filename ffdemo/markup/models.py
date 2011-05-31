@@ -11,7 +11,7 @@ class Mark(models.Model):
     date_drawn = models.DateTimeField(auto_now_add=True, db_index=True)
     reference = models.CharField(max_length=50, blank=True, db_index=True, unique=True)
     points_obj_simplified = models.TextField(blank=True)
-    country_code = models.CharField(max_length=2, blank=True)
+    country_code = models.CharField(max_length=2, blank=True, db_index=True)
     flaggings = models.IntegerField(default=0, db_index=True)
     is_approved = models.BooleanField(default=False)
     # contributor attrs
@@ -22,6 +22,13 @@ class Mark(models.Model):
 
     def __unicode__(self):
         return unicode(self.date_drawn)
+
+
+class MarkSequence(models.Model):
+    """
+    The mark sequence table, spitting out unique IDs to be used as references.
+    """
+    id = models.IntegerField(primary_key=True)
 
 
 class Invitation(models.Model):

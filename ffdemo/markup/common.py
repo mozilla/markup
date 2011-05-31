@@ -3,7 +3,7 @@ from hashlib import md5
 import re
 import bcrypt
 
-from django.db import transaction
+from django.db import connection
 
 from ffdemo.markup.models import Mark
 from ffdemo.markup.models import Invitation
@@ -43,6 +43,8 @@ def pack_mark_objects(data):
 
 
 def save_new_mark_with_data(data, ip_address):
+    """Preprocess mark data, then save to DB."""
+
     # Remove whitespace from raw full points obj
     stripped_points_obj_full = re.sub(r'\s', '', data['points_obj'])
     # remove whitespace where not in extra_info (the contributor quote)
@@ -78,14 +80,17 @@ def save_new_mark_with_data(data, ip_address):
                 f.write(stripped_points_obj_full)
     return reference
 
-@transaction.commit_on_success
+
 def create_save_mark(duplicate_hash, obscurred_ip, stripped_points_obj_simplified, data):
-    new_mark = Mark.objects.create()
-    reference = short_url.encode_url(new_mark.id)
+    """Save mark to database."""
+
+    new_mark = Mark()
+    reference = generate_reference()
     new_mark.duplicate_check = duplicate_hash
     new_mark.ip_address = obscurred_ip
     new_mark.points_obj_simplified = stripped_points_obj_simplified
     new_mark.reference = reference
+
     invite = None
     if 'country_code' in data:
         new_mark.country_code = data['country_code']
@@ -97,8 +102,30 @@ def create_save_mark(duplicate_hash, obscurred_ip, stripped_points_obj_simplifie
                 new_mark.contributor = data['contributor']
 
     new_mark.save()
+
     if invite:
         invite.used_at = datetime.now()
         invite.save()
+
     return new_mark.reference
 
+
+def generate_reference():
+    """Generates a new, unique reference string for a mark."""
+
+    # This is some raw SQL to keep things atomic. Straight from the MySQL docs:
+    # http://dev.mysql.com/doc/refman/5.0/en/information-functions.html#function_last-insert-id
+    cursor = connection.cursor()
+    cursor.execute("""UPDATE markup_marksequence SET
+                      id=LAST_INSERT_ID(id + 1)""")
+
+    # The sequence table should never be empty. But alas, if it is, let's
+    # fix it.
+    if not cursor.rowcount > 0:
+        cursor.execute("""INSERT INTO markup_marksequence (id)
+                          VALUES(LAST_INSERT_ID(id + 1))""")
+
+    cursor.execute('SELECT LAST_INSERT_ID() FROM markup_marksequence')
+    id = cursor.fetchone()[0]
+
+    return short_url.encode_url(id)
