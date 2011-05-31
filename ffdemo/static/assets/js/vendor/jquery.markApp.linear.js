@@ -402,6 +402,7 @@
 									modules.linear.fn.jumpToMark( context, lC.reference_mark, lC.playback );
 								} else {
 									// show the error message, with a link back to the main visualization link
+									modules.linear.fn.resetSelectBoxes( context );
 									context.fn.showError( context.fn.getString( 'no-marks-error-msg' ), '#/linear/' );
 									lC.eventChange = true;
 								}
@@ -438,6 +439,7 @@
 								}
 							} else {
 								// show the error message, with a link back to the main visualization link
+								modules.linear.fn.resetSelectBoxes( context );
 								context.fn.showError( context.fn.getString( 'no-marks-error-msg' ), '#/linear/' );
 								lC.eventChange = true;
 							}
@@ -607,6 +609,7 @@
 				.error( function ( request, textStatus, errorThrown ) {
 					switch( request.status ) {
 						case 404: 
+							modules.linear.fn.resetSelectBoxes( context );
 							context.fn.showError( context.fn.getString( 'no-marks-error-msg' ), '#/linear/' );
 							break;
 						default: 
@@ -842,6 +845,10 @@
 					}
 				}
 				return false;
+			},
+			resetSelectBoxes: function( context ) {
+				$( '#country-select' ).selectBox( 'value', '' );
+				$( '#contributor-select' ).selectBox( 'value', '' );
 			},
 			showMarkInformation: function( context ) {
 				var lC = context.modules.linear;
