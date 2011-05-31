@@ -44,6 +44,7 @@ urlpatterns += patterns('markup.views',
     (r'accounts/locked/$', 'account_locked'),
     (r'list_invites/$', 'list_invites'),
     (r'moderate_sammy.html$', 'moderate_sammy'),
+    (r'moderate/$', 'moderate_sammy'),
 )
 
 urlpatterns += patterns('markup.requests',
