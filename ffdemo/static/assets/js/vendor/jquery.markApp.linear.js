@@ -108,8 +108,9 @@
 				}
 			},
 			mousedown: function( context, e ) {
-				var lC = context.modules.linear;
-				if( mark = modules.linear.fn.hitTest( context, context.mouseX, context.mouseY ) ) {
+				var lC = context.modules.linear,
+					mark = modules.linear.fn.hitTest( context, context.mouseX, context.mouseY );
+				if( mark ) {
 					// if the mark hasn't changed from what's in our URL, we just need to show the details again
 					if ( mark == lC.currentMark ) {
 						modules.linear.fn.centerCurrentMark( context, function() {
@@ -124,16 +125,17 @@
 				}
 			},
 			mousemove: function( context, e ) {
-				var lC = context.modules.linear;
+				var lC = context.modules.linear,
+					mark = modules.linear.fn.hoverTest( context, context.mouseX, context.mouseY, lC.hoverMark );
 				lC.eventChange = true;
 				// hover test
-				if( mark = modules.linear.fn.hoverTest( context, context.mouseX, context.mouseY, lC.hoverMark ) ) {
+				if( mark ) {
 					// reset the old hovered mark
 					if( lC.hoverMark ) lC.hoverMark.color = lC.hoverMark.contributor_name ? '0,139,211' : '0,0,0';
 					// store this hover mark
 					lC.hoverMark = mark;
 					// set mark to the orange highlight color
-					if( lC.currentMark == null || lC.hoverMark.reference != lC.currentMark.reference )
+					if( lC.currentMark === null || lC.hoverMark.reference != lC.currentMark.reference )
 						lC.hoverMark.color = '255,111,40';
 				} else if ( lC.hoverMark ) {
 					lC.hoverMark.color = lC.hoverMark.contributor_name ? '0,139,211' : '0,0,0';
@@ -143,7 +145,7 @@
 			},
 			loop: function ( context ) {
 				var lC = context.modules.linear,
-					dLayer = lC.layerManager.layers['drawingLayer'];
+					dLayer = lC.layerManager.layers.drawingLayer;
 					
 				// update the position of the camera 
 				var lastCameraPosition = {x: lC.scene.camera.position.x, y: lC.scene.camera.position.y, z: lC.scene.camera.position.z };
@@ -155,18 +157,15 @@
 					// or with physics
 					lC.cameraChange.vZ += lC.cameraChange.aZ;
 					lC.cameraChange.vX += lC.cameraChange.aX;
-					lC.cameraChange.vX *= .93;
-					lC.cameraChange.vZ *= .93;
+					lC.cameraChange.vX *= 0.93;
+					lC.cameraChange.vZ *= 0.93;
 					lC.scene.camera.position.x += lC.cameraChange.vX;
 					lC.scene.camera.position.z += lC.cameraChange.vZ;
 					// bring the Y and Z positions close to the current mark
 					var mark = modules.linear.fn.closestMark( context );
 					if ( mark ) {
 						var dY = lC.scene.camera.position.y - ( mark.position.y + ( mark.bHeight / 2 ) );
-						// if Z is not changing, try to maintain
-						// if( )
-						// var dZ = lC.scene.camera.position.z - 
-						if ( dY != 0 && Math.abs(dY) >= 10) lC.scene.camera.position.y += ( dY > 0 ? -10 : 10 );
+						if ( dY !== 0 && Math.abs(dY) >= 10) lC.scene.camera.position.y += ( dY > 0 ? -10 : 10 );
 					}
 					// TODO: fix the Z index while navigating the line
 				}
@@ -198,15 +197,18 @@
 				// ark.renderer.renderScene( lC.scene, dLayer.context, { x: context.mouseX, y: context.mouseY }, context.width, context.height, lC.playbackTimes );
 				
 				// set the eventChange flag back to false -- a mouse/keyboard or playback event will need to set it back to true again before we'll render because of it
-				lC.eventChange = false
+				lC.eventChange = false;
 				
 				// cleanup playback times if necissary
-				for( mark in lC.scene.timers ) {
-					var now = ( new Date() ).getTime();
-					if( lC.scene.timers[mark].end < now ) {
-						delete lC.scene.timers[mark];
-					} 
-					lC.eventChange = true;
+				for( var timedMark in lC.scene.timers ) {
+					//if( timedMark in )
+					if ( lC.scene.timers.hasOwnProperty( timedMark ) ) {
+						var now = ( new Date() ).getTime();
+						if( lC.scene.timers[timedMark].end < now ) {
+							delete lC.scene.timers[timedMark];
+						} 
+						lC.eventChange = true;
+					}
 				}
 				
 			}
@@ -217,14 +219,14 @@
 				// if this modules has already been initialized, update the options
 				if ( '$linear' in context.modules.linear ) {
 					// before we merge options, check if we need to dump our current data
-					if ( options['country_code'] != lC.country_code ) {
+					if ( options.country_code != lC.country_code ) {
 						modules.linear.fn.dumpAllMarks( context );
 					}
 					// now our options into our context
 					$.extend( lC, lC, options );
 					// since merging won't replace null or undefined values, make sure we clean up after it
-					for( option in modules.linear.defaults ) {
-						if ( options[option] == null ) lC[option] = modules.linear.defaults[option];
+					for( var option in modules.linear.defaults ) {
+						if ( options[option] === null ) lC[option] = modules.linear.defaults[option];
 					}
 					// update the interface
 					modules.linear.fn.updateInterface( context );
@@ -248,7 +250,7 @@
 					// layer setup
 					lC.layerManager = new Mark.layerManager( lC.$linear.get( 0 ) );
 					lC.layerManager.addLayer( 'drawingLayer' );
-					lC.scene.canvasContext = lC.layerManager.layers['drawingLayer'].context;
+					lC.scene.canvasContext = lC.layerManager.layers.drawingLayer.context;
 					// trigger resize so our new layers are sized to fit
 					context.fn.trigger( 'resize' );
 
@@ -382,7 +384,7 @@
 			},
 			initMarks: function ( context ) {
 				var lC = context.modules.linear;
-				if ( lC.reference_mark && lC.reference_mark != "" ) {
+				if ( lC.reference_mark && lC.reference_mark !== "" ) {
 					// If we were passed a mark to start with, start there
 					if( lC.reference_mark in lC.marks ) {
 						// if we already have this mark, just jump to it
@@ -419,23 +421,24 @@
 						'success': function ( data ) {
 							if( data.success ) {
 								modules.linear.fn.setupMarks( context, data.marks );
+								var firstMark = lC.marks[lC.rightBuffer[0]];
 								// after we load the marks, back the camera away and zoom to the first one
-								if( firstMark = lC.marks[lC.rightBuffer[0]] ) {
+								if( firstMark ) {
 									lC.scene.camera.position.x = -4000;
 									lC.scene.camera.position.z = -3000;
-									var tween = 'cameraEase' in lC.tweens ? lC.tweens['cameraEase'] : new TWEEN.Tween( lC.scene.camera.position );
+									var tween = 'cameraEase' in lC.tweens ? lC.tweens.cameraEase : new TWEEN.Tween( lC.scene.camera.position );
 									tween
 										.to( { 
 											x: ( firstMark.bWidth / 2 ), 
 											y: ( firstMark.bHeight / 2 ),
 											z: -1000 }, 2000 )
 										.onComplete( function( ) {
-											delete lC.tweens['cameraEase'];
+											delete lC.tweens.cameraEase;
 											if ( typeof callback === "function" ) callback( this );
 										} )
 										.easing( TWEEN.Easing.Quartic.EaseInOut )
 										.start();
-									lC.tweens['cameraEase'] = tween;
+									lC.tweens.cameraEase = tween;
 								}
 							} else {
 								// show the error message, with a link back to the main visualization link
@@ -464,7 +467,7 @@
 				// setup the stats
 				var options = {};
 				if( lC.country_code ) {
-					options['country_code'] =  lC.country_code;
+					options.country_code =  lC.country_code;
 					$( "#contributor-select" ).next().hide();
 					$( '#contributor-select-label' ).hide();
 				} else {
@@ -491,7 +494,7 @@
 								$( '#first-mark-link' )
 									.click( function( e ) {
 										e.preventDefault();
-										if( lC.currentMark != null && lC.currentMark.reference == data.first_mark ) {
+										if( lC.currentMark !== null && lC.currentMark.reference == data.first_mark ) {
 											modules.linear.fn.centerCurrentMark( context, function() {
 												modules.linear.fn.showMarkInformation( context );
 											} );
@@ -502,7 +505,7 @@
 								$( '#last-mark-link' )
 									.click( function( e ) {
 										e.preventDefault();
-										if( lC.currentMark != null && lC.currentMark.reference == data.last_mark ) {
+										if( lC.currentMark !== null && lC.currentMark.reference == data.last_mark ) {
 											modules.linear.fn.centerCurrentMark( context, function() {
 												modules.linear.fn.showMarkInformation( context );
 											} );
@@ -537,7 +540,7 @@
 									context.$container.focus();
 								} );
 								if( lC.country_code ) {
-									options['country_code'] =  lC.country_code;
+									options.country_code =  lC.country_code;
 									$( "#contributor-select" ).next().hide();
 									$( '#contributor-select-label' ).hide();
 								} else {
@@ -551,8 +554,11 @@
 			},
 			dumpAllMarks: function ( context ) {
 				var lC = context.modules.linear;
-				for( mark in lC.marks )
-					delete lC.marks[mark];
+				for( var mark in lC.marks ) {
+					if ( lC.marks.hasOwnProperty( mark ) ) { 
+						delete lC.marks[mark];
+					}
+				}
 				lC.scene.objects = [];
 				lC.leftBuffer = [];
 				lC.rightBuffer = [];
@@ -584,8 +590,8 @@
 					// This is for all mark loading requests that aren't a result of normal buffer reloading
 					var extraInfo = context.fn.getString( 'default-loading-msg' );
 					if( lC.show_thanks ) {
-						lC.show_thanks = false
-						extraInfo = context.fn.getString( 'submission-thanks-loading-msg' )
+						lC.show_thanks = false;
+						extraInfo = context.fn.getString( 'submission-thanks-loading-msg' );
 					}
 					context.fn.showLoader( context.fn.getString( 'loading-marks-msg' ), 'overlay-light', extraInfo );
 				} else {
@@ -607,21 +613,20 @@
 					context.fn.hideLoader();
 				} )
 				.error( function ( request, textStatus, errorThrown ) {
-					switch( request.status ) {
-						case 404: 
-							modules.linear.fn.resetSelectBoxes( context );
-							context.fn.showError( context.fn.getString( 'no-marks-error-msg' ), '#/linear/' );
-							break;
-						default: 
-							context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
+					if( request.stats === 404 ) {
+						modules.linear.fn.resetSelectBoxes( context );
+						context.fn.showError( context.fn.getString( 'no-marks-error-msg' ), '#/linear/' );
+					} else {
+						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
 					}
 					lC.eventChange = true;
 				} );
 			},
 			setupMarks: function( context, marks ) {
-				var lC = context.modules.linear;
+				var lC = context.modules.linear,
+					points_obj = {};
 				// if this is empty, return
-				if( marks.length == 0 ) return;
+				if( marks.length === 0 ) return;
 				// get rid of marks we've already got
 				for( var i = 0; i < marks.length; i++ ) {
 					if( marks[i].reference in lC.marks ) {
@@ -630,15 +635,18 @@
 					}
 				}
 				// check again, if this is empty, return
-				if( marks.length == 0 ) return;
+				if( marks.length === 0 ) return;
 				// sort our current marks so we can tell what buffer to load these into
 				var sortedMarks = [];
-				for ( var mark in lC.marks )
-					sortedMarks.push( [mark, lC.marks[mark].id] );
-				sortedMarks.sort( function( a, b ) { return a[1] - b[1] } );
+				for ( var mark in lC.marks ) {
+					if( lC.marks.hasOwnProperty( mark ) ) {
+						sortedMarks.push( [mark, lC.marks[mark].id] );
+					}
+				}
+				sortedMarks.sort( function( a, b ) { return a[1] - b[1]; } );
 				
 				// default to the right buffer
-				var buffer = sortedMarks.length == 0 || sortedMarks[0][1] < marks[0].id ? lC.rightBuffer: lC.leftBuffer;
+				var buffer = sortedMarks.length === 0 || sortedMarks[0][1] < marks[0].id ? lC.rightBuffer: lC.leftBuffer;
 				// var buffer = sortedMarks.length > 0 && sortedMarks[0][1] > marks[0].id ? lC.rightBuffer : lC.leftBuffer;
 				var reverse = buffer == lC.leftBuffer ? true : false;
 				if( reverse ) marks.reverse();
@@ -646,27 +654,27 @@
 				var pMark = buffer.length > 0 ? 
 					lC.marks[buffer[ reverse ? 0 : buffer.length - 1 ]] :
 					lC.scene.objects[ reverse ? 0 : lC.scene.objects.length - 1];
-				for ( var i = 0; i < marks.length; i++ ) {
+				for ( i = 0; i < marks.length; i++ ) {
 					// if the points data seems suspect, use our default mark data instead
 					if( typeof( marks[i].points_obj_simplified ) === "undefined" ||
-						marks[i].points_obj_simplified == null ||
-						marks[i].points_obj_simplified == "" ) {
-						var points_obj = lC.defaultMarkData;
+						marks[i].points_obj_simplified === null ||
+						marks[i].points_obj_simplified === "" ) {
+						points_obj = lC.defaultMarkData;
 					} else {
 						try {
-							var points_obj = JSON.parse( marks[i].points_obj_simplified );
+							points_obj = JSON.parse( marks[i].points_obj_simplified );
 						} catch( e ) {
 							// catch errors parsing the json
-							var points_obj = lC.defaultMarkData;
+							points_obj = lC.defaultMarkData;
 						}
 						// if the points_obj seems like it
-						if( points_obj == null || !(points_obj instanceof Object) || !( 'strokes' in points_obj ) || 
-							points_obj.strokes.length == 0 ||
+						if( points_obj === null || !(points_obj instanceof Object) || !( 'strokes' in points_obj ) || 
+							points_obj.strokes.length === 0 ||
 							points_obj.strokes[0].length < 2 ) {
 							points_obj = lC.defaultMarkData;
 						}
 					}
-					var mark = new Mark.gmlMark( points_obj.strokes, marks[i].reference, marks[i].country_code, marks[i].date_drawn, points_obj.rtl, marks[i].id, marks[i].is_approved, marks[i].ip_address );
+					mark = new Mark.gmlMark( points_obj.strokes, marks[i].reference, marks[i].country_code, marks[i].date_drawn, points_obj.rtl, marks[i].id, marks[i].is_approved, marks[i].ip_address );
 					if( marks[i].contributor ) {
 						mark.contributor_name = marks[i].contributor;
 						mark.extra_info = points_obj.extra_info;
@@ -722,7 +730,7 @@
 			// also will grab more marks if a buffer length sinks below a threshold
 			updateBuffers: function( context, xMin, xMax ) {
 				var lC = context.modules.linear;
-				if( lC.scene.objects.length == 0 ) return;
+				if( lC.scene.objects.length === 0 ) return;
 				// look for marks that need moved into the left buffer
 				var mark = lC.scene.objects[0];
 				while( mark && mark.position.x + mark.bWidth < xMin ) {
@@ -744,10 +752,11 @@
 			},
 			// moves marks from the buffers to the display
 			updateScene: function( context, xMin, xMax) {
-				var lC = context.modules.linear;
+				var lC = context.modules.linear,
+					mark;
 				if( lC.rightBuffer.length > 0 ) {
 					// look for marks that need added from the right buffer
-					var mark = lC.marks[lC.rightBuffer[0]];
+					mark = lC.marks[lC.rightBuffer[0]];
 					while( mark && mark.position && mark.position.x < xMax ) {
 						lC.scene.objects.push( lC.marks[lC.rightBuffer.shift()] );
 						mark = lC.rightBuffer[0];
@@ -755,7 +764,7 @@
 				}
 				if( lC.leftBuffer.length > 0 ) {
 					// look for marks that need added from the left buffer
-					var mark = lC.marks[lC.leftBuffer[lC.leftBuffer.length - 1]];
+					mark = lC.marks[lC.leftBuffer[lC.leftBuffer.length - 1]];
 					while( mark && mark.position && mark.position.x + mark.bWidth > xMin ) {
 						lC.scene.objects.unshift( lC.marks[lC.leftBuffer.pop()] );
 						mark = lC.leftBuffer[lC.leftBuffer.length - 1];
@@ -779,33 +788,6 @@
 					modules.linear.fn.showMarkInformation( context );
 				} );
 			},
-			// unused but maybe helpful at some point?
-			// updatedOrderedMarks: function( context ) {
-			// 	var lC = context.modules.linear;
-			// 	var sortedMarks = [];
-			// 	for ( var mark in lC.marks )
-			// 		sortedMarks.push( [mark, lC.marks[mark].id] );
-			// 	sortedMarks.sort( function( a, b ) { return a[1] - b[1] } );
-			// 	// clear it out first
-			// 	lC.orderedMarks = [];
-			// 	for( var i = 0; i < sortedMarks.length; i++ ) {
-			// 		lC.orderedMarks.push( sortedMarks[i][0] );
-			// 	}
-			// },
-			// nextMark: function( context ) {
-			// 	var lC = context.modules.linear;
-			// 	var next = lC.orderedMarks[lC.orderedMarks.indexOf( lC.currentMark.reference ) + 1];
-			// 	if ( next ) {
-			// 		modules.linear.fn.jumpToMark( context, next );
-			// 	}
-			// }, 
-			// prevMark: function( context ) {
-			// 	var lC = context.modules.linear;
-			// 	var prev = lC.orderedMarks[lC.orderedMarks.indexOf( lC.currentMark.reference ) - 1];
-			// 	if ( prev ) {
-			// 		modules.linear.fn.jumpToMark( context, prev );
-			// 	}
-			// },
 			closestMark: function ( context ) {
 				var lC = context.modules.linear;
 				var retM = lC.scene.objects[0];
@@ -888,7 +870,7 @@
 					// hide the flag
 					$( '#mark-flag' ).hide();
 					// show the extra info if we've got it
-					if( 'extra_info' in mark && mark.extra_info != null && mark.extra_info != "" ) {
+					if( 'extra_info' in mark && mark.extra_info !== null && mark.extra_info !== "" ) {
 							$( '#contributor-quote' )
 								.text( "“" + mark.extra_info + "”" );
 					}
@@ -915,9 +897,9 @@
 				if (lC.linear_root != "moderate")
 				{
 					$( '#twitter-share' )
-						.data( 'socialShare-context' ).share_params['url'] = window.location.href;
+						.data( 'socialShare-context' ).share_params.url = window.location.href;
 					$( '#facebook-share' )
-						.data( 'socialShare-context' ).share_params['u'] = window.location.href;
+						.data( 'socialShare-context' ).share_params.u = window.location.href;
 				}
 				//	Update approved state if we're moderating // URK - hate this condition // Watch out // TODO
 				if (lC.linear_root == "moderate")
@@ -925,7 +907,7 @@
 					$("#approve-mark-checkbox").attr('checked', mark.is_approved);
 				}
 				// give the flag the appropriate class
-				if( lC.currentMark != null && lC.currentMark.reference in lC.flaggings ) {
+				if( lC.currentMark !== null && lC.currentMark.reference in lC.flaggings ) {
 					$( '#mark-flag').addClass( 'disabled' );
 				} else {
 					$( '#mark-flag').removeClass( 'disabled' );
@@ -957,7 +939,7 @@
 					.attr( 'href', '#' )
 				// reset texts
 					.end()
-					.find( '#mark-id, #total-mark-count, #mark-timestamp, #mark-country' )
+					.find( '#mark-id, #total-mark-count, #mark-timestamp, #mark-country' );
 					
 			},
 			replayCurrentMark: function ( context ) {
@@ -968,14 +950,14 @@
 			},
 			downloadCurrentMark: function ( context ) {
 				var lC = context.modules.linear;
-				if ( lC.currentMark != null && lC.currentMark.reference ) {
+				if ( lC.currentMark !== null && lC.currentMark.reference ) {
 					window.open( '/gml/' + lC.currentMark.reference );
 				}
 			},
 			flagCurrentMark: function ( context ) {
 				var lC = context.modules.linear;
 				// if this user has already flagged this mark, return
-				if( lC.currentMark != null && lC.currentMark.reference in lC.flaggings ) return;
+				if( lC.currentMark !== null && lC.currentMark.reference in lC.flaggings ) return;
 				$.ajax( {
 					url: '/requests/flag_mark',
 					data: {
@@ -1085,7 +1067,7 @@
 						i--;
 					} else {
 						// reposition everything after it
-						if ( i == 0 ) {
+						if ( i === 0 ) {
 							lC.scene.objects[i].positionToStart( );
 						} else {
 							lC.scene.objects[i].positionRelativeTo( lC.scene.objects[i-1] );
@@ -1112,14 +1094,14 @@
 						speed = Math.max( 1000, speed );
 
 						// var speed = Math.min( 8000, Math.max( 1000, speed) );
-						var tween = 'cameraEase' in lC.tweens ? lC.tweens['cameraEase'] : new TWEEN.Tween( lC.scene.camera.position );
+						var tween = 'cameraEase' in lC.tweens ? lC.tweens.cameraEase : new TWEEN.Tween( lC.scene.camera.position );
 						tween
 							.to( { 
 								x: lC.currentMark.position.x + ( lC.currentMark.bWidth / 2 ), 
 								y: lC.currentMark.position.y + ( lC.currentMark.bHeight / 2 ),
 								z: lC.currentMark.position.z - 1000 }, speed )
 							.onComplete( function( ) {
-								delete lC.tweens['cameraEase'];
+								delete lC.tweens.cameraEase;
 								if ( typeof callback === "function" ) callback( this );
 								if( lC.currentMark.contributor_name ) {
 									modules.linear.fn.showContributorInformation( context );
@@ -1127,7 +1109,7 @@
 							} )
 							.easing( speed > 1200 ? TWEEN.Easing.Quadratic.EaseInOut : TWEEN.Easing.Quartic.EaseInOut )
 							.start();
-						lC.tweens['cameraEase'] = tween;	
+						lC.tweens.cameraEase = tween;	
 				}
 			}
 		}
