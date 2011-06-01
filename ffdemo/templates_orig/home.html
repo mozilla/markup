@@ -9,12 +9,10 @@
 		return !!( canvas.getContext && canvas.getContext( '2d' ) && !!( 'JSON' in window ) );
 	}
 	var elem = document.getElementById( 'fallback' );
-	if ( browserSupportsRequiredFeatures ) {
+	if ( browserSupportsRequiredFeatures() ) {
 		// remove the placeholder content
 		if ( elem ) { elem.parentNode.removeChild( elem ); }
 	} else {
-		// unhide the noscript fallback content
-		var elem = document.getElementById( 'fallback' );
 		// remove the display none
 		if ( elem ) { elem.removeAttribute( 'style' ); }
 	}
