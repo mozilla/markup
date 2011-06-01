@@ -88,12 +88,14 @@
 						var moduleName,
 							moduleOptions = {};
 						if( typeof data == "string" ) {
-							moduleName = data
+							moduleName = data;
 						} else if( typeof data == "object" ) {
-							for ( var moduleData in data ) {
-								moduleName = moduleData
-								moduleOptions = data[moduleData];
-								break;
+							for( var moduleData in data ) {
+								if( data.hasOwnProperty( moduleData ) ) {
+									moduleName = moduleData;
+									moduleOptions = data[moduleData];
+									break;
+								}
 							}
 						}
 						if( $.markApp.modules[moduleName] ) {
@@ -107,12 +109,14 @@
 					unloadModule: function( context, moduleName ) {
 						if( moduleName == "all" ) {
 							// unload all the currently loaded modules
-							for ( moduleName in context.modules ) {
-								// if it has a deinit function, run it
-								if( 'deinit' in $.markApp.modules[moduleName].fn )
-									$.markApp.modules[moduleName].fn.deinit( context );
-								// remove it from our modules
-								delete context.modules[moduleName];
+							for( var module in context.modules ) {
+								if( context.modules.hasOwnProperty( module ) ) {
+									// if it has a deinit function, run it
+									if( 'deinit' in $.markApp.modules[module].fn )
+										$.markApp.modules[module].fn.deinit( context );
+									// remove it from our modules
+									delete context.modules[module];
+								}
 							}
 						} else if ( moduleName in context.modules ) {
 							// if it has a deinit function, run it
@@ -134,7 +138,7 @@
 						// trigger the global handlers first
 						if ( eventName in context.evt ) {
 							// if it returns false, stop the train
-							if ( context.evt[eventName]( eventObj ) == false ) {
+							if ( context.evt[eventName]( eventObj ) === false ) {
 								return false;
 							}
 						}
@@ -177,8 +181,8 @@
 					},
 					showLoader: function( msg, custom_class, extraText, delay ) {
 						clearTimeout( context.loaderTimeout );
-						var custom_class = typeof custom_class === "string" ? custom_class : '';
-						var msg = typeof msg === "string" ? msg : context.fn.getString( 'default-loading-msg' );
+						custom_class = typeof custom_class === "string" ? custom_class : '';
+						msg = typeof msg === "string" ? msg : context.fn.getString( 'default-loading-msg' );
 						// hide any existing loaders
 						context.fn.hideLoader();
 						// append our loader
@@ -220,7 +224,7 @@
 						} );
 					},
 					showError: function ( msg, afterError ) {
-						var msg = typeof msg === "string" ? msg : context.fn.getString( 'default-error-msg' );
+						msg = typeof msg === "string" ? msg : context.fn.getString( 'default-error-msg' );
 						// hide any existing errors or loaders
 						context.fn.hideError(); 
 						context.fn.hideLoader();
@@ -231,7 +235,7 @@
 							.click( function ( e ) {
 								e.preventDefault();
 								context.fn.hideError();
-								if ( afterError && typeof afterError === "string" ) context.app.setLocation( afterError )
+								if ( afterError && typeof afterError === "string" ) context.app.setLocation( afterError );
 							} )
 							.addClass( 'overlay-wrapper autoResize' )
 							.attr( 'id', 'markapp-error' )
@@ -292,7 +296,7 @@
 								}
 								localStorage.setItem( key, value );
 							} catch (e) {
-							 	 if ( e == QUOTA_EXCEEDED_ERR ) { /* data wasn't successfully saved due to quota exceed */ }
+								if ( e == QUOTA_EXCEEDED_ERR ) { /* data wasn't successfully saved due to quota exceed */ }
 							}
 						}
 					},
@@ -313,7 +317,7 @@
 							return regexp.test( url );
 						},
 						string: function ( string ) {
-							return ( typeof string === "string" && string.length != "" ) ? true : false; 
+							return ( typeof string === "string" && string.length !== "" ) ? true : false; 
 						}
 					}
 				}

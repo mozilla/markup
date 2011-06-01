@@ -38,13 +38,13 @@
 				if( ! lC.animationComplete ) {
 					// update the position of the camera and draw the viz preview
 					TWEEN.update();
-					lC.layerManager.layers['viz'].clean();
+					lC.layerManager.layers.viz.clean();
 					Mark.renderer.renderScene( lC.vizScene, { width: context.width, height: context.height } );
 					if( lC.curLocaleMark ) {
-						lC.layerManager.layers['mainMark'].clean();
+						lC.layerManager.layers.mainMark.clean();
 						var scale = 500 / lC.curLocaleMark.bWidth;
 						Mark.renderer.renderMark( 
-							lC.layerManager.layers['mainMark'].context, 
+							lC.layerManager.layers.mainMark.context, 
 							lC.curLocaleMark, 
 							{ offset: {x: (context.width / 2) - 115, y: context.height - 240 }, 
 								scale: {x: scale, y: scale, thickness: scale},
@@ -91,8 +91,8 @@
 					// now our options into our context
 					$.extend( lC, lC, options );
 					// since merging won't replace null or undefined values, make sure we clean up after it
-					for( option in modules.intro.defaults ) {
-						if ( options[option] == null ) lC[option] = modules.intro.defaults[option];
+					for( var option in modules.intro.defaults ) {
+						if ( options[option] === null ) lC[option] = modules.intro.defaults[option];
 					}
 				} else {
 					// allow defaults to be overriden
@@ -114,10 +114,10 @@
 					lC.layerManager = new Mark.layerManager( lC.$intro.get( 0 ) );
 					// we draw the viz preview to this
 					lC.layerManager.addLayer( 'viz' );
-					lC.vizScene.canvasContext = lC.layerManager.layers['viz'].context;
+					lC.vizScene.canvasContext = lC.layerManager.layers.viz.context;
 					// and then the 'Make Your Mark' on this
 					lC.layerManager.addLayer( 'mainMark' );
-					lC.textScene.canvasContext = lC.layerManager.layers['mainMark'].context;
+					lC.textScene.canvasContext = lC.layerManager.layers.mainMark.context;
 					// trigger resize so our new layers are sized to fit
 					context.fn.trigger( 'resize' );
 					
@@ -209,9 +209,9 @@
 			},
 			setupMarks: function( context, marks ) {
 				var lC = context.modules.intro;
-				if( typeof marks === "undefined" || marks.length == 0 ) return;
+				if( typeof marks === "undefined" || marks.length === 0 ) return;
 				// set our layer's visiblity to 0
-				$( lC.layerManager.layers['viz'].canvas ).css( 'opacity', 0 );
+				$( lC.layerManager.layers.viz.canvas ).css( 'opacity', 0 );
 				// sort the marks randomly
 				marks.sort( function( a, b ) { return ( Math.round( Math.random() ) - 0.5 ); } );
 				var pMark = null;
@@ -259,12 +259,12 @@
 						y: targetMark.position.y + (targetMark.bHeight / 2),
 						z: targetMark.position.z - 2000 }, 6000 )
 					.onComplete( function( ) {
-						delete lC.tweens['cameraEase'];
+						delete lC.tweens.cameraEase;
 					} )
 					.easing( TWEEN.Easing.Quartic.EaseInOut )
 					.start();
-				lC.tweens['cameraEase'] = tween;
-				$( lC.layerManager.layers['viz'].canvas )
+				lC.tweens.cameraEase = tween;
+				$( lC.layerManager.layers.viz.canvas )
 					.animate( { opacity: '1' }, 'slow' )
 					.delay( 2000 )
 					.animate( { opacity: '0.1'}, 'slow' );

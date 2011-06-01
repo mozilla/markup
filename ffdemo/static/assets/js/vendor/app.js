@@ -24,9 +24,9 @@
 			// update the nav
 			var modOptions = {
 				'state': 'drawing',
-				'invite_code': context.params['invite'],
-				'contributor_type': context.params['contributor_type']
-			}
+				'invite_code': context.params.invite,
+				'contributor_type': context.params.contributor_type
+			};
 			// if we already have the content loaded, just update the state of the interface
 			if ( $( '#markmaker' ).size() > 0 ) {
 				$( '#markapp' ).markApp( 'unloadModule', 'intro' );
@@ -66,7 +66,7 @@
 			$( '#markapp' ).markApp( 'unloadModule', 'capture' );
 			if ( $( '#linear' ).size() > 0 ) {
 				// already setup, just load the new reference mark into the module
-				$( '#markapp' ).markApp( 'addModule', { 'linear': { 'is_flagged': true, 'linear_root': 'moderate', 'reference_mark': context.params['splat'][0] } } );
+				$( '#markapp' ).markApp( 'addModule', { 'linear': { 'is_flagged': true, 'linear_root': 'moderate', 'reference_mark': context.params.splat[0] } } );
 			} else {
 				// show all the signatures
 				this.partial( 'moderate_sammy.html' )
@@ -74,7 +74,7 @@
 						$( '#sammy' ).css( 'zIndex', '' );
 						$( '#markapp' ).css( { 'zIndex': 100, 'cursor': 'default' } );
 						// load up the visualization
-						$( '#markapp' ).markApp( 'addModule', { 'linear': { 'is_flagged': true, 'linear_root': 'moderate', 'reference_mark': context.params['splat'][0] } } );
+						$( '#markapp' ).markApp( 'addModule', { 'linear': { 'is_flagged': true, 'linear_root': 'moderate', 'reference_mark': context.params.splat[0] } } );
 					} );
 			}
 		} );
@@ -87,14 +87,14 @@
 			$( '#markapp' ).markApp( 'unloadModule', 'capture' );
 			if ( $( '#linear' ).size() > 0 ) {
 				// already setup, just load the new reference mark into the module
-				$( '#markapp' ).markApp( 'addModule', { 'linear': { 'country_code': context.params['country_code'], 'reference_mark': context.params['splat'][0] } } );
+				$( '#markapp' ).markApp( 'addModule', { 'linear': { 'country_code': context.params.country_code, 'reference_mark': context.params.splat[0] } } );
 			} else {
 				this.partial( 'linear_sammy.html' )
 					.then( function() {
 						$( '#sammy' ).css( 'zIndex', '' );
 						$( '#markapp' ).css( { 'zIndex': 100, 'cursor': 'default' } );
 						// load up the visualization
-						$( '#markapp' ).markApp( 'addModule', { 'linear': { 'country_code': context.params['country_code'], 'reference_mark': context.params['splat'][0] } } );
+						$( '#markapp' ).markApp( 'addModule', { 'linear': { 'country_code': context.params.country_code, 'reference_mark': context.params.splat[0] } } );
 					} );
 				}
 		} );
@@ -105,7 +105,7 @@
 			$( '#markapp' ).markApp( 'unloadModule', 'capture' );
 			if ( $( '#linear' ).size() > 0 ) {
 				// already setup, just load the new reference mark into the module
-				$( '#markapp' ).markApp( 'addModule', { 'linear': { 'reference_mark': context.params['splat'][0], 'playback': context.params['playback'], 'show_thanks': context.params['be_grateful'] } } );
+				$( '#markapp' ).markApp( 'addModule', { 'linear': { 'reference_mark': context.params.splat[0], 'playback': context.params.playback, 'show_thanks': context.params.be_grateful } } );
 			} else {
 				// show all the signatures
 				this.partial( 'linear_sammy.html' )
@@ -113,7 +113,7 @@
 						$( '#sammy' ).css( 'zIndex', '' );
 						$( '#markapp' ).css( { 'zIndex': 100, 'cursor': 'default' } );
 						// load up the visualization
-						$( '#markapp' ).markApp( 'addModule', { 'linear': { 'reference_mark': context.params['splat'][0], 'playback': context.params['playback'], 'show_thanks': context.params['be_grateful'] } } );
+						$( '#markapp' ).markApp( 'addModule', { 'linear': { 'reference_mark': context.params.splat[0], 'playback': context.params.playback, 'show_thanks': context.params.be_grateful } } );
 					} );
 			}
 		} );
@@ -124,7 +124,7 @@
 			$( '#markapp' )
 				.markApp()
 				// and privide it a way of accessing the sammy app
-				.data( 'markApp-context' )['app'] = app;
+				.data( 'markApp-context' ).app = app;
 		} );
 		
 		// other stuff
