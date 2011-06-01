@@ -509,12 +509,17 @@
 							// hide loader
 							context.fn.hideLoader();
 						}
-
 					},
-					error: function( data ) {
-						if(data.error) {
-							context.fn.showError( data.error );
-						} else {
+					error: function( jqXHR, textStatus, errorThrown ) {
+						try{
+							// try to parse out an error message
+							var data = JSON.parse( jqXHR.responseText );
+							if( data.error ) {
+								context.fn.showError( data.error );
+							} else {
+								context.fn.showError( context.fn.getString( 'submit-error' ) );
+							}
+						} catch( e ) {
 							context.fn.showError( context.fn.getString( 'submit-error' ) );
 						}
 					}
@@ -613,7 +618,7 @@
 					var x, y;
 					if( lC.mark == null || lC.mark.strokes.length == 0 ) {
 						// draw the guide from the closest screen edge
-						x = context.mouseX > $( window ).width() / 2 ? lC.layerManager.layers['liveDrawingLayer'].canvas.width : 0,
+						x = context.mouseX > $( window ).width() / 2 ? lC.layerManager.layers['liveDrawingLayer'].canvas.width : 0;
 						y = context.mouseY;
 					} else {
 						// draw the guide from the last point in the previous stroke

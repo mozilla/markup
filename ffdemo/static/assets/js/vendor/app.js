@@ -144,13 +144,8 @@
 	} );
 	
 	$( document ).ready( function () {
-		// duplicated from the inline script for clarity 
-		function browserSupportsRequiredFeatures() {
-			// detect canvas and native JSON support
-			return !!( 'getContext' in document.createElement( 'canvas' ) ) && 
-				!!( 'JSON' in window );
-		}
-		if ( browserSupportsRequiredFeatures ) {
+		// browserSupportsRequiredFeatures is defined inline so that it can be run immedietly
+		if ( browserSupportsRequiredFeatures && browserSupportsRequiredFeatures() ) {
 			// run the app
 			app.run( '#/' );
 		}
