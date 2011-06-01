@@ -1,6 +1,4 @@
 from datetime import date
-import logging
-import urllib2
 
 import pycurl
 
@@ -35,20 +33,18 @@ def subscribe(campaign, address, format='html', source_url='', lang='', country=
     if not settings.RESPONSYS_API_URL.lower().startswith('https://'):
         raise Exception('Responsys API URL must start with HTTPS.')
 
-    # Ensure SSL cert validates before sending user data over the wire
     curl = pycurl.Curl()
+    # Ensure SSL cert validates before sending user data over the wire
     curl.setopt(pycurl.SSL_VERIFYPEER, 1)
     curl.setopt(pycurl.SSL_VERIFYHOST, 2)
     curl.setopt(pycurl.URL, settings.RESPONSYS_API_URL)
+    # Add POST data
+    curl.setopt(pycurl.POST, 1)
+    curl.setopt(pycurl.POSTFIELDS, urlencode(data))
     try:
         curl.perform()
     except Exception, ce:
-        raise Exception('Newsletter subscription SSL verification error: %s' % ce)
+        raise Exception('Newsletter subscription failed: %s' % ce)
+    else:
+        return curl.getinfo(pycurl.RESPONSE_CODE) == 200
 
-    # If we made it here, the cert is valid. Submit data.
-    try:
-        res = urllib2.urlopen(settings.RESPONSYS_API_URL, data=urlencode(data))
-        return res.code == 200
-    except urllib2.URLError, e:
-        logging.info('Newsletter subscription failed: %s' % e)
-        return False
