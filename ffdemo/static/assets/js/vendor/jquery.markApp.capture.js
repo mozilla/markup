@@ -512,7 +512,11 @@
 
 					},
 					error: function( data ) {
-						context.fn.showError( context.fn.getString( 'submit-error' ) );
+						if(data.error) {
+							context.fn.showError( data.error );
+						} else {
+							context.fn.showError( context.fn.getString( 'submit-error' ) );
+						}
 					}
 				} );
 				return false;
