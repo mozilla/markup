@@ -48,8 +48,8 @@ TEXT_DOMAIN = 'django'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-US'
 
-# Accepted locales on dev and prod.  Change these lists to control which 
-# locales are turned on on dev and prod.  Then, assign one of them to 
+# Accepted locales on dev and prod.  Change these lists to control which
+# locales are turned on on dev and prod.  Then, assign one of them to
 # KNOWN_LANGUAGES below (or in settings_local).
 KNOWN_LANGUAGES_DEV = (
     'en-US',
@@ -249,6 +249,7 @@ SOUTH_TESTS_MIGRATE = False
 
 # Newsletter Foo
 RESPONSYS_CAMPAIGN = 'MOZILLA_AND_YOU'
+RESPONSYS_API_URL = 'https://awesomeness.mozilla.org/pub/rf'  # SSL only!
 
 # Default bcrypt salt for hashing IP addresses. Change me.
 IP_HASH_SALT = '$2a$12$gphCwUtQA3ijuFazDyo.Ku'
