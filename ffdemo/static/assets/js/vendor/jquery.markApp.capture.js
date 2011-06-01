@@ -83,7 +83,7 @@
 			},
 			mouseout: function( context, e ) {
 				var lC = context.modules.capture;
-				lC.layerManager.layers['cursorLayer'].clean();
+				lC.layerManager.layers.cursorLayer.clean();
 				if( context.$cursorTooltip ) {
 					// set timeout for hiding the tooltip
 					clearTimeout( context.tooltipFader );
@@ -162,10 +162,8 @@
 				// increment the frame counter
 				lC.frameCount++;
 				// state specific code
-				switch( context.modules.capture.state ) {
-					case "drawing":
-						modules.capture.fn.drawLoop( context );
-						break;
+				if( context.modules.capture.state === "drawing" ) {
+					modules.capture.fn.drawLoop( context );
 				}
 			}
 		},
@@ -178,11 +176,11 @@
 					// FIXME -- this reinit portion could use some love
 					if( 'state' in options ) {
 						modules.capture.fn.reset( context );
-						if ( options['state'] == 'drawing' ) {
+						if ( options.state == 'drawing' ) {
 							if( context.mouseDown )
 								context.fn.trigger( 'mousedown' );
 						}
-						lC.state = options['state'];
+						lC.state = options.state;
 						modules.capture.fn.initDrawing( context );
 					}
 				} else {
@@ -365,14 +363,14 @@
 				var lC = context.modules.capture;
 				// ignore strokes with less than four points
 				if ( lC.currentStroke.length >= 4 ) {
-					if( lC.mark.strokes.length == 0 ) {
+					if( lC.mark.strokes.length === 0 ) {
 						// this is the first stroke captured - enable the submit and reset controls
 						$( '#markmaker-submit a, #markmaker-reset a' ).removeClass( 'disabled' );
 					} else {
 						// not the first stroke, so connect this one to the last
 						var lStroke = lC.mark.strokes[lC.mark.strokes.length - 1];
 						modules.capture.fn.drawGuide( 
-							lC.layerManager.layers['drawnLayer'].context, 
+							lC.layerManager.layers.drawnLayer.context, 
 							lStroke[lStroke.length - 1].x, 
 							lStroke[lStroke.length - 1].y, 
 							lC.currentStroke[0].x, 
@@ -419,11 +417,11 @@
 			},
 			reset: function ( context ) {
 				var lC = context.modules.capture;
-				lC.layerManager.layers['liveDrawingLayer'].clean();
-				lC.layerManager.layers['drawnLayer'].clean();
+				lC.layerManager.layers.liveDrawingLayer.clean();
+				lC.layerManager.layers.drawnLayer.clean();
 				lC.capturedPoints = 0;
 				lC.rtl = null;
-				lC.mouseDown = false
+				lC.mouseDown = false;
 				lC.lastX = null;
 				lC.lastY = null;
 				lC.strokes = [];
@@ -441,26 +439,26 @@
 				// close the mark
 				modules.capture.fn.endMark( context );
 				// clear the drawing layer
-				lC.layerManager.layers['liveDrawingLayer'].clean();
+				lC.layerManager.layers.liveDrawingLayer.clean();
 				// if the user is out of points, draw the line to the opposite side of the screen
-				var g = lC.layerManager.layers['liveDrawingLayer'].context,
+				var g = lC.layerManager.layers.liveDrawingLayer.context,
 					x = lC.lastX,
 					y = lC.lastY;
 				g.strokeStyle = 'rgba(0,0,0,0.2)';
 				g.lineWidth = 1;
 				g.beginPath();
-				g.dashedLineTo( x, y, lC.rtl ? 0 : lC.layerManager.layers['liveDrawingLayer'].canvas.width, y, [7, 5] );
+				g.dashedLineTo( x, y, lC.rtl ? 0 : lC.layerManager.layers.liveDrawingLayer.canvas.width, y, [7, 5] );
 				g.closePath();
 				g.stroke();
 				// set our cursor back to normal
 				$( '#markapp' ).css( { 'cursor': 'default' } );
-				lC.layerManager.layers['cursorLayer'].clean();
+				lC.layerManager.layers.cursorLayer.clean();
 			},
 			submit: function( context ) {
 				var lC = context.modules.capture;
 				if( lC.state == "submitting" || 
-					lC.mark == null ||
-					lC.mark.strokes.length == 0 ) return;
+					lC.mark === null ||
+					lC.mark.strokes.length === 0 ) return;
 				if( lC.state != "preview" ) modules.capture.fn.closeShop( context );
 				// process our points, and send them off
 				lC.state = "submitting";
@@ -528,10 +526,10 @@
 			},
 			drawStroke: function ( context, stroke ) { 
 				var lC = context.modules.capture;
-				Mark.thickBrush( lC.layerManager.layers['drawnLayer'].context, [stroke] );
-				lC.layerManager.layers['drawnLayer'].context.fillStyle = "rgba(255,255,255,0.3)";
-				lC.layerManager.layers['drawnLayer'].context.strokeStyle = "rgba(255,255,255,0.3)";
-				Mark.circleBrush( lC.layerManager.layers['drawnLayer'].context, [stroke] );
+				Mark.thickBrush( lC.layerManager.layers.drawnLayer.context, [stroke] );
+				lC.layerManager.layers.drawnLayer.context.fillStyle = "rgba(255,255,255,0.3)";
+				lC.layerManager.layers.drawnLayer.context.strokeStyle = "rgba(255,255,255,0.3)";
+				Mark.circleBrush( lC.layerManager.layers.drawnLayer.context, [stroke] );
 			},
 			drawGuide: function( g, x1, y1, x2, y2 ) {
 				g.strokeStyle = 'rgba(0,0,0,0.2)';
@@ -575,21 +573,21 @@
 			initCursor: function( context ) {
 				var lC = context.modules.capture;
 				lC.layerManager.addLayer( 'cursorLayer' );
-				lC.layerManager.layers['cursorLayer'].autoResize = false;
-				lC.layerManager.layers['cursorLayer'].setSize( 25, 29 );
+				lC.layerManager.layers.cursorLayer.autoResize = false;
+				lC.layerManager.layers.cursorLayer.setSize( 25, 29 );
 			},
 			updateCursor: function( context, forceRedraw ) {
 				var lC = context.modules.capture;
 				// we should never update the cursor if we're not in drawing mode
 				if( lC.state != "drawing" && lC.state != "intro" ) return;
 				// always move it
-				$( lC.layerManager.layers['cursorLayer'].canvas )
+				$( lC.layerManager.layers.cursorLayer.canvas )
 					.css( {'top': context.mouseY - 29, 'left': context.mouseX } );
 				// redraw it if the ink level has changed
 				if( forceRedraw || lC.capturedPoints != lC.lastPointCount ) {
 					lC.lastPointCount = lC.capturedPoints;
 					modules.capture.fn.drawCursor( 
-						lC.layerManager.layers['cursorLayer'],
+						lC.layerManager.layers.cursorLayer,
 						( lC.captureLimit - lC.capturedPoints ) / lC.captureLimit  );
 				}
 				// move the tooltip here. 
@@ -603,40 +601,41 @@
 			},
 			drawLoop: function( context ) {
 				var lC = context.modules.capture;
+				var x, y, lStroke;
 				// Clean the drawing layer
-				lC.layerManager.layers['liveDrawingLayer'].clean();
+				lC.layerManager.layers.liveDrawingLayer.clean();
 				if( lC.currentStroke && lC.currentStroke.length > 0 ) {
 					// draw out what we've got in the stroke buffer
-					Mark.thickBrush( lC.layerManager.layers['liveDrawingLayer'].context, [lC.currentStroke] );
-					lC.layerManager.layers['liveDrawingLayer'].context.fillStyle = "rgba(255,255,255,0.3)";
-					lC.layerManager.layers['liveDrawingLayer'].context.strokeStyle = "rgba(255,255,255,0.3)";
-					Mark.circleBrush( lC.layerManager.layers['liveDrawingLayer'].context, [lC.currentStroke] );
+					Mark.thickBrush( lC.layerManager.layers.liveDrawingLayer.context, [lC.currentStroke] );
+					lC.layerManager.layers.liveDrawingLayer.context.fillStyle = "rgba(255,255,255,0.3)";
+					lC.layerManager.layers.liveDrawingLayer.context.strokeStyle = "rgba(255,255,255,0.3)";
+					Mark.circleBrush( lC.layerManager.layers.liveDrawingLayer.context, [lC.currentStroke] );
 				}
 				if( ! context.mouseIn ) return;
 				if( ! context.mouseDown ) {
 					// draw the idle guide
-					var x, y;
-					if( lC.mark == null || lC.mark.strokes.length == 0 ) {
+					// var x, y, lStroke;
+					if( lC.mark === null || lC.mark.strokes.length === 0 ) {
 						// draw the guide from the closest screen edge
-						x = context.mouseX > $( window ).width() / 2 ? lC.layerManager.layers['liveDrawingLayer'].canvas.width : 0;
+						x = context.mouseX > $( window ).width() / 2 ? lC.layerManager.layers.liveDrawingLayer.canvas.width : 0;
 						y = context.mouseY;
 					} else {
 						// draw the guide from the last point in the previous stroke
-						var lStroke = lC.mark.strokes[lC.mark.strokes.length - 1];
+						lStroke = lC.mark.strokes[lC.mark.strokes.length - 1];
 						x = lStroke[lStroke.length - 1].x;
 						y = lStroke[lStroke.length - 1].y;
 					}
 					modules.capture.fn.drawGuide( 
-						lC.layerManager.layers['liveDrawingLayer'].context, 
+						lC.layerManager.layers.liveDrawingLayer.context, 
 						x,
 						y,
 						context.mouseX, 
 						context.mouseY );
-				} else if( lC.mark != null && lC.currentStroke != null && lC.mark.strokes.length > 0 && lC.currentStroke.length > 0 ) {
+				} else if( lC.mark !== null && lC.currentStroke !== null && lC.mark.strokes.length > 0 && lC.currentStroke.length > 0 ) {
 					// draw the drawtime guide
-					var lStroke = lC.mark.strokes[lC.mark.strokes.length - 1];
+					lStroke = lC.mark.strokes[lC.mark.strokes.length - 1];
 					modules.capture.fn.drawGuide( 
-						lC.layerManager.layers['liveDrawingLayer'].context, 
+						lC.layerManager.layers.liveDrawingLayer.context, 
 						lStroke[lStroke.length - 1].x, 
 						lStroke[lStroke.length - 1].y, 
 						lC.currentStroke[0].x, 
