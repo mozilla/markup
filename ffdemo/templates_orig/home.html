@@ -4,20 +4,19 @@
 {% block js %}
 <script type="text/javascript" charset="utf-8">
 	// placing this inline ensures it will run as soon as the page loads, and that fallback content is removed as soon as possible
-	function browserSupportsRequiredFeatures() { var elem = document.createElement('canvas'); return !!(elem.getContext && elem.getContext('2d'); }
+	function browserSupportsRequiredFeatures() { 
+		var canvas = document.createElement( 'canvas' ); 
+		return !!( canvas.getContext && canvas.getContext( '2d' ) && !!( 'JSON' in window ) );
+	}
+	var elem = document.getElementById( 'fallback' );
 	if ( browserSupportsRequiredFeatures ) {
 		// remove the placeholder content
-		var elem = document.getElementById( 'fallback' )
-		if ( elem ) {
-			elem.parentNode.removeChild( elem );
-		}
+		if ( elem ) { elem.parentNode.removeChild( elem ); }
 	} else {
 		// unhide the noscript fallback content
 		var elem = document.getElementById( 'fallback' );
-		if ( elem ) {
-			// remove the display none
-			elem.removeAttribute( 'style' );
-		}
+		// remove the display none
+		if ( elem ) { elem.removeAttribute( 'style' ); }
 	}
 </script>
 <script src="/media/assets/js/markUp_app.min.js" type="text/javascript"></script>
