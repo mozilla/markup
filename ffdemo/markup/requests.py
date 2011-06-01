@@ -124,17 +124,22 @@ def save_mark(request):
             #    Confirms size below 30, 150k
             if len(str(json)) > 250000 or len(request.POST['points_obj_simplified']) > 50000:
                 raise ValueError
+            #    Checks x,y,z values to be within some maxium
+            for stroke in json['strokes'][0]:
+                if stroke['x'] > 2500 or stroke['y'] > 1600 or stroke['z'] != 0 or stroke['significance'] > 5:
+                    raise ValueError
             #    Save new mark, handled by common.py
             new_mark_reference = common.save_new_mark_with_data(mark_data, request.META['REMOTE_ADDR'])
             #    Successful response, returning new mark reference
-            response['success'] = True
             response['mark_reference'] = new_mark_reference
-        except ValueError, KeyError:
-            response['success'] = False
+        except ValueError:
+            response['error'] = _('mark was too large. Please try drawing a smaller mark. Thanks!')
+            return HttpResponseBadRequest(simplejson.dumps(response), 'application/json')
+        except KeyError:
             response['error'] = _('invalid JSON in the POST request')
+            return HttpResponseBadRequest(simplejson.dumps(response), 'application/json')
     else:
         #    Error response
-        response['success'] = False
         response['error'] = _('missing data in POST request')
         json_response = simplejson.dumps(response)
         return HttpResponseServerError(json_response, 'application/json')
