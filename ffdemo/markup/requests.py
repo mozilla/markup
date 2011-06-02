@@ -118,16 +118,9 @@ def save_mark(request):
         try:
             #    Confirm that what we're getting is in fact JSON
             json = simplejson.loads(request.POST['points_obj'])
-            #    Confirms existence of stroke and chooses random stroke to confirm structure
-            ran = json['strokes'][0][random.randrange(0, len(json['strokes'][0]))]
-            ran['angle']; ran['significance']; ran['time']; ran['y']; ran['x']; ran['z']; ran['speed']
-            #    Confirms size below 30, 150k
-            if len(str(json)) > 250000 or len(request.POST['points_obj_simplified']) > 50000:
-                raise ValueError
-            #    Checks x,y,z values to be within some maxium
-            for stroke in json['strokes'][0]:
-                if stroke['x'] > 2500 or stroke['y'] > 1600 or stroke['z'] != 0 or stroke['significance'] > 5:
-                    raise ValueError
+            json_simplified = simplejson.loads(request.POST['points_obj_simplified'])
+            #    Validate JSON
+            validate_json(json, json_simplified)
             #    Save new mark, handled by common.py
             new_mark_reference = common.save_new_mark_with_data(mark_data, request.META['REMOTE_ADDR'])
             #    Successful response, returning new mark reference
@@ -148,6 +141,19 @@ def save_mark(request):
     json_response = simplejson.dumps(response)
     return HttpResponse(json_response, 'application/json')
 
+
+def validate_json(json, json_simplified):
+    #    Confirms size below 30, 150k
+    if len(json) > 250000 or len(json_simplified) > 50000:
+        raise ValueError
+    #    Confirms existence of stroke and chooses random stroke to confirm structure
+    for j in [json, json_simplified]:
+        ran = j['strokes'][0][random.randrange(0, len(j['strokes'][0]))]
+        ran['angle']; ran['significance']; ran['time']; ran['y']; ran['x']; ran['z']; ran['speed']
+        #    Checks x,y,z values to be within some maxium
+        for stroke in j['strokes'][0]:
+            if stroke['x'] > 2500 or stroke['y'] > 1600 or stroke['z'] != 0 or stroke['significance'] > 5:
+                raise ValueError
 
 def delete_mark(request):
     #    Completely remove the mark
