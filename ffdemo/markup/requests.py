@@ -154,6 +154,8 @@ def validate_json(json, json_simplified):
         for stroke in j['strokes'][0]:
             if stroke['x'] > 2500 or stroke['y'] > 1600 or stroke['z'] != 0 or stroke['significance'] > 5:
                 raise ValueError
+            if stroke['x'] < -2500 or stroke['y'] < -1600 or stroke['significance'] < -5:
+                raise ValueError
 
 def delete_mark(request):
     #    Completely remove the mark
