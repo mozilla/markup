@@ -38,9 +38,9 @@
 			<nav>
 				<div id="coming-soon-tip">{{ _('Coming soon') }}</div>
 				<ul>
-					<li id="make-your-mark"><a href="/#/mark/new">{{ _('Make Your Mark') }}</a></li>
-					<li id="manifesto"><a href="/manifesto">{{ _('We Believe') }}</a></li>
-					<li id="behind-the-code"><a href="/about/">{{ _('Behind The Code') }}</a></li>
+					<li id="make-your-mark"><a href="/{{ LANG }}/#/mark/new">{{ _('Make Your Mark') }}</a></li>
+                    <li id="manifesto"><a href="/{{ LANG }}/manifesto">{{ _('We Believe') }}</a></li>
+					<li id="behind-the-code"><a href="/{{ LANG }}/about/">{{ _('Behind The Code') }}</a></li>
 					<li id="community" class="disabled">{{ _('Community') }}</li>
 					<li class="download-link"><a href="http://www.mozilla.com/firefox?WT.mc_id=markup&WT.mc_ev=click" target="_blank">{{ _('Download Firefox') }}</a></li>
 				</ul>
@@ -54,13 +54,13 @@
 			<section id="callout-boxes">
 				<div id="callout-boxes-wrapper">
 					<div class="callout-box">
-						<a href="/about"><img src="/media/assets/images/evan_roth.jpg" width="57" height="57" alt="{{ _('Evan Roth') }}" /></a>
-						<h3><a href="/about">{{ _('Collaborating with Mark Up') }}</a></h3>
+						<a href="/{{ LANG }}/about"><img src="/media/assets/images/evan_roth.jpg" width="57" height="57" alt="{{ _('Evan Roth') }}" /></a>
+						<h3><a href="/{{ LANG }}/about">{{ _('Collaborating with Mark Up') }}</a></h3>
 						<p>{% blocktrans %}Learn more about our collaboration with artist Evan Roth and Lawrence Lessig's contribution.{% endblocktrans %}</p>
 					</div>
 					<div class="callout-box">
-						<a href="/newsletter"><img src="/media/assets/images/world_eater.jpg" width="57" height="57" alt="{{ _('Mozilla Newsletter') }}" /></a>
-						<h3><a href="/newsletter">{{ _('Read all about it') }}</a></h3>
+						<a href="/{{ LANG }}/newsletter"><img src="/media/assets/images/world_eater.jpg" width="57" height="57" alt="{{ _('Mozilla Newsletter') }}" /></a>
+						<h3><a href="/{{ LANG }}/newsletter">{{ _('Read all about it') }}</a></h3>
 						<p>{% blocktrans %}Subscribe to Mozilla's monthly email newsletter and receive the latest tips and tricks for getting the most out of Firefox.{% endblocktrans %}</p>
 					</div>
 					<div class="callout-box">
