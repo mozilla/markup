@@ -36,7 +36,11 @@
 		</div>
 	</div>
 	<div id="sammy"></div>
+	{% if settings.ENABLE_RAW_MARKS %}
 	<div id="markapp" data-all-points="true"></div>
+	{% else %}
+	<div id="markapp" data-all-points="false"></div>
+	{% endif %}
 	<div class="translated-strings" style="display:none;">
 		<span id="default-error-msg">{% blocktrans %}An error occured. Please try your request again.{% endblocktrans %}</span>
 		<span id="default-loading-msg">{% blocktrans %}Loading{% endblocktrans %}</span>
