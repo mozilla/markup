@@ -24,6 +24,7 @@
 			initialized: false,
 			currentStroke: null,
 			mark: null,
+			saveFullData: true,
 			timeBetweenStrokes: 400, // the amount of time to pause between strokes
 			events: []  // unexecuted events we bind to times to 
 		},
@@ -112,6 +113,7 @@
 			},
 			ready: function ( context, e ) {
 				var lC = context.modules.capture;
+				lC.saveFullData = context.$container.attr( 'data-all-points' ) === 'true';
 				// hide errything
 				$( '#markmaker' )
 					.hide()
@@ -472,10 +474,12 @@
 				// show loader
 				context.fn.showLoader( context.fn.getString( 'submitting-mark' ) );
 				var params = {
-					'points_obj': points_obj,
 					'points_obj_simplified': points_obj_simplified,
 					'country_code': country_code
 				};
+				if ( lC.saveFullData ) {
+					params.points_obj = points_obj;
+				}
 				if ( lC.invite_code && lC.contributor_type == "t" ) {
 					params.contributor_locale = context.locale;
 					params.invite = lC.invite_code;
