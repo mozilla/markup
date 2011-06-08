@@ -3,7 +3,7 @@ from hashlib import md5
 import re
 import bcrypt
 
-from django.db import connection
+from django.db import connections
 
 from ffdemo.markup.models import Mark
 from ffdemo.markup.models import Invitation
@@ -115,7 +115,7 @@ def generate_reference():
 
     # This is some raw SQL to keep things atomic. Straight from the MySQL docs:
     # http://dev.mysql.com/doc/refman/5.0/en/information-functions.html#function_last-insert-id
-    cursor = connection.cursor()
+    cursor = connections['default'].cursor()
     cursor.execute("""UPDATE markup_marksequence SET
                       id=LAST_INSERT_ID(id + 1)""")
 
