@@ -220,6 +220,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'commons.context_processors.i18n',
     'django.contrib.auth.context_processors.auth',
+    'ffdemo.utils.context_processors.enable_raw_marks',
+
 )
 
 SERIALIZATION_MODULES = {

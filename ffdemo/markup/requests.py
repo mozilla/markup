@@ -103,9 +103,11 @@ def save_mark(request):
     response = {'success': False}
 
     #    Check for mandatory POST data
-    if 'points_obj' in request.POST and 'points_obj_simplified' in request.POST:
+    if 'points_obj_simplified' in request.POST:
     #    Cosntruct mark data
-        mark_data = {'points_obj': request.POST['points_obj'], 'points_obj_simplified': request.POST['points_obj_simplified']}
+        mark_data = {'points_obj_simplified': request.POST['points_obj_simplified']}
+        if 'points_obj' in request.POST:
+            mark_data['points_obj'] = request.POST['points_obj']
         if 'country_code' in request.POST:
             mark_data['country_code'] = request.POST['country_code']
             if 'invite' in request.POST:
@@ -117,10 +119,11 @@ def save_mark(request):
 
         try:
             #    Confirm that what we're getting is in fact JSON
-            json = simplejson.loads(request.POST['points_obj'])
+            if 'points_obj' in request.POST:
+                json = simplejson.loads(request.POST['points_obj'])
+                validate_json(json, False)
             json_simplified = simplejson.loads(request.POST['points_obj_simplified'])
-            #    Validate JSON
-            validate_json(json, json_simplified)
+            validate_json(json_simplified, True)
             #    Save new mark, handled by common.py
             new_mark_reference = common.save_new_mark_with_data(mark_data, request.META['REMOTE_ADDR'])
             #    Successful response, returning new mark reference
@@ -142,20 +145,23 @@ def save_mark(request):
     return HttpResponse(json_response, 'application/json')
 
 
-def validate_json(json, json_simplified):
+def validate_json(json, simplified):
     #    Confirms size below 30, 150k
-    if len(json) > 250000 or len(json_simplified) > 50000:
-        raise ValueError
+    if simplified:
+        if len(json) > 50000:
+            raise ValueError
+    else:
+        if len(json) > 250000:
+            raise ValueError
     #    Confirms existence of stroke and chooses random stroke to confirm structure
-    for j in [json, json_simplified]:
-        ran = j['strokes'][0][random.randrange(0, len(j['strokes'][0]))]
-        ran['angle']; ran['significance']; ran['time']; ran['y']; ran['x']; ran['z']; ran['speed']
-        #    Checks x,y,z values to be within some maxium
-        for stroke in j['strokes'][0]:
-            if stroke['x'] > 2500 or stroke['y'] > 1600 or stroke['z'] != 0 or stroke['significance'] > 5:
-                raise ValueError
-            if stroke['x'] < 0 or stroke['y'] < 0 or stroke['significance'] < 0:
-                raise ValueError
+    ran = json['strokes'][0][random.randrange(0, len(json['strokes'][0]))]
+    ran['angle']; ran['significance']; ran['time']; ran['y']; ran['x']; ran['z']; ran['speed']
+    #    Checks x,y,z values to be within some maxium
+    for stroke in json['strokes'][0]:
+        if stroke['x'] > 2500 or stroke['y'] > 1600 or stroke['z'] != 0 or stroke['significance'] > 5:
+            raise ValueError
+        if stroke['x'] < 0 or stroke['y'] < 0 or stroke['significance'] < 0:
+            raise ValueError
 
 def delete_mark(request):
     #    Completely remove the mark

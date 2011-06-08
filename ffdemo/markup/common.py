@@ -46,7 +46,9 @@ def save_new_mark_with_data(data, ip_address):
     """Preprocess mark data, then save to DB."""
 
     # Remove whitespace from raw full points obj
-    stripped_points_obj_full = re.sub(r'\s', '', data['points_obj'])
+    if 'points_obj' in data:
+        stripped_points_obj_full = re.sub(r'\s', '', data['points_obj'])
+
     # remove whitespace where not in extra_info (the contributor quote)
     j = re.compile('^.*\"extra\_info"\:\"')
     k = re.compile('\"extra\_info"\:\".*\"\,*.*$')
@@ -62,7 +64,7 @@ def save_new_mark_with_data(data, ip_address):
             data['points_obj_simplified'])
 
     # Ensure duplicates aren't being introduced
-    existing_mark = Mark.objects.filter(duplicate_check=hash(stripped_points_obj_full))
+    existing_mark = Mark.objects.filter(duplicate_check=hash(stripped_points_obj_simplified))
     if existing_mark:
         return existing_mark[0].reference
 
@@ -70,14 +72,15 @@ def save_new_mark_with_data(data, ip_address):
     obscurred_ip = bcrypt.hashpw(ip_address, settings.IP_HASH_SALT)
     # Create and return Mark
     try:
-        reference = create_save_mark(hash(stripped_points_obj_full), obscurred_ip, stripped_points_obj_simplified, data)
+        reference = create_save_mark(hash(stripped_points_obj_simplified), obscurred_ip, stripped_points_obj_simplified, data)
     except:
         raise
     else:
         # Store full raw data on drive
-        if settings.ENABLE_RAW_MARKS:
-            with open(settings.RAW_MARKS_DIR + '/' + reference + '.json' , 'w') as f:
-                f.write(stripped_points_obj_full)
+        if 'points_obj' in data:
+            if settings.ENABLE_RAW_MARKS:
+                with open(settings.RAW_MARKS_DIR + '/' + reference + '.json' , 'w') as f:
+                    f.write(stripped_points_obj_full)
     return reference
 
 
