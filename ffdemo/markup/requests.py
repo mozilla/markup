@@ -169,7 +169,7 @@ def delete_mark(request):
     if not request.user.is_authenticated():
         response['error'] = _('Authentication required')
         json_response = simplejson.dumps(response)
-        return HttpResponseServerError(json_response, 'application/json')
+        return HttpResponseForbidden(json_response, 'application/json')
     else:
         if 'reference' in request.POST and len(request.POST['reference']) > 0:
             try:
@@ -194,7 +194,7 @@ def delete_all_based_on_ip(request):
     if not request.user.is_authenticated():
         response['error'] = _('Authentication required')
         json_response = simplejson.dumps(response)
-        return HttpResponseServerError(json_response, 'application/json')
+        return HttpResponseForbidden(json_response, 'application/json')
     else:
         if 'ip' in request.POST and len(request.POST['ip']) > 0:
             try:
@@ -219,7 +219,7 @@ def approve_mark(request):
     if not request.user.is_authenticated():
         response['error'] = _('Authentication required')
         json_response = simplejson.dumps(response)
-        return HttpResponseServerError(json_response, 'application/json')
+        return HttpResponseForbidden(json_response, 'application/json')
     else:
         if 'reference' in request.POST and len(request.POST['reference']) > 0:
             try:
