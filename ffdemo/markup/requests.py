@@ -179,7 +179,7 @@ def delete_mark(request):
             except Mark.DoesNotExist:
                 response['error'] = _('Mark does not exist')
                 json_response = simplejson.dumps(response)
-                return HttpResponseServerError(json_response, 'application/json')
+                return HttpResponseNotFound(json_response, 'application/json')
         else:
             response['error'] = _("No mark specified")
             json_response = simplejson.dumps(response)
