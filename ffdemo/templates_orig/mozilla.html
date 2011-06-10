@@ -6,8 +6,8 @@
 
 {% block about-content %}
 	<h1>{{ _('About Mozilla') }}</h1>
-	<p>{% blocktrans with "http://www.mozilla.org/" as moz_url %}Mozilla is a global, non-profit organization dedicated to making the Web better. We believe in principle over profit, and that the Internet is a shared public resource to be cared for, not a commodity to be sold. We work with a worldwide community to create free, open source software like Mozilla Firefox, and to innovate for the benefit of the individual and the betterment of the Web. The result is great products built by passionate people and better choices for everyone. For more information, visit <a href="{{ moz_url }}">www.mozilla.org</a>.{% endblocktrans %}</p>
+	<p>{% blocktrans with "http://www.mozilla.org/" as moz_url %}Mozilla is a global, nonprofit organization dedicated to making the Web better. We emphasize principle over profit, and believe that the Web is a shared public resource to be cared for, not a commodity to be sold. We work with a worldwide community to create open source products like Mozilla Firefox, and to innovate for the benefit of the individual and the betterment of the Web. For more information, visit <a href="{{ moz_url }}">www.mozilla.org</a>.{% endblocktrans %}</p>
 	<h2>{{ _('Special Thanks') }}</h2>
-	<p>{% blocktrans with "/about/evan-roth" as evan_url %}Special thanks to <a href="{{ evan_url }}">Evan Roth</a> for his contributions to the MarkUP project.{% endblocktrans %}</p>
+	<p>{% blocktrans with "/about/evan-roth" as evan_url %}Special thanks to <a href="{{ evan_url }}">Evan Roth</a> for his contributions to the Mark Up project.{% endblocktrans %}</p>
 {% endblock %}
 

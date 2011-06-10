@@ -30,6 +30,7 @@
 			requestingMarks: false, // prevents more mark request from being sent when set to true
 			moreLeft: true, // Flags for the begining and end of the line. Assume we're not there at the start
 			moreRight: true, 
+			maxID: 0,
 			hoverMark: null, // holds the mark currently being hovered over
 			currentMark: null,
 			playbackTimes: {}, // used for storing mark playback times by reference
@@ -226,7 +227,11 @@
 					$.extend( lC, lC, options );
 					// since merging won't replace null or undefined values, make sure we clean up after it
 					for( var option in modules.linear.defaults ) {
-						if ( options[option] === null ) lC[option] = modules.linear.defaults[option];
+						if ( modules.linear.defaults.hasOwnProperty( option ) ) {
+							if ( options[option] === null || typeof options[option] === "undefined" ) {
+								lC[option] = modules.linear.defaults[option];
+							}
+						}
 					}
 					// update the interface
 					modules.linear.fn.updateInterface( context );
@@ -309,6 +314,10 @@
 								.text( countryCodes[i].name );
 							$select.append( $option );
 						}
+						
+						$select.selectBox( { autoWidth: false } );
+						
+						if( lC.country_code ) $select.selectBox( 'value', lC.country_code );
 						$select.change( function ( ) {
 							var val = $( this ).val();
 							if( val.length != 2 && lC.country_code ) {
@@ -323,8 +332,6 @@
 							$( '.ui-selectBox-focus' ).removeClass( 'ui-selectBox-focus' );
 							context.$container.focus();
 						} );
-						// select the current mark if we have it
-						if( lC.country_code ) $select.val( lC.country_code );
 					} );
 
 				// hide all the mark detial things 
@@ -377,8 +384,7 @@
 				modules.linear.fn.initMarks( context );
 				
 				
-				$("#sammy #country-select").selectBox({ autoWidth: false });
-				$("#sammy #contributor-select").selectBox({ autoWidth: false });
+				$( "#sammy #contributor-select" ).selectBox({ autoWidth: false });
 				
 				
 			},
@@ -404,7 +410,6 @@
 									modules.linear.fn.jumpToMark( context, lC.reference_mark, lC.playback );
 								} else {
 									// show the error message, with a link back to the main visualization link
-									modules.linear.fn.resetSelectBoxes( context );
 									context.fn.showError( context.fn.getString( 'no-marks-error-msg' ), '#/linear/' );
 									lC.eventChange = true;
 								}
@@ -442,7 +447,6 @@
 								}
 							} else {
 								// show the error message, with a link back to the main visualization link
-								modules.linear.fn.resetSelectBoxes( context );
 								context.fn.showError( context.fn.getString( 'no-marks-error-msg' ), '#/linear/' );
 								lC.eventChange = true;
 							}
@@ -454,6 +458,8 @@
 			// DOM updates that should run after every new request should go here
 			updateInterface: function ( context ) {
 				var lC = context.modules.linear;
+				// clear any errors
+				context.fn.hideError();
 				// show the appropriate middle link
 				var userMark = context.fn.getData( 'userMark' );
 				if( userMark && ( lC.country_code ? ( userMark.country_code == lC.country_code ) : true ) ) {
@@ -470,9 +476,11 @@
 					options.country_code =  lC.country_code;
 					$( "#contributor-select" ).next().hide();
 					$( '#contributor-select-label' ).hide();
+					$( '#country-select' ).selectBox( 'value', lC.country_code );
 				} else {
 					$( "#contributor-select" ).next().show();
 					$( '#contributor-select-label' ).show();
+					$( '#country-select' ).selectBox( 'value', '' );
 				}
 				// if the country has changed, grab updated data
 				if( lC.linear_root != "moderate" && ! $( '#mark-browsing-options' ).is( '.country-' + ( lC.country_code ? lC.country_code : 'all' ) ) ) {
@@ -517,7 +525,8 @@
 							// setup collapsibles
 							$( '#mark-browsing' ).collapsibleMod( );
 							// set our total marks
-							$( '#total-mark-count' ).text( data.max_id );
+							lC.maxID = data.max_id;
+							$( '#total-mark-count' ).text( lC.maxID );
 							// if the contributor box is empty, fill it
 							if( $( '#contributor-select option' ).size() == 1 ) {
 								var $select = $( '#contributor-select' );
@@ -647,7 +656,6 @@
 				
 				// default to the right buffer
 				var buffer = sortedMarks.length === 0 || sortedMarks[0][1] < marks[0].id ? lC.rightBuffer: lC.leftBuffer;
-				// var buffer = sortedMarks.length > 0 && sortedMarks[0][1] > marks[0].id ? lC.rightBuffer : lC.leftBuffer;
 				var reverse = buffer == lC.leftBuffer ? true : false;
 				if( reverse ) marks.reverse();
 				// try to establish a previous mark by which we can position the new marks
@@ -674,6 +682,18 @@
 							points_obj = lC.defaultMarkData;
 						}
 					}
+					// updaet the max id and last link if this mark is greater
+					if( marks[i].id > lC.maxID ) {
+						lC.maxID = marks[i].id;
+						$( '#total-mark-count' ).text( lC.maxID );
+						if( lC.country_code ) {
+							$( '#last-mark-link' )
+								.attr( 'href', '#/' + lC.linear_root + '/country/' + lC.country_code + '/' + marks[i].reference );
+						} else {
+							$( '#last-mark-link' )
+								.attr( 'href', '#/' + lC.linear_root + '/' + marks[i].reference );
+						}
+					} 
 					mark = new Mark.gmlMark( points_obj.strokes, marks[i].reference, marks[i].country_code, marks[i].date_drawn, points_obj.rtl, marks[i].id, marks[i].is_approved, marks[i].ip_address );
 					if( marks[i].contributor ) {
 						mark.contributor_name = marks[i].contributor;
