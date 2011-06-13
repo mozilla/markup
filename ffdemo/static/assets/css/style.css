@@ -92,7 +92,6 @@ a img
 }
 
 #ui-selectBox-dropdown ul li {
-	white-space: nowrap;
 	overflow: hidden;
 	padding: .2em .6em .2em 20px;
 	display: block;
