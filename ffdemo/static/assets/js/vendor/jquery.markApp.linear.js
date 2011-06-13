@@ -1010,8 +1010,6 @@
 					type: 'POST',
 					dataType: 'JSON',
 					success: function( data ) {
-						//	Delete current mark from marks data
-						// delete lC.marks[targetMarkReference];
 						// then remove it from the screen
 						modules.linear.fn.removeMarkFromScreen( context, targetMarkReference );
 						// hide mark details and set the current mark to nada
@@ -1019,7 +1017,7 @@
 						modules.linear.fn.hideMarkInformation( context );
 					},
 					error: function ( data ) {
-						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
+						context.fn.showError( context.fn.getString( 'error-msg' ), '#/moderate/' );
 						lC.eventChange = true; 
 					}
 				} );
@@ -1040,7 +1038,7 @@
 						location.reload();
 					},
 					error: function ( data ) {
-						context.fn.showError( context.fn.getString( 'error-msg' ), '#/linear/' );
+						context.fn.showError( context.fn.getString( 'error-msg' ), '#/moderate/' );
 						lC.eventChange = true;
 					}
 				} );
