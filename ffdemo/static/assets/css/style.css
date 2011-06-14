@@ -908,7 +908,7 @@ footer #language #language-selector
 {
 	display: none;
 	position: absolute;
-	top: 15px;
+	bottom: 15px;
 	right: 0;
 	width: 120px;
 	background: #4c4c4c;
