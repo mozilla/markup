@@ -1,5 +1,6 @@
 from django.http import (HttpResponse, HttpResponseBadRequest,
-                         HttpResponseNotFound, HttpResponseServerError)
+                         HttpResponseForbidden, HttpResponseNotFound,
+                         HttpResponseServerError)
 from ffdemo.markup.models import Mark
 from ffdemo.markup import common
 from django.utils import simplejson
