@@ -1,6 +1,7 @@
 from django.http import (HttpResponse, HttpResponseBadRequest,
                          HttpResponseForbidden, HttpResponseNotFound,
                          HttpResponseServerError)
+from _mysql_exceptions import OperationalError
 from ffdemo.markup.models import Mark
 from ffdemo.markup import common
 from django.utils import simplejson
@@ -302,7 +303,7 @@ def marks_by_reference(request):
         reference_mark = request.GET['reference']
         try:
             m_offset = Mark.objects.get(reference=reference_mark)
-        except Mark.DoesNotExist:
+        except (Mark.DoesNotExist, OperationalError):
             response['success'] = False
             response['error'] = _("Reference mark doesn't exist")
             did_fail_get_marks = True
