@@ -105,7 +105,7 @@ def save_mark(request):
 
     #    Check for mandatory POST data
     if 'points_obj_simplified' in request.POST:
-    #    Cosntruct mark data
+    #    Construct mark data
         mark_data = {'points_obj_simplified': request.POST['points_obj_simplified']}
         if 'points_obj' in request.POST:
             mark_data['points_obj'] = request.POST['points_obj']
@@ -256,64 +256,6 @@ def get_mark(request):
     previous_marks = ""
     next_marks = ""
     return HttpResponse(mark.points_obj_simplified, 'application/json')
-
-
-def marks_by_offset(request):
-    #       Parameters:
-    #     offset:        Integer -
-    #     max:           Integer - (defaults 15)
-    #     country_code:      String  - filter by country-code
-    #
-    # returns json object including relevant marks with their attributes: id, reference string, points_obj, points_obj_simplified
-    dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else None
-    response = {'success': False}
-    marks_to_be_dumped = None
-    did_fail_get_marks = False
-    max_returned = 50
-
-    #    We've got an offset to play with
-    if 'offset' in request.GET:
-    #    An offset requires a max value to be returned from this offset
-        if 'max' in request.GET:
-            offset = request.GET['offset']
-            max = request.GET['max']
-            if max > max_returned:
-                max = max_returned
-            #    We can also filter by country code if need be
-            if 'country_code' in request.GET:
-                marks_to_be_dumped = Mark.objects.exclude.exclude(contributor_locale__isnull=False).filter(country_code=request.GET['country_code'])[offset:max]
-            else:
-                marks_to_be_dumped = Mark.objects.all()[offset:max]
-        else:
-           response['success'] = False
-           response['error'] = _("Querying by offset also requires a 'max' POST var")
-           did_fail_get_marks = True
-    else:
-        # No special query parameters, query for all marks
-        marks_to_be_dumped = Mark.objects.exclude(contributor_locale__isnull=False)
-    # Check that we've got marks to dump
-    if not did_fail_get_marks:
-        if marks_to_be_dumped:
-            #    Dump out
-            all_marks = []
-            for m in marks_to_be_dumped:
-                #    Append to all marks
-                all_marks.append({'date_drawn': m.date_drawn.strftime(
-                    "%a, %d %b %Y %I:%M:%S"),
-                    'reference': m.reference,
-                    'points_obj_simplified': m.points_obj_simplified,
-                    'contributor': m.contributor, 'country_code': m.country_code})
-            response['success'] = True
-            response['marks'] = all_marks
-    else:
-        #    No marks to dump
-        response['success'] = False
-        response['error'] = _("No marks to be parsed")
-        json_response = simplejson.dumps(response)
-        return HttpResponseServerError(json_response, 'application/json')
-    #    Dump and return
-    json_response = simplejson.dumps(response, default=dthandler)
-    return HttpResponse(json_response, 'application/json')
 
 
 def marks_by_locale(request):
