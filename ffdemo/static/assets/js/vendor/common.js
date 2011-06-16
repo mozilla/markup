@@ -65,5 +65,12 @@ $( document ).ready( function () {
 		$( this ).toggleClass( 'selected' );
 	} );
 	
+	// handle redirecting changes in locale
+	$( '#language-selector a' ).click( function( e ) {
+		e.preventDefault; 
+		var newLocale = $( this ).attr( 'href' );
+		window.location = window.location.href.replace(/\/([a-zA-Z\-]{2,5})\//, newLocale + '/' );
+		return false;
+	} );
 } );
 } )( jQuery );
