@@ -11,7 +11,7 @@ from django.template.loader import get_template
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.cache import cache_page
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_POST
 from django.core.context_processors import csrf
 from ffdemo.utils.render import render_response
 from ffdemo.markup.models import Mark, Invitation
