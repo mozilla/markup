@@ -1,6 +1,5 @@
 from django.http import (HttpResponse, HttpResponseBadRequest,
-                         HttpResponseForbidden, HttpResponseNotFound,
-                         HttpResponseServerError)
+                         HttpResponseForbidden, HttpResponseServerError, Http404)
 from _mysql_exceptions import OperationalError
 from ffdemo.markup.models import Mark
 from ffdemo.markup import common
@@ -179,9 +178,7 @@ def delete_mark(request):
                 m.delete()
                 response['success'] = True
             except Mark.DoesNotExist:
-                response['error'] = _('Mark does not exist')
-                json_response = simplejson.dumps(response)
-                return HttpResponseNotFound(json_response, 'application/json')
+                raise Http404
         else:
             response['error'] = _("No mark specified")
             json_response = simplejson.dumps(response)
@@ -391,11 +388,7 @@ def marks_by_reference(request):
             response['success'] = True
             response['marks'] = all_marks
     else:
-        #    No marks to dump
-        response['success'] = False
-        response['error'] = _("No marks to be parsed")
-        json_response = simplejson.dumps(response)
-        return HttpResponseNotFound(json_response, 'application/json')
+        raise Http404
 
     #    Dump and return
     json_response = simplejson.dumps(response, default=dthandler)
