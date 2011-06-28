@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /localeurl/
+Disallow: /i18n/
+Disallow: /linear_sammy.html
+Disallow: /makemark_sammy.html
+Disallow: /mark/
+Disallow: /gml/
+Disallow: /accounts/
+Disallow: /list_invites/
+Disallow: /moderate/
+Disallow: /requests/
+Disallow: /newsletter/subscribe/

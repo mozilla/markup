@@ -39,7 +39,8 @@ USE_I18N = True
 USE_L10N = True
 
 # Paths that don't require a locale prefix.
-SUPPORTED_NONLOCALES = ('media', 'admin', 'requests', 'accounts', 'moderate')
+SUPPORTED_NONLOCALES = ('media', 'admin', 'requests', 'accounts', 'moderate',
+                        'robots.txt')
 
 # Gettext text domain
 TEXT_DOMAIN = 'django'
