@@ -63,7 +63,7 @@
 				// open the pop up
 				window.open(
 					$.socialShare.fn.shareURL( context ),
-					context.share_title,
+					'share',
 					'height=' + context.popupHeight + ',width=' + context.popupWidth
 				);
 			}
