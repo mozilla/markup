@@ -10,5 +10,5 @@ MySQL-python==1.2.3
 
 # Deployments
 Fabric==1.0.1
-paramiko==1.7.6
+paramiko==2.0.9
 pycrypto==2.3
