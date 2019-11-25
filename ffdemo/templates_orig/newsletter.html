@@ -25,7 +25,7 @@ window.MarkupEmailError = true;
 			</p>
                         <p><label for="id_optin" id="privacy-check-label">
                             <span class="error-wrapper">{{form.optin}}</span>
-                            <span class="title">{% blocktrans with 'http://mozilla.com/en-US/privacy-policy' as policy %}I agree to the <a href="{{policy}}">Mozilla Privacy Policy</a>{% endblocktrans %}</span></label></p>
+                            <span class="title">{% blocktrans with 'http://www.mozilla.org/privacy/websites/' as policy %}I agree to the <a href="{{policy}}">Mozilla Privacy Policy</a>{% endblocktrans %}</span></label></p>
 			<p><input type="submit" value="{{ _('Sign me up!') }}" /></p>
 			<cite>{{ _('We will only send you Mozilla-related information') }}</cite>
 		</form>		
