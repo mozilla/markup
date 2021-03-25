@@ -21,4 +21,4 @@ Babel>=0.9.4
 -e git://github.com/simplegeo/django-south.git#egg=south
 
 # YAML
-PyYAML==5.1
+PyYAML==5.4
